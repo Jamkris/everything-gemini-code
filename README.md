@@ -5,9 +5,9 @@
 [![Stars](https://img.shields.io/github/stars/Jamkris/everything-gemini-code?style=flat)](https://github.com/Jamkris/everything-gemini-code/stargazers)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
-**A complete collection of Gemini CLI configurations for productivity.**
+**A comprehensive configuration suite for Gemini CLI / Antigravity.**
 
-Production-ready agents, skills, hooks, commands, rules, and MCP configurations for building real products.
+This extension provides production-ready agents, skills, hooks, commands, rules, and MCP configurations designed to supercharge your development workflow with Gemini.
 
 ---
 
@@ -15,132 +15,100 @@ Production-ready agents, skills, hooks, commands, rules, and MCP configurations 
 
 Get up and running in under 2 minutes:
 
-### Step 1: Install the Plugin (Recommended)
+### Option 1: Install via Gemini CLI (Recommended)
 
 ```bash
-# Add marketplace
-/plugin marketplace add Jamkris/everything-gemini-code
-
-# Install plugin
-/plugin install everything-gemini-code@everything-gemini-code
+# Install directly from GitHub
+gemini extensions install https://github.com/Jamkris/everything-gemini-code
 ```
 
-### Step 2: Install Rules (Required)
+### Option 2: Manual Installation (Advanced)
 
-> ⚠️ **Important:** Gemini CLI plugins cannot distribute `rules` automatically. Install them manually:
+If you prefer manual control or need to customize specific components:
 
 ```bash
-# Clone the repo first
-git clone https://github.com/Jamkris/everything-gemini-code.git
-
-# Install common rules (required)
-cp -r everything-gemini-code/rules/common/* ~/.gemini/rules/
-
-# Install language-specific rules (pick your stack)
-cp -r everything-gemini-code/rules/typescript/* ~/.gemini/rules/
-cp -r everything-gemini-code/rules/python/* ~/.gemini/rules/
-cp -r everything-gemini-code/rules/golang/* ~/.gemini/rules/
-```
-
-### Step 3: Start Using
-
-```bash
-# Try a command
-/plan "Add user authentication"
-
-# Check available commands
-/plugin list everything-gemini-code@everything-gemini-code
-```
-
----
-
-## 📦 What's Inside
-
-This repo is a **Gemini CLI extension** - install it directly or copy components manually.
-
-```
-everything-gemini-code/
-├── gemini-extension.json  # Extension manifest
-├── agents/                # Specialized subagents for delegation
-│   ├── planner.md         # Feature implementation planning
-│   ├── architect.md       # System design decisions
-│   ├── code-reviewer.md   # Quality and security review
-│   ├── security-reviewer.md
-│   ├── build-error-resolver.md
-│   ├── e2e-runner.md      # Playwright E2E testing
-│   └── ...
-├── skills/                # Workflow definitions and domain knowledge
-│   ├── coding-standards/  # Language best practices
-│   ├── backend-patterns/  # API, database, caching patterns
-│   ├── tdd-workflow/      # TDD methodology
-│   └── ...
-├── commands/              # Slash commands (/plan, /tdd, /code-review, etc.)
-├── rules/                 # Always-follow guidelines
-│   ├── common/            # Language-agnostic principles
-│   ├── typescript/        # TypeScript specific
-│   ├── python/            # Python specific
-│   └── golang/            # Go specific
-├── hooks/                 # Trigger-based automations (hooks.json)
-└── mcp-configs/           # MCP server configurations (GitHub, Supabase, etc.)
-```
-
----
-
-## 🎯 Key Concepts
-
-### Agents
-
-Subagents handle delegated tasks with limited scope. Example: `code-reviewer`, `security-reviewer`.
-
-### Skills
-
-Workflow definitions invoked by commands or agents. Example: `TDD Workflow`, `Security Review`.
-
-### Hooks
-
-Fire on tool events. Example: Warn about `console.log` usage.
-
-### Rules
-
-Always-follow guidelines, organized into `common/` (language-agnostic) + language-specific directories.
-
----
-
-## 🔧 Manual Installation
-
-If you prefer manual control:
-
-```bash
-# Clone the repo
+# Clone the repository
 git clone https://github.com/Jamkris/everything-gemini-code.git
 
 # Copy agents
 cp everything-gemini-code/agents/*.md ~/.gemini/agents/
-
-# Copy rules
-cp -r everything-gemini-code/rules/common/* ~/.gemini/rules/
 
 # Copy commands
 cp everything-gemini-code/commands/*.md ~/.gemini/commands/
 
 # Copy skills
 cp -r everything-gemini-code/skills/* ~/.gemini/skills/
+
+# Install rules (Required for both installation methods)
+cp -r everything-gemini-code/rules/common/* ~/.gemini/rules/
+```
+
+> ⚠️ **Note:** Rules must be installed manually to `~/.gemini/rules/` as they are not automatically distributed by extensions.
+
+---
+
+## 💻 Usage
+
+Once installed, you can access the new capabilities directly in Gemini CLI.
+
+### Slash Commands
+
+Use custom commands to automate workflows:
+
+```bash
+# Plan a feature implementation
+/plan "Add user authentication with JWT"
+
+# Start Test-Driven Development workflow
+/tdd "Create a user service"
+
+# Run a code review
+/code-review
+```
+
+### Agents
+
+Delegate complex tasks to specialized agents:
+
+```bash
+# Use the architect agent for system design
+@architect "Design a microservices architecture for..."
+
+# Use the security reviewer for vulnerability checks
+@security-reviewer "Audit this file for injection flaws"
+```
+
+### Skills
+
+Gemini will automatically utilize installed skills when relevant to your request, such as "TDD Workflow" or "Backend Patterns".
+
+---
+
+## 📦 What's Inside
+
+This extension packs a complete development environment config:
+
+```
+everything-gemini-code/
+├── gemini-extension.json  # Extension manifest
+├── agents/                # Specialized subagents (@planner, @architect, etc.)
+├── skills/                # Workflow definitions (TDD, Patterns, etc.)
+├── commands/              # Slash commands (/plan, /tdd, etc.)
+├── rules/                 # Coding guidelines (TypeScript, Python, Go)
+├── hooks/                 # Automation triggers (hooks.json)
+└── mcp-configs/           # MCP server configurations
 ```
 
 ---
 
 ## 🤝 Contributing
 
-**Contributions are welcome and encouraged.**
+**Contributions are welcome!**
 
-If you have useful agents, skills, hooks, or MCP configurations, please contribute! See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
+If you have useful agents, skills, or configurations, please submit a Pull Request.
 
 ---
 
 ## 📄 License
 
-MIT - Use freely, modify as needed, contribute back if you can.
-
----
-
-**Star this repo if it helps. Build something great.**
+MIT - Use freely, modify as needed.
