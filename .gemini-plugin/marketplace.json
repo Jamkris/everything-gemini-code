@@ -1,24 +1,25 @@
 {
 	"name": "everything-gemini-code",
 	"owner": {
-		"name": "Affaan Mustafa",
-		"email": "affaan@example.com"
+		"name": "Jamkris",
+		"email": "jamkris@example.com"
 	},
 	"metadata": {
-		"description": "Battle-tested Gemini CLI configurations adapted from everything-gemini-code"
+		"description": "Comprehensive Gemini CLI configurations for productivity"
 	},
 	"plugins": [
 		{
 			"name": "everything-gemini-code",
 			"source": "./",
-			"description": "Complete collection of agents, skills, hooks, commands, and rules evolved over 10+ months of intensive daily use",
+			"description": "Complete collection of agents, skills, hooks, commands, and rules for Gemini CLI",
 			"author": {
-				"name": "Affaan Mustafa"
+				"name": "Jamkris"
 			},
-			"homepage": "https://github.com/affaan-m/everything-gemini-code",
-			"repository": "https://github.com/affaan-m/everything-gemini-code",
+			"homepage": "https://github.com/Jamkris/everything-gemini-code",
+			"repository": "https://github.com/Jamkris/everything-gemini-code",
 			"license": "MIT",
 			"keywords": [
+				"gemini-cli",
 				"agents",
 				"skills",
 				"hooks",
@@ -30,6 +31,7 @@
 			],
 			"category": "workflow",
 			"tags": [
+				"gemini-cli",
 				"agents",
 				"skills",
 				"hooks",

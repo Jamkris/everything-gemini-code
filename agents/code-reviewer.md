@@ -101,4 +101,4 @@ Add your project-specific checks here. Examples:
 - Check AI integration error handling
 - Validate cache fallback behavior
 
-Customize based on your project's `CLAUDE.md` or skill files.
+Customize based on your project's `GEMINI.md` or skill files.

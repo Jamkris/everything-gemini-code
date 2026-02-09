@@ -24,7 +24,7 @@ from typing import Optional
 # Configuration
 # ─────────────────────────────────────────────
 
-HOMUNCULUS_DIR = Path.home() / ".claude" / "homunculus"
+HOMUNCULUS_DIR = Path.home() / ".gemini" / "homunculus"
 INSTINCTS_DIR = HOMUNCULUS_DIR / "instincts"
 PERSONAL_DIR = INSTINCTS_DIR / "personal"
 INHERITED_DIR = INSTINCTS_DIR / "inherited"

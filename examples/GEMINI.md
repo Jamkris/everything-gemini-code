@@ -1,6 +1,6 @@
-# Example Project CLAUDE.md
+# Example Project GEMINI.md
 
-This is an example project-level CLAUDE.md file. Place this in your project root.
+This is an example project-level GEMINI.md file. Place this in your project root.
 
 ## Project Overview
 

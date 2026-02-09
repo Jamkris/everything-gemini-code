@@ -1,6 +1,6 @@
-# User-Level CLAUDE.md Example
+# User-Level GEMINI.md Example
 
-This is an example user-level CLAUDE.md file. Place at `~/.gemini/CLAUDE.md`.
+This is an example user-level GEMINI.md file. Place at `~/.gemini/GEMINI.md`.
 
 User-level configs apply globally across all projects. Use for:
 - Personal coding preferences

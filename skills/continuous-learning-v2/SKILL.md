@@ -277,7 +277,7 @@ v2 is fully compatible with v1:
 
 - [Skill Creator](https://skill-creator.app) - Generate instincts from repo history
 - [Homunculus](https://github.com/humanplane/homunculus) - Inspiration for v2 architecture
-- [The Longform Guide](https://x.com/affaanmustafa/status/2014040193557471352) - Continuous learning section
+- [The Longform Guide](https://x.com/Jamkris/status/2014040193557471352) - Continuous learning section
 
 ---
 

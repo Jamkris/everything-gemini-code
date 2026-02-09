@@ -28,7 +28,7 @@ Before any installation, clone the latest ECC source to `/tmp`:
 
 ```bash
 rm -rf /tmp/everything-gemini-code
-git clone https://github.com/affaan-m/everything-gemini-code.git /tmp/everything-gemini-code
+git clone https://github.com/Jamkris/everything-gemini-code.git /tmp/everything-gemini-code
 ```
 
 Set `ECC_ROOT=/tmp/everything-gemini-code` as the source for all subsequent copy operations.

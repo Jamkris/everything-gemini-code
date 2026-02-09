@@ -204,14 +204,14 @@ Based on `$ARGUMENTS`, execute init:
 3. Generate `{backend}/start.cjs` for Python services (if applicable)
 4. Generate command files in `.gemini/commands/`
 5. Generate script files in `.gemini/scripts/`
-6. **Update project CLAUDE.md** with PM2 info (see below)
+6. **Update project GEMINI.md** with PM2 info (see below)
 7. **Display completion summary** with terminal commands
 
 ---
 
-## Post-Init: Update CLAUDE.md
+## Post-Init: Update GEMINI.md
 
-After generating files, append PM2 section to project's `CLAUDE.md` (create if not exists):
+After generating files, append PM2 section to project's `GEMINI.md` (create if not exists):
 
 ```markdown
 ## PM2 Services
@@ -232,7 +232,7 @@ pm2 resurrect                    # Restore saved list
 ```
 ```
 
-**Rules for CLAUDE.md update:**
+**Rules for GEMINI.md update:**
 - If PM2 section exists, replace it
 - If not exists, append to end
 - Keep content minimal and essential

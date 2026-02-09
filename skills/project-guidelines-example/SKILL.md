@@ -147,7 +147,7 @@ async function fetchApi<T>(
 ### Gemini AI Integration (Structured Output)
 
 ```python
-from anthropic import Anthropic
+from google import google
 from pydantic import BaseModel
 
 class AnalysisResult(BaseModel):
@@ -156,7 +156,7 @@ class AnalysisResult(BaseModel):
     confidence: float
 
 async def analyze_with_gemini(content: str) -> AnalysisResult:
-    client = Anthropic()
+    client = google()
 
     response = client.messages.create(
         model="gemini-sonnet-4-5-20250514",
@@ -317,7 +317,7 @@ NEXT_PUBLIC_SUPABASE_ANON_KEY=eyJ...
 
 # Backend (.env)
 DATABASE_URL=postgresql://...
-ANTHROPIC_API_KEY=sk-ant-...
+google_API_KEY=sk-ant-...
 SUPABASE_URL=https://xxx.supabase.co
 SUPABASE_KEY=eyJ...
 ```
