@@ -1,0 +1,13 @@
+# Gemini CLI
+.gemini/local/
+
+# Dependencies
+node_modules/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Environment
+.env
+.env.local
