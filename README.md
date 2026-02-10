@@ -15,7 +15,17 @@ This extension provides production-ready agents, skills, hooks, commands, rules,
 
 Get up and running in under 2 minutes:
 
-### Option 1: Quick Install (Recommended)
+### Option 1: Install via Gemini CLI (Recommended)
+
+The easiest way to install. This will automatically set up the extension for Gemini CLI.
+
+```bash
+gemini extensions install https://github.com/Jamkris/everything-gemini-code
+```
+
+### Option 2: Install via Script (For Antigravity & Advanced Users)
+
+Recommended if you use **Antigravity** (VS Code / Cursor) or need to customize the installation.
 
 ```bash
 # Clone the repository

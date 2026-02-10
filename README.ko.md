@@ -15,7 +15,17 @@
 
 2분 안에 설정을 완료하세요:
 
-### 옵션 1: 빠른 설치 (권장)
+### 옵션 1: Gemini CLI를 통한 설치 (권장)
+
+가장 간편한 설치 방법입니다. Gemini CLI용 확장이 자동으로 설정됩니다.
+
+```bash
+gemini extensions install https://github.com/Jamkris/everything-gemini-code
+```
+
+### 옵션 2: 스크립트를 통한 설치 (Antigravity 및 고급 사용자용)
+
+**Antigravity** (VS Code / Cursor)를 사용하거나 설치를 커스터마이징해야 하는 경우 권장됩니다.
 
 ```bash
 # 저장소 복제
