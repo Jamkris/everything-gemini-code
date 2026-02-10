@@ -1,7 +1,7 @@
 ---
 name: security-reviewer
 description: Security vulnerability detection and remediation specialist. Use PROACTIVELY after writing code that handles user input, authentication, API endpoints, or sensitive data. Flags secrets, SSRF, injection, unsafe crypto, and OWASP Top 10 vulnerabilities.
-tools: ["read_file", "write_file", "edit_file", "run_shell_command"]
+tools: ["read_file", "write_file", "run_shell_command"]
 ---
 
 # Security Reviewer
