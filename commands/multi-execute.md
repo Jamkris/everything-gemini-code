@@ -78,14 +78,15 @@ EOF",
 ```
 
 **Model Parameter Notes**:
-- `{{GEMINI_MODEL_FLAG}}`: When using `--backend gemini`, replace with `--gemini-model gemini-3-pro-preview ` (note trailing space); use empty string for codex
+
+- `{{GEMINI_MODEL_FLAG}}`: When using `--backend gemini`, replace with `--gemini-model gemini-3-pro-preview` (note trailing space); use empty string for codex
 
 **Role Prompts**:
 
-| Phase | Codex | Gemini |
-|-------|-------|--------|
+| Phase          | Codex                                       | Gemini                                      |
+| -------------- | ------------------------------------------- | ------------------------------------------- |
 | Implementation | `~/.gemini/.ccg/prompts/codex/architect.md` | `~/.gemini/.ccg/prompts/gemini/frontend.md` |
-| Review | `~/.gemini/.ccg/prompts/codex/reviewer.md` | `~/.gemini/.ccg/prompts/gemini/reviewer.md` |
+| Review         | `~/.gemini/.ccg/prompts/codex/reviewer.md`  | `~/.gemini/.ccg/prompts/gemini/reviewer.md` |
 
 **Session Reuse**: If `/ccg:plan` provided SESSION_ID, use `resume <SESSION_ID>` to reuse context.
 
@@ -96,6 +97,7 @@ TaskOutput({ task_id: "<task_id>", block: true, timeout: 600000 })
 ```
 
 **IMPORTANT**:
+
 - Must specify `timeout: 600000`, otherwise default 30 seconds will cause premature timeout
 - If still incomplete after 10 minutes, continue polling with `TaskOutput`, **NEVER kill the process**
 - If waiting is skipped due to timeout, **MUST call `AskUserQuestion` to ask user whether to continue waiting or kill task**
@@ -124,11 +126,11 @@ TaskOutput({ task_id: "<task_id>", block: true, timeout: 600000 })
 
 4. **Task Type Routing**:
 
-   | Task Type | Detection | Route |
-   |-----------|-----------|-------|
-   | **Frontend** | Pages, components, UI, styles, layout | Gemini |
-   | **Backend** | API, interfaces, database, logic, algorithms | Codex |
-   | **Fullstack** | Contains both frontend and backend | Codex ∥ Gemini parallel |
+   | Task Type     | Detection                                    | Route                   |
+   | ------------- | -------------------------------------------- | ----------------------- |
+   | **Frontend**  | Pages, components, UI, styles, layout        | Gemini                  |
+   | **Backend**   | API, interfaces, database, logic, algorithms | Codex                   |
+   | **Fullstack** | Contains both frontend and backend           | Codex ∥ Gemini parallel |
 
 ---
 
@@ -148,12 +150,14 @@ mcp__ace-tool__search_context({
 ```
 
 **Retrieval Strategy**:
+
 - Extract target paths from plan's "Key Files" table
 - Build semantic query covering: entry files, dependency modules, related type definitions
 - If results insufficient, add 1-2 recursive retrievals
 - **NEVER** use Bash + find/ls to manually explore project structure
 
 **After Retrieval**:
+
 - Organize retrieved code snippets
 - Confirm complete context for implementation
 - Proceed to Phase 3

@@ -9,7 +9,7 @@ Process documents with the [Nutrient DWS Processor API](https://www.nutrient.io/
 
 ## Setup
 
-Get a free API key at **https://dashboard.nutrient.io/sign_up/?product=processor**
+Get a free API key at **<https://dashboard.nutrient.io/sign_up/?product=processor>**
 
 ```bash
 export NUTRIENT_API_KEY="pdf_live_..."

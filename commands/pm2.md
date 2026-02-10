@@ -16,15 +16,15 @@ Auto-analyze project and generate PM2 service commands.
 
 ## Service Detection
 
-| Type | Detection | Default Port |
-|------|-----------|--------------|
-| Vite | vite.config.* | 5173 |
-| Next.js | next.config.* | 3000 |
-| Nuxt | nuxt.config.* | 3000 |
-| CRA | react-scripts in package.json | 3000 |
-| Express/Node | server/backend/api directory + package.json | 3000 |
-| FastAPI/Flask | requirements.txt / pyproject.toml | 8000 |
-| Go | go.mod / main.go | 8080 |
+| Type          | Detection                                   | Default Port |
+| ------------- | ------------------------------------------- | ------------ |
+| Vite          | vite.config.\*                              | 5173         |
+| Next.js       | next.config.\*                              | 3000         |
+| Nuxt          | nuxt.config.\*                              | 3000         |
+| CRA           | react-scripts in package.json               | 3000         |
+| Express/Node  | server/backend/api directory + package.json | 3000         |
+| FastAPI/Flask | requirements.txt / pyproject.toml           | 8000         |
+| Go            | go.mod / main.go                            | 8080         |
 
 **Port Detection Priority**: User specified > .env > config file > scripts args > default port
 
@@ -85,12 +85,12 @@ module.exports = {
 
 **Framework script paths:**
 
-| Framework | script | args |
-|-----------|--------|------|
-| Vite | `node_modules/vite/bin/vite.js` | `--port {port}` |
-| Next.js | `node_modules/next/dist/bin/next` | `dev -p {port}` |
-| Nuxt | `node_modules/nuxt/bin/nuxt.mjs` | `dev --port {port}` |
-| Express | `src/index.js` or `server.js` | - |
+| Framework | script                            | args                |
+| --------- | --------------------------------- | ------------------- |
+| Vite      | `node_modules/vite/bin/vite.js`   | `--port {port}`     |
+| Next.js   | `node_modules/next/dist/bin/next` | `dev -p {port}`     |
+| Nuxt      | `node_modules/nuxt/bin/nuxt.mjs`  | `dev --port {port}` |
+| Express   | `src/index.js` or `server.js`     | -                   |
 
 ### Python Wrapper Script (start.cjs)
 
@@ -107,6 +107,7 @@ proc.on('close', (code) => process.exit(code));
 ## Command File Templates (Minimal Content)
 
 ### pm2-all.md (Start all + monit)
+
 ```markdown
 Start all services and open PM2 monitor.
 \`\`\`bash
@@ -115,6 +116,7 @@ cd "{PROJECT_ROOT}" && pm2 start ecosystem.config.cjs && start wt.exe -d "{PROJE
 ```
 
 ### pm2-all-stop.md
+
 ```markdown
 Stop all services.
 \`\`\`bash
@@ -123,6 +125,7 @@ cd "{PROJECT_ROOT}" && pm2 stop all
 ```
 
 ### pm2-all-restart.md
+
 ```markdown
 Restart all services.
 \`\`\`bash
@@ -131,6 +134,7 @@ cd "{PROJECT_ROOT}" && pm2 restart all
 ```
 
 ### pm2-{port}.md (Start single + logs)
+
 ```markdown
 Start {name} ({port}) and open logs.
 \`\`\`bash
@@ -139,6 +143,7 @@ cd "{PROJECT_ROOT}" && pm2 start ecosystem.config.cjs --only {name} && start wt.
 ```
 
 ### pm2-{port}-stop.md
+
 ```markdown
 Stop {name} ({port}).
 \`\`\`bash
@@ -147,6 +152,7 @@ cd "{PROJECT_ROOT}" && pm2 stop {name}
 ```
 
 ### pm2-{port}-restart.md
+
 ```markdown
 Restart {name} ({port}).
 \`\`\`bash
@@ -155,6 +161,7 @@ cd "{PROJECT_ROOT}" && pm2 restart {name}
 ```
 
 ### pm2-logs.md
+
 ```markdown
 View all PM2 logs.
 \`\`\`bash
@@ -163,6 +170,7 @@ cd "{PROJECT_ROOT}" && pm2 logs
 ```
 
 ### pm2-status.md
+
 ```markdown
 View PM2 status.
 \`\`\`bash
@@ -171,12 +179,14 @@ cd "{PROJECT_ROOT}" && pm2 status
 ```
 
 ### PowerShell Scripts (pm2-logs-{port}.ps1)
+
 ```powershell
 Set-Location "{PROJECT_ROOT}"
 pm2 logs {name}
 ```
 
 ### PowerShell Scripts (pm2-monit.ps1)
+
 ```powershell
 Set-Location "{PROJECT_ROOT}"
 pm2 monit
@@ -213,7 +223,7 @@ Based on `$ARGUMENTS`, execute init:
 
 After generating files, append PM2 section to project's `GEMINI.md` (create if not exists):
 
-```markdown
+````markdown
 ## PM2 Services
 
 | Port | Name | Type |
@@ -230,9 +240,10 @@ pm2 logs / pm2 status / pm2 monit
 pm2 save                         # Save process list
 pm2 resurrect                    # Restore saved list
 ```
-```
+````
 
 **Rules for GEMINI.md update:**
+
 - If PM2 section exists, replace it
 - If not exists, append to end
 - Keep content minimal and essential
