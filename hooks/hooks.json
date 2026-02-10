@@ -47,7 +47,7 @@
 				"hooks": [
 					{
 						"type": "command",
-						"command": "node \"${GEMINI_EXTENSION_ROOT}/scripts/hooks/suggest-compact.js\""
+						"command": "node \"scripts/hooks/suggest-compact.js\""
 					}
 				],
 				"description": "Suggest manual compaction at logical intervals"
@@ -59,7 +59,7 @@
 				"hooks": [
 					{
 						"type": "command",
-						"command": "node \"${GEMINI_EXTENSION_ROOT}/scripts/hooks/session-start.js\""
+						"command": "node \"scripts/hooks/session-start.js\""
 					}
 				],
 				"description": "Load previous context and detect package manager on new session"
@@ -125,7 +125,7 @@
 				"hooks": [
 					{
 						"type": "command",
-						"command": "node \"${GEMINI_EXTENSION_ROOT}/scripts/hooks/check-console-log.js\""
+						"command": "node \"scripts/hooks/check-console-log.js\""
 					}
 				],
 				"description": "Check for console.log in modified files after each response"
@@ -137,7 +137,7 @@
 				"hooks": [
 					{
 						"type": "command",
-						"command": "node \"${GEMINI_EXTENSION_ROOT}/scripts/hooks/session-end.js\""
+						"command": "node \"scripts/hooks/session-end.js\""
 					}
 				],
 				"description": "Persist session state on end"
@@ -147,7 +147,7 @@
 				"hooks": [
 					{
 						"type": "command",
-						"command": "node \"${GEMINI_EXTENSION_ROOT}/scripts/hooks/evaluate-session.js\""
+						"command": "node \"scripts/hooks/evaluate-session.js\""
 					}
 				],
 				"description": "Evaluate session for extractable patterns"
