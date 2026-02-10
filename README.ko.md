@@ -44,20 +44,14 @@ gemini extensions install https://github.com/Jamkris/everything-gemini-code
 
 ### 옵션 2: 스크립트를 통한 설치 (Antigravity 및 고급 사용자용)
 
-**Antigravity** (VS Code / Cursor)를 사용하거나 설치를 커스터마이징해야 하는 경우 권장됩니다.
+**Antigravity** (VS Code / Cursor)를 사용하거나 설치를 커스터마이징해야 하는 경우 권장됩니다. 기존 설정은 자동으로 업데이트됩니다.
 
 ```bash
-# 저장소 복제
-git clone https://github.com/Jamkris/everything-gemini-code.git
+# Antigravity 전용 설치 (권장)
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Jamkris/everything-gemini-code/main/install.sh)" -- --antigravity
 
-# 설치 스크립트 실행
-cd everything-gemini-code
-./install.sh
-
-# 대화형 프롬프트를 따라 설치 환경을 선택하세요:
-# 1) Gemini CLI (표준)
-# 2) Antigravity (VS Code / Cursor)
-# 3) Both (둘 다)
+# 전체 설치 (CLI + Antigravity)
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Jamkris/everything-gemini-code/main/install.sh)" -- --all
 ```
 
 ### 옵션 2: 수동 설치 (고급)

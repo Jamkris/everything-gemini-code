@@ -46,20 +46,14 @@ gemini extensions install https://github.com/Jamkris/everything-gemini-code
 
 ### Option 2: Install via Script (For Antigravity & Advanced Users)
 
-Recommended if you use **Antigravity** (VS Code / Cursor) or need to customize the installation.
+Recommended if you use **Antigravity** (VS Code / Cursor) or need to customize the installation. Existing configurations will be updated.
 
 ```bash
-# Clone the repository
-git clone https://github.com/Jamkris/everything-gemini-code.git
+# Install for Antigravity (Recommended)
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Jamkris/everything-gemini-code/main/install.sh)" -- --antigravity
 
-# Run installation script
-cd everything-gemini-code
-./install.sh
-
-# Follow the interactive prompt to select your environment:
-# 1) Gemini CLI (Standard)
-# 2) Antigravity (VS Code / Cursor)
-# 3) Both
+# Install All (CLI + Antigravity)
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Jamkris/everything-gemini-code/main/install.sh)" -- --all
 ```
 
 ### Option 2: Manual Installation (Advanced)
