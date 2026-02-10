@@ -301,7 +301,7 @@ async function runTests() {
       const result = await runHookWithInput(
         path.join(scriptsDir, 'evaluate-session.js'),
         {},
-        { CLAUDE_TRANSCRIPT_PATH: transcriptPath }
+        { GEMINI_TRANSCRIPT_PATH: transcriptPath }
       );
 
       // Should not crash, just skip processing
@@ -327,7 +327,7 @@ async function runTests() {
       const result = await runHookWithInput(
         path.join(scriptsDir, 'suggest-compact.js'),
         {},
-        { CLAUDE_SESSION_ID: sessionId, COMPACT_THRESHOLD: '50' }
+        { GEMINI_SESSION_ID: sessionId, COMPACT_THRESHOLD: '50' }
       );
 
       assert.ok(
@@ -358,7 +358,7 @@ async function runTests() {
       const result = await runHookWithInput(
         path.join(scriptsDir, 'evaluate-session.js'),
         {},
-        { CLAUDE_TRANSCRIPT_PATH: transcriptPath }
+        { GEMINI_TRANSCRIPT_PATH: transcriptPath }
       );
 
       assert.ok(result.stderr.includes('15 messages'), 'Should process session');

@@ -122,35 +122,35 @@ function runTests() {
   console.log('\nSession ID Functions:');
 
   if (test('getSessionIdShort falls back to project name', () => {
-    const original = process.env.CLAUDE_SESSION_ID;
-    delete process.env.CLAUDE_SESSION_ID;
+    const original = process.env.GEMINI_SESSION_ID;
+    delete process.env.GEMINI_SESSION_ID;
     try {
       const shortId = utils.getSessionIdShort();
       assert.strictEqual(shortId, utils.getProjectName());
     } finally {
-      if (original) process.env.CLAUDE_SESSION_ID = original;
+      if (original) process.env.GEMINI_SESSION_ID = original;
     }
   })) passed++; else failed++;
 
   if (test('getSessionIdShort returns last 8 characters', () => {
-    const original = process.env.CLAUDE_SESSION_ID;
-    process.env.CLAUDE_SESSION_ID = 'test-session-abc12345';
+    const original = process.env.GEMINI_SESSION_ID;
+    process.env.GEMINI_SESSION_ID = 'test-session-abc12345';
     try {
       assert.strictEqual(utils.getSessionIdShort(), 'abc12345');
     } finally {
-      if (original) process.env.CLAUDE_SESSION_ID = original;
-      else delete process.env.CLAUDE_SESSION_ID;
+      if (original) process.env.GEMINI_SESSION_ID = original;
+      else delete process.env.GEMINI_SESSION_ID;
     }
   })) passed++; else failed++;
 
   if (test('getSessionIdShort handles short session IDs', () => {
-    const original = process.env.CLAUDE_SESSION_ID;
-    process.env.CLAUDE_SESSION_ID = 'short';
+    const original = process.env.GEMINI_SESSION_ID;
+    process.env.GEMINI_SESSION_ID = 'short';
     try {
       assert.strictEqual(utils.getSessionIdShort(), 'short');
     } finally {
-      if (original) process.env.CLAUDE_SESSION_ID = original;
-      else delete process.env.CLAUDE_SESSION_ID;
+      if (original) process.env.GEMINI_SESSION_ID = original;
+      else delete process.env.GEMINI_SESSION_ID;
     }
   })) passed++; else failed++;
 

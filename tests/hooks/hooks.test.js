@@ -114,7 +114,7 @@ async function runTests() {
     await runScript(path.join(scriptsDir, 'session-end.js'));
 
     // Check if session file was created
-    // Note: Without CLAUDE_SESSION_ID, falls back to project name (not 'default')
+    // Note: Without GEMINI_SESSION_ID, falls back to project name (not 'default')
     // Use local time to match the script's getDateString() function
     const sessionsDir = path.join(os.homedir(), '.gemini', 'sessions');
     const now = new Date();
@@ -134,7 +134,7 @@ async function runTests() {
 
     // Run with custom session ID
     await runScript(path.join(scriptsDir, 'session-end.js'), '', {
-      CLAUDE_SESSION_ID: testSessionId
+      GEMINI_SESSION_ID: testSessionId
     });
 
     // Check if session file was created with session ID
@@ -171,7 +171,7 @@ async function runTests() {
 
   if (await asyncTest('runs without error', async () => {
     const result = await runScript(path.join(scriptsDir, 'suggest-compact.js'), '', {
-      CLAUDE_SESSION_ID: 'test-session-' + Date.now()
+      GEMINI_SESSION_ID: 'test-session-' + Date.now()
     });
     assert.strictEqual(result.code, 0, `Exit code should be 0, got ${result.code}`);
   })) passed++; else failed++;
@@ -182,7 +182,7 @@ async function runTests() {
     // Run multiple times
     for (let i = 0; i < 3; i++) {
       await runScript(path.join(scriptsDir, 'suggest-compact.js'), '', {
-        CLAUDE_SESSION_ID: sessionId
+        GEMINI_SESSION_ID: sessionId
       });
     }
 
@@ -203,7 +203,7 @@ async function runTests() {
     fs.writeFileSync(counterFile, '49');
 
     const result = await runScript(path.join(scriptsDir, 'suggest-compact.js'), '', {
-      CLAUDE_SESSION_ID: sessionId,
+      GEMINI_SESSION_ID: sessionId,
       COMPACT_THRESHOLD: '50'
     });
 
@@ -233,7 +233,7 @@ async function runTests() {
     fs.writeFileSync(transcriptPath, transcript);
 
     const result = await runScript(path.join(scriptsDir, 'evaluate-session.js'), '', {
-      CLAUDE_TRANSCRIPT_PATH: transcriptPath
+      GEMINI_TRANSCRIPT_PATH: transcriptPath
     });
 
     assert.ok(
@@ -253,7 +253,7 @@ async function runTests() {
     fs.writeFileSync(transcriptPath, transcript);
 
     const result = await runScript(path.join(scriptsDir, 'evaluate-session.js'), '', {
-      CLAUDE_TRANSCRIPT_PATH: transcriptPath
+      GEMINI_TRANSCRIPT_PATH: transcriptPath
     });
 
     assert.ok(
@@ -306,7 +306,7 @@ async function runTests() {
     }
   })) passed++; else failed++;
 
-  if (test('script references use CLAUDE_PLUGIN_ROOT variable', () => {
+  if (test('script references use GEMINI_PLUGIN_ROOT variable', () => {
     const hooksPath = path.join(__dirname, '..', '..', 'hooks', 'hooks.json');
     const hooks = JSON.parse(fs.readFileSync(hooksPath, 'utf8'));
 
@@ -314,11 +314,11 @@ async function runTests() {
       for (const entry of hookArray) {
         for (const hook of entry.hooks) {
           if (hook.type === 'command' && hook.command.includes('scripts/hooks/')) {
-            // Check for the literal string "${CLAUDE_PLUGIN_ROOT}" in the command
-            const hasPluginRoot = hook.command.includes('${CLAUDE_PLUGIN_ROOT}');
+            // Check for the literal string "${GEMINI_PLUGIN_ROOT}" in the command
+            const hasPluginRoot = hook.command.includes('${GEMINI_PLUGIN_ROOT}');
             assert.ok(
               hasPluginRoot,
-              `Script paths should use CLAUDE_PLUGIN_ROOT: ${hook.command.substring(0, 80)}...`
+              `Script paths should use GEMINI_PLUGIN_ROOT: ${hook.command.substring(0, 80)}...`
             );
           }
         }

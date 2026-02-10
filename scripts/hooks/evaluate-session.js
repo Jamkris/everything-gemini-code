@@ -50,7 +50,7 @@ async function main() {
   ensureDir(learnedSkillsPath);
 
   // Get transcript path from environment (set by Gemini CLI)
-  const transcriptPath = process.env.CLAUDE_TRANSCRIPT_PATH;
+  const transcriptPath = process.env.GEMINI_TRANSCRIPT_PATH;
 
   if (!transcriptPath || !fs.existsSync(transcriptPath)) {
     process.exit(0);

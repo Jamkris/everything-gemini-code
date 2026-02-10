@@ -105,11 +105,11 @@ function getProjectName() {
 }
 
 /**
- * Get short session ID from CLAUDE_SESSION_ID environment variable
+ * Get short session ID from GEMINI_SESSION_ID environment variable
  * Returns last 8 characters, falls back to project name then 'default'
  */
 function getSessionIdShort(fallback = 'default') {
-  const sessionId = process.env.CLAUDE_SESSION_ID;
+  const sessionId = process.env.GEMINI_SESSION_ID;
   if (sessionId && sessionId.length > 0) {
     return sessionId.slice(-8);
   }
