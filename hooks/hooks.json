@@ -53,6 +53,18 @@
 				"description": "Suggest manual compaction at logical intervals"
 			}
 		],
+		"PreCompress": [
+			{
+				"matcher": "*",
+				"hooks": [
+					{
+						"type": "command",
+						"command": "node \"scripts/hooks/pre-compact.js\""
+					}
+				],
+				"description": "Run pre-compression logic"
+			}
+		],
 		"SessionStart": [
 			{
 				"matcher": "*",

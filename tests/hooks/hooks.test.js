@@ -289,6 +289,13 @@ async function runTests() {
          assert.ok(hooksObj.AfterTool || hooksObj.PostToolUse, 'Should have AfterTool (or PostToolUse) hooks');
          assert.ok(hooksObj.SessionStart, 'Should have SessionStart hooks');
          assert.ok(hooksObj.SessionEnd, 'Should have SessionEnd hooks');
+         // PreCompress is optional but good to check if it's there instead of PreCompact
+         if (hooksObj.PreCompact) {
+            console.log('    Warning: using deprecated PreCompact event');
+         }
+         if (hooksObj.PreCompress) {
+             assert.ok(hooksObj.PreCompress, 'Should have PreCompress hooks');
+         }
     }
   })) passed++; else failed++;
 
