@@ -60,6 +60,8 @@ install_gemini_cli() {
     mkdir -p "$GEMINI_CLI_DIR/scripts"
     [ -d "scripts" ] && cp -r scripts/* "$GEMINI_CLI_DIR/scripts/"
     
+
+    
     # Rules are now handled via GEMINI.md generation
     echo "Gemini CLI installation complete."
 }
