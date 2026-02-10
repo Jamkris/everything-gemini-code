@@ -15,6 +15,16 @@
 
 2분 안에 설정을 완료하세요:
 
+### 사전 요구 사항 (Prerequisites)
+
+최신 공식 Gemini CLI가 설치되어 있는지 확인하세요:
+
+```bash
+npm install -g @google/gemini-cli@latest
+# 또는
+npm update -g @google/gemini-cli
+```
+
 ### 옵션 1: Gemini CLI를 통한 설치 (권장)
 
 가장 간편한 설치 방법입니다. Gemini CLI용 확장이 자동으로 설정됩니다.

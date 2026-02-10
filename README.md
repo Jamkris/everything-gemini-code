@@ -15,6 +15,14 @@ This extension provides production-ready agents, skills, hooks, commands, rules,
 
 Get up and running in under 2 minutes:
 
+### Prerequisites
+
+Ensure you have the latest official Gemini CLI installed:
+
+```bash
+npm install -g @google/gemini-cli@latest
+```
+
 ### Option 1: Install via Gemini CLI (Recommended)
 
 The easiest way to install. This will automatically set up the extension for Gemini CLI.
