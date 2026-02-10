@@ -8,12 +8,39 @@ set -e
 # Define paths
 GEMINI_CLI_DIR="$HOME/.gemini"
 ANTIGRAVITY_DIR="$HOME/.gemini/antigravity"
+REPO_URL="https://github.com/Jamkris/everything-gemini-code.git"
+TEMP_DIR=""
 
-echo "Select installation target:"
-echo "1) Gemini CLI (Standard)"
-echo "2) Antigravity (VS Code / Cursor)"
-echo "3) Both"
-read -p "Enter choice [1-3]: " choice
+# Parse arguments
+INSTALL_TARGET=""
+CLEANUP=true
+
+while [[ "$#" -gt 0 ]]; do
+    case $1 in
+        --cli) INSTALL_TARGET="cli" ;;
+        --antigravity) INSTALL_TARGET="antigravity" ;;
+        --all) INSTALL_TARGET="all" ;;
+        --no-cleanup) CLEANUP=false ;;
+        *) echo "Unknown parameter passed: $1"; exit 1 ;;
+    esac
+    shift
+done
+
+# Cleanup function
+cleanup_temp() {
+    if [ -n "$TEMP_DIR" ] && [ -d "$TEMP_DIR" ]; then
+        rm -rf "$TEMP_DIR"
+    fi
+}
+trap cleanup_temp EXIT
+
+# Ensure we have the files (Clone if running remotely or missing)
+if [ ! -d "agents" ] || [ ! -d "skills" ]; then
+    echo "Files not found locally. Cloning repository to temporary directory..."
+    TEMP_DIR=$(mktemp -d)
+    git clone --depth 1 "$REPO_URL" "$TEMP_DIR"
+    cd "$TEMP_DIR"
+fi
 
 install_gemini_cli() {
     echo "Installing for Gemini CLI..."
@@ -33,10 +60,18 @@ install_gemini_cli() {
 }
 
 install_antigravity() {
-    echo "Installing for Antigravity..."
-    # Antigravity paths
-    # We follow the convention: ~/.gemini/antigravity/global_{component}
+    echo "Installing for Antigravity (VS Code / Cursor)..."
     
+    # Cleanup existing directories if requested
+    if [ "$CLEANUP" = true ]; then
+        echo "Cleaning up existing Antigravity configurations..."
+        rm -rf "$ANTIGRAVITY_DIR/global_workflows"
+        rm -rf "$ANTIGRAVITY_DIR/global_agents"
+        rm -rf "$ANTIGRAVITY_DIR/global_skills"
+        rm -rf "$ANTIGRAVITY_DIR/global_rules"
+    fi
+
+    # Antigravity paths
     mkdir -p "$ANTIGRAVITY_DIR/global_workflows"
     mkdir -p "$ANTIGRAVITY_DIR/global_agents"
     mkdir -p "$ANTIGRAVITY_DIR/global_skills"
@@ -54,23 +89,35 @@ install_antigravity() {
     # Rules -> global_rules
     [ -d "rules/common" ] && cp -r rules/common/* "$ANTIGRAVITY_DIR/global_rules/"
     
-    echo "Antigravity components installed to $ANTIGRAVITY_DIR/global_*"
+    echo "Antigravity components installed/updated to $ANTIGRAVITY_DIR/global_*"
 }
 
-case $choice in
-    1)
+# Interactive mode if no target specified
+if [ -z "$INSTALL_TARGET" ]; then
+    echo "Select installation target:"
+    echo "1) Gemini CLI (Standard)"
+    echo "2) Antigravity (VS Code / Cursor)"
+    echo "3) Both"
+    read -p "Enter choice [1-3]: " choice
+    case $choice in
+        1) INSTALL_TARGET="cli" ;;
+        2) INSTALL_TARGET="antigravity" ;;
+        3) INSTALL_TARGET="all" ;;
+        *) echo "Invalid choice. Exiting."; exit 1 ;;
+    esac
+fi
+
+# Execute installation
+case $INSTALL_TARGET in
+    cli)
         install_gemini_cli
         ;;
-    2)
+    antigravity)
         install_antigravity
         ;;
-    3)
+    all)
         install_gemini_cli
         install_antigravity
-        ;;
-    *)
-        echo "Invalid choice. Exiting."
-        exit 1
         ;;
 esac
 
