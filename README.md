@@ -56,6 +56,16 @@ Recommended if you use **Antigravity** (VS Code / Cursor) or need to customize t
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Jamkris/everything-gemini-code/main/install.sh)" -- --all
 ```
 
+### Uninstallation
+
+```bash
+# Selective Uninstall (Recommended): Removes only files installed by this extension.
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Jamkris/everything-gemini-code/main/uninstall.sh)" -- --antigravity
+
+# Full Uninstall (Caution): Deletes ALL files in the target directories.
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Jamkris/everything-gemini-code/main/uninstall.sh)" -- --antigravity --purge
+```
+
 ### Option 2: Manual Installation (Advanced)
 
 If you prefer manual control or need to customize specific components:

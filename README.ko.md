@@ -54,6 +54,16 @@ gemini extensions install https://github.com/Jamkris/everything-gemini-code
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Jamkris/everything-gemini-code/main/install.sh)" -- --all
 ```
 
+### 삭제 방법 (Uninstallation)
+
+```bash
+# 선택적 삭제 (권장): 해당 확장에서 설치한 파일만 삭제하고, 사용자가 추가한 파일은 유지합니다.
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Jamkris/everything-gemini-code/main/uninstall.sh)" -- --antigravity
+
+# 전체 삭제 (주의): 해당 디렉토리의 모든 파일을 삭제합니다.
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Jamkris/everything-gemini-code/main/uninstall.sh)" -- --antigravity --purge
+```
+
 ### 옵션 2: 수동 설치 (고급)
 
 직접 제어하거나 특정 컴포넌트만 커스터마이징하고 싶다면:
