@@ -47,4 +47,3 @@ Generate and run end-to-end tests with Playwright. Creates test journeys, runs t
 [Source Definition](../../gemini/commands/e2e.md)
 
 ---
-

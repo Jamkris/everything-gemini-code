@@ -55,4 +55,3 @@ Manage Gemini CLI session history - list, load, alias, and edit sessions stored 
 [Source Definition](../../gemini/commands/sessions.md)
 
 ---
-

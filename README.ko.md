@@ -15,24 +15,24 @@
 
 2분 안에 설정을 완료하세요:
 
+```bash
 npm install -g @google/gemini-cli@latest
 
 # 또는
 
 npm update -g @google/gemini-cli
-
-````
+```
 
 ### 인증 설정 (필수)
 
 Gemini CLI를 사용하려면 API 키가 필요합니다.
 
-1.  [Google AI Studio](https://aistudio.google.com/)에서 API 키를 발급받으세요.
-2.  환경 변수로 설정합니다:
+1. [Google AI Studio](https://aistudio.google.com/)에서 API 키를 발급받으세요.
+2. 환경 변수로 설정합니다:
 
 ```bash
 export GEMINI_API_KEY="여기에_API_키를_입력하세요"
-````
+```
 
 ### 옵션 1: Gemini CLI를 통한 설치 (권장)
 

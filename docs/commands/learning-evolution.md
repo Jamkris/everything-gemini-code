@@ -47,4 +47,3 @@ Show all learned instincts with their confidence levels
 [Source Definition](../../gemini/commands/instinct-status.md)
 
 ---
-

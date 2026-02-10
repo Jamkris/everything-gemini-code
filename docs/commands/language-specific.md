@@ -31,4 +31,3 @@ Comprehensive Python code review for PEP 8 compliance, type hints, security, and
 [Source Definition](../../gemini/commands/python-review.md)
 
 ---
-
