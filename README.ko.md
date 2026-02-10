@@ -15,11 +15,20 @@
 
 2분 안에 설정을 완료하세요:
 
-### 옵션 1: Gemini CLI를 통한 설치 (권장)
+### 옵션 1: 빠른 설치 (권장)
 
 ```bash
-# GitHub에서 직접 설치
-gemini extensions install https://github.com/Jamkris/everything-gemini-code
+# 저장소 복제
+git clone https://github.com/Jamkris/everything-gemini-code.git
+
+# 설치 스크립트 실행
+cd everything-gemini-code
+./install.sh
+
+# 대화형 프롬프트를 따라 설치 환경을 선택하세요:
+# 1) Gemini CLI (표준)
+# 2) Antigravity (VS Code / Cursor)
+# 3) Both (둘 다)
 ```
 
 ### 옵션 2: 수동 설치 (고급)
@@ -27,14 +36,18 @@ gemini extensions install https://github.com/Jamkris/everything-gemini-code
 직접 제어하거나 특정 컴포넌트만 커스터마이징하고 싶다면:
 
 ```bash
-# 리포지토리 클론
+# 저장소 복제
 git clone https://github.com/Jamkris/everything-gemini-code.git
 
 # 에이전트 복사
 cp everything-gemini-code/agents/*.md ~/.gemini/agents/
 
-# 명령어 복사
-cp everything-gemini-code/commands/*.md ~/.gemini/commands/
+# 명령어 복사 (Gemini CLI 용)
+cp everything-gemini-code/commands/*.toml ~/.gemini/commands/
+
+# 워크플로우 복사 (Antigravity 용)
+# 참고: Antigravity는 ~/.gemini/antigravity/global_workflows/ 경로를 사용합니다.
+cp everything-gemini-code/workflows/*.md ~/.gemini/antigravity/global_workflows/
 
 # 스킬 복사
 cp -r everything-gemini-code/skills/* ~/.gemini/skills/
@@ -43,7 +56,23 @@ cp -r everything-gemini-code/skills/* ~/.gemini/skills/
 cp -r everything-gemini-code/rules/common/* ~/.gemini/rules/
 ```
 
-> ⚠️ **참고:** 규칙(Rules)은 확장 프로그램으로 자동 배포되지 않으므로 `~/.gemini/rules/` 경로에 수동으로 설치해야 합니다.
+> **Antigravity 사용자 참고:**
+> Antigravity를 위해 수동 설치하는 경우, 호환성을 위해 `~/.gemini/antigravity/` 하위 디렉토리(`global_agents`, `global_skills`, `global_rules`)에 복사하는 것이 좋습니다. `install.sh` 스크립트는 이를 자동으로 처리합니다.
+
+### 옵션 3: Gemini CLI 확장 프로그램으로 설치 (개발자 모드)
+
+이 저장소를 Gemini CLI 확장 프로그램으로 직접 링크할 수 있습니다. 이를 통해 변경 사항을 실시간으로 개발하고 테스트할 수 있습니다.
+
+```bash
+# 저장소 복제
+git clone https://github.com/Jamkris/everything-gemini-code.git
+cd everything-gemini-code
+
+# 확장 프로그램 링크
+gemini extensions link .
+```
+
+> ⚠️ **참고:** 규칙(Rules)은 확장 프로그램으로 자동 배포되지 않으므로 `~/.gemini/rules/` 또는 `~/.gemini/antigravity/global_rules/` 경로에 수동으로 설치해야 합니다.
 
 ---
 
@@ -93,7 +122,8 @@ everything-gemini-code/
 ├── gemini-extension.json  # 확장 프로그램 매니페스트
 ├── agents/                # 전문 서브 에이전트 (@planner, @architect 등)
 ├── skills/                # 워크플로우 정의 (TDD, 패턴 등)
-├── commands/              # 슬래시 명령어 (/plan, /tdd 등)
+├── commands/              # Gemini CLI 명령어 (.toml)
+├── workflows/             # Antigravity 워크플로우 (.md)
 ├── rules/                 # 코딩 가이드라인 (TypeScript, Python, Go)
 ├── hooks/                 # 자동화 트리거 (hooks.json)
 └── mcp-configs/           # MCP 서버 설정

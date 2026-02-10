@@ -42,8 +42,12 @@ git clone https://github.com/Jamkris/everything-gemini-code.git
 # Copy agents
 cp everything-gemini-code/agents/*.md ~/.gemini/agents/
 
-# Copy workflows (Slash Commands)
-cp everything-gemini-code/workflows/*.md ~/.gemini/workflows/
+# Copy commands (Gemini CLI)
+cp everything-gemini-code/commands/*.toml ~/.gemini/commands/
+
+# Copy workflows (Antigravity)
+# Note: For Antigravity, use ~/.gemini/antigravity/global_workflows/
+cp everything-gemini-code/workflows/*.md ~/.gemini/antigravity/global_workflows/
 
 # Copy skills
 cp -r everything-gemini-code/skills/* ~/.gemini/skills/
@@ -51,6 +55,11 @@ cp -r everything-gemini-code/skills/* ~/.gemini/skills/
 # Install rules (Required for both installation methods)
 cp -r everything-gemini-code/rules/common/* ~/.gemini/rules/
 ```
+
+> **For Antigravity Users:**
+> If you are manually installing for Antigravity, copying to `~/.gemini/antigravity/` subdirectories (`global_agents`, `global_skills`, `global_rules`) is recommended for full compatibility. The `install.sh` script handles this automatically.
+
+````
 
 ### Option 3: Install as Gemini CLI Extension (Developer Mode)
 
@@ -63,7 +72,7 @@ cd everything-gemini-code
 
 # Link the extension
 gemini extensions link .
-```
+````
 
 > ⚠️ **Note:** Rules still need to be installed manually to `~/.gemini/rules/` or `~/.gemini/antigravity/global_rules/` as extensions do not automatically distribute them.
 
