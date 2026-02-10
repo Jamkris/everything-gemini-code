@@ -31,26 +31,27 @@ install_gemini_cli() {
 
 install_antigravity() {
     echo "Installing for Antigravity..."
-    # Antigravity paths (verified: ~/.gemini/antigravity/global_workflows)
-    # Agents often go to a global agents dir or project specific, but let's try global if exists
-    # If not, we put them in ~/.gemini/antigravity/agents assuming it supports it or user manually moves them
+    # Antigravity paths
+    # We follow the convention: ~/.gemini/antigravity/global_{component}
     
     mkdir -p "$ANTIGRAVITY_DIR/global_workflows"
+    mkdir -p "$ANTIGRAVITY_DIR/global_agents"
+    mkdir -p "$ANTIGRAVITY_DIR/global_skills"
+    mkdir -p "$ANTIGRAVITY_DIR/global_rules"
     
-    # Workflows go to global_workflows
+    # Workflows -> global_workflows
     [ -d "workflows" ] && cp workflows/*.md "$ANTIGRAVITY_DIR/global_workflows/"
     
-    # For agents/skills in Antigravity, the structure can vary. 
-    # Current best practice is often project-level or explicit import.
-    # However, let's copy to a shared location if Antigravity looks for it
-    # We'll use the same structure as Gemini CLI for consistency in ~/.gemini root 
-    # as Antigravity might fallback to looking there (it shares ~/.gemini root)
+    # Agents -> global_agents
+    [ -d "agents" ] && cp agents/*.md "$ANTIGRAVITY_DIR/global_agents/"
+
+    # Skills -> global_skills
+    [ -d "skills" ] && cp -r skills/* "$ANTIGRAVITY_DIR/global_skills/"
+
+    # Rules -> global_rules
+    [ -d "rules/common" ] && cp -r rules/common/* "$ANTIGRAVITY_DIR/global_rules/"
     
-    # BUT, if user specifically asked for Antigravity, they might expect things in specific places.
-    # The user only mentioned `global_workflows`.
-    # Let's effectively replicate the workflow install to the specialized path.
-    
-    echo "Antigravity workflows installed to $ANTIGRAVITY_DIR/global_workflows"
+    echo "Antigravity components installed to $ANTIGRAVITY_DIR/global_*"
 }
 
 case $choice in
