@@ -1,8 +1,7 @@
 ---
 name: go-build-resolver
 description: Go build, vet, and compilation error resolution specialist. Fixes build errors, go vet issues, and linter warnings with minimal changes. Use when Go builds fail.
-tools: ["read_file", "write_file", "edit_file", "run_shell_command"]
-model: opus
+tools: ["read_file", "write_file", "edit", "run_shell_command"]
 ---
 
 # Go Build Error Resolver
