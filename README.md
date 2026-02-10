@@ -15,11 +15,15 @@ This extension provides production-ready agents, skills, hooks, commands, rules,
 
 Get up and running in under 2 minutes:
 
-### Option 1: Install via Gemini CLI (Recommended)
+### Option 1: Quick Install (Recommended)
 
 ```bash
-# Install directly from GitHub
-gemini extensions install https://github.com/Jamkris/everything-gemini-code
+# Clone the repository
+git clone https://github.com/Jamkris/everything-gemini-code.git
+
+# Run installation script
+cd everything-gemini-code
+./install.sh
 ```
 
 ### Option 2: Manual Installation (Advanced)
