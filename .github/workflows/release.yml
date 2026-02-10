@@ -22,27 +22,27 @@ jobs:
       - name: Validate and Extract Version
         id: version
         run: |
-          PLUGIN_VERSION=$(grep -oE '"version": *"[^"]*"' .gemini-plugin/plugin.json | grep -oE '[0-9]+\.[0-9]+\.[0-9]+')
-          if [[ -z "$PLUGIN_VERSION" ]]; then
-            echo "::error::Could not extract version from plugin.json"
+          EXTENSION_VERSION=$(grep -oE '"version": *"[^"]*"' gemini-extension.json | head -n1 | grep -oE '[0-9]+\.[0-9]+\.[0-9]+')
+          if [[ -z "$EXTENSION_VERSION" ]]; then
+            echo "::error::Could not extract version from gemini-extension.json"
             exit 1
           fi
 
-          echo "Detected plugin version: $PLUGIN_VERSION"
+          echo "Detected extension version: $EXTENSION_VERSION"
 
           if [[ "${{ github.ref_type }}" == "tag" ]]; then
-            # Verify tag matches plugin version
+            # Verify tag matches extension version
             TAG_VERSION="${{ github.ref_name }}"
             TAG_VERSION="${TAG_VERSION#v}"
-            if [[ "$TAG_VERSION" != "$PLUGIN_VERSION" ]]; then
-              echo "::error::Tag version ($TAG_VERSION) does not match plugin.json version ($PLUGIN_VERSION)"
+            if [[ "$TAG_VERSION" != "$EXTENSION_VERSION" ]]; then
+              echo "::error::Tag version ($TAG_VERSION) does not match gemini-extension.json version ($EXTENSION_VERSION)"
               exit 1
             fi
             echo "RELEASE_TAG=${{ github.ref_name }}" >> $GITHUB_OUTPUT
           else
-            # On branch, use plugin version as tag
-            echo "::warning::Running on branch '${{ github.ref_name }}'. Will release as v$PLUGIN_VERSION"
-            echo "RELEASE_TAG=v$PLUGIN_VERSION" >> $GITHUB_OUTPUT
+            # On branch, use extension version as tag
+            echo "::warning::Running on branch '${{ github.ref_name }}'. Will release as v$EXTENSION_VERSION"
+            echo "RELEASE_TAG=v$EXTENSION_VERSION" >> $GITHUB_OUTPUT
             echo "CREATE_TAG=true" >> $GITHUB_OUTPUT
           fi
 
