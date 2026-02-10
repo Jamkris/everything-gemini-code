@@ -15,12 +15,25 @@ This extension provides production-ready agents, skills, hooks, commands, rules,
 
 Get up and running in under 2 minutes:
 
-### Prerequisites
+npm install -g @google/gemini-cli@latest
 
-Ensure you have the latest official Gemini CLI installed:
+````
+
+### Authentication (Required)
+
+The Gemini CLI requires an API key to function.
+
+1.  Get your API key from [Google AI Studio](https://aistudio.google.com/).
+2.  Set it as an environment variable:
 
 ```bash
-npm install -g @google/gemini-cli@latest
+export GEMINI_API_KEY="your_api_key_here"
+````
+
+Or configure it using the CLI (if supported by your version):
+
+```bash
+gemini config set apiKey "your_api_key_here"
 ```
 
 ### Option 1: Install via Gemini CLI (Recommended)
