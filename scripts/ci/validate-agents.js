@@ -7,7 +7,7 @@ const fs = require('fs');
 const path = require('path');
 
 const AGENTS_DIR = path.join(__dirname, '../../agents');
-const REQUIRED_FIELDS = ['model', 'tools'];
+const REQUIRED_FIELDS = ['tools'];
 
 function extractFrontmatter(content) {
   // Strip BOM if present (UTF-8 BOM: \uFEFF)

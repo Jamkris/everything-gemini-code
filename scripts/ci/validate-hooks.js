@@ -7,7 +7,7 @@ const fs = require('fs');
 const path = require('path');
 
 const HOOKS_FILE = path.join(__dirname, '../../hooks/hooks.json');
-const VALID_EVENTS = ['PreToolUse', 'PostToolUse', 'PreCompact', 'SessionStart', 'SessionEnd', 'Stop', 'Notification', 'SubagentStop'];
+const VALID_EVENTS = ['BeforeTool', 'AfterTool', 'BeforeAgent', 'AfterAgent', 'BeforeModel', 'AfterModel', 'SessionStart', 'SessionEnd'];
 
 function validateHooks() {
   if (!fs.existsSync(HOOKS_FILE)) {
