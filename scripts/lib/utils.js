@@ -8,6 +8,15 @@ const path = require('path');
 const os = require('os');
 const { execSync, spawnSync } = require('child_process');
 
+// Suppress Node.js v22+ punycode deprecation warning (DEP0040)
+const originalEmit = process.emit;
+process.emit = function (name, data, ...args) {
+  if (name === 'warning' && typeof data === 'object' && data.name === 'DeprecationWarning' && data.code === 'DEP0040') {
+    return false;
+  }
+  return originalEmit.apply(process, [name, data, ...args]);
+};
+
 // Platform detection
 const isWindows = process.platform === 'win32';
 const isMacOS = process.platform === 'darwin';
