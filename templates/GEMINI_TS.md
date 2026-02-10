@@ -1,18 +1,10 @@
-# TypeScript/JavaScript Coding Style
+## TypeScript/JavaScript Specific Rules
 
-> This file extends [common/coding-style.md](../common/coding-style.md) with TypeScript/JavaScript specific content.
-
-## Immutability
+### Immutability
 
 Use spread operator for immutable updates:
 
 ```typescript
-// WRONG: Mutation
-function updateUser(user, name) {
-  user.name = name  // MUTATION!
-  return user
-}
-
 // CORRECT: Immutability
 function updateUser(user, name) {
   return {
@@ -22,7 +14,7 @@ function updateUser(user, name) {
 }
 ```
 
-## Error Handling
+### Error Handling
 
 Use async/await with try-catch:
 
@@ -36,7 +28,7 @@ try {
 }
 ```
 
-## Input Validation
+### Input Validation
 
 Use Zod for schema-based validation:
 
@@ -51,8 +43,7 @@ const schema = z.object({
 const validated = schema.parse(input)
 ```
 
-## Console.log
+### Console.log
 
 - No `console.log` statements in production code
 - Use proper logging libraries instead
-- See hooks for automatic detection

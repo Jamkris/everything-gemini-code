@@ -55,7 +55,7 @@ install_gemini_cli() {
     [ -d "commands" ] && cp commands/*.toml "$GEMINI_CLI_DIR/commands/"
     
     [ -d "skills" ] && cp -r skills/* "$GEMINI_CLI_DIR/skills/"
-    [ -d "rules/common" ] && cp -r rules/common/* "$GEMINI_CLI_DIR/rules/"
+    # Rules are now handled via GEMINI.md generation
     echo "Gemini CLI installation complete."
 }
 
@@ -68,6 +68,7 @@ install_antigravity() {
         rm -rf "$ANTIGRAVITY_DIR/global_workflows"
         rm -rf "$ANTIGRAVITY_DIR/global_agents"
         rm -rf "$ANTIGRAVITY_DIR/global_skills"
+        # global_rules is deprecated, removing it
         rm -rf "$ANTIGRAVITY_DIR/global_rules"
     fi
 
@@ -75,7 +76,6 @@ install_antigravity() {
     mkdir -p "$ANTIGRAVITY_DIR/global_workflows"
     mkdir -p "$ANTIGRAVITY_DIR/global_agents"
     mkdir -p "$ANTIGRAVITY_DIR/global_skills"
-    mkdir -p "$ANTIGRAVITY_DIR/global_rules"
     
     # Workflows -> global_workflows
     [ -d "workflows" ] && cp workflows/*.md "$ANTIGRAVITY_DIR/global_workflows/"
@@ -86,10 +86,56 @@ install_antigravity() {
     # Skills -> global_skills
     [ -d "skills" ] && cp -r skills/* "$ANTIGRAVITY_DIR/global_skills/"
 
-    # Rules -> global_rules
-    [ -d "rules/common" ] && cp -r rules/common/* "$ANTIGRAVITY_DIR/global_rules/"
-    
     echo "Antigravity components installed/updated to $ANTIGRAVITY_DIR/global_*"
+}
+
+generate_gemini_md() {
+    echo "Generating ~/.gemini/GEMINI.md (Global Context)..."
+    TEMPLATE_DIR="templates"
+    TARGET_FILE="$HOME/.gemini/GEMINI.md"
+    
+    # Ensure templates exist locally (we might need to fetch them if remote install)
+    if [ ! -d "$TEMPLATE_DIR" ]; then
+         # Usually redundant if we adhere to the main logic, but safety first
+         echo "Templates not found. Skipping GEMINI.md generation."
+         return
+    fi
+    
+    # Ask for language preference if interactive
+    LANG_CHOICE=""
+    if [ -z "$INSTALL_TARGET" ]; then # Only ask in interactive mode
+        echo "Select primary language for Global Rules:"
+        echo "1) TypeScript/JavaScript"
+        echo "2) Python"
+        echo "3) Go"
+        echo "4) None (General only)"
+        read -p "Enter choice [1-4]: " lchoice
+        case $lchoice in
+            1) LANG_CHOICE="ts" ;;
+            2) LANG_CHOICE="python" ;;
+            3) LANG_CHOICE="go" ;;
+            *) LANG_CHOICE="none" ;;
+        esac
+    else
+        # Default to None or strictly General in non-interactive (unless extended later)
+        LANG_CHOICE="none"
+    fi
+
+    echo "Creating GEMINI.md..."
+    cat "$TEMPLATE_DIR/GEMINI_GLOBAL.md" > "$TARGET_FILE"
+    
+    if [ "$LANG_CHOICE" == "ts" ]; then
+        cat "$TEMPLATE_DIR/GEMINI_TS.md" >> "$TARGET_FILE"
+        echo "Added TypeScript rules."
+    elif [ "$LANG_CHOICE" == "python" ]; then
+        cat "$TEMPLATE_DIR/GEMINI_PYTHON.md" >> "$TARGET_FILE"
+        echo "Added Python rules."
+    elif [ "$LANG_CHOICE" == "go" ]; then
+        cat "$TEMPLATE_DIR/GEMINI_GO.md" >> "$TARGET_FILE"
+        echo "Added Go rules."
+    fi
+    
+    echo "Generated $TARGET_FILE"
 }
 
 # Interactive mode if no target specified
@@ -111,13 +157,16 @@ fi
 case $INSTALL_TARGET in
     cli)
         install_gemini_cli
+        generate_gemini_md
         ;;
     antigravity)
         install_antigravity
+        generate_gemini_md # Antigravity users also benefit from GEMINI.md context
         ;;
     all)
         install_gemini_cli
         install_antigravity
+        generate_gemini_md
         ;;
 esac
 

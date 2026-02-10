@@ -21,8 +21,7 @@ echo "  - Commands..."
 node scripts/ci/validate-commands.js
 echo "  - Skills..."
 node scripts/ci/validate-skills.js
-echo "  - Rules..."
-node scripts/ci/validate-rules.js
+
 
 echo -e "\n🧪 5. Running Tests..."
 npm test
