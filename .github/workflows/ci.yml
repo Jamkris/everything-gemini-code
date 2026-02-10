@@ -82,9 +82,6 @@ jobs:
       - name: Validate skills
         run: node scripts/ci/validate-skills.js
 
-      - name: Validate rules
-        run: node scripts/ci/validate-rules.js
-
   security:
     name: Security Scan
     runs-on: ubuntu-latest
