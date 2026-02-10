@@ -109,12 +109,14 @@ if [ "$TARGET_CLI" = true ]; then
         rm -rf "$GEMINI_CLI_DIR/agents"
         rm -rf "$GEMINI_CLI_DIR/commands"
         rm -rf "$GEMINI_CLI_DIR/skills"
+        rm -rf "$GEMINI_CLI_DIR/scripts"
         rm -rf "$GEMINI_CLI_DIR/rules"
     else
         echo "Removing matching files..."
         remove_matching_files "agents" "$GEMINI_CLI_DIR/agents"
         remove_matching_files "commands" "$GEMINI_CLI_DIR/commands"
         remove_matching_files "skills" "$GEMINI_CLI_DIR/skills"
+        remove_matching_files "scripts" "$GEMINI_CLI_DIR/scripts"
         remove_matching_files "rules/common" "$GEMINI_CLI_DIR/rules"
     fi
     echo "Gemini CLI uninstallation complete."

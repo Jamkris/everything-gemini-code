@@ -55,6 +55,11 @@ install_gemini_cli() {
     [ -d "commands" ] && cp commands/*.toml "$GEMINI_CLI_DIR/commands/"
     
     [ -d "skills" ] && cp -r skills/* "$GEMINI_CLI_DIR/skills/"
+    
+    # Copy hook scripts
+    mkdir -p "$GEMINI_CLI_DIR/scripts"
+    [ -d "scripts" ] && cp -r scripts/* "$GEMINI_CLI_DIR/scripts/"
+    
     # Rules are now handled via GEMINI.md generation
     echo "Gemini CLI installation complete."
 }
