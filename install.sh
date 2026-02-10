@@ -44,25 +44,74 @@ fi
 
 install_gemini_cli() {
     echo "Installing for Gemini CLI..."
+
+    # Check if extension is already installed via 'gemini extensions install'
+    EXT_DIR="$GEMINI_CLI_DIR/extensions/everything-gemini-code"
+    if [ -d "$EXT_DIR" ]; then
+        echo ""
+        echo "============================================="
+        echo "  Extension detected at: $EXT_DIR"
+        echo "============================================="
+        echo ""
+        echo "Skills, agents, and hooks are already managed by the extension."
+        echo "Skipping file copy to prevent conflicts."
+        echo ""
+
+        # Clean up any old duplicates from previous manual installs
+        echo "Cleaning up old duplicates (if any)..."
+
+        # Remove skills that exist in the extension
+        if [ -d "$EXT_DIR/skills" ] && [ -d "$GEMINI_CLI_DIR/skills" ]; then
+            for skill_dir in "$EXT_DIR/skills"/*/; do
+                skill_name=$(basename "$skill_dir")
+                if [ -d "$GEMINI_CLI_DIR/skills/$skill_name" ] && [ "$skill_name" != "learned" ]; then
+                    echo "  Removing duplicate skill: $skill_name"
+                    rm -rf "$GEMINI_CLI_DIR/skills/$skill_name"
+                fi
+            done
+        fi
+
+        # Remove agents that exist in the extension
+        if [ -d "$EXT_DIR/agents" ] && [ -d "$GEMINI_CLI_DIR/agents" ]; then
+            for agent_file in "$EXT_DIR/agents"/*.md; do
+                agent_name=$(basename "$agent_file")
+                if [ -f "$GEMINI_CLI_DIR/agents/$agent_name" ]; then
+                    echo "  Removing duplicate agent: $agent_name"
+                    rm -f "$GEMINI_CLI_DIR/agents/$agent_name"
+                fi
+            done
+        fi
+
+        # Remove scripts that exist in the extension
+        if [ -d "$EXT_DIR/scripts" ] && [ -d "$GEMINI_CLI_DIR/scripts" ]; then
+            echo "  Removing duplicate scripts directory"
+            rm -rf "$GEMINI_CLI_DIR/scripts/hooks"
+            rm -rf "$GEMINI_CLI_DIR/scripts/lib"
+            rm -rf "$GEMINI_CLI_DIR/scripts/ci"
+        fi
+
+        echo "Cleanup complete."
+        echo ""
+        return
+    fi
+
+    # Manual install (no extension detected)
+    echo "No extension detected. Installing files manually..."
     mkdir -p "$GEMINI_CLI_DIR/agents"
     mkdir -p "$GEMINI_CLI_DIR/commands"
     mkdir -p "$GEMINI_CLI_DIR/skills"
-    mkdir -p "$GEMINI_CLI_DIR/rules"
 
     [ -d "agents" ] && cp agents/*.md "$GEMINI_CLI_DIR/agents/"
-    
+
     # Gemini CLI uses TOML commands
     [ -d "commands" ] && cp commands/*.toml "$GEMINI_CLI_DIR/commands/"
-    
+
     [ -d "skills" ] && cp -r skills/* "$GEMINI_CLI_DIR/skills/"
-    
+
     # Copy hook scripts
     mkdir -p "$GEMINI_CLI_DIR/scripts"
     [ -d "scripts" ] && cp -r scripts/* "$GEMINI_CLI_DIR/scripts/"
-    
 
-    
-    # Rules are now handled via GEMINI.md generation
     echo "Gemini CLI installation complete."
 }
 
