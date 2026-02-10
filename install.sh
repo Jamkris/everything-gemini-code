@@ -18,12 +18,15 @@ read -p "Enter choice [1-3]: " choice
 install_gemini_cli() {
     echo "Installing for Gemini CLI..."
     mkdir -p "$GEMINI_CLI_DIR/agents"
-    mkdir -p "$GEMINI_CLI_DIR/workflows"
+    mkdir -p "$GEMINI_CLI_DIR/commands"
     mkdir -p "$GEMINI_CLI_DIR/skills"
     mkdir -p "$GEMINI_CLI_DIR/rules"
 
     [ -d "agents" ] && cp agents/*.md "$GEMINI_CLI_DIR/agents/"
-    [ -d "workflows" ] && cp workflows/*.md "$GEMINI_CLI_DIR/workflows/"
+    
+    # Gemini CLI uses TOML commands
+    [ -d "commands" ] && cp commands/*.toml "$GEMINI_CLI_DIR/commands/"
+    
     [ -d "skills" ] && cp -r skills/* "$GEMINI_CLI_DIR/skills/"
     [ -d "rules/common" ] && cp -r rules/common/* "$GEMINI_CLI_DIR/rules/"
     echo "Gemini CLI installation complete."
