@@ -19,23 +19,31 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Validate version tag
+      - name: Validate and Extract Version
+        id: version
         run: |
-          if ! [[ "${{ github.ref_name }}" =~ ^v[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
-            echo "Invalid version tag format. Expected vX.Y.Z"
+          PLUGIN_VERSION=$(grep -oE '"version": *"[^"]*"' .gemini-plugin/plugin.json | grep -oE '[0-9]+\.[0-9]+\.[0-9]+')
+          if [[ -z "$PLUGIN_VERSION" ]]; then
+            echo "::error::Could not extract version from plugin.json"
             exit 1
           fi
 
-      - name: Verify plugin.json version matches tag
-        env:
-          TAG_NAME: ${{ github.ref_name }}
-        run: |
-          TAG_VERSION="${TAG_NAME#v}"
-          PLUGIN_VERSION=$(grep -oE '"version": *"[^"]*"' .gemini-plugin/plugin.json | grep -oE '[0-9]+\.[0-9]+\.[0-9]+')
-          if [ "$TAG_VERSION" != "$PLUGIN_VERSION" ]; then
-            echo "::error::Tag version ($TAG_VERSION) does not match plugin.json version ($PLUGIN_VERSION)"
-            echo "Run: ./scripts/release.sh $TAG_VERSION"
-            exit 1
+          echo "Detected plugin version: $PLUGIN_VERSION"
+
+          if [[ "${{ github.ref_type }}" == "tag" ]]; then
+            # Verify tag matches plugin version
+            TAG_VERSION="${{ github.ref_name }}"
+            TAG_VERSION="${TAG_VERSION#v}"
+            if [[ "$TAG_VERSION" != "$PLUGIN_VERSION" ]]; then
+              echo "::error::Tag version ($TAG_VERSION) does not match plugin.json version ($PLUGIN_VERSION)"
+              exit 1
+            fi
+            echo "RELEASE_TAG=${{ github.ref_name }}" >> $GITHUB_OUTPUT
+          else
+            # On branch, use plugin version as tag
+            echo "::warning::Running on branch '${{ github.ref_name }}'. Will release as v$PLUGIN_VERSION"
+            echo "RELEASE_TAG=v$PLUGIN_VERSION" >> $GITHUB_OUTPUT
+            echo "CREATE_TAG=true" >> $GITHUB_OUTPUT
           fi
 
       - name: Generate changelog
@@ -54,7 +62,11 @@ jobs:
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
         with:
+          tag_name: ${{ steps.version.outputs.RELEASE_TAG }}
+          target_commitish: ${{ github.sha }}
           body: |
             ## Changes
             ${{ steps.changelog.outputs.commits }}
           generate_release_notes: false
+          draft: false
+          prerelease: false
