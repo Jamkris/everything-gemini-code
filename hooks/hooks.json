@@ -1,9 +1,9 @@
 {
 	"$schema": "https://json.schemastore.org/gemini-code-settings.json",
 	"hooks": {
-		"PreToolUse": [
+		"BeforeTool": [
 			{
-				"matcher": "tool == \"Bash\" && tool_input.command matches \"(npm run dev|pnpm( run)? dev|yarn dev|bun run dev)\"",
+				"matcher": "tool == \"run_shell_command\" && tool_input.command matches \"(npm run dev|pnpm( run)? dev|yarn dev|bun run dev)\"",
 				"hooks": [
 					{
 						"type": "command",
@@ -13,7 +13,7 @@
 				"description": "Block dev servers outside tmux - ensures you can access logs"
 			},
 			{
-				"matcher": "tool == \"Bash\" && tool_input.command matches \"(npm (install|test)|pnpm (install|test)|yarn (install|test)?|bun (install|test)|cargo build|make|docker|pytest|vitest|playwright)\"",
+				"matcher": "tool == \"run_shell_command\" && tool_input.command matches \"(npm (install|test)|pnpm (install|test)|yarn (install|test)?|bun (install|test)|cargo build|make|docker|pytest|vitest|playwright)\"",
 				"hooks": [
 					{
 						"type": "command",
@@ -23,7 +23,7 @@
 				"description": "Reminder to use tmux for long-running commands"
 			},
 			{
-				"matcher": "tool == \"Bash\" && tool_input.command matches \"git push\"",
+				"matcher": "tool == \"run_shell_command\" && tool_input.command matches \"git push\"",
 				"hooks": [
 					{
 						"type": "command",
@@ -33,7 +33,7 @@
 				"description": "Reminder before git push to review changes"
 			},
 			{
-				"matcher": "tool == \"Write\" && tool_input.file_path matches \"\\\\.(md|txt)$\" && !(tool_input.file_path matches \"README\\\\.md|CLAUDE\\\\.md|AGENTS\\\\.md|CONTRIBUTING\\\\.md\")",
+				"matcher": "tool == \"write_file\" && tool_input.file_path matches \"\\\\.(md|txt)$\" && !(tool_input.file_path matches \"README\\\\.md|CLAUDE\\\\.md|AGENTS\\\\.md|CONTRIBUTING\\\\.md\")",
 				"hooks": [
 					{
 						"type": "command",
@@ -43,26 +43,14 @@
 				"description": "Block creation of random .md files - keeps docs consolidated"
 			},
 			{
-				"matcher": "tool == \"Edit\" || tool == \"Write\"",
+				"matcher": "tool == \"edit_file\" || tool == \"write_file\"",
 				"hooks": [
 					{
 						"type": "command",
-						"command": "node \"${GEMINI_PLUGIN_ROOT}/scripts/hooks/suggest-compact.js\""
+						"command": "node \"${GEMINI_EXTENSION_ROOT}/scripts/hooks/suggest-compact.js\""
 					}
 				],
 				"description": "Suggest manual compaction at logical intervals"
-			}
-		],
-		"PreCompact": [
-			{
-				"matcher": "*",
-				"hooks": [
-					{
-						"type": "command",
-						"command": "node \"${GEMINI_PLUGIN_ROOT}/scripts/hooks/pre-compact.js\""
-					}
-				],
-				"description": "Save state before context compaction"
 			}
 		],
 		"SessionStart": [
@@ -71,15 +59,15 @@
 				"hooks": [
 					{
 						"type": "command",
-						"command": "node \"${GEMINI_PLUGIN_ROOT}/scripts/hooks/session-start.js\""
+						"command": "node \"${GEMINI_EXTENSION_ROOT}/scripts/hooks/session-start.js\""
 					}
 				],
 				"description": "Load previous context and detect package manager on new session"
 			}
 		],
-		"PostToolUse": [
+		"AfterTool": [
 			{
-				"matcher": "tool == \"Bash\"",
+				"matcher": "tool == \"run_shell_command\"",
 				"hooks": [
 					{
 						"type": "command",
@@ -89,7 +77,7 @@
 				"description": "Log PR URL and provide review command after PR creation"
 			},
 			{
-				"matcher": "tool == \"Bash\" && tool_input.command matches \"(npm run build|pnpm build|yarn build)\"",
+				"matcher": "tool == \"run_shell_command\" && tool_input.command matches \"(npm run build|pnpm build|yarn build)\"",
 				"hooks": [
 					{
 						"type": "command",
@@ -101,7 +89,7 @@
 				"description": "Example: async hook for build analysis (runs in background without blocking)"
 			},
 			{
-				"matcher": "tool == \"Edit\" && tool_input.file_path matches \"\\\\.(ts|tsx|js|jsx)$\"",
+				"matcher": "tool == \"edit_file\" && tool_input.file_path matches \"\\\\.(ts|tsx|js|jsx)$\"",
 				"hooks": [
 					{
 						"type": "command",
@@ -111,7 +99,7 @@
 				"description": "Auto-format JS/TS files with Prettier after edits"
 			},
 			{
-				"matcher": "tool == \"Edit\" && tool_input.file_path matches \"\\\\.(ts|tsx)$\"",
+				"matcher": "tool == \"edit_file\" && tool_input.file_path matches \"\\\\.(ts|tsx)$\"",
 				"hooks": [
 					{
 						"type": "command",
@@ -121,7 +109,7 @@
 				"description": "TypeScript check after editing .ts/.tsx files"
 			},
 			{
-				"matcher": "tool == \"Edit\" && tool_input.file_path matches \"\\\\.(ts|tsx|js|jsx)$\"",
+				"matcher": "tool == \"edit_file\" && tool_input.file_path matches \"\\\\.(ts|tsx|js|jsx)$\"",
 				"hooks": [
 					{
 						"type": "command",
@@ -131,13 +119,13 @@
 				"description": "Warn about console.log statements after edits"
 			}
 		],
-		"Stop": [
+		"AfterAgent": [
 			{
 				"matcher": "*",
 				"hooks": [
 					{
 						"type": "command",
-						"command": "node \"${GEMINI_PLUGIN_ROOT}/scripts/hooks/check-console-log.js\""
+						"command": "node \"${GEMINI_EXTENSION_ROOT}/scripts/hooks/check-console-log.js\""
 					}
 				],
 				"description": "Check for console.log in modified files after each response"
@@ -149,7 +137,7 @@
 				"hooks": [
 					{
 						"type": "command",
-						"command": "node \"${GEMINI_PLUGIN_ROOT}/scripts/hooks/session-end.js\""
+						"command": "node \"${GEMINI_EXTENSION_ROOT}/scripts/hooks/session-end.js\""
 					}
 				],
 				"description": "Persist session state on end"
@@ -159,7 +147,7 @@
 				"hooks": [
 					{
 						"type": "command",
-						"command": "node \"${GEMINI_PLUGIN_ROOT}/scripts/hooks/evaluate-session.js\""
+						"command": "node \"${GEMINI_EXTENSION_ROOT}/scripts/hooks/evaluate-session.js\""
 					}
 				],
 				"description": "Evaluate session for extractable patterns"

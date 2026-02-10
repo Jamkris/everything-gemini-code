@@ -164,6 +164,15 @@ everything-gemini-code/
 
 ---
 
+## ⚠️ Troubleshooting
+
+If you see "Skill conflict detected" warnings, it means you have previously installed skills manually. You can safely remove the local versions to use the extension's managed skills:
+
+```bash
+# Remove manually installed skills and commands to avoid conflicts
+rm -rf ~/.gemini/skills/* ~/.gemini/commands/*
+```
+
 ## 🤝 Contributing
 
 **Contributions are welcome!**

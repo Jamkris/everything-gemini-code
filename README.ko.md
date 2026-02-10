@@ -160,6 +160,13 @@ everything-gemini-code/
 
 ---
 
+만약 "Skill conflict detected" 경고가 뜬다면, 이전에 수동으로 설치한 스킬들과 충돌하는 것입니다. 확장에서 제공하는 최신 스킬을 사용하려면 기존 로컬 파일을 삭제하세요:
+
+```bash
+# 충돌 방지를 위해 수동 설치된 스킬과 명령어 삭제
+rm -rf ~/.gemini/skills/* ~/.gemini/commands/*
+```
+
 ## 🤝 기여하기
 
 **기여는 언제나 환영합니다!**
