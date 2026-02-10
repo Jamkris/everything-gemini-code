@@ -52,7 +52,20 @@ cp -r everything-gemini-code/skills/* ~/.gemini/skills/
 cp -r everything-gemini-code/rules/common/* ~/.gemini/rules/
 ```
 
-> ⚠️ **Note:** Rules must be installed manually to `~/.gemini/rules/` as they are not automatically distributed by extensions.
+### Option 3: Install as Gemini CLI Extension (Developer Mode)
+
+You can link this repository directly to Gemini CLI as an extension. This allows you to develop and test changes in real-time.
+
+```bash
+# Clone the repository
+git clone https://github.com/Jamkris/everything-gemini-code.git
+cd everything-gemini-code
+
+# Link the extension
+gemini extensions link .
+```
+
+> ⚠️ **Note:** Rules still need to be installed manually to `~/.gemini/rules/` or `~/.gemini/antigravity/global_rules/` as extensions do not automatically distribute them.
 
 ---
 
@@ -102,7 +115,8 @@ everything-gemini-code/
 ├── gemini-extension.json  # Extension manifest
 ├── agents/                # Specialized subagents (@planner, @architect, etc.)
 ├── skills/                # Workflow definitions (TDD, Patterns, etc.)
-├── workflows/             # Slash commands (/plan, /tdd, etc.)
+├── commands/              # Gemini CLI commands (.toml)
+├── workflows/             # Antigravity workflows (.md)
 ├── rules/                 # Coding guidelines (TypeScript, Python, Go)
 ├── hooks/                 # Automation triggers (hooks.json)
 └── mcp-configs/           # MCP server configurations
