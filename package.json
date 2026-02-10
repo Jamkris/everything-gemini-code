@@ -7,7 +7,7 @@
 	"license": "MIT",
 	"scripts": {
 		"test": "node tests/run-all.js",
-		"lint": "eslint scripts/**/*.js tests/**/*.js",
+		"lint": "eslint scripts/**/*.js tests/**/*.js && markdownlint \"**/*.md\" --ignore node_modules",
 		"format": "prettier --write ."
 	},
 	"devDependencies": {
