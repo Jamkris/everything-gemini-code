@@ -24,6 +24,11 @@ git clone https://github.com/Jamkris/everything-gemini-code.git
 # Run installation script
 cd everything-gemini-code
 ./install.sh
+
+# Follow the interactive prompt to select your environment:
+# 1) Gemini CLI (Standard)
+# 2) Antigravity (VS Code / Cursor)
+# 3) Both
 ```
 
 ### Option 2: Manual Installation (Advanced)
