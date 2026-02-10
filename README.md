@@ -37,8 +37,8 @@ git clone https://github.com/Jamkris/everything-gemini-code.git
 # Copy agents
 cp everything-gemini-code/agents/*.md ~/.gemini/agents/
 
-# Copy commands
-cp everything-gemini-code/commands/*.md ~/.gemini/commands/
+# Copy workflows (Slash Commands)
+cp everything-gemini-code/workflows/*.md ~/.gemini/workflows/
 
 # Copy skills
 cp -r everything-gemini-code/skills/* ~/.gemini/skills/
@@ -97,7 +97,7 @@ everything-gemini-code/
 ├── gemini-extension.json  # Extension manifest
 ├── agents/                # Specialized subagents (@planner, @architect, etc.)
 ├── skills/                # Workflow definitions (TDD, Patterns, etc.)
-├── commands/              # Slash commands (/plan, /tdd, etc.)
+├── workflows/             # Slash commands (/plan, /tdd, etc.)
 ├── rules/                 # Coding guidelines (TypeScript, Python, Go)
 ├── hooks/                 # Automation triggers (hooks.json)
 └── mcp-configs/           # MCP server configurations

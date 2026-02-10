@@ -22,7 +22,7 @@
 		"automation",
 		"best-practices"
 	],
-	"skills": ["./skills/", "./commands/"],
+	"skills": ["./skills/", "./workflows/"],
 	"agents": [
 		"./agents/architect.md",
 		"./agents/build-error-resolver.md",

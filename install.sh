@@ -11,7 +11,7 @@ echo "Installing Gemini CLI Extensions..."
 
 # Ensure directories exist
 mkdir -p "$GEMINI_DIR/agents"
-mkdir -p "$GEMINI_DIR/commands"
+mkdir -p "$GEMINI_DIR/workflows"
 mkdir -p "$GEMINI_DIR/skills"
 mkdir -p "$GEMINI_DIR/rules"
 
@@ -21,10 +21,10 @@ if [ -d "agents" ]; then
     cp agents/*.md "$GEMINI_DIR/agents/"
 fi
 
-# Copy commands
-if [ -d "commands" ]; then
-    echo "Copying commands..."
-    cp commands/*.md "$GEMINI_DIR/commands/"
+# Copy workflows (Slash Commands)
+if [ -d "workflows" ]; then
+    echo "Copying workflows..."
+    cp workflows/*.md "$GEMINI_DIR/workflows/"
 fi
 
 # Copy skills
