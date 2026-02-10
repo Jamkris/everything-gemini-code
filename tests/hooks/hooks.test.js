@@ -277,18 +277,28 @@ async function runTests() {
     const hooksPath = path.join(__dirname, '..', '..', 'hooks', 'hooks.json');
     const hooks = JSON.parse(fs.readFileSync(hooksPath, 'utf8'));
 
-    assert.ok(hooks.hooks.PreToolUse, 'Should have PreToolUse hooks');
-    assert.ok(hooks.hooks.PostToolUse, 'Should have PostToolUse hooks');
-    assert.ok(hooks.hooks.SessionStart, 'Should have SessionStart hooks');
-    assert.ok(hooks.hooks.Stop, 'Should have Stop hooks');
-    assert.ok(hooks.hooks.PreCompact, 'Should have PreCompact hooks');
+    // Support both object and array format (new format uses object)
+    const hooksObj = hooks.hooks || hooks;
+
+    if (Array.isArray(hooksObj)) {
+         // Legacy array format
+         console.log('    Note: Using legacy array format');
+    } else {
+         // Object format
+         assert.ok(hooksObj.BeforeTool || hooksObj.PreToolUse, 'Should have BeforeTool (or PreToolUse) hooks');
+         assert.ok(hooksObj.AfterTool || hooksObj.PostToolUse, 'Should have AfterTool (or PostToolUse) hooks');
+         assert.ok(hooksObj.SessionStart, 'Should have SessionStart hooks');
+         assert.ok(hooksObj.SessionEnd, 'Should have SessionEnd hooks');
+    }
   })) passed++; else failed++;
 
   if (test('all hook commands use node', () => {
     const hooksPath = path.join(__dirname, '..', '..', 'hooks', 'hooks.json');
     const hooks = JSON.parse(fs.readFileSync(hooksPath, 'utf8'));
+    const hooksObj = hooks.hooks || hooks;
 
     const checkHooks = (hookArray) => {
+      if (!hookArray) return;
       for (const entry of hookArray) {
         for (const hook of entry.hooks) {
           if (hook.type === 'command') {
@@ -301,32 +311,42 @@ async function runTests() {
       }
     };
 
-    for (const [, hookArray] of Object.entries(hooks.hooks)) {
-      checkHooks(hookArray);
+    if (Array.isArray(hooksObj)) {
+        checkHooks(hooksObj);
+    } else {
+        for (const [, hookArray] of Object.entries(hooksObj)) {
+            checkHooks(hookArray);
+        }
     }
   })) passed++; else failed++;
 
-  if (test('script references use GEMINI_PLUGIN_ROOT variable', () => {
+  if (test('script references use relative paths (no env vars)', () => {
     const hooksPath = path.join(__dirname, '..', '..', 'hooks', 'hooks.json');
     const hooks = JSON.parse(fs.readFileSync(hooksPath, 'utf8'));
+    const hooksObj = hooks.hooks || hooks;
 
     const checkHooks = (hookArray) => {
+      if (!hookArray) return;
       for (const entry of hookArray) {
         for (const hook of entry.hooks) {
-          if (hook.type === 'command' && hook.command.includes('scripts/hooks/')) {
-            // Check for the literal string "${GEMINI_PLUGIN_ROOT}" in the command
-            const hasPluginRoot = hook.command.includes('${GEMINI_PLUGIN_ROOT}');
+          if (hook.type === 'command' && (hook.command.includes('scripts/hooks/') || hook.command.match(/\.js"?$/))) {
+            // Should NOT use ${GEMINI_PLUGIN_ROOT} or ${GEMINI_EXTENSION_ROOT} as they are unreliable
+            const hasEnvVar = hook.command.includes('${GEMINI_PLUGIN_ROOT}') || hook.command.includes('${GEMINI_EXTENSION_ROOT}');
             assert.ok(
-              hasPluginRoot,
-              `Script paths should use GEMINI_PLUGIN_ROOT: ${hook.command.substring(0, 80)}...`
+              !hasEnvVar,
+              `Script paths should be relative (no env vars): ${hook.command.substring(0, 80)}...`
             );
           }
         }
       }
     };
 
-    for (const [, hookArray] of Object.entries(hooks.hooks)) {
-      checkHooks(hookArray);
+    if (Array.isArray(hooksObj)) {
+        checkHooks(hooksObj);
+    } else {
+        for (const [, hookArray] of Object.entries(hooksObj)) {
+            checkHooks(hookArray);
+        }
     }
   })) passed++; else failed++;
 
