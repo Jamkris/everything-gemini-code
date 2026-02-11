@@ -1,6 +1,6 @@
 {
 	"name": "everything-gemini-code",
-	"version": "1.0.17",
+	"version": "1.0.18",
 	"description": "Complete collection of Gemini CLI configurations adapted from everything-gemini-code - agents, skills, hooks, and rules",
 	"author": {
 		"name": "Jamkris",
