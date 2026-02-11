@@ -13,8 +13,6 @@ This extension provides production-ready agents, skills, hooks, commands, rules,
 
 ## 🚀 Quick Start
 
-Get up and running in under 2 minutes:
-
 npm install -g @google/gemini-cli@latest
 
 ````
@@ -56,7 +54,13 @@ Recommended if you use **Antigravity** (VS Code / Cursor) or need to customize t
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Jamkris/everything-gemini-code/main/install.sh)" -- --all
 ```
 
-### Uninstallation
+### Option 1: Uninstallation (Recommended)
+
+```bash
+gemini extensions uninstall https://github.com/Jamkris/everything-gemini-code
+```
+
+### Option 2: Uninstallation (Manual Script)
 
 ```bash
 # Selective Uninstall (Recommended): Removes only files installed by this extension.
@@ -119,7 +123,7 @@ Once installed, you can access the new capabilities directly in Gemini CLI.
 
 ### Slash Commands
 
-Use custom commands to automate workflows:
+Use custom commands to automate workflows (see [Full Command List](COMMANDS.md)):
 
 ```bash
 # Plan a feature implementation

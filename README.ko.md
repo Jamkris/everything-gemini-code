@@ -13,8 +13,6 @@
 
 ## 🚀 빠른 시작
 
-2분 안에 설정을 완료하세요:
-
 ```bash
 npm install -g @google/gemini-cli@latest
 
@@ -54,7 +52,13 @@ gemini extensions install https://github.com/Jamkris/everything-gemini-code
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Jamkris/everything-gemini-code/main/install.sh)" -- --all
 ```
 
-### 삭제 방법 (Uninstallation)
+### 옵션 1: 삭제 방법 (Uninstallation)
+
+```bash
+gemini extensions uninstall https://github.com/Jamkris/everything-gemini-code
+```
+
+### 옵션 2: 삭제 방법 (Uninstallation)
 
 ```bash
 # 선택적 삭제 (권장): 해당 확장에서 설치한 파일만 삭제하고, 사용자가 추가한 파일은 유지합니다.
@@ -115,7 +119,7 @@ gemini extensions link .
 
 ### 슬래시 명령어 (Slash Commands)
 
-커스텀 명령어로 워크플로우를 자동화하세요:
+커스텀 명령어로 워크플로우를 자동화하세요 (전체 명령어 목록은 [COMMANDS.ko.md](COMMANDS.ko.md) 참조):
 
 ```bash
 # 기능 구현 계획 수립

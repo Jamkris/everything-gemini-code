@@ -13,8 +13,6 @@
 
 ## 🚀 快速开始
 
-只需两分钟即可完成设置：
-
 ### 选项 1：通过 Gemini CLI 安装（推荐）
 
 ```bash
@@ -45,6 +43,22 @@ cp -r everything-gemini-code/rules/common/* ~/.gemini/rules/
 
 > ⚠️ **注意：** Rules（规则）无法通过扩展自动分发，必须手动安装到 `~/.gemini/rules/` 目录。
 
+### 选项 1：卸载（推荐）
+
+```bash
+gemini extensions uninstall https://github.com/Jamkris/everything-gemini-code
+```
+
+### 选项 2：卸载（手动脚本）
+
+```bash
+# 选择性卸载（推荐）：仅卸载此扩展安装的文件。
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Jamkris/everything-gemini-code/main/uninstall.sh)" -- --antigravity
+
+# 完全卸载（警告）：删除目标目录中的所有文件。
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Jamkris/everything-gemini-code/main/uninstall.sh)" -- --antigravity --purge
+```
+
 ---
 
 ## 💻 使用方法
@@ -53,7 +67,7 @@ cp -r everything-gemini-code/rules/common/* ~/.gemini/rules/
 
 ### 斜杠命令 (Slash Commands)
 
-使用自定义命令自动化工作流：
+使用自定义命令自动化工作流（请参阅 [完整命令列表](COMMANDS.zh-CN.md)）：
 
 ```bash
 # 规划功能实现
