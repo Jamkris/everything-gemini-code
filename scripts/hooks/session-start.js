@@ -9,6 +9,7 @@
  */
 
 const {
+  getGeminiDir,
   getSessionsDir,
   getLearnedSkillsDir,
   findFiles,
@@ -60,6 +61,56 @@ async function main() {
   if (pm.source === 'fallback' || pm.source === 'default') {
     log('[SessionStart] No package manager preference found.');
     log(getSelectionPrompt());
+  }
+
+  // Ensure command shims exist (for short aliases like /tdd)
+  try {
+    const fs = require('fs');
+    const path = require('path');
+    const geminiDir = getGeminiDir();
+    const globalCmdDir = path.join(geminiDir, 'commands');
+    
+    // Check if the primary shim exists
+    if (!fs.existsSync(path.join(globalCmdDir, 'tdd.toml'))) {
+      log('[SessionStart] Generating command shims for short aliases...');
+      
+      // Extension root is ../.. from this script
+      const extDir = path.resolve(__dirname, '..', '..');
+      const extCmdDir = path.join(extDir, 'commands');
+      const agentsDir = path.join(extDir, 'agents');
+      
+      if (fs.existsSync(extCmdDir)) {
+        ensureDir(globalCmdDir);
+        
+        const cmdFiles = fs.readdirSync(extCmdDir).filter(f => f.endsWith('.toml'));
+        
+        // Get list of agents to replace references
+        let agentNames = [];
+        if (fs.existsSync(agentsDir)) {
+          agentNames = fs.readdirSync(agentsDir)
+            .filter(f => f.endsWith('.md'))
+            .map(f => f.replace('.md', ''));
+        }
+        
+        for (const file of cmdFiles) {
+          const content = fs.readFileSync(path.join(extCmdDir, file), 'utf8');
+          let newContent = content;
+          
+          // Replace @agent-name with @everything-gemini-code.agent-name
+          for (const agent of agentNames) {
+            newContent = newContent.replace(
+              new RegExp(`@${agent}`, 'g'), 
+              `@everything-gemini-code.${agent}`
+            );
+          }
+          
+          fs.writeFileSync(path.join(globalCmdDir, file), newContent);
+          log(`[SessionStart] Created shim: ${file}`);
+        }
+      }
+    }
+  } catch (err) {
+    log(`[SessionStart] Warning: Failed to generate shims: ${err.message}`);
   }
 
   process.exit(0);
