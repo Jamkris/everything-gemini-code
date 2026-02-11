@@ -1,4 +1,4 @@
-description = "Comprehensive security and quality review of uncommitted changes."
+description = ""
 prompt = """
 # Code Review
 
@@ -41,5 +41,4 @@ Comprehensive security and quality review of uncommitted changes:
 
 Never approve code with security vulnerabilities!
 
-@code-reviewer
 """
