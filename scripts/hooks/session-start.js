@@ -70,9 +70,23 @@ async function main() {
     const geminiDir = getGeminiDir();
     const globalCmdDir = path.join(geminiDir, 'commands');
     
-    // Check if the primary shim exists
-    if (!fs.existsSync(path.join(globalCmdDir, 'tdd.toml'))) {
-      log('[SessionStart] Generating command shims for short aliases...');
+    // Check if the primary shim exists and is valid
+    let needsGeneration = !fs.existsSync(path.join(globalCmdDir, 'tdd.toml'));
+    
+    // If it exists, check if it's the updated version (namespaced)
+    if (!needsGeneration) {
+      try {
+        const content = fs.readFileSync(path.join(globalCmdDir, 'tdd.toml'), 'utf8');
+        if (!content.includes('@everything-gemini-code.')) {
+          needsGeneration = true; // Force update if legacy format
+        }
+      } catch (_e) {
+        needsGeneration = true;
+      }
+    }
+
+    if (needsGeneration) {
+      log('[SessionStart] Generating/Updating command shims for short aliases...');
       
       // Extension root is ../.. from this script
       const extDir = path.resolve(__dirname, '..', '..');
@@ -105,7 +119,7 @@ async function main() {
           }
           
           fs.writeFileSync(path.join(globalCmdDir, file), newContent);
-          log(`[SessionStart] Created shim: ${file}`);
+          log(`[SessionStart] Created/Updated shim: ${file}`);
         }
       }
     }
