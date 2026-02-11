@@ -92,30 +92,28 @@ async function main() {
         const globalFile = path.join(globalCmdDir, file);
         let needsUpdate = !fs.existsSync(globalFile);
         
-        // If it exists, check if it's the updated version (namespaced)
+        // If it exists, check if content matches extension perfectly
+        // This ensures any updates (syntax fixes, logic changes) are propagated
         if (!needsUpdate) {
           try {
-            const content = fs.readFileSync(globalFile, 'utf8');
-            // Check if it contains at least one namespaced agent reference
-            // ONLY if the command actually references an agent. 
-            // Simple heuristic: if source has @agent, target must have @everything-gemini-code.agent
-            // But reading source is expensive?
-            // Let's just check if content lacks namespace.
-            // But some commands might NOT use agents.
-            // However, most do.
-            // Safe check: if it contains ANY @agent that is IN our agent list, it must be namespaced.
+            const globalContent = fs.readFileSync(globalFile, 'utf8');
+            const extContent = fs.readFileSync(path.join(extCmdDir, file), 'utf8');
             
-            // For simplicity, we can just check if it contains ANY @everything-gemini-code. 
-            // OR we can just overwrite always? No, unnecessary IO.
-            // Let's stick to the previous check: if missing namespace, update.
-            if (!content.includes('@everything-gemini-code.') && agentNames.length > 0) {
-              // But what if command doesn't use agents?
-              // Then it doesn't need update.
-              // Let's read source content to check if it needs update.
-              const srcContent = fs.readFileSync(path.join(extCmdDir, file), 'utf8');
-              if (srcContent.includes('@') && !content.includes('@everything-gemini-code.')) {
-                 needsUpdate = true;
-              }
+            // We need to compare potential namespace injection too?
+            // The shim logic modifies content to inject namespaces.
+            // So we can't just compare raw texts if we transform it.
+            
+            // Let's generate the expected content
+            let expectedContent = extContent;
+            for (const agent of agentNames) {
+                 expectedContent = expectedContent.replace(
+                    new RegExp(`@${agent}\\b`, 'g'), 
+                    `@everything-gemini-code.${agent}`
+                 );
+            }
+            
+            if (globalContent !== expectedContent) {
+                needsUpdate = true;
             }
           } catch (_e) {
             needsUpdate = true;
@@ -129,7 +127,7 @@ async function main() {
           // Replace @agent-name with @everything-gemini-code.agent-name
           for (const agent of agentNames) {
             newContent = newContent.replace(
-              new RegExp(`@${agent}\\b`, 'g'), // Add word boundary to avoid partial matches
+              new RegExp(`@${agent}\\b`, 'g'), 
               `@everything-gemini-code.${agent}`
             );
           }
