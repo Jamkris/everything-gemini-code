@@ -92,7 +92,7 @@ test.describe('Market Search and View Flow', () => {
     await marketCards.first().click()
 
     // 5. Verify market details page loads
-    await expect(page).toHaveURL(/\/markets\/[a-z0-9-]+/)
+    await expect(page).toHaveURL(/\\/markets\\/[a-z0-9-]+/)
 
     const detailsPage = new MarketDetailsPage(page)
     await expect(detailsPage.marketName).toBeVisible()

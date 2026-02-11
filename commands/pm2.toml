@@ -111,65 +111,65 @@ proc.on('close', (code) => process.exit(code));
 ### pm2-all.md (Start all + monit)
 ```markdown
 Start all services and open PM2 monitor.
-\`\`\`bash
+\\`\\`\\`bash
 cd "{PROJECT_ROOT}" && pm2 start ecosystem.config.cjs && start wt.exe -d "{PROJECT_ROOT}" pwsh -NoExit -c "pm2 monit"
-\`\`\`
+\\`\\`\\`
 ```
 
 ### pm2-all-stop.md
 ```markdown
 Stop all services.
-\`\`\`bash
+\\`\\`\\`bash
 cd "{PROJECT_ROOT}" && pm2 stop all
-\`\`\`
+\\`\\`\\`
 ```
 
 ### pm2-all-restart.md
 ```markdown
 Restart all services.
-\`\`\`bash
+\\`\\`\\`bash
 cd "{PROJECT_ROOT}" && pm2 restart all
-\`\`\`
+\\`\\`\\`
 ```
 
 ### pm2-{port}.md (Start single + logs)
 ```markdown
 Start {name} ({port}) and open logs.
-\`\`\`bash
+\\`\\`\\`bash
 cd "{PROJECT_ROOT}" && pm2 start ecosystem.config.cjs --only {name} && start wt.exe -d "{PROJECT_ROOT}" pwsh -NoExit -c "pm2 logs {name}"
-\`\`\`
+\\`\\`\\`
 ```
 
 ### pm2-{port}-stop.md
 ```markdown
 Stop {name} ({port}).
-\`\`\`bash
+\\`\\`\\`bash
 cd "{PROJECT_ROOT}" && pm2 stop {name}
-\`\`\`
+\\`\\`\\`
 ```
 
 ### pm2-{port}-restart.md
 ```markdown
 Restart {name} ({port}).
-\`\`\`bash
+\\`\\`\\`bash
 cd "{PROJECT_ROOT}" && pm2 restart {name}
-\`\`\`
+\\`\\`\\`
 ```
 
 ### pm2-logs.md
 ```markdown
 View all PM2 logs.
-\`\`\`bash
+\\`\\`\\`bash
 cd "{PROJECT_ROOT}" && pm2 logs
-\`\`\`
+\\`\\`\\`
 ```
 
 ### pm2-status.md
 ```markdown
 View PM2 status.
-\`\`\`bash
+\\`\\`\\`bash
 cd "{PROJECT_ROOT}" && pm2 status
-\`\`\`
+\\`\\`\\`
 ```
 
 ### PowerShell Scripts (pm2-logs-{port}.ps1)

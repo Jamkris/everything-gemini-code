@@ -61,8 +61,11 @@ try {
     // But typically markdown code blocks use ```, so """ is rare.
     // We'll escape """ as \""" just in case, or use literal string '''?
     // Gemini CLI supports TOML. Let's stick to """ and hope for best.
-    // If content has """, we might need to escape one quote.
-    const safePrompt = promptContent.replace(/"""/g, '\\"\\"\\"');
+    // If content has """, we might need    // Escape backslashes first (TOML requires \\ for literal \)
+    // Then escape triple quotes
+    const safePrompt = promptContent
+      .replace(/\\/g, '\\\\')
+      .replace(/"""/g, '\\"\\"\\"');
 
     // Create TOML content
     const tomlContent = `description = "${description.replace(/"/g, '\\"')}"
