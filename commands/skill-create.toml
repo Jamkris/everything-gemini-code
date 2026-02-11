@@ -1,5 +1,5 @@
 description = "Analyze local git history to extract coding patterns and generate SKILL.md files. Local version of the Skill Creator GitHub App."
-prompt = """
+prompt = '''
 # /skill-create - Local Skill Generation
 
 Analyze your repository's git history to extract coding patterns and generate SKILL.md files that teach Claude your team's practices.
@@ -168,4 +168,4 @@ For advanced features (10k+ commits, team sharing, auto-PRs), use the [Skill Cre
 ---
 
 *Part of [Everything Claude Code](https://github.com/affaan-m/everything-claude-code)*
-"""
+'''

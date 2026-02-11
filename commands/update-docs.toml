@@ -1,5 +1,5 @@
 description = ""
-prompt = """
+prompt = '''
 # Update Documentation
 
 Sync documentation from source-of-truth:
@@ -32,4 +32,4 @@ Sync documentation from source-of-truth:
 
 Single source of truth: package.json and .env.example
 
-"""
+'''

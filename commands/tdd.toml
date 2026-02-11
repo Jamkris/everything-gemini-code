@@ -1,5 +1,5 @@
 description = "Enforce test-driven development workflow. Scaffold interfaces, generate tests FIRST, then implement minimal code to pass. Ensure 80%+ coverage."
-prompt = """
+prompt = '''
 # TDD Command
 
 This command invokes the **tdd-guide** agent to enforce test-driven development methodology.
@@ -322,4 +322,4 @@ This command invokes the `tdd-guide` agent located at:
 
 And can reference the `tdd-workflow` skill at:
 `~/.claude/skills/tdd-workflow/`
-"""
+'''

@@ -1,5 +1,5 @@
 description = ""
-prompt = """
+prompt = '''
 # Eval Command
 
 Manage eval-driven development workflow.
@@ -121,4 +121,4 @@ $ARGUMENTS:
 - `list` - Show all evals
 - `clean` - Remove old eval logs (keeps last 10 runs)
 
-"""
+'''

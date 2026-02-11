@@ -1,5 +1,5 @@
 description = "Export instincts for sharing with teammates or other projects"
-prompt = """
+prompt = '''
 # Instinct Export Command
 
 Exports instincts to a shareable format. Perfect for:
@@ -85,4 +85,4 @@ Exports do NOT include:
 - `--output <file>`: Output file path (default: instincts-export-YYYYMMDD.yaml)
 - `--format <yaml|json|md>`: Output format (default: yaml)
 - `--include-evidence`: Include evidence text (default: excluded)
-"""
+'''

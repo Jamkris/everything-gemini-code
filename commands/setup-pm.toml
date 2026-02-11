@@ -1,5 +1,5 @@
 description = "Configure your preferred package manager (npm/pnpm/yarn/bun)"
-prompt = """
+prompt = '''
 # Package Manager Setup
 
 Configure your preferred package manager for this project or globally.
@@ -75,4 +75,4 @@ To see current package manager detection results, run:
 ```bash
 node scripts/setup-package-manager.js --detect
 ```
-"""
+'''

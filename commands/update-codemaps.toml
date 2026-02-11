@@ -1,5 +1,5 @@
 description = ""
-prompt = """
+prompt = '''
 # Update Codemaps
 
 Analyze the codebase structure and update architecture documentation:
@@ -18,4 +18,4 @@ Analyze the codebase structure and update architecture documentation:
 
 Use TypeScript/Node.js for analysis. Focus on high-level structure, not implementation details.
 
-"""
+'''

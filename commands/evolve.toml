@@ -1,5 +1,5 @@
 description = "Cluster related instincts into skills, commands, or agents"
-prompt = """
+prompt = '''
 # Evolve Command
 
 ## Implementation
@@ -187,4 +187,4 @@ evolved_from:
 
 [Generated content based on clustered instincts]
 ```
-"""
+'''

@@ -1,5 +1,5 @@
 description = ""
-prompt = """
+prompt = '''
 # Sessions Command
 
 Manage Claude Code session history - list, load, alias, and edit sessions stored in `~/.claude/sessions/`.
@@ -306,4 +306,4 @@ $ARGUMENTS:
 - Session IDs can be shortened (first 4-8 characters usually unique enough)
 - Use aliases for frequently referenced sessions
 
-"""
+'''

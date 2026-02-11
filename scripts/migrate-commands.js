@@ -58,21 +58,33 @@ try {
     // (TOML multiline string uses """, so we need to escape it)
     // Actually TOML spec says basic strings can contain " if not 3 in a row.
     // If prompt contains """, we should assume it might break.
-    // But typically markdown code blocks use ```, so """ is rare.
-    // We'll escape """ as \""" just in case, or use literal string '''?
-    // Gemini CLI supports TOML. Let's stick to """ and hope for best.
-    // If content has """, we might need    // Escape backslashes first (TOML requires \\ for literal \)
-    // Then escape triple quotes
-    const safePrompt = promptContent
-      .replace(/\\/g, '\\\\')
-      .replace(/"""/g, '\\"\\"\\"');
-
-    // Create TOML content
-    const tomlContent = `description = "${description.replace(/"/g, '\\"')}"
+    // Use literal multiline string (''') if possible to avoid escaping issues
+    // TOML literal strings don't support escaping, so backslashes are literal.
+    // We only need to fallback to """ if the content contains ''' 
+    
+    let tomlContent = '';
+    
+    if (promptContent.includes("'''")) {
+      console.warn(`Warning: ${file} contains ''', falling back to """`);
+      // Fallback to """ with strict escaping
+      const safePrompt = promptContent
+        .replace(/\\/g, '\\\\')
+        .replace(/"""/g, '\\"\\"\\"');
+        
+      tomlContent = `description = "${description.replace(/"/g, '\\"')}"
 prompt = """
 ${safePrompt}
 """
 `;
+    } else {
+      // Use literal string '''
+      // No escaping needed for content
+      tomlContent = `description = "${description.replace(/"/g, '\\"')}"
+prompt = '''
+${promptContent}
+'''
+`;
+    }
 
     fs.writeFileSync(destPath, tomlContent);
     console.log(`Migrated: ${file} -> ${destFile}`);

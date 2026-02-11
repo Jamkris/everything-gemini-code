@@ -1,5 +1,5 @@
 description = ""
-prompt = """
+prompt = '''
 # Verification Command
 
 Run comprehensive verification on current codebase state.
@@ -60,4 +60,4 @@ $ARGUMENTS can be:
 - `pre-commit` - Checks relevant for commits
 - `pre-pr` - Full checks plus security scan
 
-"""
+'''

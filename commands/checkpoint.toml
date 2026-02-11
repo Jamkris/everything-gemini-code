@@ -1,5 +1,5 @@
 description = ""
-prompt = """
+prompt = '''
 # Checkpoint Command
 
 Create or verify a checkpoint in your workflow.
@@ -75,4 +75,4 @@ $ARGUMENTS:
 - `list` - Show all checkpoints
 - `clear` - Remove old checkpoints (keeps last 5)
 
-"""
+'''

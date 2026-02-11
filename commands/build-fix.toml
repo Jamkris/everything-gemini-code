@@ -1,5 +1,5 @@
 description = ""
-prompt = """
+prompt = '''
 # Build and Fix
 
 Incrementally fix TypeScript and build errors:
@@ -30,4 +30,4 @@ Incrementally fix TypeScript and build errors:
 
 Fix one error at a time for safety!
 
-"""
+'''

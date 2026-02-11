@@ -1,5 +1,5 @@
 description = ""
-prompt = """
+prompt = '''
 # /learn - Extract Reusable Patterns
 
 Analyze the current session and extract any patterns worth saving as skills.
@@ -71,4 +71,4 @@ Create a skill file at `~/.claude/skills/learned/[pattern-name].md`:
 - Focus on patterns that will save time in future sessions
 - Keep skills focused - one pattern per skill
 
-"""
+'''

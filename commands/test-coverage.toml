@@ -1,5 +1,5 @@
 description = ""
-prompt = """
+prompt = '''
 # Test Coverage
 
 Analyze test coverage and generate missing tests:
@@ -28,4 +28,4 @@ Focus on:
 - Edge cases (null, undefined, empty)
 - Boundary conditions
 
-"""
+'''

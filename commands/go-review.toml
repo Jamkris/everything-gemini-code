@@ -1,5 +1,5 @@
 description = "Comprehensive Go code review for idiomatic patterns, concurrency safety, error handling, and security. Invokes the go-reviewer agent."
-prompt = """
+prompt = '''
 # Go Code Review
 
 This command invokes the **go-reviewer** agent for comprehensive Go-specific code review.
@@ -144,4 +144,4 @@ Recommendation: ❌ Block merge until CRITICAL issue is fixed
 
 - Agent: `agents/go-reviewer.md`
 - Skills: `skills/golang-patterns/`, `skills/golang-testing/`
-"""
+'''
