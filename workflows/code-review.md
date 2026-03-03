@@ -1,3 +1,7 @@
+---
+description: Comprehensive security and quality review of uncommitted changes.
+---
+
 # Code Review
 
 Comprehensive security and quality review of uncommitted changes:
@@ -7,14 +11,16 @@ Comprehensive security and quality review of uncommitted changes:
 2. For each changed file, check for:
 
 **Security Issues (CRITICAL):**
+
 - Hardcoded credentials, API keys, tokens
 - SQL injection vulnerabilities
-- XSS vulnerabilities  
+- XSS vulnerabilities
 - Missing input validation
 - Insecure dependencies
 - Path traversal risks
 
 **Code Quality (HIGH):**
+
 - Functions > 50 lines
 - Files > 800 lines
 - Nesting depth > 4 levels
@@ -24,6 +30,7 @@ Comprehensive security and quality review of uncommitted changes:
 - Missing JSDoc for public APIs
 
 **Best Practices (MEDIUM):**
+
 - Mutation patterns (use immutable instead)
 - Emoji usage in code/comments
 - Missing tests for new code

@@ -1,3 +1,7 @@
+---
+description: Analyze test coverage and generate missing unit tests.
+---
+
 # Test Coverage
 
 Analyze test coverage and generate missing tests:
@@ -21,6 +25,7 @@ Analyze test coverage and generate missing tests:
 7. Ensure project reaches 80%+ overall coverage
 
 Focus on:
+
 - Happy path scenarios
 - Error handling
 - Edge cases (null, undefined, empty)
