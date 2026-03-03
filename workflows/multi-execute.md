@@ -1,3 +1,7 @@
+---
+description: Multi-model collaborative prototype implementation and auditing.
+---
+
 # Execute - Multi-Model Collaborative Execution
 
 Multi-model collaborative execution - Get prototype from plan → Gemini refactors and implements → Multi-model audit and delivery.

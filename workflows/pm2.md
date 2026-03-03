@@ -1,3 +1,7 @@
+---
+description: Project analysis and PM2 service command generation.
+---
+
 # PM2 Init
 
 Auto-analyze project and generate PM2 service commands.

@@ -1,3 +1,7 @@
+---
+description: Identify and remove dead code with safe test verification.
+---
+
 # Refactor Clean
 
 Safely identify and remove dead code with test verification:
