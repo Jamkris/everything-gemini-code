@@ -96,6 +96,10 @@ gemini extensions uninstall https://github.com/Jamkris/everything-gemini-code
 
 Gemini 会在与您的请求相关时自动利用已安装的技能，例如“TDD 工作流”或“后端模式”。
 
+### MCP 服务器 (MCP Servers)
+
+配置和管理模型上下文协议 (MCP) 服务器以扩展 Gemini 的功能。（请参阅 [MCP 配置指南](mcp-configs/README.md)）
+
 ---
 
 ## 📦 包含内容
