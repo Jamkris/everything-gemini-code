@@ -1,8 +1,11 @@
 name: Release
 
 on:
-  push:
-    tags: ['v*']
+  pull_request:
+    types:
+      - closed
+    branches:
+      - main
   workflow_dispatch:
 
 permissions:
@@ -11,8 +14,10 @@ permissions:
 jobs:
   release:
     name: Create Release
+    if: >
+      (github.event_name == 'pull_request' && github.event.pull_request.merged == true && startsWith(github.event.pull_request.head.ref, 'chore/release-v')) ||
+      github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -29,22 +34,13 @@ jobs:
           fi
 
           echo "Detected extension version: $EXTENSION_VERSION"
+          echo "RELEASE_TAG=v$EXTENSION_VERSION" >> $GITHUB_OUTPUT
 
-          if [[ "${{ github.ref_type }}" == "tag" ]]; then
-            # Verify tag matches extension version
-            TAG_VERSION="${{ github.ref_name }}"
-            TAG_VERSION="${TAG_VERSION#v}"
-            if [[ "$TAG_VERSION" != "$EXTENSION_VERSION" ]]; then
-              echo "::error::Tag version ($TAG_VERSION) does not match gemini-extension.json version ($EXTENSION_VERSION)"
-              exit 1
-            fi
-            echo "RELEASE_TAG=${{ github.ref_name }}" >> $GITHUB_OUTPUT
-          else
-            # On branch, use extension version as tag
-            echo "::warning::Running on branch '${{ github.ref_name }}'. Will release as v$EXTENSION_VERSION"
-            echo "RELEASE_TAG=v$EXTENSION_VERSION" >> $GITHUB_OUTPUT
-            echo "CREATE_TAG=true" >> $GITHUB_OUTPUT
-          fi
+          # Create local tag to be pushed later
+          git config --global user.name "github-release-bot"
+          git config --global user.email "github-release-bot@users.noreply.github.com"
+          git tag "v$EXTENSION_VERSION"
+          git push origin "v$EXTENSION_VERSION"
 
       - name: Generate changelog
         id: changelog
