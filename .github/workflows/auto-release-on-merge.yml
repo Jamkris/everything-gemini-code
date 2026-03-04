@@ -1,7 +1,10 @@
 name: Auto Release on Main
 
 on:
-  push:
+  workflow_run:
+    workflows: ['Gemini CI']
+    types:
+      - completed
     branches:
       - main
 
@@ -10,9 +13,10 @@ permissions:
 
 jobs:
   bump-and-release:
-    if: "!startsWith(github.event.head_commit.message, 'chore: bump extension version')"
+    if: >
+      github.event.workflow_run.conclusion == 'success' &&
+      !startsWith(github.event.workflow_run.head_commit.message, 'chore: bump extension version')
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -21,8 +25,8 @@ jobs:
 
       - name: Setup Git
         run: |
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git config --global user.name "github-release-bot"
+          git config --global user.email "github-release-bot@users.noreply.github.com"
 
       - name: Bump, Commit, Tag, and Push
         id: bump
