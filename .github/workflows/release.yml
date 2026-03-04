@@ -25,14 +25,53 @@ jobs:
             exit 1
           fi
 
-          echo "Detected extension version: $EXTENSION_VERSION"
-          echo "RELEASE_TAG=v$EXTENSION_VERSION" >> $GITHUB_OUTPUT
+          echo "Original extension version: $EXTENSION_VERSION"
+
+          IFS='.' read -ra ADDR <<< "$EXTENSION_VERSION"
+          PATCH=${ADDR[2]}
+          NEW_VERSION="$EXTENSION_VERSION"
+
+          while true; do
+            if git rev-parse "refs/tags/v$NEW_VERSION" >/dev/null 2>&1; then
+              echo "Tag v$NEW_VERSION already exists locally, trying next..."
+              PATCH=$((PATCH + 1))
+              NEW_VERSION="${ADDR[0]}.${ADDR[1]}.$PATCH"
+              continue
+            fi
+            
+            if git ls-remote --tags origin "refs/tags/v$NEW_VERSION" | grep -q "refs/tags/v$NEW_VERSION"; then
+              echo "Tag v$NEW_VERSION already exists on remote, trying next..."
+              PATCH=$((PATCH + 1))
+              NEW_VERSION="${ADDR[0]}.${ADDR[1]}.$PATCH"
+              continue
+            fi
+            
+            break
+          done
+
+          if [[ "$NEW_VERSION" != "$EXTENSION_VERSION" ]]; then
+            echo "Bumping version $EXTENSION_VERSION -> $NEW_VERSION"
+            sed -i "s/\"version\": *\"[^\"]*\"/\"version\": \"$NEW_VERSION\"/" gemini-extension.json
+            sed -i "s/\"version\": *\"[^\"]*\"/\"version\": \"$NEW_VERSION\"/" package.json
+            
+            # Since this is manual, we commit the version bump back to main immediately
+            # (Note: Requires a token with bypass protections if main is protected.
+            # However, workflow_dispatch running via a normal user or PAT with admin might work.)
+            git config --global user.name "github-release-bot"
+            git config --global user.email "github-release-bot@users.noreply.github.com"
+            git add gemini-extension.json package.json
+            git commit -m "chore: bump extension version to $NEW_VERSION"
+            git push origin main
+          else
+            git config --global user.name "github-release-bot"
+            git config --global user.email "github-release-bot@users.noreply.github.com"
+          fi
+
+          echo "RELEASE_TAG=v$NEW_VERSION" >> $GITHUB_OUTPUT
 
           # Create local tag to be pushed later
-          git config --global user.name "github-release-bot"
-          git config --global user.email "github-release-bot@users.noreply.github.com"
-          git tag "v$EXTENSION_VERSION"
-          git push origin "v$EXTENSION_VERSION"
+          git tag "v$NEW_VERSION"
+          git push origin "v$NEW_VERSION"
 
       - name: Generate changelog
         id: changelog
