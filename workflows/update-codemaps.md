@@ -1,3 +1,7 @@
+---
+description: Analyze codebase structure and update architecture docs.
+---
+
 # Update Codemaps
 
 Analyze the codebase structure and update architecture documentation:
@@ -5,7 +9,7 @@ Analyze the codebase structure and update architecture documentation:
 1. Scan all source files for imports, exports, and dependencies
 2. Generate token-lean codemaps in the following format:
    - codemaps/architecture.md - Overall architecture
-   - codemaps/backend.md - Backend structure  
+   - codemaps/backend.md - Backend structure
    - codemaps/frontend.md - Frontend structure
    - codemaps/data.md - Data models and schemas
 

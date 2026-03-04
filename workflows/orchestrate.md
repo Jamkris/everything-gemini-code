@@ -1,3 +1,7 @@
+---
+description: Sequential multi-agent workflow for complex task execution.
+---
+
 # Orchestrate Command
 
 Sequential agent workflow for complex tasks.
@@ -9,25 +13,33 @@ Sequential agent workflow for complex tasks.
 ## Workflow Types
 
 ### feature
+
 Full feature implementation workflow:
+
 ```
 planner -> tdd-guide -> code-reviewer -> security-reviewer
 ```
 
 ### bugfix
+
 Bug investigation and fix workflow:
+
 ```
 explorer -> tdd-guide -> code-reviewer
 ```
 
 ### refactor
+
 Safe refactoring workflow:
+
 ```
 architect -> code-reviewer -> tdd-guide
 ```
 
 ### security
+
 Security-focused review:
+
 ```
 security-reviewer -> code-reviewer -> architect
 ```
@@ -151,6 +163,7 @@ Combine outputs into single report
 ## Arguments
 
 $ARGUMENTS:
+
 - `feature <description>` - Full feature workflow
 - `bugfix <description>` - Bug fix workflow
 - `refactor <description>` - Refactoring workflow
