@@ -61,11 +61,24 @@ else
   sed -i "s/\"version\": *\"[^\"]*\"/\"version\": \"$VERSION\"/" "$PACKAGE_JSON"
 fi
 
-# Stage, commit, tag, and push
-# Stage, commit, tag, and push
+# Create and checkout a new release branch
+BRANCH_NAME="chore/release-v$VERSION"
+git checkout -b "$BRANCH_NAME"
+
+# Stage, commit, and push the branch
 git add "$EXTENSION_JSON" "$PACKAGE_JSON"
 git commit -m "chore: bump extension version to $VERSION"
-git tag "v$VERSION"
-git push origin main "v$VERSION"
+git push -u origin "$BRANCH_NAME"
 
-echo "Released v$VERSION"
+# Create a Pull Request using GitHub CLI
+if command -v gh >/dev/null 2>&1; then
+  echo "Creating Pull Request..."
+  gh pr create \
+    --title "chore: release v$VERSION" \
+    --body "This PR bumps the extension version to **v$VERSION**.\n\n⚠️ **Note:** Merging this PR will automatically trigger the GitHub Release and Tag creation." \
+    --label "release"
+  echo "✨ Release PR created successfully!"
+else
+  echo "⚠️ GitHub CLI (gh) is not installed. Please create the Pull Request manually:"
+  echo "https://github.com/Jamkris/everything-gemini-code/pull/new/$BRANCH_NAME"
+fi
