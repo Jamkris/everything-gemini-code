@@ -1,0 +1,72 @@
+name: Auto Release on Main
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: write
+
+jobs:
+  bump-and-release:
+    if: "!startsWith(github.event.head_commit.message, 'chore: bump extension version')"
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Git
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Bump, Commit, Tag, and Push
+        id: bump
+        run: |
+          CURRENT_VERSION=$(grep -oE '"version": *"[^"]*"' gemini-extension.json | head -n1 | grep -oE '[0-9]+\.[0-9]+\.[0-9]+')
+          IFS='.' read -ra ADDR <<< "$CURRENT_VERSION"
+          NEW_VERSION="${ADDR[0]}.${ADDR[1]}.$((ADDR[2] + 1))"
+
+          echo "Bumping version $CURRENT_VERSION -> $NEW_VERSION"
+
+          # Update version in files
+          sed -i "s/\"version\": *\"[^\"]*\"/\"version\": \"$NEW_VERSION\"/" gemini-extension.json
+          sed -i "s/\"version\": *\"[^\"]*\"/\"version\": \"$NEW_VERSION\"/" package.json
+
+          # Commit and Tag
+          git add gemini-extension.json package.json
+          git commit -m "chore: bump extension version to $NEW_VERSION"
+          git tag "v$NEW_VERSION"
+          git push origin main "v$NEW_VERSION"
+
+          echo "new_version=$NEW_VERSION" >> $GITHUB_OUTPUT
+          echo "old_version=$CURRENT_VERSION" >> $GITHUB_OUTPUT
+
+      - name: Generate Changelog
+        id: changelog
+        run: |
+          PREV_TAG="v${{ steps.bump.outputs.old_version }}"
+          if git rev-parse "$PREV_TAG" >/dev/null 2>&1; then
+            # Get commits from previous tag to HEAD^ (excluding the bump commit we just made)
+            COMMITS=$(git log --pretty=format:"- %s" ${PREV_TAG}..HEAD^)
+          else
+            COMMITS=$(git log --pretty=format:"- %s" HEAD^)
+          fi
+          echo "commits<<EOF" >> $GITHUB_OUTPUT
+          echo "$COMMITS" >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: v${{ steps.bump.outputs.new_version }}
+          body: |
+            ## Changes
+            ${{ steps.changelog.outputs.commits }}
+          generate_release_notes: false
+          draft: false
+          prerelease: false

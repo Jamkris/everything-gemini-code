@@ -148,6 +148,10 @@ gemini extensions link .
 
 Gemini는 "TDD 워크플로우"나 "백엔드 패턴"과 같이 요청과 관련된 스킬을 자동으로 활용합니다.
 
+### MCP 서버 (MCP Servers)
+
+Gemini의 기능을 확장하기 위해 Model Context Protocol (MCP) 서버를 구성하고 관리하세요. ([MCP 설정 가이드](mcp-configs/README.md) 참조)
+
 ---
 
 ## 📦 구성 요소
