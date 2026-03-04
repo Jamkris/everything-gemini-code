@@ -1,11 +1,6 @@
 name: Release
 
 on:
-  pull_request:
-    types:
-      - closed
-    branches:
-      - main
   workflow_dispatch:
 
 permissions:
@@ -14,9 +9,6 @@ permissions:
 jobs:
   release:
     name: Create Release
-    if: >
-      (github.event_name == 'pull_request' && github.event.pull_request.merged == true && startsWith(github.event.pull_request.head.ref, 'chore/release-v')) ||
-      github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
