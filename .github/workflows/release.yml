@@ -54,24 +54,40 @@ jobs:
             sed -i "s/\"version\": *\"[^\"]*\"/\"version\": \"$NEW_VERSION\"/" gemini-extension.json
             sed -i "s/\"version\": *\"[^\"]*\"/\"version\": \"$NEW_VERSION\"/" package.json
             
-            # Since this is manual, we commit the version bump back to main immediately
-            # (Note: Requires a token with bypass protections if main is protected.
-            # However, workflow_dispatch running via a normal user or PAT with admin might work.)
             git config --global user.name "github-release-bot"
             git config --global user.email "github-release-bot@users.noreply.github.com"
             git add gemini-extension.json package.json
             git commit -m "chore: bump extension version to $NEW_VERSION"
-            git push origin main
           else
             git config --global user.name "github-release-bot"
             git config --global user.email "github-release-bot@users.noreply.github.com"
           fi
 
           echo "RELEASE_TAG=v$NEW_VERSION" >> $GITHUB_OUTPUT
+          echo "OLD_VERSION=$EXTENSION_VERSION" >> $GITHUB_OUTPUT
 
-          # Create local tag to be pushed later
-          git tag "v$NEW_VERSION"
-          git push origin "v$NEW_VERSION"
+      - name: Create Pull Request for Version Bump
+        id: cpr
+        if: steps.version.outputs.RELEASE_TAG != format('v{0}', steps.version.outputs.OLD_VERSION)
+        uses: peter-evans/create-pull-request@v6
+        with:
+          token: ${{ secrets.RELEASE_TOKEN }}
+          commit-message: 'chore: bump extension version to ${{ steps.version.outputs.RELEASE_TAG }}'
+          branch: 'chore/release-${{ steps.version.outputs.RELEASE_TAG }}'
+          title: 'chore: release ${{ steps.version.outputs.RELEASE_TAG }}'
+          body: |
+            This PR was generated manually via workflow_dispatch to bump the version to **${{ steps.version.outputs.RELEASE_TAG }}**.
+
+            ⚠️ **Note:** Merging this PR will NOT automatically trigger the release tag. Only workflow_dispatch handles it now, or you can merge this and then manually tag/release.
+
+            _Wait, if it's manual, we need to merge this PR to get the version bumped in main. The release action should probably run when this PR merges..._
+          labels: 'release'
+
+      - name: Create Local Tag and Release (Only if no bump needed)
+        if: steps.version.outputs.RELEASE_TAG == format('v{0}', steps.version.outputs.OLD_VERSION)
+        run: |
+          git tag "${{ steps.version.outputs.RELEASE_TAG }}"
+          git push origin "${{ steps.version.outputs.RELEASE_TAG }}"
 
       - name: Generate changelog
         id: changelog
