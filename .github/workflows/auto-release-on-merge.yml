@@ -22,6 +22,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
+          token: ${{ secrets.RELEASE_TOKEN }}
 
       - name: Setup Git
         run: |
@@ -33,7 +34,24 @@ jobs:
         run: |
           CURRENT_VERSION=$(grep -oE '"version": *"[^"]*"' gemini-extension.json | head -n1 | grep -oE '[0-9]+\.[0-9]+\.[0-9]+')
           IFS='.' read -ra ADDR <<< "$CURRENT_VERSION"
-          NEW_VERSION="${ADDR[0]}.${ADDR[1]}.$((ADDR[2] + 1))"
+          PATCH=${ADDR[2]}
+
+          while true; do
+            PATCH=$((PATCH + 1))
+            NEW_VERSION="${ADDR[0]}.${ADDR[1]}.$PATCH"
+            
+            if git rev-parse "refs/tags/v$NEW_VERSION" >/dev/null 2>&1; then
+              echo "Tag v$NEW_VERSION already exists locally, trying next..."
+              continue
+            fi
+            
+            if git ls-remote --tags origin "refs/tags/v$NEW_VERSION" | grep -q "refs/tags/v$NEW_VERSION"; then
+              echo "Tag v$NEW_VERSION already exists on remote, trying next..."
+              continue
+            fi
+            
+            break
+          done
 
           echo "Bumping version $CURRENT_VERSION -> $NEW_VERSION"
 
@@ -44,8 +62,9 @@ jobs:
           # Commit and Tag
           git add gemini-extension.json package.json
           git commit -m "chore: bump extension version to $NEW_VERSION"
+          git push origin main
           git tag "v$NEW_VERSION"
-          git push origin main "v$NEW_VERSION"
+          git push origin "v$NEW_VERSION"
 
           echo "new_version=$NEW_VERSION" >> $GITHUB_OUTPUT
           echo "old_version=$CURRENT_VERSION" >> $GITHUB_OUTPUT
