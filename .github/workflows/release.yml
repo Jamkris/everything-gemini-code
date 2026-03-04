@@ -72,8 +72,8 @@ jobs:
         uses: peter-evans/create-pull-request@v6
         with:
           token: ${{ secrets.RELEASE_TOKEN }}
-          commit-message: 'chore: bump extension version to ${{ steps.version.outputs.RELEASE_TAG }}'
-          branch: 'chore/release-${{ steps.version.outputs.RELEASE_TAG }}'
+          commit-message: 'chore: bump extension version to ${{ steps.version.outputs.RELEASE_TAG }} [skip ci]'
+          branch: 'release/${{ steps.version.outputs.RELEASE_TAG }}'
           title: 'chore: release ${{ steps.version.outputs.RELEASE_TAG }}'
           body: |
             This PR was generated manually via workflow_dispatch to bump the version to **${{ steps.version.outputs.RELEASE_TAG }}**.
