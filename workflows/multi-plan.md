@@ -1,3 +1,7 @@
+---
+description: Multi-model collaborative context analysis and planning.
+---
+
 # Plan - Multi-Model Collaborative Planning
 
 Multi-model collaborative planning - Context retrieval + Dual-model analysis → Generate step-by-step implementation plan.
@@ -198,7 +202,7 @@ Synthesize both analyses, generate **Step-by-step Implementation Plan**:
 2. Save plan to `.gemini/plan/<feature-name>.md` (extract feature name from requirement, e.g., `user-auth`, `payment-module`)
 3. Output prompt in **bold text** (MUST use actual saved file path):
 
-   ---
+   ***
 
    **Plan generated and saved to `.gemini/plan/actual-feature-name.md`**
 
@@ -210,7 +214,7 @@ Synthesize both analyses, generate **Step-by-step Implementation Plan**:
    /ccg:execute .gemini/plan/actual-feature-name.md
    ```
 
-   ---
+   ***
 
    **NOTE**: The `actual-feature-name.md` above MUST be replaced with the actual saved filename!
 
