@@ -4,7 +4,7 @@
 
 Analyze the current session and extract any patterns worth saving as skills.
 
-[Source Definition](../../gemini/commands/learn.md)
+[Source Definition](../../commands/learn.md)
 
 ---
 
@@ -12,7 +12,7 @@ Analyze the current session and extract any patterns worth saving as skills.
 
 Analyze local git history to extract coding patterns and generate SKILL.md files. Local version of the Skill Creator GitHub App.
 
-[Source Definition](../../gemini/commands/skill-create.md)
+[Source Definition](../../commands/skill-create.md)
 
 ---
 
@@ -20,7 +20,7 @@ Analyze local git history to extract coding patterns and generate SKILL.md files
 
 Cluster related instincts into skills, commands, or agents
 
-[Source Definition](../../gemini/commands/evolve.md)
+[Source Definition](../../commands/evolve.md)
 
 ---
 
@@ -28,7 +28,7 @@ Cluster related instincts into skills, commands, or agents
 
 Import instincts from teammates, Skill Creator, or other sources
 
-[Source Definition](../../gemini/commands/instinct-import.md)
+[Source Definition](../../commands/instinct-import.md)
 
 ---
 
@@ -36,7 +36,7 @@ Import instincts from teammates, Skill Creator, or other sources
 
 Export instincts for sharing with teammates or other projects
 
-[Source Definition](../../gemini/commands/instinct-export.md)
+[Source Definition](../../commands/instinct-export.md)
 
 ---
 
@@ -44,6 +44,6 @@ Export instincts for sharing with teammates or other projects
 
 Show all learned instincts with their confidence levels
 
-[Source Definition](../../gemini/commands/instinct-status.md)
+[Source Definition](../../commands/instinct-status.md)
 
 ---
