@@ -4,7 +4,7 @@
 
 Configure your preferred package manager (npm/pnpm/yarn/bun)
 
-[Source Definition](../../gemini/commands/setup-pm.md)
+[Source Definition](../../commands/setup-pm.md)
 
 ---
 
@@ -12,7 +12,7 @@ Configure your preferred package manager (npm/pnpm/yarn/bun)
 
 Sync documentation from source-of-truth:
 
-[Source Definition](../../gemini/commands/update-docs.md)
+[Source Definition](../../commands/update-docs.md)
 
 ---
 
@@ -20,7 +20,7 @@ Sync documentation from source-of-truth:
 
 Analyze the codebase structure and update architecture documentation:
 
-[Source Definition](../../gemini/commands/update-codemaps.md)
+[Source Definition](../../commands/update-codemaps.md)
 
 ---
 
@@ -28,7 +28,7 @@ Analyze the codebase structure and update architecture documentation:
 
 Run comprehensive verification on current codebase state.
 
-[Source Definition](../../gemini/commands/verify.md)
+[Source Definition](../../commands/verify.md)
 
 ---
 
@@ -36,7 +36,7 @@ Run comprehensive verification on current codebase state.
 
 Create or verify a checkpoint in your workflow.
 
-[Source Definition](../../gemini/commands/checkpoint.md)
+[Source Definition](../../commands/checkpoint.md)
 
 ---
 
@@ -44,7 +44,7 @@ Create or verify a checkpoint in your workflow.
 
 Manage eval-driven development workflow.
 
-[Source Definition](../../gemini/commands/eval.md)
+[Source Definition](../../commands/eval.md)
 
 ---
 
@@ -52,6 +52,6 @@ Manage eval-driven development workflow.
 
 Manage Gemini CLI session history - list, load, alias, and edit sessions stored in `~/.gemini/sessions/`.
 
-[Source Definition](../../gemini/commands/sessions.md)
+[Source Definition](../../commands/sessions.md)
 
 ---
