@@ -4,7 +4,7 @@
 
 Multi-model collaborative planning - Context retrieval + Dual-model analysis → Generate step-by-step implementation plan.
 
-[Source Definition](../../gemini/commands/multi-plan.md)
+[Source Definition](../../commands/multi-plan.md)
 
 ---
 
@@ -12,7 +12,7 @@ Multi-model collaborative planning - Context retrieval + Dual-model analysis →
 
 Multi-model collaborative execution - Get prototype from plan → Gemini refactors and implements → Multi-model audit and delivery.
 
-[Source Definition](../../gemini/commands/multi-execute.md)
+[Source Definition](../../commands/multi-execute.md)
 
 ---
 
@@ -20,7 +20,7 @@ Multi-model collaborative execution - Get prototype from plan → Gemini refacto
 
 Backend-focused workflow (Research → Ideation → Plan → Execute → Optimize → Review), Codex-led.
 
-[Source Definition](../../gemini/commands/multi-backend.md)
+[Source Definition](../../commands/multi-backend.md)
 
 ---
 
@@ -28,7 +28,7 @@ Backend-focused workflow (Research → Ideation → Plan → Execute → Optimiz
 
 Frontend-focused workflow (Research → Ideation → Plan → Execute → Optimize → Review), Gemini-led.
 
-[Source Definition](../../gemini/commands/multi-frontend.md)
+[Source Definition](../../commands/multi-frontend.md)
 
 ---
 
@@ -36,7 +36,7 @@ Frontend-focused workflow (Research → Ideation → Plan → Execute → Optimi
 
 Multi-model collaborative development workflow (Research → Ideation → Plan → Execute → Optimize → Review), with intelligent routing: Frontend → Gemini, Backend → Codex.
 
-[Source Definition](../../gemini/commands/multi-workflow.md)
+[Source Definition](../../commands/multi-workflow.md)
 
 ---
 
@@ -44,7 +44,7 @@ Multi-model collaborative development workflow (Research → Ideation → Plan �
 
 Sequential agent workflow for complex tasks.
 
-[Source Definition](../../gemini/commands/orchestrate.md)
+[Source Definition](../../commands/orchestrate.md)
 
 ---
 
@@ -52,6 +52,6 @@ Sequential agent workflow for complex tasks.
 
 Auto-analyze project and generate PM2 service commands.
 
-[Source Definition](../../gemini/commands/pm2.md)
+[Source Definition](../../commands/pm2.md)
 
 ---

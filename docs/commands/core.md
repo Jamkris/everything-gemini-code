@@ -4,7 +4,7 @@
 
 Restate requirements, assess risks, and create step-by-step implementation plan. WAIT for user CONFIRM before touching any code.
 
-[Source Definition](../../gemini/commands/plan.md)
+[Source Definition](../../commands/plan.md)
 
 ---
 
@@ -12,7 +12,7 @@ Restate requirements, assess risks, and create step-by-step implementation plan.
 
 Enforce test-driven development workflow. Scaffold interfaces, generate tests FIRST, then implement minimal code to pass. Ensure 80%+ coverage.
 
-[Source Definition](../../gemini/commands/tdd.md)
+[Source Definition](../../commands/tdd.md)
 
 ---
 
@@ -20,7 +20,7 @@ Enforce test-driven development workflow. Scaffold interfaces, generate tests FI
 
 Comprehensive security and quality review of uncommitted changes:
 
-[Source Definition](../../gemini/commands/code-review.md)
+[Source Definition](../../commands/code-review.md)
 
 ---
 
@@ -28,7 +28,7 @@ Comprehensive security and quality review of uncommitted changes:
 
 Incrementally fix TypeScript and build errors:
 
-[Source Definition](../../gemini/commands/build-fix.md)
+[Source Definition](../../commands/build-fix.md)
 
 ---
 
@@ -36,7 +36,7 @@ Incrementally fix TypeScript and build errors:
 
 Safely identify and remove dead code with test verification:
 
-[Source Definition](../../gemini/commands/refactor-clean.md)
+[Source Definition](../../commands/refactor-clean.md)
 
 ---
 
@@ -44,6 +44,6 @@ Safely identify and remove dead code with test verification:
 
 Generate and run end-to-end tests with Playwright. Creates test journeys, runs tests, captures screenshots/videos/traces, and uploads artifacts.
 
-[Source Definition](../../gemini/commands/e2e.md)
+[Source Definition](../../commands/e2e.md)
 
 ---
