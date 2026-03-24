@@ -72,35 +72,24 @@ jobs:
       - name: Bump Version and Push
         id: versioning
         run: |
-          # Use gemini-extension.json to accurately bump the patch version
-          EXTENSION_VERSION=$(grep -oE '"version": *"[^"]*"' gemini-extension.json | head -n1 | grep -oE '[0-9]+\.[0-9]+\.[0-9]+')
-          if [[ -z "$EXTENSION_VERSION" ]]; then
-            echo "::error::Could not extract version from gemini-extension.json"
-            exit 1
-          fi
+          # Calculate the next version from the last tag
+          LAST_TAG="${{ steps.get_last_tag.outputs.last_tag }}"
+          VERSION_NUM=${LAST_TAG#v} # Remove 'v' prefix for calculation
           
-          IFS='.' read -r MAJOR MINOR PATCH <<< "$EXTENSION_VERSION"
+          IFS='.' read -r MAJOR MINOR PATCH <<< "$VERSION_NUM"
           PATCH=$((PATCH + 1))
-          NEW_VERSION="$MAJOR.$MINOR.$PATCH"
+          NEW_VERSION="v$MAJOR.$MINOR.$PATCH"
           
           echo "Bumping version to $NEW_VERSION"
           
-          # Update package files
-          sed -i "s/\"version\": *\"[^\"]*\"/\"version\": \"$NEW_VERSION\"/" gemini-extension.json
-          sed -i "s/\"version\": *\"[^\"]*\"/\"version\": \"$NEW_VERSION\"/" package.json
-          
-          # Commit and push directly to main. Use [skip ci] to prevent infinite workflow loops
           git config user.name "Github-Release-Bot"
           git config user.email "dltmdgus1412@gmail.com"
-          git add gemini-extension.json package.json
-          git commit -m "chore: bump extension version to $NEW_VERSION [skip ci]"
-          git push origin main
           
-          # Create and push tag
-          git tag "v$NEW_VERSION"
-          git push origin "v$NEW_VERSION"
+          # Create and push tag ONLY, avoiding push to protected main branch
+          git tag "$NEW_VERSION"
+          git push origin "$NEW_VERSION"
           
-          echo "version=v$NEW_VERSION" >> $GITHUB_OUTPUT
+          echo "version=$NEW_VERSION" >> $GITHUB_OUTPUT
 
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
