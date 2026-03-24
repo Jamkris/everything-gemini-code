@@ -1,115 +1,112 @@
-name: Release
+name: Release on main merge
 
 on:
-  workflow_dispatch:
+  push:
+    branches:
+      - main
 
 permissions:
   contents: write
+  pull-requests: read
 
 jobs:
   release:
-    name: Create Release
+    name: Generate Release Notes and Create Release
     runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout
+      - name: Checkout repository
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
-      - name: Validate and Extract Version
-        id: version
+      - name: Set up Git and fetch tags
+        run: git fetch --tags
+
+      - name: Get last tag and date
+        id: get_last_tag
         run: |
+          LAST_TAG=$(git tag --list 'v[0-9]*' --sort=-v:refname | head -n 1)
+          if [ -z "$LAST_TAG" ]; then
+            LAST_TAG="v0.0.0"
+            TAG_DATE="1970-01-01T00:00:00Z"
+          else
+            TAG_DATE=$(git log -1 --format=%aI "$LAST_TAG" || date -Iseconds)
+          fi
+          echo "last_tag=$LAST_TAG" >> $GITHUB_OUTPUT
+          echo "last_tag_date=$TAG_DATE" >> $GITHUB_OUTPUT
+
+      - name: Get merged PRs and their bodies
+        id: changelog
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const { data: prs } = await github.rest.pulls.list({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              state: "closed",
+              base: "main",
+              per_page: 100
+            });
+
+            const since = new Date("${{ steps.get_last_tag.outputs.last_tag_date }}");
+            const mergedPRs = prs.filter(pr => pr.merged_at && new Date(pr.merged_at) > since);
+
+            let changelog = "";
+            if (mergedPRs.length === 0) {
+              changelog = "_No pull requests merged since last release._";
+            } else {
+              const formatted = mergedPRs.map(pr => {
+                const cleanBody = pr.body?.trim() || "_No description provided._";
+                return `### ${pr.title} (#${pr.number}) by @${pr.user.login}\n\n${cleanBody}`;
+              });
+              changelog = formatted.join("\n\n---\n\n");
+            }
+            
+            // Write changelog to file to avoid context issues
+            const fs = require('fs');
+            fs.writeFileSync('CHANGELOG.md', changelog);
+            return changelog;
+          result-encoding: string
+
+      - name: Bump Version and Push
+        id: versioning
+        run: |
+          # Use gemini-extension.json to accurately bump the patch version
           EXTENSION_VERSION=$(grep -oE '"version": *"[^"]*"' gemini-extension.json | head -n1 | grep -oE '[0-9]+\.[0-9]+\.[0-9]+')
           if [[ -z "$EXTENSION_VERSION" ]]; then
             echo "::error::Could not extract version from gemini-extension.json"
             exit 1
           fi
-
-          echo "Original extension version: $EXTENSION_VERSION"
-
-          IFS='.' read -ra ADDR <<< "$EXTENSION_VERSION"
-          PATCH=${ADDR[2]}
-          NEW_VERSION="$EXTENSION_VERSION"
-
-          while true; do
-            if git rev-parse "refs/tags/v$NEW_VERSION" >/dev/null 2>&1; then
-              echo "Tag v$NEW_VERSION already exists locally, trying next..."
-              PATCH=$((PATCH + 1))
-              NEW_VERSION="${ADDR[0]}.${ADDR[1]}.$PATCH"
-              continue
-            fi
-            
-            if git ls-remote --tags origin "refs/tags/v$NEW_VERSION" | grep -q "refs/tags/v$NEW_VERSION"; then
-              echo "Tag v$NEW_VERSION already exists on remote, trying next..."
-              PATCH=$((PATCH + 1))
-              NEW_VERSION="${ADDR[0]}.${ADDR[1]}.$PATCH"
-              continue
-            fi
-            
-            break
-          done
-
-          if [[ "$NEW_VERSION" != "$EXTENSION_VERSION" ]]; then
-            echo "Bumping version $EXTENSION_VERSION -> $NEW_VERSION"
-            sed -i "s/\"version\": *\"[^\"]*\"/\"version\": \"$NEW_VERSION\"/" gemini-extension.json
-            sed -i "s/\"version\": *\"[^\"]*\"/\"version\": \"$NEW_VERSION\"/" package.json
-            
-            git config --global user.name "github-release-bot"
-            git config --global user.email "github-release-bot@users.noreply.github.com"
-            git add gemini-extension.json package.json
-            git commit -m "chore: bump extension version to $NEW_VERSION"
-          else
-            git config --global user.name "github-release-bot"
-            git config --global user.email "github-release-bot@users.noreply.github.com"
-          fi
-
-          echo "RELEASE_TAG=v$NEW_VERSION" >> $GITHUB_OUTPUT
-          echo "OLD_VERSION=$EXTENSION_VERSION" >> $GITHUB_OUTPUT
-
-      - name: Create Pull Request for Version Bump
-        id: cpr
-        if: steps.version.outputs.RELEASE_TAG != format('v{0}', steps.version.outputs.OLD_VERSION)
-        uses: peter-evans/create-pull-request@v6
-        with:
-          token: ${{ secrets.RELEASE_TOKEN }}
-          commit-message: 'chore: bump extension version to ${{ steps.version.outputs.RELEASE_TAG }} [skip ci]'
-          branch: 'release/${{ steps.version.outputs.RELEASE_TAG }}'
-          title: 'chore: release ${{ steps.version.outputs.RELEASE_TAG }}'
-          body: |
-            This PR was generated manually via workflow_dispatch to bump the version to **${{ steps.version.outputs.RELEASE_TAG }}**.
-
-            ⚠️ **Note:** Merging this PR will NOT automatically trigger the release tag. Only workflow_dispatch handles it now, or you can merge this and then manually tag/release.
-
-            _Wait, if it's manual, we need to merge this PR to get the version bumped in main. The release action should probably run when this PR merges..._
-          labels: 'release'
-
-      - name: Create Local Tag and Release (Only if no bump needed)
-        if: steps.version.outputs.RELEASE_TAG == format('v{0}', steps.version.outputs.OLD_VERSION)
-        run: |
-          git tag "${{ steps.version.outputs.RELEASE_TAG }}"
-          git push origin "${{ steps.version.outputs.RELEASE_TAG }}"
-
-      - name: Generate changelog
-        id: changelog
-        run: |
-          PREV_TAG=$(git describe --tags --abbrev=0 HEAD^ 2>/dev/null || echo "")
-          if [ -z "$PREV_TAG" ]; then
-            COMMITS=$(git log --pretty=format:"- %s" HEAD)
-          else
-            COMMITS=$(git log --pretty=format:"- %s" ${PREV_TAG}..HEAD)
-          fi
-          echo "commits<<EOF" >> $GITHUB_OUTPUT
-          echo "$COMMITS" >> $GITHUB_OUTPUT
-          echo "EOF" >> $GITHUB_OUTPUT
+          
+          IFS='.' read -r MAJOR MINOR PATCH <<< "$EXTENSION_VERSION"
+          PATCH=$((PATCH + 1))
+          NEW_VERSION="$MAJOR.$MINOR.$PATCH"
+          
+          echo "Bumping version to $NEW_VERSION"
+          
+          # Update package files
+          sed -i "s/\"version\": *\"[^\"]*\"/\"version\": \"$NEW_VERSION\"/" gemini-extension.json
+          sed -i "s/\"version\": *\"[^\"]*\"/\"version\": \"$NEW_VERSION\"/" package.json
+          
+          # Commit and push directly to main. Use [skip ci] to prevent infinite workflow loops
+          git config user.name "Github-Release-Bot"
+          git config user.email "dltmdgus1412@gmail.com"
+          git add gemini-extension.json package.json
+          git commit -m "chore: bump extension version to $NEW_VERSION [skip ci]"
+          git push origin main
+          
+          # Create and push tag
+          git tag "v$NEW_VERSION"
+          git push origin "v$NEW_VERSION"
+          
+          echo "version=v$NEW_VERSION" >> $GITHUB_OUTPUT
 
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
         with:
-          tag_name: ${{ steps.version.outputs.RELEASE_TAG }}
-          target_commitish: ${{ github.sha }}
-          body: |
-            ## Changes
-            ${{ steps.changelog.outputs.commits }}
-          generate_release_notes: false
-          draft: false
-          prerelease: false
+          tag_name: ${{ steps.versioning.outputs.version }}
+          name: ${{ steps.versioning.outputs.version }}
+          body_path: CHANGELOG.md
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
