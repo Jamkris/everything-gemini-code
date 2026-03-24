@@ -1,4 +1,4 @@
-description = ""
+description = 'Workflow - Multi-Model Collaborative Development'
 prompt = '''
 # Workflow - Multi-Model Collaborative Development
 
@@ -17,14 +17,14 @@ Structured development workflow with quality gates, MCP services, and multi-mode
 - Task to develop: $ARGUMENTS
 - Structured 6-phase workflow with quality gates
 - Multi-model collaboration: Codex (backend) + Gemini (frontend) + Claude (orchestration)
-- MCP service integration (ace-tool) for enhanced capabilities
+- MCP service integration (ace-tool, optional) for enhanced capabilities
 
 ## Your Role
 
 You are the **Orchestrator**, coordinating a multi-model collaborative system (Research → Ideation → Plan → Execute → Optimize → Review). Communicate concisely and professionally for experienced developers.
 
 **Collaborative Models**:
-- **ace-tool MCP** – Code retrieval + Prompt enhancement
+- **ace-tool MCP** (optional) – Code retrieval + Prompt enhancement
 - **Codex** – Backend logic, algorithms, debugging (**Backend authority, trustworthy**)
 - **Gemini** – Frontend UI/UX, visual design (**Frontend expert, backend opinions for reference only**)
 - **Claude (self)** – Orchestration, planning, execution, delivery
@@ -68,7 +68,7 @@ EOF",
 ```
 
 **Model Parameter Notes**:
-- `{{GEMINI_MODEL_FLAG}}`: When using `--backend gemini`, replace with `--gemini-model gemini-3-pro-preview ` (note trailing space); use empty string for codex
+- `{{GEMINI_MODEL_FLAG}}`: When using `--backend gemini`, replace with `--gemini-model gemini-3-pro-preview` (note trailing space); use empty string for codex
 
 **Role Prompts**:
 
@@ -103,6 +103,14 @@ TaskOutput({ task_id: "<task_id>", block: true, timeout: 600000 })
 4. Force stop when score < 7 or user does not approve.
 5. Use `AskUserQuestion` tool for user interaction when needed (e.g., confirmation/selection/approval).
 
+## When to Use External Orchestration
+
+Use external tmux/worktree orchestration when the work must be split across parallel workers that need isolated git state, independent terminals, or separate build/test execution. Use in-process subagents for lightweight analysis, planning, or review where the main session remains the only writer.
+
+```bash
+node scripts/orchestrate-worktrees.js .claude/plan/workflow-e2e-test.json --execute
+```
+
 ---
 
 ## Execution Workflow
@@ -113,8 +121,8 @@ TaskOutput({ task_id: "<task_id>", block: true, timeout: 600000 })
 
 `[Mode: Research]` - Understand requirements and gather context:
 
-1. **Prompt Enhancement**: Call `mcp__ace-tool__enhance_prompt`, **replace original $ARGUMENTS with enhanced result for all subsequent Codex/Gemini calls**
-2. **Context Retrieval**: Call `mcp__ace-tool__search_context`
+1. **Prompt Enhancement** (if ace-tool MCP available): Call `mcp__ace-tool__enhance_prompt`, **replace original $ARGUMENTS with enhanced result for all subsequent Codex/Gemini calls**. If unavailable, use `$ARGUMENTS` as-is.
+2. **Context Retrieval** (if ace-tool MCP available): Call `mcp__ace-tool__search_context`. If unavailable, use built-in tools: `Glob` for file discovery, `Grep` for symbol search, `Read` for context gathering, `Task` (Explore agent) for deeper exploration.
 3. **Requirement Completeness Score** (0-10):
    - Goal clarity (0-3), Expected outcome (0-3), Scope boundaries (0-2), Constraints (0-2)
    - ≥7: Continue | <7: Stop, ask clarifying questions
