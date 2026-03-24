@@ -1,4 +1,4 @@
-**Language:** **English** | [한국어](README.ko.md) | [简体中文](README.zh-CN.md)
+**Language:** **English** | [한국어](docs/ko-KR/README.md)
 
 # Everything Gemini Code
 
