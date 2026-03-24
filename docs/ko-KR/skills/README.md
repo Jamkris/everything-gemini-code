@@ -36,12 +36,14 @@
 ## 언어별 스킬
 
 ### Go
+
 | 스킬 | 설명 |
 |------|------|
 | [golang-patterns](golang-patterns/) | Go 관용구 및 모범 사례 |
 | [golang-testing](golang-testing/) | Go 테스팅 패턴, TDD, 벤치마크 |
 
 ### Python
+
 | 스킬 | 설명 |
 |------|------|
 | [python-patterns](python-patterns/) | Python 관용구 및 모범 사례 |
@@ -51,6 +53,7 @@
 | [django-tdd](django-tdd/) | Django TDD 워크플로우 |
 
 ### Java/Kotlin
+
 | 스킬 | 설명 |
 |------|------|
 | [java-coding-standards](java-coding-standards/) | Java 코딩 스탠다드 |
@@ -61,18 +64,21 @@
 | [kotlin-coroutines-flows](kotlin-coroutines-flows/) | Kotlin 코루틴 및 Flow |
 
 ### Rust
+
 | 스킬 | 설명 |
 |------|------|
 | [rust-patterns](rust-patterns/) | Rust 패턴 |
 | [rust-testing](rust-testing/) | Rust 테스팅 |
 
 ### C++
+
 | 스킬 | 설명 |
 |------|------|
 | [cpp-coding-standards](cpp-coding-standards/) | C++ Core Guidelines 기반 스탠다드 |
 | [cpp-testing](cpp-testing/) | GoogleTest, CMake/CTest 테스팅 |
 
 ### Swift/iOS
+
 | 스킬 | 설명 |
 |------|------|
 | [swiftui-patterns](swiftui-patterns/) | SwiftUI 패턴 |
