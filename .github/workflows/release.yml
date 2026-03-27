@@ -1,9 +1,9 @@
-name: Release on main merge
+name: Release
 
 on:
   push:
-    branches:
-      - main
+    tags:
+      - 'v*'
 
 permissions:
   contents: write
@@ -11,7 +11,7 @@ permissions:
 
 jobs:
   release:
-    name: Generate Release Notes and Create Release
+    name: Create Release
     runs-on: ubuntu-latest
 
     steps:
@@ -20,13 +20,49 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Set up Git and fetch tags
-        run: git fetch --tags
+      - name: Validate version tag format
+        run: |
+          if ! [[ "${{ github.ref_name }}" =~ ^v[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+            echo "::error::Invalid version tag format (${{ github.ref_name }}). Expected vX.Y.Z"
+            exit 1
+          fi
+
+      - name: Verify versions match tag
+        env:
+          TAG_NAME: ${{ github.ref_name }}
+        run: |
+          TAG_VERSION="${TAG_NAME#v}"
+          
+          # Check package.json
+          PACKAGE_VERSION=$(node -p "require('./package.json').version")
+          if [ "$TAG_VERSION" != "$PACKAGE_VERSION" ]; then
+            echo "::error::Tag version ($TAG_VERSION) does not match package.json version ($PACKAGE_VERSION)"
+            exit 1
+          fi
+          
+          # Check gemini-extension.json
+          EXTENSION_VERSION=$(node -p "require('./gemini-extension.json').version")
+          if [ "$TAG_VERSION" != "$EXTENSION_VERSION" ]; then
+            echo "::error::Tag version ($TAG_VERSION) does not match gemini-extension.json version ($EXTENSION_VERSION)"
+            exit 1
+          fi
+          
+          # Check .gemini-plugin/plugin.json
+          PLUGIN_VERSION=$(node -p "require('./.gemini-plugin/plugin.json').version")
+          if [ "$TAG_VERSION" != "$PLUGIN_VERSION" ]; then
+            echo "::error::Tag version ($TAG_VERSION) does not match .gemini-plugin/plugin.json version ($PLUGIN_VERSION)"
+            exit 1
+          fi
+          
+          echo "All versions match tag $TAG_NAME"
 
       - name: Get last tag and date
         id: get_last_tag
         run: |
-          LAST_TAG=$(git tag --list 'v[0-9]*' --sort=-v:refname | head -n 1)
+          # Get the tag before the current one
+          TAG_LIST=$(git tag --list 'v[0-9]*' --sort=-v:refname)
+          LAST_TAG=$(echo "$TAG_LIST" | sed -n '2p')
+          
           if [ -z "$LAST_TAG" ]; then
             LAST_TAG="v0.0.0"
             TAG_DATE="1970-01-01T00:00:00Z"
@@ -36,7 +72,7 @@ jobs:
           echo "last_tag=$LAST_TAG" >> $GITHUB_OUTPUT
           echo "last_tag_date=$TAG_DATE" >> $GITHUB_OUTPUT
 
-      - name: Get merged PRs and their bodies
+      - name: Generate Changelog from merged PRs
         id: changelog
         uses: actions/github-script@v6
         with:
@@ -52,50 +88,25 @@ jobs:
             const since = new Date("${{ steps.get_last_tag.outputs.last_tag_date }}");
             const mergedPRs = prs.filter(pr => pr.merged_at && new Date(pr.merged_at) > since);
 
-            let changelog = "";
+            let changelog = "## What's Changed in ${{ github.ref_name }}\n\n";
             if (mergedPRs.length === 0) {
-              changelog = "_No pull requests merged since last release._";
+              changelog += "_No pull requests merged since last release._";
             } else {
               const formatted = mergedPRs.map(pr => {
                 const cleanBody = pr.body?.trim() || "_No description provided._";
                 return `### ${pr.title} (#${pr.number}) by @${pr.user.login}\n\n${cleanBody}`;
               });
-              changelog = formatted.join("\n\n---\n\n");
+              changelog += formatted.join("\n\n---\n\n");
             }
             
-            // Write changelog to file to avoid context issues
             const fs = require('fs');
-            fs.writeFileSync('CHANGELOG.md', changelog);
-            return changelog;
-          result-encoding: string
-
-      - name: Bump Version and Push
-        id: versioning
-        run: |
-          # Calculate the next version from the last tag
-          LAST_TAG="${{ steps.get_last_tag.outputs.last_tag }}"
-          VERSION_NUM=${LAST_TAG#v} # Remove 'v' prefix for calculation
-          
-          IFS='.' read -r MAJOR MINOR PATCH <<< "$VERSION_NUM"
-          PATCH=$((PATCH + 1))
-          NEW_VERSION="v$MAJOR.$MINOR.$PATCH"
-          
-          echo "Bumping version to $NEW_VERSION"
-          
-          git config user.name "Github-Release-Bot"
-          git config user.email "dltmdgus1412@gmail.com"
-          
-          # Create and push tag ONLY, avoiding push to protected main branch
-          git tag "$NEW_VERSION"
-          git push origin "$NEW_VERSION"
-          
-          echo "version=$NEW_VERSION" >> $GITHUB_OUTPUT
+            fs.writeFileSync('RELEASE_NOTES.md', changelog);
 
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
         with:
-          tag_name: ${{ steps.versioning.outputs.version }}
-          name: ${{ steps.versioning.outputs.version }}
-          body_path: CHANGELOG.md
+          tag_name: ${{ github.ref_name }}
+          name: ${{ github.ref_name }}
+          body_path: RELEASE_NOTES.md
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

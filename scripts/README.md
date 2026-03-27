@@ -16,6 +16,7 @@ This directory contains utility scripts for maintaining the Everything Gemini Co
 | Script | Description |
 |--------|-------------|
 | `harness-audit.js` | Audits the repository against core Gemini CLI harness rules. Checks for the presence of required context optimization documents, eval coverage, required hooks, and security guards. <br><br> **Usage:** `node scripts/harness-audit.js --scope repo` |
+| `release.sh` | Synchronizes version numbers in `package.json`, `gemini-extension.json`, and `.gemini-plugin/plugin.json`, creates a git commit, and generates a version tag. <br><br> **Usage:** `./scripts/release.sh <version>` |
 
 ### Documentation Generation
 

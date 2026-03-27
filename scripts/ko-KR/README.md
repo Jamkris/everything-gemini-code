@@ -16,6 +16,7 @@
 | 스크립트 | 설명 |
 |----------|------|
 | `harness-audit.js` | 핵심 Gemini CLI 규칙에 대한 저장소 상태를 검사(Audit)합니다. 토큰/컨텍스트 최적화 가이드 제공 여부, 훅 구성 파일, Eval 커버리지, 보안 가드레일 등을 평가합니다. <br><br> **사용법:** `node scripts/harness-audit.js --scope repo` |
+| `release.sh` | `package.json`, `gemini-extension.json`, `.gemini-plugin/plugin.json` 세 파일의 버전을 동기화하고, 커밋 및 버전 태그(`v*`)를 생성합니다. <br><br> **사용법:** `./scripts/release.sh <version>` |
 
 ### 문서 자동 생성
 
