@@ -16,7 +16,7 @@ const {
   ensureDir,
   log
 } = require('../lib/utils');
-const { getPackageManager, getSelectionPrompt } = require('../lib/package-manager');
+const { getPackageManager } = require('../lib/package-manager');
 const { listAliases } = require('../lib/session-aliases');
 
 const { runHook } = require('../lib/hook-utils');
@@ -33,8 +33,7 @@ runHook('SessionStart', async () => {
   // Match both old format (YYYY-MM-DD-session.tmp) and new format (YYYY-MM-DD-shortid-session.tmp)
   const recentSessions = findFiles(sessionsDir, '*-session.tmp', { maxAge: 7 });
 
-  // Check for recent sessions, learned skills, and aliases (silent)
-  findFiles(sessionsDir, '*-session.tmp', { maxAge: 7 });
+  // Initialize recent sessions, learned skills, and aliases (silent)
   findFiles(learnedDir, '*.md');
   listAliases({ limit: 5 });
 

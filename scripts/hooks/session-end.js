@@ -35,13 +35,11 @@ runHook('SessionEnd', async () => {
 
   // If session file exists for today, update the end time
   if (fs.existsSync(sessionFile)) {
-    const success = replaceInFile(
+    replaceInFile(
       sessionFile,
       /\*\*Last Updated:\*\*.*/,
       `**Last Updated:** ${currentTime}`
     );
-
-    // Updated silently
   } else {
     // Create new session file with template
     const template = `# Session: ${today}
