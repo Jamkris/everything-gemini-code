@@ -42,8 +42,17 @@ git commit -m "chore: bump version to $VERSION"
 echo "Creating tag v$VERSION..."
 git tag "v$VERSION"
 
+BRANCH=$(git rev-parse --abbrev-ref HEAD)
+
 echo "Done!"
 echo "Next steps:"
-echo "1. git push origin main"
+echo "1. git push origin $BRANCH"
 echo "2. git push origin v$VERSION"
-echo "3. Check GitHub Actions for the Release process."
+if [ "$BRANCH" != "main" ]; then
+    echo "3. Create a PR to merge '$BRANCH' into main"
+    echo "   gh pr create --title 'chore: release v$VERSION' --body 'Bump version to $VERSION'"
+    echo "4. After merge, push the tag: git push origin v$VERSION"
+    echo "5. Check GitHub Actions for the Release process."
+else
+    echo "3. Check GitHub Actions for the Release process."
+fi
