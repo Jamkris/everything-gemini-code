@@ -1,4 +1,4 @@
-description = ""
+description = "Run security and quality review on uncommitted changes"
 prompt = '''
 # Code Review
 

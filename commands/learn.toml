@@ -1,4 +1,4 @@
-description = ""
+description = "Extract reusable patterns from the current session"
 prompt = '''
 # /learn - Extract Reusable Patterns
 

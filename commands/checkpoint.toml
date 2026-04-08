@@ -1,4 +1,4 @@
-description = ""
+description = "Create or verify a workflow checkpoint"
 prompt = '''
 # Checkpoint Command
 

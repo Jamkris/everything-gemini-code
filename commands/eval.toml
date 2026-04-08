@@ -1,4 +1,4 @@
-description = ""
+description = "Manage eval-driven development workflow"
 prompt = '''
 # Eval Command
 
