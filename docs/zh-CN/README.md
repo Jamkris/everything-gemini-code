@@ -1,4 +1,4 @@
-**Language:** [English](README.md) | [한국어](README.ko.md) | **简体中文**
+**Language:** [English](../../README.md) | [한국어](../ko-KR/README.md) | **简体中文**
 
 # Everything Gemini Code
 
@@ -65,7 +65,7 @@ gemini extensions uninstall https://github.com/Jamkris/everything-gemini-code
 
 ### 斜杠命令 (Slash Commands)
 
-使用自定义命令自动化工作流（请参阅 [完整命令列表](COMMANDS.zh-CN.md)）：
+使用自定义命令自动化工作流（请参阅 [完整命令列表](COMMANDS.md)）：
 
 ```bash
 # 规划功能实现

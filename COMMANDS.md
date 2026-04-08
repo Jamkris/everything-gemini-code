@@ -1,3 +1,5 @@
+**Language:** **English** | [한국어](docs/ko-KR/COMMANDS.md) | [简体中文](docs/zh-CN/COMMANDS.md)
+
 # Gemini CLI Extension Commands
 
 List of available commands provided by `everything-gemini-code`.
