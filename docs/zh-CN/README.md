@@ -65,7 +65,7 @@ gemini extensions uninstall https://github.com/Jamkris/everything-gemini-code
 
 ### 斜杠命令 (Slash Commands)
 
-使用自定义命令自动化工作流（请参阅 [完整命令列表](COMMANDS.md)）：
+使用自定义命令自动化工作流（请参阅 [完整命令列表](commands/README.md)）：
 
 ```bash
 # 规划功能实现
