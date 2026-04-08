@@ -5,43 +5,17 @@
 
 const fs = require('fs');
 const path = require('path');
+const { validateDirs } = require('../lib/validator');
 
-const SKILLS_DIR = path.join(__dirname, '../../skills');
-
-function validateSkills() {
-  if (!fs.existsSync(SKILLS_DIR)) {
-    console.log('No skills directory found, skipping validation');
-    process.exit(0);
-  }
-
-  const entries = fs.readdirSync(SKILLS_DIR, { withFileTypes: true });
-  const dirs = entries.filter(e => e.isDirectory()).map(e => e.name);
-  let hasErrors = false;
-  let validCount = 0;
-
-  for (const dir of dirs) {
-    const skillMd = path.join(SKILLS_DIR, dir, 'SKILL.md');
-    if (!fs.existsSync(skillMd)) {
-      console.error(`ERROR: ${dir}/ - Missing SKILL.md`);
-      hasErrors = true;
-      continue;
-    }
+validateDirs({
+  dir: path.join(__dirname, '../../skills'),
+  label: 'skill',
+  validate(dirPath) {
+    const skillMd = path.join(dirPath, 'SKILL.md');
+    if (!fs.existsSync(skillMd)) return ['Missing SKILL.md'];
 
     const content = fs.readFileSync(skillMd, 'utf-8');
-    if (content.trim().length === 0) {
-      console.error(`ERROR: ${dir}/SKILL.md - Empty file`);
-      hasErrors = true;
-      continue;
-    }
-
-    validCount++;
+    if (content.trim().length === 0) return ['SKILL.md is empty'];
+    return null;
   }
-
-  if (hasErrors) {
-    process.exit(1);
-  }
-
-  console.log(`Validated ${validCount} skill directories`);
-}
-
-validateSkills();
+});
