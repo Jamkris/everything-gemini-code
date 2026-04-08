@@ -93,7 +93,7 @@ git checkout <reviewed-full-sha>          # pin to a specific reviewed commit
 
 ### Vendored standalone install
 
-If you are vendoring only this skill outside the full ECC install, copy the reviewed file from the ECC repository into `~/.claude/skills/blueprint/SKILL.md`. Vendored copies do not have a git remote, so update them by re-copying the file from a reviewed ECC commit rather than running `git pull`.
+If you are vendoring only this skill outside the full ECC install, copy the reviewed file from the ECC repository into `~/.gemini/skills/blueprint/SKILL.md`. Vendored copies do not have a git remote, so update them by re-copying the file from a reviewed ECC commit rather than running `git pull`.
 
 ## Requirements
 

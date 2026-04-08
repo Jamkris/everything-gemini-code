@@ -120,7 +120,7 @@ CLAW_SESSION=my-project CLAW_SKILLS=tdd-workflow,security-review node scripts/cl
 
 ### How It Works
 
-1. Loads conversation history from `~/.claude/claw/{session}.md`
+1. Loads conversation history from `~/.gemini/claw/{session}.md`
 2. Each user message is sent to `claude -p` with full history as context
 3. Responses are appended to the session file (Markdown-as-database)
 4. Sessions persist across restarts

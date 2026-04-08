@@ -50,7 +50,7 @@ agents/
 Agent directories are probed in order and results are merged:
 
 1. `./agents/**/*.md` + `./agents/*.md` — project-local agents (both depths)
-2. `~/.claude/agents/**/*.md` + `~/.claude/agents/*.md` — global agents (both depths)
+2. `~/.gemini/agents/**/*.md` + `~/.gemini/agents/*.md` — global agents (both depths)
 
 Results from all locations are merged and deduplicated by agent name. Project-local agents take precedence over global agents with the same name. A custom path can be used instead if the user specifies one.
 

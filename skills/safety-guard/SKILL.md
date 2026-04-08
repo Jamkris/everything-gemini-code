@@ -66,4 +66,4 @@ Uses PreToolUse hooks to intercept Bash, Write, Edit, and MultiEdit tool calls. 
 
 - Enable by default for `codex -a never` sessions
 - Pair with observability risk scoring in ECC 2.0
-- Logs all blocked actions to `~/.claude/safety-guard.log`
+- Logs all blocked actions to `~/.gemini/safety-guard.log`
