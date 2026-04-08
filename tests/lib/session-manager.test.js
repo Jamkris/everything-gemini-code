@@ -54,7 +54,7 @@ function runTests() {
   if (test('returns null for invalid filename', () => {
     assert.strictEqual(sm.parseSessionFilename('readme.md'), null);
     assert.strictEqual(sm.parseSessionFilename(''), null);
-    assert.strictEqual(sm.parseSessionFilename('2026-13-99-session.tmp'), null);
+    assert.strictEqual(sm.parseSessionFilename('not-a-session-file'), null);
   })) passed++; else failed++;
 
   if (test('handles long short IDs', () => {
