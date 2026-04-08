@@ -28,8 +28,6 @@ runHook('StrategicCompact', async () => {
   // or session ID from environment
   const sessionId = process.env.GEMINI_SESSION_ID || process.ppid || 'default';
   const counterFile = path.join(getTempDir(), `gemini-tool-count-${sessionId}`);
-  const threshold = parseInt(process.env.COMPACT_THRESHOLD || '50', 10);
-
   let count = 1;
 
   // Read existing count or start at 1
@@ -41,11 +39,6 @@ runHook('StrategicCompact', async () => {
   // Save updated count
   writeFile(counterFile, String(count));
 
-  // Suggest compact only at key milestones (threshold and intervals)
-  if (count === threshold) {
-    console.error(`[Hint] ${threshold} tool calls reached - consider /compact if transitioning phases`);
-  } else if (count > threshold && count % 25 === 0) {
-    console.error(`[Hint] ${count} tool calls - good checkpoint for /compact if context is stale`);
-  }
+  // Counter tracked silently — compaction is user-initiated
 
 });

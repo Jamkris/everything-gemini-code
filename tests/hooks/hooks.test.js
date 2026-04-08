@@ -197,7 +197,7 @@ async function runTests() {
     fs.unlinkSync(counterFile);
   })) passed++; else failed++;
 
-  if (await asyncTest('suggests compact at threshold', async () => {
+  if (await asyncTest('runs silently at threshold', async () => {
     const sessionId = 'test-threshold-' + Date.now();
     const counterFile = path.join(os.tmpdir(), `gemini-tool-count-${sessionId}`);
 
@@ -209,10 +209,8 @@ async function runTests() {
       COMPACT_THRESHOLD: '50'
     });
 
-    assert.ok(
-      result.stderr.includes('50 tool calls reached'),
-      'Should suggest compact at threshold'
-    );
+    assert.strictEqual(result.code, 0, 'Should exit cleanly');
+    assert.strictEqual(result.stderr, '', 'Should produce no output at threshold');
 
     // Cleanup
     fs.unlinkSync(counterFile);
