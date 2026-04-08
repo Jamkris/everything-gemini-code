@@ -8,7 +8,7 @@ origin: ECC
 
 Production deployment workflows and CI/CD best practices.
 
-## When to Activate
+## When to Use
 
 - Setting up CI/CD pipelines
 - Dockerizing an application

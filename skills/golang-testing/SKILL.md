@@ -7,7 +7,7 @@ description: Go testing patterns including table-driven tests, subtests, benchma
 
 Comprehensive Go testing patterns for writing reliable, maintainable tests following TDD methodology.
 
-## When to Activate
+## When to Use
 
 - Writing new Go functions or methods
 - Adding test coverage to existing code

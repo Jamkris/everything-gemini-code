@@ -8,7 +8,7 @@ origin: ECC
 
 Patterns for making Swift code testable by abstracting external dependencies (file system, network, iCloud) behind small, focused protocols. Enables deterministic tests without I/O.
 
-## When to Activate
+## When to Use
 
 - Writing Swift code that accesses file system, network, or external APIs
 - Need to test error handling paths without triggering real failures

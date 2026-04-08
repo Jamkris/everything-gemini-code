@@ -7,7 +7,7 @@ description: SwiftUI architecture patterns, state management with @Observable, v
 
 Modern SwiftUI patterns for building declarative, performant user interfaces on Apple platforms. Covers the Observation framework, view composition, type-safe navigation, and performance optimization.
 
-## When to Activate
+## When to Use
 
 - Building SwiftUI views and managing state (`@State`, `@Observable`, `@Binding`)
 - Designing navigation flows with `NavigationStack`

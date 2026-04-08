@@ -8,7 +8,7 @@ origin: ECC
 
 Patterns for structured concurrency, Flow-based reactive streams, and coroutine testing in Android and Kotlin Multiplatform projects.
 
-## When to Activate
+## When to Use
 
 - Writing async code with Kotlin coroutines
 - Using Flow, StateFlow, or SharedFlow for reactive data

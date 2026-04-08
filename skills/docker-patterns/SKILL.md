@@ -8,7 +8,7 @@ origin: ECC
 
 Docker and Docker Compose best practices for containerized development.
 
-## When to Activate
+## When to Use
 
 - Setting up Docker Compose for local development
 - Designing multi-container architectures

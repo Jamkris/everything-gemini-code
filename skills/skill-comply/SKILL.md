@@ -21,7 +21,7 @@ Measures whether coding agents actually follow skills, rules, or agent definitio
 - **Rules** (`rules/common/*.md`): Mandatory rules like testing.md, security.md, git-workflow.md
 - **Agent definitions** (`agents/*.md`): Whether an agent gets invoked when expected (internal workflow verification not yet supported)
 
-## When to Activate
+## When to Use
 
 - User runs `/skill-comply <path>`
 - User asks "is this rule actually being followed?"

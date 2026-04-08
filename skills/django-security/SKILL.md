@@ -7,7 +7,7 @@ description: Django security best practices, authentication, authorization, CSRF
 
 Comprehensive security guidelines for Django applications to protect against common vulnerabilities.
 
-## When to Activate
+## When to Use
 
 - Setting up Django authentication and authorization
 - Implementing user permissions and roles

@@ -7,7 +7,7 @@ description: Idiomatic Go patterns, best practices, and conventions for building
 
 Idiomatic Go patterns and best practices for building robust, efficient, and maintainable applications.
 
-## When to Activate
+## When to Use
 
 - Writing new Go code
 - Reviewing Go code

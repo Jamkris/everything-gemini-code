@@ -7,7 +7,7 @@ description: Use this skill when adding authentication, handling user input, wor
 
 This skill ensures all code follows security best practices and identifies potential vulnerabilities.
 
-## When to Activate
+## When to Use
 
 - Implementing authentication or authorization
 - Handling user input or file uploads

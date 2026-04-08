@@ -8,7 +8,7 @@ origin: ECC
 
 Produce research that supports decisions, not research theater.
 
-## When to Activate
+## When to Use
 
 - researching a market, category, company, investor, or technology trend
 - building TAM/SAM/SOM estimates

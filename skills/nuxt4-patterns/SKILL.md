@@ -8,7 +8,7 @@ origin: ECC
 
 Use when building or debugging Nuxt 4 apps with SSR, hybrid rendering, route rules, or page-level data fetching.
 
-## When to Activate
+## When to Use
 
 - Hydration mismatches between server HTML and client state
 - Route-level rendering decisions such as prerender, SWR, ISR, or client-only sections

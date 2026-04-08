@@ -8,7 +8,7 @@ origin: ECC
 
 Programmatic interaction with X (Twitter) for posting, reading, searching, and analytics.
 
-## When to Activate
+## When to Use
 
 - User wants to post tweets or threads programmatically
 - Reading timeline, mentions, or user data from X

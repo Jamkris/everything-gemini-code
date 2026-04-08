@@ -8,7 +8,7 @@ origin: ECC
 
 Patterns for controlling LLM API costs while maintaining quality. Combines model routing, budget tracking, retry logic, and prompt caching into a composable pipeline.
 
-## When to Activate
+## When to Use
 
 - Building applications that call LLM APIs (Claude, GPT, etc.)
 - Processing batches of items with varying complexity

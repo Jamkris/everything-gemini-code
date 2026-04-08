@@ -8,7 +8,7 @@ origin: ECC
 
 Build investor-facing materials that are consistent, credible, and easy to defend.
 
-## When to Activate
+## When to Use
 
 - creating or revising a pitch deck
 - writing an investor memo or one-pager

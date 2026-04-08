@@ -8,7 +8,7 @@ origin: ECC
 
 Safe, reversible database schema changes for production systems.
 
-## When to Activate
+## When to Use
 
 - Creating or altering database tables
 - Adding/removing columns or indexes

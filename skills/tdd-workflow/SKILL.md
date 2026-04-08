@@ -7,7 +7,7 @@ description: Use this skill when writing new features, fixing bugs, or refactori
 
 This skill ensures all code development follows TDD principles with comprehensive test coverage.
 
-## When to Activate
+## When to Use
 
 - Writing new features or functionality
 - Fixing bugs or issues

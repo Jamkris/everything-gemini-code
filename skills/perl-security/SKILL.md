@@ -8,7 +8,7 @@ origin: ECC
 
 Comprehensive security guidelines for Perl applications covering input validation, injection prevention, and secure coding practices.
 
-## When to Activate
+## When to Use
 
 - Handling user input in Perl applications
 - Building Perl web applications (CGI, Mojolicious, Dancer2, Catalyst)
