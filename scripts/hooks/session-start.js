@@ -65,82 +65,70 @@ runHook('SessionStart', async () => {
     log(getSelectionPrompt());
   }
 
-  // Ensure command shims exist (for short aliases like /tdd)
+  // Command shims: only needed for manual installs (no extension).
+  // When the extension is installed, Gemini CLI loads commands directly
+  // from the extension directory. Creating shims would cause conflicts
+  // (every command gets renamed to /everything-gemini-code:xxx and /user.xxx).
   try {
     const fs = require('fs');
     const path = require('path');
     const geminiDir = getGeminiDir();
-    const globalCmdDir = path.join(geminiDir, 'commands');
-    
-    // Extension root is ../.. from this script
-    const extDir = path.resolve(__dirname, '..', '..');
-    const extCmdDir = path.join(extDir, 'commands');
-    const agentsDir = path.join(extDir, 'agents');
-    
-    if (fs.existsSync(extCmdDir)) {
-      ensureDir(globalCmdDir);
-      
-      const cmdFiles = fs.readdirSync(extCmdDir).filter(f => f.endsWith('.toml'));
-      
-      // Get list of agents to replace references
-      let agentNames = [];
-      if (fs.existsSync(agentsDir)) {
-        agentNames = fs.readdirSync(agentsDir)
-          .filter(f => f.endsWith('.md'))
-          .map(f => f.replace('.md', ''));
-      }
-      
-      for (const file of cmdFiles) {
-        const globalFile = path.join(globalCmdDir, file);
-        let needsUpdate = !fs.existsSync(globalFile);
-        
-        // If it exists, check if content matches extension perfectly
-        // This ensures any updates (syntax fixes, logic changes) are propagated
-        if (!needsUpdate) {
-          try {
-            const globalContent = fs.readFileSync(globalFile, 'utf8');
-            const extContent = fs.readFileSync(path.join(extCmdDir, file), 'utf8');
-            
-            // We need to compare potential namespace injection too?
-            // The shim logic modifies content to inject namespaces.
-            // So we can't just compare raw texts if we transform it.
-            
-            // Let's generate the expected content
-            let expectedContent = extContent;
-            for (const agent of agentNames) {
-                 expectedContent = expectedContent.replace(
-                    new RegExp(`@${agent}\\b`, 'g'), 
-                    `@everything-gemini-code.${agent}`
-                 );
+    const extInstalledDir = path.join(geminiDir, 'extensions', 'everything-gemini-code');
+    const isExtensionInstall = fs.existsSync(extInstalledDir);
+
+    if (isExtensionInstall) {
+      // Clean up stale shims from previous installs to avoid conflicts
+      const globalCmdDir = path.join(geminiDir, 'commands');
+      if (fs.existsSync(globalCmdDir)) {
+        const extDir = path.resolve(__dirname, '..', '..');
+        const extCmdDir = path.join(extDir, 'commands');
+        if (fs.existsSync(extCmdDir)) {
+          const extCmds = new Set(fs.readdirSync(extCmdDir).filter(f => f.endsWith('.toml')));
+          for (const file of fs.readdirSync(globalCmdDir).filter(f => f.endsWith('.toml'))) {
+            if (extCmds.has(file)) {
+              fs.unlinkSync(path.join(globalCmdDir, file));
+              log(`[SessionStart] Removed stale shim: ${file}`);
             }
-            
-            if (globalContent !== expectedContent) {
-                needsUpdate = true;
-            }
-          } catch (_e) {
-            needsUpdate = true;
           }
         }
-        
-        if (needsUpdate) {
-          const content = fs.readFileSync(path.join(extCmdDir, file), 'utf8');
-          let newContent = content;
-          
-          // Replace @agent-name with @everything-gemini-code.agent-name
-          for (const agent of agentNames) {
-            newContent = newContent.replace(
-              new RegExp(`@${agent}\\b`, 'g'), 
-              `@everything-gemini-code.${agent}`
-            );
+      }
+    } else {
+      // Manual install: create shims so short aliases like /tdd work
+      const globalCmdDir = path.join(geminiDir, 'commands');
+      const extDir = path.resolve(__dirname, '..', '..');
+      const extCmdDir = path.join(extDir, 'commands');
+      const agentsDir = path.join(extDir, 'agents');
+
+      if (fs.existsSync(extCmdDir)) {
+        ensureDir(globalCmdDir);
+        const cmdFiles = fs.readdirSync(extCmdDir).filter(f => f.endsWith('.toml'));
+
+        let agentNames = [];
+        if (fs.existsSync(agentsDir)) {
+          agentNames = fs.readdirSync(agentsDir)
+            .filter(f => f.endsWith('.md'))
+            .map(f => f.replace('.md', ''));
+        }
+
+        for (const file of cmdFiles) {
+          const globalFile = path.join(globalCmdDir, file);
+          if (!fs.existsSync(globalFile)) {
+            const content = fs.readFileSync(path.join(extCmdDir, file), 'utf8');
+            let newContent = content;
+            for (const agent of agentNames) {
+              newContent = newContent.replace(
+                new RegExp(`@${agent}\\b`, 'g'),
+                `@everything-gemini-code.${agent}`
+              );
+            }
+            fs.writeFileSync(globalFile, newContent);
+            log(`[SessionStart] Created shim: ${file}`);
           }
-          
-          fs.writeFileSync(globalFile, newContent);
-          log(`[SessionStart] Created/Updated shim: ${file}`);
         }
       }
     }
   } catch (err) {
-    log(`[SessionStart] Warning: Failed to generate shims: ${err.message}`);
+    log(`[SessionStart] Warning: Shim management failed: ${err.message}`);
   }
 
 });
