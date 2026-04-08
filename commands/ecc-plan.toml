@@ -13,7 +13,7 @@ This command invokes the **planner** agent to create a comprehensive implementat
 
 ## When to Use
 
-Use `/plan` when:
+Use `/ecc-plan` when:
 - Starting a new feature
 - Making significant architectural changes
 - Working on complex refactoring
@@ -34,7 +34,7 @@ The planner agent will:
 ## Example Usage
 
 ```
-User: /plan I need to add real-time notifications when markets resolve
+User: /ecc-plan I need to add real-time notifications when markets resolve
 
 Agent (planner):
 # Implementation Plan: Real-Time Market Resolution Notifications
@@ -107,6 +107,5 @@ After planning:
 
 ## Related Agents
 
-This command invokes the `planner` agent located at:
-`~/.gemini/agents/planner.md`
+This command invokes the `@planner` agent.
 '''
