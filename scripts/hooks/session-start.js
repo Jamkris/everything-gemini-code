@@ -12,30 +12,16 @@ const {
   getGeminiDir,
   getSessionsDir,
   getLearnedSkillsDir,
-  findFiles,
   ensureDir,
   log
 } = require('../lib/utils');
-const { getPackageManager } = require('../lib/package-manager');
-const { listAliases } = require('../lib/session-aliases');
 
 const { runHook } = require('../lib/hook-utils');
 
 runHook('SessionStart', async () => {
-  const sessionsDir = getSessionsDir();
-  const learnedDir = getLearnedSkillsDir();
-
   // Ensure directories exist
-  ensureDir(sessionsDir);
-  ensureDir(learnedDir);
-
-  // Initialize recent sessions, learned skills, and aliases (silent)
-  findFiles(sessionsDir, '*-session.tmp', { maxAge: 7 });
-  findFiles(learnedDir, '*.md');
-  listAliases({ limit: 5 });
-
-  // Detect package manager (silent)
-  getPackageManager();
+  ensureDir(getSessionsDir());
+  ensureDir(getLearnedSkillsDir());
 
   // Command shims: only needed for manual installs (no extension).
   // When the extension is installed, Gemini CLI loads commands directly
