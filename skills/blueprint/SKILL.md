@@ -85,7 +85,7 @@ test -f skills/blueprint/SKILL.md
 To update later, review the ECC diff before updating:
 
 ```bash
-cd /path/to/everything-claude-code
+cd /path/to/everything-gemini-code
 git fetch origin main
 git log --oneline HEAD..origin/main       # review new commits before updating
 git checkout <reviewed-full-sha>          # pin to a specific reviewed commit
