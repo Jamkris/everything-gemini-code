@@ -1,3 +1,8 @@
+---
+name: verification-loop
+description: Comprehensive verification system for code changes
+---
+
 # Verification Loop Skill
 
 A comprehensive verification system for Gemini CLI sessions.

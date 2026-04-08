@@ -1,3 +1,8 @@
+---
+name: safety-guard
+description: Prevent destructive operations on production systems
+---
+
 # Safety Guard — Prevent Destructive Operations
 
 ## When to Use

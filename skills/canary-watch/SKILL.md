@@ -1,3 +1,8 @@
+---
+name: canary-watch
+description: Post-deploy monitoring and canary health verification
+---
+
 # Canary Watch — Post-Deploy Monitoring
 
 ## When to Use

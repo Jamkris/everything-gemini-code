@@ -1,3 +1,8 @@
+---
+name: product-lens
+description: Product thinking validation before building features
+---
+
 # Product Lens — Think Before You Build
 
 ## When to Use
