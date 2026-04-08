@@ -19,7 +19,9 @@ const {
 const { getPackageManager, getSelectionPrompt } = require('../lib/package-manager');
 const { listAliases } = require('../lib/session-aliases');
 
-async function main() {
+const { runHook } = require('../lib/hook-utils');
+
+runHook('SessionStart', async () => {
   const sessionsDir = getSessionsDir();
   const learnedDir = getLearnedSkillsDir();
 
@@ -141,10 +143,4 @@ async function main() {
     log(`[SessionStart] Warning: Failed to generate shims: ${err.message}`);
   }
 
-  process.exit(0);
-}
-
-main().catch(err => {
-  console.error('[SessionStart] Error:', err.message);
-  process.exit(0); // Don't block on errors
 });

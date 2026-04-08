@@ -21,7 +21,9 @@ const {
   log
 } = require('../lib/utils');
 
-async function main() {
+const { runHook } = require('../lib/hook-utils');
+
+runHook('StrategicCompact', async () => {
   // Track tool call count (increment in a temp file)
   // Use a session-specific counter file based on PID from parent process
   // or session ID from environment
@@ -50,10 +52,4 @@ async function main() {
     log(`[StrategicCompact] ${count} tool calls - good checkpoint for /compact if context is stale`);
   }
 
-  process.exit(0);
-}
-
-main().catch(err => {
-  console.error('[StrategicCompact] Error:', err.message);
-  process.exit(0);
 });

@@ -21,7 +21,9 @@ const {
   log
 } = require('../lib/utils');
 
-async function main() {
+const { runHook } = require('../lib/hook-utils');
+
+runHook('ContinuousLearning', async () => {
   // Get script directory to find config
   const scriptDir = __dirname;
   const configFile = path.join(scriptDir, '..', '..', 'skills', 'continuous-learning', 'config.json');
@@ -69,10 +71,4 @@ async function main() {
   log(`[ContinuousLearning] Session has ${messageCount} messages - evaluate for extractable patterns`);
   log(`[ContinuousLearning] Save learned skills to: ${learnedSkillsPath}`);
 
-  process.exit(0);
-}
-
-main().catch(err => {
-  console.error('[ContinuousLearning] Error:', err.message);
-  process.exit(0);
 });
