@@ -92,10 +92,25 @@ jobs:
             if (mergedPRs.length === 0) {
               changelog += "_No pull requests merged since last release._";
             } else {
-              const formatted = mergedPRs.map(pr => {
-                const cleanBody = pr.body?.trim() || "_No description provided._";
-                return `### ${pr.title} (#${pr.number}) by @${pr.user.login}\n\n${cleanBody}`;
-              });
+              const formatted = [];
+              for (const pr of mergedPRs) {
+                let body = pr.body?.trim();
+                if (!body) {
+                  // PR body가 없으면 커밋 목록으로 대체
+                  try {
+                    const { data: commits } = await github.rest.pulls.listCommits({
+                      owner: context.repo.owner,
+                      repo: context.repo.repo,
+                      pull_number: pr.number,
+                      per_page: 20
+                    });
+                    body = commits.map(c => `- ${c.commit.message.split('\n')[0]}`).join('\n');
+                  } catch {
+                    body = '_No description provided._';
+                  }
+                }
+                formatted.push(`### ${pr.title} (#${pr.number}) by @${pr.user.login}\n\n${body}`);
+              }
               changelog += formatted.join("\n\n---\n\n");
             }
             
