@@ -13,7 +13,7 @@
  * @param {Function} fn - Async function containing hook logic
  */
 function runHook(name, fn) {
-  fn().then(() => {
+  Promise.resolve(fn()).then(() => {
     process.exit(0);
   }).catch(err => {
     console.error(`[${name}] Error:`, err.message);
@@ -29,12 +29,14 @@ function runHook(name, fn) {
  * @param {Function} fn - Function receiving stdin data string, must call console.log(data) when done
  */
 function runStdinHook(name, fn) {
-  let data = '';
-  process.stdin.on('data', chunk => { data += chunk; });
+  const chunks = [];
+  process.stdin.on('data', chunk => { chunks.push(chunk); });
   process.stdin.on('end', () => {
+    const data = Buffer.concat(chunks).toString();
     try {
       fn(data);
-    } catch (_error) {
+    } catch (error) {
+      console.error(`[${name}] Hook failed:`, error.message);
       console.log(data);
     }
   });
