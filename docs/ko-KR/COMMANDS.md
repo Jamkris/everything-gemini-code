@@ -25,7 +25,8 @@
 | `/multi-plan`      | `planner` 에이전트를 사용하여 포괄적인 구현 계획을 수립하고 여러 에이전트에 작업을 분배합니다.                                         |
 | `/multi-workflow`  | 여러 에이전트를 사용하는 특정 워크플로우 단계입니다.                                                                                   |
 | `/orchestrate`     | 코드베이스 전반에 걸친 복잡한 다단계 작업을 관리하기 위한 상위 수준의 오케스트레이션 명령입니다.                                       |
-| `/plan`            | 요구 사항을 재검토하고 위험을 평가하며 단계별 구현 계획을 수립합니다. 진행하기 전에 사용자의 확인을 기다립니다.                        |
+| `/ecc-plan`        | 요구 사항을 재검토하고 위험을 평가하며 단계별 구현 계획을 수립합니다. 진행하기 전에 사용자의 확인을 기다립니다. (별칭: `/everything-gemini-code:plan`) |
+| `/ecc-docs`        | Context7을 통해 라이브러리 또는 주제의 최신 문서를 조회합니다. (별칭: `/everything-gemini-code:docs`)                                   |
 | `/pm2`             | 프로젝트를 자동 분석하고 PM2 서비스 구성(`ecosystem.config.cjs`) 및 관리 명령을 생성합니다.                                            |
 | `/python-review`   | PEP 8 준수, 타입 힌트, 보안 및 Pythonic 관용구에 대한 포괄적인 Python 코드 리뷰를 수행합니다. `python-reviewer` 에이전트를 호출합니다. |
 | `/refactor-clean`  | 죽은 코드, 사용되지 않는 import, 레거시 아티팩트를 식별하고 제거합니다.                                                                |

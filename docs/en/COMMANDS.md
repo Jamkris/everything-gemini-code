@@ -25,7 +25,8 @@ List of available commands provided by `everything-gemini-code`.
 | `/multi-plan`      | Create a comprehensive implementation plan using the `planner` agent, breaking down tasks for multiple agents.                                   |
 | `/multi-workflow`  | specific workflow steps using multiple agents.                                                                                                   |
 | `/orchestrate`     | High-level orchestration command to manage complex, multi-step tasks across the codebase.                                                        |
-| `/plan`            | Restate requirements, assess risks, and create step-by-step implementation plan. Waits for user confirmation before proceeding.                  |
+| `/ecc-plan`        | Restate requirements, assess risks, and create step-by-step implementation plan. Waits for user confirmation before proceeding. (alias: `/everything-gemini-code:plan`) |
+| `/ecc-docs`        | Look up current documentation for a library or topic via Context7. (alias: `/everything-gemini-code:docs`)                                       |
 | `/pm2`             | Auto-analyze project and generate PM2 service configuration (`ecosystem.config.cjs`) and management commands.                                    |
 | `/python-review`   | Comprehensive Python code review for PEP 8 compliance, type hints, security, and Pythonic idioms. Invokes the `python-reviewer` agent.           |
 | `/refactor-clean`  | Identify and remove dead code, unused imports, and legacy artifacts.                                                                             |

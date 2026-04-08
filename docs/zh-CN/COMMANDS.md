@@ -25,7 +25,8 @@
 | `/multi-plan`      | 使用 `planner` 代理制定全面的实施计划，为多个代理分解任务。                                                  |
 | `/multi-workflow`  | 使用多个代理的特定工作流步骤。                                                                               |
 | `/orchestrate`     | 用于管理代码库中复杂的、多步骤任务的高级编排命令。                                                           |
-| `/plan`            | 重述需求，评估风险，并制定分步实施计划。在继续之前等待用户确认。                                             |
+| `/ecc-plan`        | 重述需求，评估风险，并制定分步实施计划。在继续之前等待用户确认。(别名: `/everything-gemini-code:plan`)         |
+| `/ecc-docs`        | 通过 Context7 查找库或主题的最新文档。(别名: `/everything-gemini-code:docs`)                                   |
 | `/pm2`             | 自动分析项目并生成 PM2 服务配置 (`ecosystem.config.cjs`) 和管理命令。                                        |
 | `/python-review`   | 针对 PEP 8 合规性、类型提示、安全性和 Pythonic 习语进行全面的 Python 代码审查。调用 `python-reviewer` 代理。 |
 | `/refactor-clean`  | 识别并删除死代码、未使用的导入和遗留工件。                                                                   |
