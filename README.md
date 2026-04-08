@@ -154,7 +154,7 @@ Gemini will automatically utilize installed skills when relevant to your request
 
 ### MCP Servers
 
-Configure and manage Model Context Protocol (MCP) servers to extend Gemini's capabilities. (see [MCP Configuration Guide](docs/en/MCP-CONFIGS.md))
+Configure and manage Model Context Protocol (MCP) servers to extend Gemini's capabilities. (see [MCP Configuration Guide](docs/en/mcp-configs/README.md))
 
 ---
 

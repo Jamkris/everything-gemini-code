@@ -2,5 +2,5 @@
 
 See the full documentation:
 
-- [English](../docs/en/MCP-CONFIGS.md)
-- [한국어](../docs/ko-KR/MCP-CONFIGS.md)
+- [English](../docs/en/mcp-configs/README.md)
+- [한국어](../docs/ko-KR/mcp-configs/README.md)

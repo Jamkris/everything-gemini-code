@@ -1,4 +1,4 @@
-**Language:** **English** | [한국어](../ko-KR/MCP-CONFIGS.md)
+**Language:** **English** | [한국어](../../ko-KR/mcp-configs/README.md)
 
 # MCP Server Configurations
 
