@@ -91,12 +91,12 @@ cp everything-gemini-code/workflows/*.md ~/.gemini/antigravity/global_workflows/
 # Copy skills
 cp -r everything-gemini-code/skills/* ~/.gemini/skills/
 
-# Install rules (Required for both installation methods)
-cp -r everything-gemini-code/rules/common/* ~/.gemini/rules/
 ```
 
 > **For Antigravity Users:**
-> If you are manually installing for Antigravity, copying to `~/.gemini/antigravity/` subdirectories (`global_agents`, `global_skills`, `global_rules`) is recommended for full compatibility. The `install.sh` script handles this automatically.
+> If you are manually installing for Antigravity, copying to `~/.gemini/antigravity/` subdirectories (`global_agents`, `global_skills`) is recommended for full compatibility. The `install.sh` script handles this automatically.
+>
+> **Note:** Rules are bundled into `~/.gemini/GEMINI.md` via `install.sh`. For manual installs, copy a template: `cp everything-gemini-code/templates/GEMINI_GLOBAL.md ~/.gemini/GEMINI.md`
 
 ````
 
@@ -113,7 +113,7 @@ cd everything-gemini-code
 gemini extensions link .
 ````
 
-> ⚠️ **Note:** Rules still need to be installed manually to `~/.gemini/rules/` or `~/.gemini/antigravity/global_rules/` as extensions do not automatically distribute them.
+> ⚠️ **Note:** Rules are generated into `~/.gemini/GEMINI.md` by the install script. For extension-only installs, copy a template manually: `cp templates/GEMINI_GLOBAL.md ~/.gemini/GEMINI.md`
 
 ---
 
@@ -169,7 +169,7 @@ everything-gemini-code/
 ├── skills/                # Workflow definitions (TDD, Patterns, etc.)
 ├── commands/              # Gemini CLI commands (.toml)
 ├── workflows/             # Antigravity workflows (.md)
-├── rules/                 # Coding guidelines (TypeScript, Python, Go)
+├── templates/             # GEMINI.md rule templates (Global, TS, Python, Go)
 ├── hooks/                 # Automation triggers (hooks.json)
 └── mcp-configs/           # MCP server configurations
 ```

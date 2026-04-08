@@ -151,11 +151,11 @@ everything-gemini-code/
 │
 ├── workflows/             # Antigravity 워크플로우 (.md)
 │
-├── rules/                 # 코딩 가이드라인
-│   ├── common/              # 언어 무관 원칙
-│   ├── typescript/          # TypeScript/JavaScript 전용
-│   ├── python/              # Python 전용
-│   └── golang/              # Go 전용
+├── templates/             # GEMINI.md 규칙 템플릿
+│   ├── GEMINI_GLOBAL.md     # 공통 규칙
+│   ├── GEMINI_TS.md         # TypeScript/JavaScript 전용
+│   ├── GEMINI_PYTHON.md     # Python 전용
+│   └── GEMINI_GO.md         # Go 전용
 │
 ├── hooks/                 # 자동화 트리거 (hooks.json)
 │
@@ -193,13 +193,14 @@ cp everything-gemini-code/commands/*.toml ~/.gemini/commands/
 # 스킬 복사
 cp -r everything-gemini-code/skills/* ~/.gemini/skills/
 
-# 룰 복사 (공통 + 언어별)
-cp -r everything-gemini-code/rules/common/* ~/.gemini/rules/
-cp -r everything-gemini-code/rules/typescript/* ~/.gemini/rules/  # 사용하는 스택 선택
 ```
 
+> **규칙 설치:** 규칙은 `install.sh`를 통해 `~/.gemini/GEMINI.md`에 통합됩니다.
+> 수동 설치 시: `cp everything-gemini-code/templates/GEMINI_GLOBAL.md ~/.gemini/GEMINI.md`
+> TypeScript 규칙 추가: `cat everything-gemini-code/templates/GEMINI_TS.md >> ~/.gemini/GEMINI.md`
+>
 > **Antigravity 사용자:**
-> Antigravity용으로 수동 설치 시 `~/.gemini/antigravity/` 하위 디렉토리(`global_agents`, `global_skills`, `global_rules`)에 복사하는 것을 권장합니다. `install.sh` 스크립트가 이를 자동으로 처리합니다.
+> Antigravity용으로 수동 설치 시 `~/.gemini/antigravity/` 하위 디렉토리(`global_agents`, `global_skills`)에 복사하는 것을 권장합니다. `install.sh` 스크립트가 이를 자동으로 처리합니다.
 
 ---
 

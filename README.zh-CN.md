@@ -37,11 +37,9 @@ cp everything-gemini-code/commands/*.md ~/.gemini/commands/
 # 复制 Skills
 cp -r everything-gemini-code/skills/* ~/.gemini/skills/
 
-# 安装 Rules（两种安装方式均必需）
-cp -r everything-gemini-code/rules/common/* ~/.gemini/rules/
 ```
 
-> ⚠️ **注意：** Rules（规则）无法通过扩展自动分发，必须手动安装到 `~/.gemini/rules/` 目录。
+> ⚠️ **注意：** 规则通过 `install.sh` 生成到 `~/.gemini/GEMINI.md`。手动安装时：`cp everything-gemini-code/templates/GEMINI_GLOBAL.md ~/.gemini/GEMINI.md`
 
 ### 选项 1：卸载（推荐）
 
@@ -112,7 +110,7 @@ everything-gemini-code/
 ├── agents/                # 专用子智能体 (@planner, @architect 等)
 ├── skills/                # 工作流定义 (TDD, Patterns 等)
 ├── commands/              # 斜杠命令 (/plan, /tdd 等)
-├── rules/                 # 编码指南 (TypeScript, Python, Go)
+├── templates/             # GEMINI.md 规则模板 (Global, TS, Python, Go)
 ├── hooks/                 # 自动化触发器 (hooks.json)
 └── mcp-configs/           # MCP 服务器配置
 ```

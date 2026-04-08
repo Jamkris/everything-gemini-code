@@ -89,12 +89,12 @@ cp everything-gemini-code/workflows/*.md ~/.gemini/antigravity/global_workflows/
 # 스킬 복사
 cp -r everything-gemini-code/skills/* ~/.gemini/skills/
 
-# 규칙 설치 (두 설치 방법 모두 필수)
-cp -r everything-gemini-code/rules/common/* ~/.gemini/rules/
 ```
 
 > **Antigravity 사용자 참고:**
-> Antigravity를 위해 수동 설치하는 경우, 호환성을 위해 `~/.gemini/antigravity/` 하위 디렉토리(`global_agents`, `global_skills`, `global_rules`)에 복사하는 것이 좋습니다. `install.sh` 스크립트는 이를 자동으로 처리합니다.
+> Antigravity를 위해 수동 설치하는 경우, 호환성을 위해 `~/.gemini/antigravity/` 하위 디렉토리(`global_agents`, `global_skills`)에 복사하는 것이 좋습니다. `install.sh` 스크립트는 이를 자동으로 처리합니다.
+>
+> **참고:** 규칙은 `install.sh`를 통해 `~/.gemini/GEMINI.md`에 통합됩니다. 수동 설치 시: `cp everything-gemini-code/templates/GEMINI_GLOBAL.md ~/.gemini/GEMINI.md`
 
 ### 옵션 3: Gemini CLI 확장 프로그램으로 설치 (개발자 모드)
 
@@ -165,7 +165,7 @@ everything-gemini-code/
 ├── skills/                # 워크플로우 정의 (TDD, 패턴 등)
 ├── commands/              # Gemini CLI 명령어 (.toml)
 ├── workflows/             # Antigravity 워크플로우 (.md)
-├── rules/                 # 코딩 가이드라인 (TypeScript, Python, Go)
+├── templates/             # GEMINI.md 규칙 템플릿 (Global, TS, Python, Go)
 ├── hooks/                 # 자동화 트리거 (hooks.json)
 └── mcp-configs/           # MCP 서버 설정
 ```
