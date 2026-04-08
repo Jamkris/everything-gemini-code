@@ -1,5 +1,8 @@
 name: Reusable Test Workflow
 
+permissions:
+  contents: read
+
 on:
   workflow_call:
     inputs:
