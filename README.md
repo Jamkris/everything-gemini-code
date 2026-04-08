@@ -123,7 +123,7 @@ Once installed, you can access the new capabilities directly in Gemini CLI.
 
 ### Slash Commands
 
-Use custom commands to automate workflows (see [Full Command List](docs/en/COMMANDS.md)):
+Use custom commands to automate workflows (see [Full Command List](docs/en/commands/README.md)):
 
 ```bash
 # Plan a feature implementation

@@ -1,125 +1,188 @@
-# 커맨드 레퍼런스
+**언어:** [English](../../en/commands/README.md) | **한국어** | [简体中文](../../zh-CN/COMMANDS.md)
 
-**언어:** [English](../../COMMANDS.md) | 한국어
+# Gemini CLI 확장 명령어
 
-Gemini CLI 커맨드는 `.toml` 형식으로 정의됩니다. 슬래시(`/`)로 호출합니다.
+`everything-gemini-code`에서 제공하는 명령어 목록입니다.
+
+| 명령어             | 설명                                                                                                                                   |
+| ------------------ | -------------------------------------------------------------------------------------------------------------------------------------- |
+| `/build-fix`       | 빌드 오류를 분석하고 `build-error-resolver` 에이전트로 자동 수정을 시도합니다.                                                          |
+| `/checkpoint`      | 모든 변경 사항을 스테이징하고 AI 생성 메시지로 커밋합니다.                                                                               |
+| `/code-review`     | `code-reviewer` 에이전트를 사용하여 현재 변경 사항에 대한 종합 코드 리뷰를 수행합니다.                                                    |
+| `/e2e`             | Playwright로 E2E 테스트를 생성하고 실행합니다.                                                                                           |
+| `/ecc-plan`        | 요구 사항을 재검토하고 단계별 구현 계획을 수립합니다. (별칭: `/everything-gemini-code:plan`)                                               |
+| `/ecc-docs`        | Context7을 통해 라이브러리 또는 주제의 최신 문서를 조회합니다. (별칭: `/everything-gemini-code:docs`)                                      |
+| `/eval`            | Eval 기반 개발 워크플로우를 관리합니다.                                                                                                  |
+| `/evolve`          | 관련 인스팅트를 스킬, 커맨드 또는 에이전트로 클러스터링합니다.                                                                            |
+| `/go-build`        | Go 빌드 오류, go vet 경고 및 린터 문제를 점진적으로 수정합니다.                                                                           |
+| `/go-review`       | Go 코드 리뷰 — 관용 패턴, 동시성 안전성, 에러 처리, 보안 점검.                                                                           |
+| `/go-test`         | Go TDD 워크플로우. 테이블 기반 테스트 먼저 작성 후 구현.                                                                                  |
+| `/instinct-export` | 학습된 인스팅트를 파일로 내보냅니다.                                                                                                     |
+| `/instinct-import` | 파일 또는 외부 소스에서 인스팅트를 가져옵니다.                                                                                            |
+| `/instinct-status` | 현재 학습된 모든 인스팅트와 신뢰도를 표시합니다.                                                                                          |
+| `/learn`           | 현재 세션에서 재사용 가능한 패턴을 추출합니다.                                                                                            |
+| `/multi-backend`   | 백엔드 중심 멀티 에이전트 워크플로우.                                                                                                    |
+| `/multi-execute`   | 여러 전문 에이전트를 사용하여 멀티 페이즈 계획을 실행합니다.                                                                              |
+| `/multi-frontend`  | 프론트엔드 중심 멀티 에이전트 워크플로우.                                                                                                |
+| `/multi-plan`      | 여러 에이전트를 사용하여 종합적인 구현 계획을 수립합니다.                                                                                 |
+| `/multi-workflow`  | 멀티 모델 협업 개발 워크플로우.                                                                                                          |
+| `/orchestrate`     | 복잡한 멀티 스텝 작업을 위한 상위 오케스트레이션.                                                                                         |
+| `/pm2`             | 프로젝트를 분석하고 PM2 서비스 명령을 자동 생성합니다.                                                                                    |
+| `/python-review`   | PEP 8, 타입 힌트, 보안에 대한 종합 Python 코드 리뷰.                                                                                     |
+| `/refactor-clean`  | 불필요한 코드, 미사용 임포트 및 레거시 아티팩트를 식별하고 제거합니다.                                                                     |
+| `/sessions`        | 활성 Gemini 세션을 관리하고 나열합니다.                                                                                                  |
+| `/setup-pm`        | 선호하는 패키지 매니저(npm/pnpm/yarn/bun)를 설정합니다.                                                                                  |
+| `/skill-create`    | 로컬 git 히스토리를 분석하여 코딩 패턴을 추출하고 `SKILL.md` 파일을 생성합니다.                                                           |
+| `/tdd`             | 테스트 주도 개발 워크플로우를 적용합니다.                                                                                                |
+| `/test-coverage`   | 현재 테스트 커버리지를 분석하고 개선 방안을 제안합니다.                                                                                   |
+| `/update-codemaps` | 코드베이스 맵을 새로 고쳐 최신 컨텍스트를 반영합니다.                                                                                     |
+| `/update-docs`     | 최근 코드 변경에 따라 문서를 업데이트합니다.                                                                                              |
+| `/verify`          | 전체 검증 스위트(린트, 빌드, 테스트)를 실행합니다.                                                                                        |
 
 ---
 
 ## 핵심 커맨드
 
-| 커맨드 | 설명 |
-|--------|------|
-| `/plan` | 기능 구현 계획 수립 |
-| `/tdd` | 테스트 주도 개발 워크플로우 |
-| `/code-review` | 코드 품질 및 보안 리뷰 |
-| `/build-fix` | 빌드 에러 자동 수정 |
-| `/e2e` | E2E 테스트 생성 및 실행 |
-| `/refactor-clean` | 사용하지 않는 코드 제거 |
-| `/verify` | 검증 루프 실행 |
-| `/eval` | 기준에 따른 평가 |
+### /ecc-plan
 
-## Go 언어 커맨드
+요구 사항을 재검토하고, 위험을 평가하며, 단계별 구현 계획을 수립합니다. 코드 작성 전 사용자 확인을 기다립니다.
 
-| 커맨드 | 설명 |
-|--------|------|
-| `/go-build` | Go 빌드 에러 수정 |
-| `/go-review` | Go 코드 리뷰 |
-| `/go-test` | Go TDD 워크플로우 |
+### /tdd
 
-## Python 커맨드
+테스트 주도 개발 워크플로우. 인터페이스 스캐폴딩, 테스트 먼저 생성, 최소 코드 구현. 80%+ 커버리지 보장.
 
-| 커맨드 | 설명 |
-|--------|------|
-| `/python-review` | Python 코드 리뷰 |
+### /code-review
 
-## Kotlin/Java 커맨드
+커밋되지 않은 변경 사항에 대한 종합 보안 및 품질 리뷰.
 
-| 커맨드 | 설명 |
-|--------|------|
-| `/kotlin-build` | Kotlin/Gradle 빌드 에러 수정 |
-| `/kotlin-review` | Kotlin 코드 리뷰 |
-| `/kotlin-test` | Kotlin TDD 워크플로우 |
+### /build-fix
 
-## Rust 커맨드
+TypeScript 및 빌드 오류를 점진적으로 수정합니다.
 
-| 커맨드 | 설명 |
-|--------|------|
-| `/rust-build` | Rust 빌드 에러 수정 |
-| `/rust-review` | Rust 코드 리뷰 |
-| `/rust-test` | Rust 테스팅 워크플로우 |
+### /refactor-clean
 
-## C++ 커맨드
+테스트 검증을 통해 불필요한 코드를 안전하게 식별하고 제거합니다.
 
-| 커맨드 | 설명 |
-|--------|------|
-| `/cpp-build` | C++ CMake 빌드 에러 수정 |
-| `/cpp-review` | C++ 코드 리뷰 |
-| `/cpp-test` | C++ 테스팅 워크플로우 |
+### /e2e
 
-## 문서 및 유지보수
-
-| 커맨드 | 설명 |
-|--------|------|
-| `/update-docs` | 문서 업데이트 |
-| `/update-codemaps` | 코드맵 업데이트 |
-| `/test-coverage` | 테스트 커버리지 분석 |
-| `/checkpoint` | 검증 상태 저장 |
-
-## 학습 및 진화
-
-| 커맨드 | 설명 |
-|--------|------|
-| `/learn` | 세션에서 패턴 추출 |
-| `/learn-eval` | 패턴 추출 및 평가 |
-| `/evolve` | 인스팅트를 스킬로 클러스터링 |
-| `/instinct-status` | 학습된 인스팅트 확인 |
-| `/instinct-import` | 인스팅트 가져오기 |
-| `/instinct-export` | 인스팅트 내보내기 |
-
-## 멀티 에이전트 오케스트레이션
-
-| 커맨드 | 설명 |
-|--------|------|
-| `/orchestrate` | 멀티 에이전트 조정 |
-| `/multi-plan` | 멀티 에이전트 작업 분해 |
-| `/multi-execute` | 오케스트레이션된 멀티 에이전트 워크플로우 |
-| `/multi-backend` | 백엔드 멀티 서비스 오케스트레이션 |
-| `/multi-frontend` | 프론트엔드 멀티 서비스 오케스트레이션 |
-| `/multi-workflow` | 일반 멀티 서비스 워크플로우 |
-
-## 세션 관리
-
-| 커맨드 | 설명 |
-|--------|------|
-| `/sessions` | 세션 히스토리 관리 |
-| `/save-session` | 세션 저장 |
-| `/resume-session` | 세션 재개 |
-| `/pm2` | PM2 서비스 라이프사이클 관리 |
-
-## 스킬 관리
-
-| 커맨드 | 설명 |
-|--------|------|
-| `/skill-create` | git 히스토리에서 스킬 생성 |
-| `/skill-health` | 스킬 및 커맨드 품질 감사 |
+Playwright로 E2E 테스트를 생성하고 실행합니다. 테스트 여정 생성, 스크린샷/비디오/트레이스 캡처.
 
 ---
 
-## 커맨드 형식 예시
+## 멀티 에이전트 커맨드
 
-Gemini CLI 커맨드는 `.toml` 형식을 사용합니다:
+### /multi-plan
 
-```toml
-description = "커맨드 설명"
-prompt = '''
-# 커맨드 제목
+멀티 모델 협업 계획 — 컨텍스트 검색 + 이중 모델 분석.
 
-커맨드 내용...
+### /multi-execute
 
-1. 첫 번째 단계
-2. 두 번째 단계
-'''
-```
+멀티 모델 협업 실행 — 프로토타입, 리팩토링 및 구현, 감사 및 전달.
 
-Claude Code와 달리 Gemini CLI 커맨드에는 `model` 필드가 없습니다.
+### /multi-backend
+
+백엔드 중심 워크플로우 (조사, 아이디어, 계획, 실행, 최적화, 리뷰).
+
+### /multi-frontend
+
+프론트엔드 중심 워크플로우 (조사, 아이디어, 계획, 실행, 최적화, 리뷰).
+
+### /multi-workflow
+
+멀티 모델 협업 개발 워크플로우. 프론트엔드는 Gemini, 백엔드는 Codex로 지능적 라우팅.
+
+### /orchestrate
+
+복잡한 작업을 위한 순차적 에이전트 워크플로우.
+
+### /pm2
+
+프로젝트를 분석하고 PM2 서비스 명령을 자동 생성합니다.
+
+---
+
+## 언어별 커맨드
+
+### /go-build, /go-review, /go-test
+
+Go 빌드 오류 수정, 코드 리뷰, TDD 워크플로우.
+
+### /python-review
+
+PEP 8, 타입 힌트, 보안에 대한 종합 Python 코드 리뷰.
+
+### /kotlin-build, /kotlin-review, /kotlin-test
+
+Kotlin 빌드 오류 수정, 코드 리뷰, TDD 워크플로우.
+
+### /cpp-build, /cpp-review, /cpp-test
+
+C++ 빌드 오류 수정, 코드 리뷰, TDD 워크플로우.
+
+### /rust-build, /rust-review, /rust-test
+
+Rust 빌드 오류 수정, 코드 리뷰, TDD 워크플로우.
+
+### /gradle-build
+
+Gradle/Android 빌드 오류 및 의존성 문제 수정.
+
+---
+
+## 학습 및 진화 커맨드
+
+### /learn
+
+현재 세션을 분석하여 스킬로 저장할 만한 패턴을 추출합니다.
+
+### /skill-create
+
+로컬 git 히스토리를 분석하여 코딩 패턴을 추출하고 SKILL.md 파일을 생성합니다.
+
+### /evolve
+
+관련 인스팅트를 스킬, 커맨드 또는 에이전트로 클러스터링합니다.
+
+### /instinct-import, /instinct-export, /instinct-status
+
+인스팅트 가져오기, 내보내기, 조회.
+
+### /learn-eval
+
+자체 평가를 통한 재사용 가능한 패턴 추출.
+
+### /promote, /prune, /projects
+
+인스팅트 글로벌 승격, 저신뢰도 인스팅트 정리, 알려진 프로젝트 목록.
+
+---
+
+## 유틸리티 커맨드
+
+### /setup-pm
+
+선호하는 패키지 매니저(npm/pnpm/yarn/bun)를 설정합니다.
+
+### /update-docs, /update-codemaps
+
+문서 동기화 및 코드베이스 아키텍처 맵 새로 고침.
+
+### /verify, /checkpoint, /eval
+
+검증 스위트, 워크플로우 체크포인트, eval 기반 개발.
+
+### /sessions, /save-session, /resume-session
+
+세션 관리 — 나열, 저장, 불러오기, 별칭 설정.
+
+### /ecc-docs
+
+Context7을 통해 라이브러리 또는 주제의 최신 문서를 조회합니다.
+
+### /context-budget
+
+컨텍스트 윈도우 사용량을 모니터링하고 관리합니다.
+
+### /model-route
+
+작업 복잡도에 따라 최적 모델로 라우팅합니다.
