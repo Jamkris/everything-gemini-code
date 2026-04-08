@@ -1,6 +1,6 @@
 # 스크립트 레퍼런스
 
-**언어:** [English](../README.md) | 한국어
+**언어:** [English](../en/SCRIPTS.md) | **한국어**
 
 이 디렉토리는 Everything Gemini Code 저장소를 유지 관리하기 위한 유틸리티 스크립트 모음입니다.
 
