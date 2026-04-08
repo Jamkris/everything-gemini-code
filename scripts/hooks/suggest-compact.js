@@ -17,8 +17,7 @@ const path = require('path');
 const {
   getTempDir,
   readFile,
-  writeFile,
-  log
+  writeFile
 } = require('../lib/utils');
 
 const { runHook } = require('../lib/hook-utils');
@@ -29,8 +28,6 @@ runHook('StrategicCompact', async () => {
   // or session ID from environment
   const sessionId = process.env.GEMINI_SESSION_ID || process.ppid || 'default';
   const counterFile = path.join(getTempDir(), `gemini-tool-count-${sessionId}`);
-  const threshold = parseInt(process.env.COMPACT_THRESHOLD || '50', 10);
-
   let count = 1;
 
   // Read existing count or start at 1
@@ -42,14 +39,6 @@ runHook('StrategicCompact', async () => {
   // Save updated count
   writeFile(counterFile, String(count));
 
-  // Suggest compact after threshold tool calls
-  if (count === threshold) {
-    log(`[StrategicCompact] ${threshold} tool calls reached - consider /compact if transitioning phases`);
-  }
-
-  // Suggest at regular intervals after threshold
-  if (count > threshold && count % 25 === 0) {
-    log(`[StrategicCompact] ${count} tool calls - good checkpoint for /compact if context is stale`);
-  }
+  // Counter tracked silently — compaction is user-initiated
 
 });

@@ -1,3 +1,5 @@
+**언어:** [English](../../en/contributing/TERMINOLOGY.md) | **한국어**
+
 # Gemini CLI & Everything Gemini Code — 용어 사전
 
 이 문서는 프로젝트 전반에서 사용되는 핵심 용어를 정의합니다.

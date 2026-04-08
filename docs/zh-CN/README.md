@@ -1,4 +1,4 @@
-**Language:** [English](README.md) | [한국어](README.ko.md) | **简体中文**
+**Language:** [English](../../README.md) | [한국어](../ko-KR/README.md) | **简体中文**
 
 # Everything Gemini Code
 
@@ -51,10 +51,10 @@ gemini extensions uninstall https://github.com/Jamkris/everything-gemini-code
 
 ```bash
 # 选择性卸载（推荐）：仅卸载此扩展安装的文件。
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Jamkris/everything-gemini-code/main/uninstall.sh)" -- --antigravity
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Jamkris/everything-gemini-code/main/scripts/uninstall.sh)" -- --antigravity
 
 # 完全卸载（警告）：删除目标目录中的所有文件。
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Jamkris/everything-gemini-code/main/uninstall.sh)" -- --antigravity --purge
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Jamkris/everything-gemini-code/main/scripts/uninstall.sh)" -- --antigravity --purge
 ```
 
 ---
@@ -65,7 +65,7 @@ gemini extensions uninstall https://github.com/Jamkris/everything-gemini-code
 
 ### 斜杠命令 (Slash Commands)
 
-使用自定义命令自动化工作流（请参阅 [完整命令列表](COMMANDS.zh-CN.md)）：
+使用自定义命令自动化工作流（请参阅 [完整命令列表](commands/README.md)）：
 
 ```bash
 # 规划功能实现

@@ -92,12 +92,14 @@ async function runTests() {
     assert.strictEqual(result.code, 0, `Exit code should be 0, got ${result.code}`);
   })) passed++; else failed++;
 
-  if (await asyncTest('outputs session info to stderr', async () => {
+  if (await asyncTest('runs silently on success', async () => {
     const result = await runScript(path.join(scriptsDir, 'session-start.js'));
+    // Normal operation should produce minimal or no stderr output
+    // Only warnings/errors should appear
     assert.ok(
-      result.stderr.includes('[SessionStart]') ||
-      result.stderr.includes('Package manager'),
-      'Should output session info'
+      !result.stderr.includes('[SessionStart] Found') &&
+      !result.stderr.includes('[SessionStart] Package manager'),
+      'Should not output verbose info on success'
     );
   })) passed++; else failed++;
 
@@ -155,9 +157,9 @@ async function runTests() {
     assert.strictEqual(result.code, 0, `Exit code should be 0, got ${result.code}`);
   })) passed++; else failed++;
 
-  if (await asyncTest('outputs PreCompact message', async () => {
+  if (await asyncTest('runs silently on success', async () => {
     const result = await runScript(path.join(scriptsDir, 'pre-compact.js'));
-    assert.ok(result.stderr.includes('[PreCompact]'), 'Should output PreCompact message');
+    assert.ok(!result.stderr.includes('[PreCompact]'), 'Should not output verbose info on success');
   })) passed++; else failed++;
 
   if (await asyncTest('creates compaction log', async () => {
@@ -195,7 +197,7 @@ async function runTests() {
     fs.unlinkSync(counterFile);
   })) passed++; else failed++;
 
-  if (await asyncTest('suggests compact at threshold', async () => {
+  if (await asyncTest('runs silently at threshold', async () => {
     const sessionId = 'test-threshold-' + Date.now();
     const counterFile = path.join(os.tmpdir(), `gemini-tool-count-${sessionId}`);
 
@@ -207,10 +209,8 @@ async function runTests() {
       COMPACT_THRESHOLD: '50'
     });
 
-    assert.ok(
-      result.stderr.includes('50 tool calls reached'),
-      'Should suggest compact at threshold'
-    );
+    assert.strictEqual(result.code, 0, 'Should exit cleanly');
+    assert.strictEqual(result.stderr, '', 'Should produce no output at threshold');
 
     // Cleanup
     fs.unlinkSync(counterFile);
@@ -224,11 +224,10 @@ async function runTests() {
     assert.strictEqual(result.code, 0, `Exit code should be 0, got ${result.code}`);
   })) passed++; else failed++;
 
-  if (await asyncTest('skips short sessions', async () => {
+  if (await asyncTest('skips short sessions silently', async () => {
     const testDir = createTestDir();
     const transcriptPath = path.join(testDir, 'transcript.jsonl');
 
-    // Create a short transcript (less than 10 user messages)
     const transcript = Array(5).fill('{"type":"user","content":"test"}\n').join('');
     fs.writeFileSync(transcriptPath, transcript);
 
@@ -236,19 +235,16 @@ async function runTests() {
       GEMINI_TRANSCRIPT_PATH: transcriptPath
     });
 
-    assert.ok(
-      result.stderr.includes('Session too short'),
-      'Should indicate session is too short'
-    );
+    assert.strictEqual(result.code, 0, 'Should exit cleanly');
+    assert.ok(!result.stderr.includes('Session too short'), 'Should skip silently');
 
     cleanupTestDir(testDir);
   })) passed++; else failed++;
 
-  if (await asyncTest('processes sessions with enough messages', async () => {
+  if (await asyncTest('processes long sessions silently', async () => {
     const testDir = createTestDir();
     const transcriptPath = path.join(testDir, 'transcript.jsonl');
 
-    // Create a longer transcript (more than 10 user messages)
     const transcript = Array(15).fill('{"type":"user","content":"test"}\n').join('');
     fs.writeFileSync(transcriptPath, transcript);
 
@@ -256,10 +252,8 @@ async function runTests() {
       GEMINI_TRANSCRIPT_PATH: transcriptPath
     });
 
-    assert.ok(
-      result.stderr.includes('15 messages'),
-      'Should report message count'
-    );
+    assert.strictEqual(result.code, 0, 'Should exit cleanly');
+    assert.ok(!result.stderr.includes('15 messages'), 'Should process silently');
 
     cleanupTestDir(testDir);
   })) passed++; else failed++;
