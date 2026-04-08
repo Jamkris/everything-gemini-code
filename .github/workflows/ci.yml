@@ -15,87 +15,29 @@ permissions:
 
 jobs:
   test:
-    name: Test (${{ matrix.os }}, Node ${{ matrix.node }})
-    runs-on: ${{ matrix.os }}
-    timeout-minutes: 15
-
     strategy:
       fail-fast: false
       matrix:
         os: [ubuntu-latest, macos-latest]
         node: ['20.x', '22.x']
-
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Setup Node.js ${{ matrix.node }}
-        uses: actions/setup-node@v4
-        with:
-          node-version: ${{ matrix.node }}
-          cache: 'npm'
-
-      - name: Install dependencies
-        run: npm ci
-
-      - name: Run Tests
-        run: npm test
-        env:
-          GEMINI_CODE_PACKAGE_MANAGER: npm
-
-      - name: Debug Info
-        if: failure()
-        run: |
-          echo "Node version: $(node -v)"
-          echo "NPM version: $(npm -v)"
-          ls -R tests
+    uses: ./.github/workflows/reusable-test.yml
+    with:
+      os: ${{ matrix.os }}
+      node-version: ${{ matrix.node }}
+      package-manager: 'npm'
 
   validate:
-    name: Validate Components
-    runs-on: ubuntu-latest
-    timeout-minutes: 5
-
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '22.x'
-
-      - name: Debug Working Directory
-        run: |
-          pwd
-          ls -F
-          ls -F scripts/ci/
-
-      - name: Validate agents
-        run: node scripts/ci/validate-agents.js
-
-      - name: Validate hooks
-        run: node scripts/ci/validate-hooks.js
-
-      - name: Validate commands
-        run: node scripts/ci/validate-commands.js
-
-      - name: Validate skills
-        run: node scripts/ci/validate-skills.js
+    uses: ./.github/workflows/reusable-validate.yml
+    with:
+      node-version: '22.x'
 
   security:
     name: Security Scan
     runs-on: ubuntu-latest
     timeout-minutes: 5
-
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '22.x'
-
       - name: Run npm audit
         run: npm audit --audit-level=high
 
@@ -103,19 +45,15 @@ jobs:
     name: Lint
     runs-on: ubuntu-latest
     timeout-minutes: 5
-
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '22.x'
           cache: 'npm'
-
       - name: Install dependencies
         run: npm ci
-
       - name: Run ESLint
         run: npm run lint
