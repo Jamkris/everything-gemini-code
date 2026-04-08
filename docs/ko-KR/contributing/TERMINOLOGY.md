@@ -1,4 +1,4 @@
-**언어:** [English](../en/TERMINOLOGY.md) | **한국어**
+**언어:** [English](../../en/contributing/TERMINOLOGY.md) | **한국어**
 
 # Gemini CLI & Everything Gemini Code — 용어 사전
 

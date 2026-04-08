@@ -1,8 +1,16 @@
 # Contributing Guide
 
-**Language:** **English** | [한국어](../ko-KR/CONTRIBUTING.md)
+**Language:** **English** | [한국어](../../ko-KR/contributing/README.md)
 
 Thank you for your interest in contributing to Everything Gemini Code!
+
+## Related Documents
+
+- [Command-Agent Map](COMMAND-AGENT-MAP.md) — Which agents are invoked by each command
+- [Skill Placement Policy](SKILL-PLACEMENT-POLICY.md) — Where skills belong and how they are identified
+- [Token Optimization](token-optimization.md) — Managing token consumption
+- [Verification Guide](VERIFICATION_GUIDE.md) — Verifying extension installation
+- [Terminology](TERMINOLOGY.md) — Core project terminology
 
 ---
 

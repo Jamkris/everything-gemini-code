@@ -1,8 +1,16 @@
 # 기여 가이드
 
-**언어:** [English](../en/CONTRIBUTING.md) | **한국어**
+**언어:** [English](../../en/contributing/README.md) | **한국어**
 
 Everything Gemini Code에 기여해 주셔서 감사합니다!
+
+## 관련 문서
+
+- [커맨드-에이전트 매핑](../../en/contributing/COMMAND-AGENT-MAP.md) — 각 커맨드가 호출하는 에이전트
+- [스킬 배치 정책](../../en/contributing/SKILL-PLACEMENT-POLICY.md) — 스킬 파일 배치 규칙
+- [토큰 최적화](../../en/contributing/token-optimization.md) — 토큰 사용량 관리
+- [설치 검증 가이드](../../en/contributing/VERIFICATION_GUIDE.md) — 확장 설치 검증
+- [용어 사전](TERMINOLOGY.md) — 프로젝트 용어 정의
 
 ---
 
