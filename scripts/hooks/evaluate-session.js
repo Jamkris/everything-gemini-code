@@ -17,8 +17,7 @@ const {
   getLearnedSkillsDir,
   ensureDir,
   readFile,
-  countInFile,
-  log
+  countInFile
 } = require('../lib/utils');
 
 const { runHook } = require('../lib/hook-utils');
@@ -63,12 +62,10 @@ runHook('ContinuousLearning', async () => {
 
   // Skip short sessions
   if (messageCount < minSessionLength) {
-    log(`[ContinuousLearning] Session too short (${messageCount} messages), skipping`);
-    process.exit(0);
+    // Session too short, skip silently
+    return;
   }
 
-  // Signal to Gemini that session should be evaluated for extractable patterns
-  log(`[ContinuousLearning] Session has ${messageCount} messages - evaluate for extractable patterns`);
-  log(`[ContinuousLearning] Save learned skills to: ${learnedSkillsPath}`);
+  // Session evaluation completed silently
 
 });

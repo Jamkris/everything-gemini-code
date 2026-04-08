@@ -17,8 +17,7 @@ const {
   getSessionIdShort,
   ensureDir,
   writeFile,
-  replaceInFile,
-  log
+  replaceInFile
 } = require('../lib/utils');
 
 const { runHook } = require('../lib/hook-utils');
@@ -42,9 +41,7 @@ runHook('SessionEnd', async () => {
       `**Last Updated:** ${currentTime}`
     );
 
-    if (success) {
-      log(`[SessionEnd] Updated session file: ${sessionFile}`);
-    }
+    // Updated silently
   } else {
     // Create new session file with template
     const template = `# Session: ${today}
@@ -74,7 +71,7 @@ runHook('SessionEnd', async () => {
 `;
 
     writeFile(sessionFile, template);
-    log(`[SessionEnd] Created session file: ${sessionFile}`);
+    // Created silently
   }
 
 });

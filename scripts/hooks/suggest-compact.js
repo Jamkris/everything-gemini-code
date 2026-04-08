@@ -17,8 +17,7 @@ const path = require('path');
 const {
   getTempDir,
   readFile,
-  writeFile,
-  log
+  writeFile
 } = require('../lib/utils');
 
 const { runHook } = require('../lib/hook-utils');
@@ -42,14 +41,11 @@ runHook('StrategicCompact', async () => {
   // Save updated count
   writeFile(counterFile, String(count));
 
-  // Suggest compact after threshold tool calls
+  // Suggest compact only at key milestones (threshold and intervals)
   if (count === threshold) {
-    log(`[StrategicCompact] ${threshold} tool calls reached - consider /compact if transitioning phases`);
-  }
-
-  // Suggest at regular intervals after threshold
-  if (count > threshold && count % 25 === 0) {
-    log(`[StrategicCompact] ${count} tool calls - good checkpoint for /compact if context is stale`);
+    console.error(`[Hint] ${threshold} tool calls reached - consider /compact if transitioning phases`);
+  } else if (count > threshold && count % 25 === 0) {
+    console.error(`[Hint] ${count} tool calls - good checkpoint for /compact if context is stale`);
   }
 
 });

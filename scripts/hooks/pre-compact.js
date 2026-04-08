@@ -15,8 +15,7 @@ const {
   getTimeString,
   findFiles,
   ensureDir,
-  appendFile,
-  log
+  appendFile
 } = require('../lib/utils');
 
 const { runHook } = require('../lib/hook-utils');
@@ -40,5 +39,5 @@ runHook('PreCompact', async () => {
     appendFile(activeSession, `\n---\n**[Compaction occurred at ${timeStr}]** - Context was summarized\n`);
   }
 
-  log('[PreCompact] State saved before compaction');
+  // Completed silently
 });
