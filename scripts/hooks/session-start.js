@@ -29,11 +29,8 @@ runHook('SessionStart', async () => {
   ensureDir(sessionsDir);
   ensureDir(learnedDir);
 
-  // Check for recent session files (last 7 days)
-  // Match both old format (YYYY-MM-DD-session.tmp) and new format (YYYY-MM-DD-shortid-session.tmp)
-  const recentSessions = findFiles(sessionsDir, '*-session.tmp', { maxAge: 7 });
-
   // Initialize recent sessions, learned skills, and aliases (silent)
+  findFiles(sessionsDir, '*-session.tmp', { maxAge: 7 });
   findFiles(learnedDir, '*.md');
   listAliases({ limit: 5 });
 
