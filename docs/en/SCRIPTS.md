@@ -1,6 +1,6 @@
 # Scripts Reference
 
-**Language:** English | [한국어](ko-KR/README.md)
+**Language:** **English** | [한국어](../ko-KR/SCRIPTS.md)
 
 This directory contains utility scripts for maintaining the Everything Gemini Code repository.
 

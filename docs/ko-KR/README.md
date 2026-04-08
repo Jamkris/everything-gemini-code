@@ -45,10 +45,10 @@ Antigravity 사용자는 스크립트를 사용하세요:
 
 ```bash
 # Antigravity용 설치
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Jamkris/everything-gemini-code/main/install.sh)" -- --antigravity
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Jamkris/everything-gemini-code/main/scripts/install.sh)" -- --antigravity
 
 # CLI + Antigravity 모두 설치
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Jamkris/everything-gemini-code/main/install.sh)" -- --all
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Jamkris/everything-gemini-code/main/scripts/install.sh)" -- --all
 ```
 
 ### 4단계: 사용 시작

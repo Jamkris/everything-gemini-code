@@ -1,6 +1,6 @@
 # Contributing Guide
 
-**Language:** English | [한국어](ko-KR/CONTRIBUTING.md)
+**Language:** **English** | [한국어](../ko-KR/CONTRIBUTING.md)
 
 Thank you for your interest in contributing to Everything Gemini Code!
 

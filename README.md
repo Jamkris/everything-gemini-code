@@ -48,10 +48,10 @@ Recommended if you use **Antigravity** (VS Code / Cursor) or need to customize t
 
 ```bash
 # Install for Antigravity (Recommended)
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Jamkris/everything-gemini-code/main/install.sh)" -- --antigravity
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Jamkris/everything-gemini-code/main/scripts/install.sh)" -- --antigravity
 
 # Install All (CLI + Antigravity)
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Jamkris/everything-gemini-code/main/install.sh)" -- --all
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Jamkris/everything-gemini-code/main/scripts/install.sh)" -- --all
 ```
 
 ### Option 1: Uninstallation (Recommended)
@@ -64,10 +64,10 @@ gemini extensions uninstall https://github.com/Jamkris/everything-gemini-code
 
 ```bash
 # Selective Uninstall (Recommended): Removes only files installed by this extension.
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Jamkris/everything-gemini-code/main/uninstall.sh)" -- --antigravity
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Jamkris/everything-gemini-code/main/scripts/uninstall.sh)" -- --antigravity
 
 # Full Uninstall (Caution): Deletes ALL files in the target directories.
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Jamkris/everything-gemini-code/main/uninstall.sh)" -- --antigravity --purge
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Jamkris/everything-gemini-code/main/scripts/uninstall.sh)" -- --antigravity --purge
 ```
 
 ### Option 2: Manual Installation (Advanced)
@@ -123,7 +123,7 @@ Once installed, you can access the new capabilities directly in Gemini CLI.
 
 ### Slash Commands
 
-Use custom commands to automate workflows (see [Full Command List](COMMANDS.md)):
+Use custom commands to automate workflows (see [Full Command List](docs/en/COMMANDS.md)):
 
 ```bash
 # Plan a feature implementation
@@ -171,7 +171,9 @@ everything-gemini-code/
 ├── workflows/             # Antigravity workflows (.md)
 ├── templates/             # GEMINI.md rule templates (Global, TS, Python, Go)
 ├── hooks/                 # Automation triggers (hooks.json)
-└── mcp-configs/           # MCP server configurations
+├── scripts/               # Install, uninstall, CI, and utility scripts
+├── mcp-configs/           # MCP server configurations
+└── docs/                  # Documentation (en, ko-KR, zh-CN)
 ```
 
 ---
@@ -187,7 +189,7 @@ rm -rf ~/.gemini/skills/* ~/.gemini/commands/*
 
 ## 🤝 Contributing
 
-**Contributions are welcome!**
+**Contributions are welcome!** See the [Contributing Guide](docs/en/CONTRIBUTING.md).
 
 If you have useful agents, skills, or configurations, please submit a Pull Request.
 

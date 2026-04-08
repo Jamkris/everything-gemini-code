@@ -1,4 +1,4 @@
-**Language:** **English** | [한국어](docs/ko-KR/COMMANDS.md) | [简体中文](docs/zh-CN/COMMANDS.md)
+**Language:** **English** | [한국어](../ko-KR/COMMANDS.md) | [简体中文](../zh-CN/COMMANDS.md)
 
 # Gemini CLI Extension Commands
 

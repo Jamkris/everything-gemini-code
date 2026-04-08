@@ -51,10 +51,10 @@ gemini extensions uninstall https://github.com/Jamkris/everything-gemini-code
 
 ```bash
 # 选择性卸载（推荐）：仅卸载此扩展安装的文件。
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Jamkris/everything-gemini-code/main/uninstall.sh)" -- --antigravity
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Jamkris/everything-gemini-code/main/scripts/uninstall.sh)" -- --antigravity
 
 # 完全卸载（警告）：删除目标目录中的所有文件。
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Jamkris/everything-gemini-code/main/uninstall.sh)" -- --antigravity --purge
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Jamkris/everything-gemini-code/main/scripts/uninstall.sh)" -- --antigravity --purge
 ```
 
 ---
