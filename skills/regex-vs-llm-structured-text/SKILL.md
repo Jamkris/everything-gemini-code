@@ -8,7 +8,7 @@ origin: ECC
 
 A practical decision framework for parsing structured text (quizzes, forms, invoices, documents). The key insight: regex handles 95-98% of cases cheaply and deterministically. Reserve expensive LLM calls for the remaining edge cases.
 
-## When to Activate
+## When to Use
 
 - Parsing structured text with repeating patterns (questions, forms, tables)
 - Deciding between regex and LLM for text extraction
@@ -211,7 +211,7 @@ From a production quiz parsing pipeline (410 items):
 - Mutating parsed objects during cleaning/validation steps
 - Not testing edge cases (malformed input, missing fields, encoding issues)
 
-## When to Use
+## Ideal For
 
 - Quiz/exam question parsing
 - Form data extraction

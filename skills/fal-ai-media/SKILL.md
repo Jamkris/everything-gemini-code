@@ -8,7 +8,7 @@ origin: ECC
 
 Generate images, videos, and audio using fal.ai models via MCP.
 
-## When to Activate
+## When to Use
 
 - User wants to generate images from text prompts
 - Creating videos from text or images

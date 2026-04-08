@@ -1,3 +1,8 @@
+---
+name: canary-watch
+description: Post-deploy monitoring and canary health verification
+---
+
 # Canary Watch — Post-Deploy Monitoring
 
 ## When to Use
@@ -65,7 +70,7 @@ info:      # log only
 When a critical threshold is crossed:
 - Desktop notification (macOS/Linux)
 - Optional: Slack/Discord webhook
-- Log to `~/.claude/canary-watch.log`
+- Log to `~/.gemini/canary-watch.log`
 
 ## Output
 

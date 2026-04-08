@@ -8,7 +8,7 @@ origin: ECC
 
 Distribute content across multiple social platforms with platform-native adaptation.
 
-## When to Activate
+## When to Use
 
 - User wants to post content to multiple platforms
 - Publishing announcements, launches, or updates across social media

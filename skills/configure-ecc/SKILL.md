@@ -7,7 +7,7 @@ description: Interactive installer for Everything Gemini CLI — guides users th
 
 An interactive, step-by-step installation wizard for the Everything Gemini CLI project. Uses `AskUserQuestion` to guide users through selective installation of skills and rules, then verifies correctness and offers optimization.
 
-## When to Activate
+## When to Use
 
 - User says "configure ecc", "install ecc", "setup everything gemini code", or similar
 - User wants to selectively install skills or rules from this project

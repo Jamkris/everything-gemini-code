@@ -8,7 +8,7 @@ origin: ECC
 
 Patterns for building thread-safe data persistence layers using Swift actors. Combines in-memory caching with file-backed storage, leveraging the actor model to eliminate data races at compile time.
 
-## When to Activate
+## When to Use
 
 - Building a data persistence layer in Swift 5.5+
 - Need thread-safe access to shared mutable state
@@ -135,7 +135,7 @@ final class QuestionListViewModel {
 - Forgetting that all actor method calls are `await` — callers must handle async context
 - Using `nonisolated` to bypass actor isolation (defeats the purpose)
 
-## When to Use
+## Ideal For
 
 - Local data storage in iOS/macOS apps (user data, settings, cached content)
 - Offline-first architectures that sync to a server later

@@ -7,7 +7,7 @@ description: Django testing strategies with pytest-django, TDD methodology, fact
 
 Test-driven development for Django applications using pytest, factory_boy, and Django REST Framework.
 
-## When to Activate
+## When to Use
 
 - Writing new Django applications
 - Implementing Django REST Framework APIs

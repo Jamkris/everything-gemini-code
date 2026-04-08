@@ -4,7 +4,7 @@
 # Output: JSON to stdout
 #
 # Environment:
-#   RULES_DISTILL_DIR  Override ~/.claude/rules (for testing only)
+#   RULES_DISTILL_DIR  Override ~/.gemini/rules (for testing only)
 
 set -euo pipefail
 

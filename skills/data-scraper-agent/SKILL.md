@@ -11,7 +11,7 @@ Runs on a schedule, enriches results with a free LLM, stores to a database, and 
 
 **Stack: Python · Gemini Flash (free) · GitHub Actions (free) · Notion / Sheets / Supabase**
 
-## When to Activate
+## When to Use
 
 - User wants to scrape or monitor any public website or API
 - User says "build a bot that checks...", "monitor X for me", "collect data from..."

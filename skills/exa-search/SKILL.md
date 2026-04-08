@@ -8,7 +8,7 @@ origin: ECC
 
 Neural search for web content, code, companies, and people via the Exa MCP server.
 
-## When to Activate
+## When to Use
 
 - User needs current web information or news
 - Searching for code examples, API docs, or technical references

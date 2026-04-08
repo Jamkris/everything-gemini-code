@@ -21,7 +21,7 @@ Measures whether coding agents actually follow skills, rules, or agent definitio
 - **Rules** (`rules/common/*.md`): Mandatory rules like testing.md, security.md, git-workflow.md
 - **Agent definitions** (`agents/*.md`): Whether an agent gets invoked when expected (internal workflow verification not yet supported)
 
-## When to Activate
+## When to Use
 
 - User runs `/skill-comply <path>`
 - User asks "is this rule actually being followed?"
@@ -32,10 +32,10 @@ Measures whether coding agents actually follow skills, rules, or agent definitio
 
 ```bash
 # Full run
-uv run python -m scripts.run ~/.claude/rules/common/testing.md
+uv run python -m scripts.run ~/.gemini/rules/common/testing.md
 
 # Dry run (no cost, spec + scenarios only)
-uv run python -m scripts.run --dry-run ~/.claude/skills/search-first/SKILL.md
+uv run python -m scripts.run --dry-run ~/.gemini/skills/search-first/SKILL.md
 
 # Custom models
 uv run python -m scripts.run --gen-model haiku --model sonnet <path>

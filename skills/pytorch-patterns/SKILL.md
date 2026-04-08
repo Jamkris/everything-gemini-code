@@ -8,7 +8,7 @@ origin: ECC
 
 Idiomatic PyTorch patterns and best practices for building robust, efficient, and reproducible deep learning applications.
 
-## When to Activate
+## When to Use
 
 - Writing new PyTorch models or training scripts
 - Reviewing deep learning code

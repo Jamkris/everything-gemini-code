@@ -7,7 +7,7 @@ description: Pythonic idioms, PEP 8 standards, type hints, and best practices fo
 
 Idiomatic Python patterns and best practices for building robust, efficient, and maintainable applications.
 
-## When to Activate
+## When to Use
 
 - Writing new Python code
 - Reviewing Python code

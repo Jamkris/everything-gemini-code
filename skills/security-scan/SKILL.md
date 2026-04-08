@@ -8,7 +8,7 @@ origin: ECC
 
 Audit your Claude Code configuration for security issues using [AgentShield](https://github.com/affaan-m/agentshield).
 
-## When to Activate
+## When to Use
 
 - Setting up a new Claude Code project
 - After modifying `.claude/settings.json`, `CLAUDE.md`, or MCP configs

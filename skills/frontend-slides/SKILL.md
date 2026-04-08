@@ -10,7 +10,7 @@ Create zero-dependency, animation-rich HTML presentations that run entirely in t
 
 Inspired by the visual exploration approach showcased in work by zarazhangrui (credit: @zarazhangrui).
 
-## When to Activate
+## When to Use
 
 - Creating a talk deck, pitch deck, workshop deck, or internal presentation
 - Converting `.ppt` or `.pptx` slides into an HTML presentation

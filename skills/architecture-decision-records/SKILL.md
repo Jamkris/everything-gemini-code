@@ -8,7 +8,7 @@ origin: ECC
 
 Capture architectural decisions as they happen during coding sessions. Instead of decisions living only in Slack threads, PR comments, or someone's memory, this skill produces structured ADR documents that live alongside the code.
 
-## When to Activate
+## When to Use
 
 - User explicitly says "let's record this decision" or "ADR this"
 - User chooses between significant alternatives (framework, library, pattern, database, API design)

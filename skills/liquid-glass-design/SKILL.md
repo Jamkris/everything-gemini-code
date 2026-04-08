@@ -7,7 +7,7 @@ description: iOS 26 Liquid Glass design system — dynamic glass material with b
 
 Patterns for implementing Apple's Liquid Glass — a dynamic material that blurs content behind it, reflects color and light from surrounding content, and reacts to touch and pointer interactions. Covers SwiftUI, UIKit, and WidgetKit integration.
 
-## When to Activate
+## When to Use
 
 - Building or updating apps for iOS 26+ with the new design language
 - Implementing glass-style buttons, cards, toolbars, or containers
@@ -270,7 +270,7 @@ VStack { /* content */ }
 - Ignoring accented rendering mode in widgets — breaks tinted Home Screen appearance
 - Using opaque backgrounds behind glass — defeats the translucency effect
 
-## When to Use
+## Ideal For
 
 - Navigation bars, toolbars, and tab bars with the new iOS 26 design
 - Floating action buttons and card-style containers

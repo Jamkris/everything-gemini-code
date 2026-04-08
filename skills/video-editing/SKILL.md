@@ -8,7 +8,7 @@ origin: ECC
 
 AI-assisted editing for real footage. Not generation from prompts. Editing existing video fast.
 
-## When to Activate
+## When to Use
 
 - User wants to edit, cut, or structure video footage
 - Turning long recordings into short-form content

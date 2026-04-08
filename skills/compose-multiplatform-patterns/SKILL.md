@@ -8,7 +8,7 @@ origin: ECC
 
 Patterns for building shared UI across Android, iOS, Desktop, and Web using Compose Multiplatform and Jetpack Compose. Covers state management, navigation, theming, and performance.
 
-## When to Activate
+## When to Use
 
 - Building Compose UI (Jetpack Compose or Compose Multiplatform)
 - Managing UI state with ViewModels and Compose state

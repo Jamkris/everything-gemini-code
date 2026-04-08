@@ -7,7 +7,7 @@ description: Django architecture patterns, REST API design with DRF, ORM best pr
 
 Production-grade Django architecture patterns for scalable, maintainable applications.
 
-## When to Activate
+## When to Use
 
 - Building Django web applications
 - Designing Django REST Framework APIs

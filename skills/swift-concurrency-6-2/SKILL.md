@@ -7,7 +7,7 @@ description: Swift 6.2 Approachable Concurrency — single-threaded by default, 
 
 Patterns for adopting Swift 6.2's concurrency model where code runs single-threaded by default and concurrency is introduced explicitly. Eliminates common data-race errors without sacrificing performance.
 
-## When to Activate
+## When to Use
 
 - Migrating Swift 5.x or 6.0/6.1 projects to Swift 6.2
 - Resolving data-race safety compiler errors
@@ -207,7 +207,7 @@ To use `@concurrent`:
 - Fighting the compiler — if it reports a data race, the code has a real concurrency issue
 - Assuming all async code runs in the background (Swift 6.2 default: stays on calling actor)
 
-## When to Use
+## Ideal For
 
 - All new Swift 6.2+ projects (Approachable Concurrency is the recommended default)
 - Migrating existing apps from Swift 5.x or 6.0/6.1 concurrency

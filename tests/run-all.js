@@ -13,6 +13,8 @@ const testsDir = __dirname;
 const testFiles = [
   'lib/utils.test.js',
   'lib/package-manager.test.js',
+  'lib/session-manager.test.js',
+  'lib/session-aliases.test.js',
   'hooks/hooks.test.js'
 ];
 

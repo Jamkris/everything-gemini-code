@@ -1,4 +1,4 @@
-description = ""
+description = "Run comprehensive verification on the codebase"
 prompt = '''
 # Verification Command
 

@@ -8,7 +8,7 @@ origin: ECC
 
 Comprehensive testing strategies for Perl applications using Test2::V0, Test::More, prove, and TDD methodology.
 
-## When to Activate
+## When to Use
 
 - Writing new Perl code (follow TDD: red, green, refactor)
 - Designing test suites for Perl modules or applications

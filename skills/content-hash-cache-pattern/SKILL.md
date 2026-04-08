@@ -8,7 +8,7 @@ origin: ECC
 
 Cache expensive file processing results (PDF parsing, text extraction, image analysis) using SHA-256 content hashes as cache keys. Unlike path-based caching, this approach survives file moves/renames and auto-invalidates when content changes.
 
-## When to Activate
+## When to Use
 
 - Building file processing pipelines (PDF, images, text extraction)
 - Processing cost is high and same files are processed repeatedly
@@ -147,7 +147,7 @@ def extract_text(path, *, cache_enabled=False, cache_dir=None):
 data = dataclasses.asdict(entry)  # Use manual serialization instead
 ```
 
-## When to Use
+## Ideal For
 
 - File processing pipelines (PDF parsing, OCR, text extraction, image analysis)
 - CLI tools that benefit from `--cache/--no-cache` options

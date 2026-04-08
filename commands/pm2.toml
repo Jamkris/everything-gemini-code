@@ -1,4 +1,4 @@
-description = ""
+description = "Auto-analyze project and generate PM2 service commands"
 prompt = '''
 # PM2 Init
 

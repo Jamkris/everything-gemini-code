@@ -7,7 +7,7 @@ description: PostgreSQL database patterns for query optimization, schema design,
 
 Quick reference for PostgreSQL best practices. For detailed guidance, use the `database-reviewer` agent.
 
-## When to Activate
+## When to Use
 
 - Writing SQL queries or migrations
 - Designing database schemas

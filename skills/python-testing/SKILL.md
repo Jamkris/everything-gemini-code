@@ -7,7 +7,7 @@ description: Python testing strategies using pytest, TDD methodology, fixtures, 
 
 Comprehensive testing strategies for Python applications using pytest, TDD methodology, and best practices.
 
-## When to Activate
+## When to Use
 
 - Writing new Python code (follow TDD: red, green, refactor)
 - Designing test suites for Python projects

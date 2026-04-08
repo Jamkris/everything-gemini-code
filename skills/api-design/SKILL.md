@@ -8,7 +8,7 @@ origin: ECC
 
 Conventions and best practices for designing consistent, developer-friendly REST APIs.
 
-## When to Activate
+## When to Use
 
 - Designing new API endpoints
 - Reviewing existing API contracts

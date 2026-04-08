@@ -8,7 +8,7 @@ origin: ECC
 
 Idiomatic Perl 5.36+ patterns and best practices for building robust, maintainable applications.
 
-## When to Activate
+## When to Use
 
 - Writing new Perl code or modules
 - Reviewing Perl code for idiom compliance

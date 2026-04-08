@@ -15,13 +15,13 @@ List project registry entries and per-project instinct/observation counts for co
 Run the instinct CLI using the plugin root path:
 
 ```bash
-python3 "${CLAUDE_PLUGIN_ROOT}/skills/continuous-learning-v2/scripts/instinct-cli.py" projects
+python3 "${GEMINI_EXTENSION_ROOT}/skills/continuous-learning-v2/scripts/instinct-cli.py" projects
 ```
 
-Or if `CLAUDE_PLUGIN_ROOT` is not set (manual installation):
+Or if `GEMINI_EXTENSION_ROOT` is not set (manual installation):
 
 ```bash
-python3 ~/.claude/skills/continuous-learning-v2/scripts/instinct-cli.py projects
+python3 ~/.gemini/skills/continuous-learning-v2/scripts/instinct-cli.py projects
 ```
 
 ## Usage
@@ -32,7 +32,7 @@ python3 ~/.claude/skills/continuous-learning-v2/scripts/instinct-cli.py projects
 
 ## What to Do
 
-1. Read `~/.claude/homunculus/projects.json`
+1. Read `~/.gemini/homunculus/projects.json`
 2. For each project, display:
    - Project name, id, root, remote
    - Personal and inherited instinct counts

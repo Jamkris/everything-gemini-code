@@ -11,10 +11,10 @@ command: true
 Run the instinct CLI using the plugin root path:
 
 ```bash
-python3 "${CLAUDE_PLUGIN_ROOT}/skills/continuous-learning-v2/scripts/instinct-cli.py" import <file-or-url> [--dry-run] [--force] [--min-confidence 0.7]
+python3 "${GEMINI_EXTENSION_ROOT}/skills/continuous-learning-v2/scripts/instinct-cli.py" import <file-or-url> [--dry-run] [--force] [--min-confidence 0.7]
 ```
 
-Or if `CLAUDE_PLUGIN_ROOT` is not set (manual installation):
+Or if `GEMINI_EXTENSION_ROOT` is not set (manual installation):
 
 ```bash
 python3 ~/.gemini/skills/continuous-learning-v2/scripts/instinct-cli.py import <file-or-url>

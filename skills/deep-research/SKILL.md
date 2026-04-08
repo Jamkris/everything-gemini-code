@@ -8,7 +8,7 @@ origin: ECC
 
 Produce thorough, cited research reports from multiple web sources using firecrawl and exa MCP tools.
 
-## When to Activate
+## When to Use
 
 - User asks to research any topic in depth
 - Competitive analysis, technology evaluation, or market sizing

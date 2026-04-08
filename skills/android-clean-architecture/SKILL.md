@@ -8,7 +8,7 @@ origin: ECC
 
 Clean Architecture patterns for Android and KMP projects. Covers module boundaries, dependency inversion, UseCase/Repository patterns, and data layer design with Room, SQLDelight, and Ktor.
 
-## When to Activate
+## When to Use
 
 - Structuring Android or KMP project modules
 - Implementing UseCases, Repositories, or DataSources

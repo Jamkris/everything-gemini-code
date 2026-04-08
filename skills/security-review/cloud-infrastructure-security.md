@@ -6,7 +6,7 @@
 
 This skill ensures cloud infrastructure, CI/CD pipelines, and deployment configurations follow security best practices and comply with industry standards.
 
-## When to Activate
+## When to Use
 
 - Deploying applications to cloud platforms (AWS, Vercel, Railway, Cloudflare)
 - Configuring IAM roles and permissions

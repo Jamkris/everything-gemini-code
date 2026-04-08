@@ -8,7 +8,7 @@ origin: ECC
 
 Comprehensive Ktor patterns for building robust, maintainable HTTP servers with Kotlin coroutines.
 
-## When to Activate
+## When to Use
 
 - Building Ktor HTTP servers
 - Configuring Ktor plugins (Auth, CORS, ContentNegotiation, StatusPages)

@@ -8,7 +8,7 @@ origin: ECC
 
 Write investor communication that is short, personalized, and easy to act on.
 
-## When to Activate
+## When to Use
 
 - writing a cold email to an investor
 - drafting a warm intro request

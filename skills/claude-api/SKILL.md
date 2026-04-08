@@ -8,7 +8,7 @@ origin: ECC
 
 Build applications with the Anthropic Claude API and SDKs.
 
-## When to Activate
+## When to Use
 
 - Building applications that call the Claude API
 - Code imports `anthropic` (Python) or `@anthropic-ai/sdk` (TypeScript)

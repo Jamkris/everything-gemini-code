@@ -8,7 +8,7 @@ origin: ECC
 
 Turn one idea into strong, platform-native content instead of posting the same thing everywhere.
 
-## When to Activate
+## When to Use
 
 - writing X posts or threads
 - drafting LinkedIn posts or launch updates

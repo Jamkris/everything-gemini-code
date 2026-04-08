@@ -90,29 +90,19 @@ install_gemini_cli() {
             rm -rf "$GEMINI_CLI_DIR/scripts/ci"
         fi
 
-        # Generate command shims for short aliases
-        echo "Generating command shims (aliases)..."
-        echo "  This allows using short commands like /tdd instead of /everything-gemini-code.tdd"
-        mkdir -p "$GEMINI_CLI_DIR/commands"
-        if [ -d "commands" ]; then
+        # Clean up any stale command shims that would conflict with the extension
+        echo "Cleaning up stale command shims..."
+        if [ -d "commands" ] && [ -d "$GEMINI_CLI_DIR/commands" ]; then
             for cmd_file in commands/*.toml; do
                 target_file="$GEMINI_CLI_DIR/commands/$(basename "$cmd_file")"
-                # Copy original file
-                cp "$cmd_file" "$target_file"
-                
-                # Replace agent references with namespaced versions
-                # e.g., @tdd-guide -> @everything-gemini-code.tdd-guide
-                if [ -d "agents" ]; then
-                    for agent_file in agents/*.md; do
-                        agent_name=$(basename "$agent_file" .md)
-                        perl -i -pe "s/\\@$agent_name/\\@everything-gemini-code.$agent_name/g" "$target_file"
-                    done
+                if [ -f "$target_file" ]; then
+                    rm -f "$target_file"
+                    echo "  Removed stale shim: $(basename "$target_file")"
                 fi
-                echo "  Created shim: $(basename "$target_file")"
             done
         fi
 
-        echo "Cleanup complete. Global shims updated."
+        echo "Cleanup complete."
         echo ""
         return
     fi

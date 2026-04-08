@@ -21,7 +21,9 @@ const {
   log
 } = require('../lib/utils');
 
-async function main() {
+const { runHook } = require('../lib/hook-utils');
+
+runHook('SessionEnd', async () => {
   const sessionsDir = getSessionsDir();
   const today = getDateString();
   const shortId = getSessionIdShort();
@@ -75,10 +77,4 @@ async function main() {
     log(`[SessionEnd] Created session file: ${sessionFile}`);
   }
 
-  process.exit(0);
-}
-
-main().catch(err => {
-  console.error('[SessionEnd] Error:', err.message);
-  process.exit(0);
 });

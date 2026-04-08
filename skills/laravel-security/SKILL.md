@@ -8,7 +8,7 @@ origin: ECC
 
 Comprehensive security guidance for Laravel applications to protect against common vulnerabilities.
 
-## When to Activate
+## When to Use
 
 - Adding authentication or authorization
 - Handling user input and file uploads

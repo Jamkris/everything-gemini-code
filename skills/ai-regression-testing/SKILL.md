@@ -8,7 +8,7 @@ origin: ECC
 
 Testing patterns specifically designed for AI-assisted development, where the same model writes code and reviews it — creating systematic blind spots that only automated tests can catch.
 
-## When to Activate
+## When to Use
 
 - AI agent (Claude Code, Cursor, Codex) has modified API routes or backend logic
 - A bug was found and fixed — need to prevent re-introduction

@@ -19,7 +19,9 @@ const {
   log
 } = require('../lib/utils');
 
-async function main() {
+const { runHook } = require('../lib/hook-utils');
+
+runHook('PreCompact', async () => {
   const sessionsDir = getSessionsDir();
   const compactionLog = path.join(sessionsDir, 'compaction-log.txt');
 
@@ -39,10 +41,4 @@ async function main() {
   }
 
   log('[PreCompact] State saved before compaction');
-  process.exit(0);
-}
-
-main().catch(err => {
-  console.error('[PreCompact] Error:', err.message);
-  process.exit(0);
 });

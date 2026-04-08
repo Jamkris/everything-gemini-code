@@ -8,7 +8,7 @@ origin: ECC
 
 Orchestrate parallel AI agent sessions using dmux, a tmux pane manager for agent harnesses.
 
-## When to Activate
+## When to Use
 
 - Running multiple agent sessions in parallel
 - Coordinating work across Claude Code, Codex, and other harnesses

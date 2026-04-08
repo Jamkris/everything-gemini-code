@@ -8,7 +8,7 @@ origin: ECC
 
 Write long-form content that sounds like a real person or brand, not generic AI output.
 
-## When to Activate
+## When to Use
 
 - drafting blog posts, essays, launch posts, guides, tutorials, or newsletter issues
 - turning notes, transcripts, or research into polished articles

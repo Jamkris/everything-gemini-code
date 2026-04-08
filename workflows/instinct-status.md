@@ -13,10 +13,10 @@ Shows all learned instincts with their confidence scores, grouped by domain.
 Run the instinct CLI using the plugin root path:
 
 ```bash
-python3 "${CLAUDE_PLUGIN_ROOT}/skills/continuous-learning-v2/scripts/instinct-cli.py" status
+python3 "${GEMINI_EXTENSION_ROOT}/skills/continuous-learning-v2/scripts/instinct-cli.py" status
 ```
 
-Or if `CLAUDE_PLUGIN_ROOT` is not set (manual installation), use:
+Or if `GEMINI_EXTENSION_ROOT` is not set (manual installation), use:
 
 ```bash
 python3 ~/.gemini/skills/continuous-learning-v2/scripts/instinct-cli.py status

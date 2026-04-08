@@ -7,7 +7,7 @@ description: Apple FoundationModels framework for on-device LLM — text generat
 
 Patterns for integrating Apple's on-device language model into apps using the FoundationModels framework. Covers text generation, structured output with `@Generable`, custom tool calling, and snapshot streaming — all running on-device for privacy and offline support.
 
-## When to Activate
+## When to Use
 
 - Building AI-powered features using Apple Intelligence on-device
 - Generating or summarizing text without cloud dependency
@@ -234,7 +234,7 @@ var body: some View {
 - Building complex multi-step logic in a single prompt — break into multiple focused prompts
 - Assuming the model is always available — device eligibility and settings vary
 
-## When to Use
+## Ideal For
 
 - On-device text generation for privacy-sensitive apps
 - Structured data extraction from user input (forms, natural language commands)
