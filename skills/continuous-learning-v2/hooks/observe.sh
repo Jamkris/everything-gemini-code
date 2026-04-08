@@ -6,16 +6,16 @@
 #
 # Hook config (in ~/.gemini/settings.json):
 #
-# If installed as a plugin, use ${CLAUDE_PLUGIN_ROOT}:
+# If installed as a plugin, use ${GEMINI_EXTENSION_ROOT}:
 # {
 #   "hooks": {
 #     "PreToolUse": [{
 #       "matcher": "*",
-#       "hooks": [{ "type": "command", "command": "${CLAUDE_PLUGIN_ROOT}/skills/continuous-learning-v2/hooks/observe.sh pre" }]
+#       "hooks": [{ "type": "command", "command": "${GEMINI_EXTENSION_ROOT}/skills/continuous-learning-v2/hooks/observe.sh pre" }]
 #     }],
 #     "PostToolUse": [{
 #       "matcher": "*",
-#       "hooks": [{ "type": "command", "command": "${CLAUDE_PLUGIN_ROOT}/skills/continuous-learning-v2/hooks/observe.sh post" }]
+#       "hooks": [{ "type": "command", "command": "${GEMINI_EXTENSION_ROOT}/skills/continuous-learning-v2/hooks/observe.sh post" }]
 #     }]
 #   }
 # }
