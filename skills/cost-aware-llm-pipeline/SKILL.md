@@ -175,7 +175,7 @@ def process(text: str, config: Config, tracker: CostTracker) -> tuple[Result, Co
 - Hardcoding model names throughout the codebase (use constants or config)
 - Ignoring prompt caching for repetitive system prompts
 
-## When to Use
+## Ideal For
 
 - Any application calling Claude, OpenAI, or similar LLM APIs
 - Batch processing pipelines where cost adds up quickly

@@ -234,7 +234,7 @@ var body: some View {
 - Building complex multi-step logic in a single prompt — break into multiple focused prompts
 - Assuming the model is always available — device eligibility and settings vary
 
-## When to Use
+## Ideal For
 
 - On-device text generation for privacy-sensitive apps
 - Structured data extraction from user input (forms, natural language commands)

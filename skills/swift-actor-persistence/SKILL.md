@@ -135,7 +135,7 @@ final class QuestionListViewModel {
 - Forgetting that all actor method calls are `await` — callers must handle async context
 - Using `nonisolated` to bypass actor isolation (defeats the purpose)
 
-## When to Use
+## Ideal For
 
 - Local data storage in iOS/macOS apps (user data, settings, cached content)
 - Offline-first architectures that sync to a server later

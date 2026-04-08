@@ -147,7 +147,7 @@ def extract_text(path, *, cache_enabled=False, cache_dir=None):
 data = dataclasses.asdict(entry)  # Use manual serialization instead
 ```
 
-## When to Use
+## Ideal For
 
 - File processing pipelines (PDF parsing, OCR, text extraction, image analysis)
 - CLI tools that benefit from `--cache/--no-cache` options

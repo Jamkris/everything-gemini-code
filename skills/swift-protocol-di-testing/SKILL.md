@@ -182,7 +182,7 @@ func testReadError() async {
 - Forgetting `Sendable` conformance when used with actors
 - Over-engineering: if a type has no external dependencies, it doesn't need a protocol
 
-## When to Use
+## Ideal For
 
 - Any Swift code that touches file system, network, or external APIs
 - Testing error handling paths that are hard to trigger in real environments

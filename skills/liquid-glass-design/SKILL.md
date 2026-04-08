@@ -270,7 +270,7 @@ VStack { /* content */ }
 - Ignoring accented rendering mode in widgets — breaks tinted Home Screen appearance
 - Using opaque backgrounds behind glass — defeats the translucency effect
 
-## When to Use
+## Ideal For
 
 - Navigation bars, toolbars, and tab bars with the new iOS 26 design
 - Floating action buttons and card-style containers
