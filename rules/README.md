@@ -62,7 +62,7 @@ cp -r rules/web ~/.claude/rules/web
 cp -r rules/swift ~/.claude/rules/swift
 cp -r rules/php ~/.claude/rules/php
 
-# Attention ! ! ! Configure according to your actual project requirements; the configuration here is for reference only.
+# Note: Configure according to your actual project requirements; the configuration here is for reference only.
 ```
 
 ## Rules vs Skills
