@@ -57,7 +57,7 @@ AKIA[0-9A-Z]{16}
 (postgres|mysql|mongodb|redis):\/\/[^\s'"]+
 
 # JWT tokens (3-segment: header.payload.signature)
-eyJ[A-Za-z0-9_-]+\.eyJ[A-Za-z0-9_-]+\.[A-Za-z0-9_-]+
+eyJ[A-Za-z0-9_-]{20,}\.eyJ[A-Za-z0-9_-]{20,}\.[A-Za-z0-9_-]+
 
 # Private keys
 -----BEGIN (RSA |EC |DSA )?PRIVATE KEY-----
