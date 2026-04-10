@@ -8,7 +8,7 @@ origin: ECC
 
 Use Manim for technical explainers where motion, structure, and clarity matter more than photorealism.
 
-## When to Activate
+## When to Use
 
 - the user wants a technical explainer animation
 - the concept is a graph, workflow, architecture, metric progression, or system diagram

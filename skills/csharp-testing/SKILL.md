@@ -8,7 +8,7 @@ origin: ECC
 
 Comprehensive testing patterns for .NET applications using xUnit, FluentAssertions, and modern testing practices.
 
-## When to Activate
+## When to Use
 
 - Writing new tests for C# code
 - Reviewing test quality and coverage

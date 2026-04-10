@@ -14,7 +14,7 @@ Prefer the live workspace model:
 - broader human-facing notes can live in a non-repo context/archive folder
 - durable cross-machine memory belongs in the knowledge base, not in a shadow repo workspace
 
-## When to Activate
+## When to Use
 
 - User wants to save information to their knowledge base
 - Ingesting documents, conversations, or data into structured storage

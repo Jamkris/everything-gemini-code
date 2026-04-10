@@ -10,7 +10,7 @@ Use this skill when an agent run is failing repeatedly, consuming tokens without
 
 This is a workflow skill, not a hidden runtime. It teaches the agent to debug itself systematically before escalating to a human.
 
-## When to Activate
+## When to Use
 
 - Maximum tool call / loop-limit failures
 - Repeated retries with no forward progress

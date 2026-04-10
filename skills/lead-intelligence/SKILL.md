@@ -8,7 +8,7 @@ origin: ECC
 
 Agent-powered lead intelligence pipeline that finds, scores, and reaches high-value contacts through social graph analysis and warm path discovery.
 
-## When to Activate
+## When to Use
 
 - User wants to find leads or prospects in a specific industry
 - Building an outreach list for partnerships, sales, or fundraising

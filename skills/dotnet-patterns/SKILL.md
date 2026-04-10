@@ -8,7 +8,7 @@ origin: ECC
 
 Idiomatic C# and .NET patterns for building robust, performant, and maintainable applications.
 
-## When to Activate
+## When to Use
 
 - Writing new C# code
 - Reviewing C# code

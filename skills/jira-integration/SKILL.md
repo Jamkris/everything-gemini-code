@@ -8,7 +8,7 @@ origin: ECC
 
 Retrieve, analyze, and update Jira tickets directly from your AI coding workflow. Supports both **MCP-based** (recommended) and **direct REST API** approaches.
 
-## When to Activate
+## When to Use
 
 - Fetching a Jira ticket to understand requirements
 - Extracting testable acceptance criteria from a ticket

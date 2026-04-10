@@ -8,7 +8,7 @@ origin: ECC
 
 Best practices for Git version control, branching strategies, and collaborative development.
 
-## When to Activate
+## When to Use
 
 - Setting up Git workflow for a new project
 - Deciding on branching strategy (GitFlow, trunk-based, GitHub flow)

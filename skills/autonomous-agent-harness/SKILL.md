@@ -8,7 +8,7 @@ origin: ECC
 
 Turn Claude Code into a persistent, self-directing agent system using only native features and MCP servers.
 
-## When to Activate
+## When to Use
 
 - User wants an agent that runs continuously or on a schedule
 - Setting up automated workflows that trigger periodically

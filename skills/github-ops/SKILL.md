@@ -8,7 +8,7 @@ origin: ECC
 
 Manage GitHub repositories with a focus on community health, CI reliability, and contributor experience.
 
-## When to Activate
+## When to Use
 
 - Triaging issues (classifying, labeling, responding, deduplicating)
 - Managing PRs (review status, CI checks, stale PRs, merge readiness)

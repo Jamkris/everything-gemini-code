@@ -8,7 +8,7 @@ origin: ECC
 
 Production-grade NestJS patterns for modular TypeScript backends.
 
-## When to Activate
+## When to Use
 
 - Building NestJS APIs or services
 - Structuring modules, controllers, and providers

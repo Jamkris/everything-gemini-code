@@ -8,7 +8,7 @@ origin: ECC
 
 Safely open-source any project through a 3-stage pipeline: **Fork** (strip secrets) → **Sanitize** (verify clean) → **Package** (CLAUDE.md + setup.sh + README).
 
-## When to Activate
+## When to Use
 
 - User says "open source this project" or "make this public"
 - User wants to prepare a private repo for public release

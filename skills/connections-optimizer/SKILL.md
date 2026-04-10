@@ -17,7 +17,7 @@ This skill handles:
 - warm-path identification
 - Apple Mail, X DM, and LinkedIn draft generation in the user's real voice
 
-## When to Activate
+## When to Use
 
 - the user wants to prune their X following
 - the user wants to rebalance who they follow or stay connected to
