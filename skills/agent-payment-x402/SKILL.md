@@ -38,7 +38,7 @@ The payment layer exposes standard MCP tools that slot into any Claude Code or a
   "mcpServers": {
     "agentpay": {
       "command": "npx",
-      "args": ["agentwallet-sdk@6.0.0"]
+      "args": ["-y", "agentwallet-sdk@6.0.0"]
     }
   }
 }
