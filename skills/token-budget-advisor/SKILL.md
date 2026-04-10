@@ -129,5 +129,5 @@ This skill uses heuristic estimation — no real tokenizer. Accuracy ~85-90%, va
 
 ## Source
 
-Standalone skill from [TBA — Token Budget Advisor for Gemini CLI](https://github.com/Xabilimon1/Token-Budget-Advisor-Claude-Code-).
+Originally from [Token Budget Advisor](https://github.com/Xabilimon1/Token-Budget-Advisor-Claude-Code-), adapted for Gemini CLI.
 Original project also ships a Python estimator script, but this repository keeps the skill self-contained and heuristic-only.

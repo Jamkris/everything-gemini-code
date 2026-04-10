@@ -166,8 +166,8 @@ Result:     [PUSHED / ESCALATED TO USER]
 ## Notes
 
 - Reviewer A (Gemini Ultra) always runs — guarantees at least one strong reviewer regardless of tooling.
-- Model diversity is the goal for Reviewer B. GPT-5.4 or Claude Opus gives true independence — different training data, different biases, different blind spots. The Gemini-only fallback still provides value via context isolation but loses model diversity.
-- Strongest available models are used: Ultra for Reviewer A, GPT-5.4 or Claude Opus for Reviewer B.
+- Model diversity is the goal for Reviewer B. GPT-5.4 gives true independence — different training data, different biases, different blind spots. The Gemini-only fallback still provides value via context isolation but loses model diversity.
+- Strongest available models are used: Ultra for Reviewer A, GPT-5.4 for Reviewer B.
 - External reviewers run with `--sandbox read-only` (Codex) to prevent repo mutation during review.
 - Fresh reviewers each round prevents anchoring bias from prior findings.
 - The rubric is the most important input. Tighten it if reviewers rubber-stamp or flag subjective style issues.
