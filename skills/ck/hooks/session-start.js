@@ -10,7 +10,7 @@
  * - Compact 5-line summary for registered projects
  * - Unsaved session detection → "Last session wasn't saved. Run /ck:save."
  * - Git activity since last session
- * - Goal mismatch detection vs CLAUDE.md
+ * - Goal mismatch detection vs GEMINI.md
  * - Mini portfolio for unregistered directories
  */
 
