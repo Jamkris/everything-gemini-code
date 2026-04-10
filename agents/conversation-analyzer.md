@@ -6,7 +6,7 @@ tools: [read_file, search_files]
 
 # Conversation Analyzer Agent
 
-You analyze conversation history to identify problematic Claude Code behaviors that should be prevented with hooks.
+You analyze conversation history to identify problematic Gemini CLI behaviors that should be prevented with hooks.
 
 ## What to Look For
 
