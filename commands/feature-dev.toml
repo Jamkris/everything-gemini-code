@@ -12,7 +12,7 @@ A structured feature-development workflow that emphasizes understanding existing
 
 ### 2. Codebase Exploration
 
-- use `code-explorer` to analyze the relevant existing code
+- use `@code-explorer` to analyze the relevant existing code
 - trace execution paths and architecture layers
 - understand integration points and conventions
 
@@ -24,7 +24,7 @@ A structured feature-development workflow that emphasizes understanding existing
 
 ### 4. Architecture Design
 
-- use `code-architect` to design the feature
+- use `@code-architect` to design the feature
 - provide the implementation blueprint
 - wait for approval before implementing
 
@@ -36,7 +36,7 @@ A structured feature-development workflow that emphasizes understanding existing
 
 ### 6. Quality Review
 
-- use `code-reviewer` to review the implementation
+- use `@code-reviewer` to review the implementation
 - address critical and important issues
 - verify test coverage
 
@@ -45,5 +45,17 @@ A structured feature-development workflow that emphasizes understanding existing
 - summarize what was built
 - list follow-up items or limitations
 - provide testing instructions
+
+## Example Usage
+
+```
+/feature-dev Add user profile page with avatar upload
+```
+
+## Related Commands
+
+- `/plan` — Create implementation plan first
+- `/tdd` — Test-driven development workflow
+- `/code-review` — Standalone code review
 
 '''
