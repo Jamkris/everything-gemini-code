@@ -28,17 +28,17 @@ Read the project to understand stack and sensitive surface area:
 - Docs: `README.md`, `CLAUDE.md`
 
 ```bash
-find SOURCE_DIR -type f | grep -v node_modules | grep -v .git | grep -v __pycache__
+find "$SOURCE_DIR" -type f | grep -v node_modules | grep -v .git | grep -v __pycache__
 ```
 
 ### Step 2: Create Staging Copy
 
 ```bash
-mkdir -p TARGET_DIR
+mkdir -p "$TARGET_DIR"
 rsync -av --exclude='.git' --exclude='node_modules' --exclude='__pycache__' \
   --exclude='.env*' --exclude='*.pyc' --exclude='.venv' --exclude='venv' \
   --exclude='.claude/' --exclude='.secrets/' --exclude='secrets/' \
-  SOURCE_DIR/ TARGET_DIR/
+  "$SOURCE_DIR/" "$TARGET_DIR/"
 ```
 
 ### Step 3: Secret Detection and Stripping

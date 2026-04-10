@@ -22,7 +22,7 @@ You are an expert performance specialist focused on identifying bottlenecks and 
 ```bash
 # Bundle analysis
 npx bundle-analyzer
-npx source-map-explorer build/static/js/*.js
+npx source-map-explorer 'build/static/js/*.js'
 
 # Lighthouse performance audit
 npx lighthouse https://your-app.com --view
@@ -136,7 +136,7 @@ const sortedItems = useMemo(
 
 ```bash
 # Analyze bundle composition
-npx webpack-bundle-analyzer build/static/js/*.js
+npx webpack-bundle-analyzer 'build/static/js/*.js'
 
 # Check for duplicate dependencies
 npx duplicate-package-checker-analyzer
