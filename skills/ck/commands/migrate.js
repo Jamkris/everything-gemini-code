@@ -1,19 +1,19 @@
 #!/usr/bin/env node
 /**
  * ck — Context Keeper v2
- * migrate.mjs — convert v1 (CONTEXT.md + meta.json) to v2 (context.json)
+ * migrate.js — convert v1 (CONTEXT.md + meta.json) to v2 (context.json)
  *
  * Usage:
- *   node migrate.mjs           — migrate all v1 projects
- *   node migrate.mjs --dry-run — preview without writing
+ *   node migrate.js           — migrate all v1 projects
+ *   node migrate.js --dry-run — preview without writing
  *
  * Safe: backs up meta.json to meta.json.v1-backup, never deletes data.
  * exit 0: success  exit 1: error
  */
 
-import { readFileSync, existsSync, renameSync } from 'fs';
-import { resolve } from 'path';
-import { readProjects, writeProjects, saveContext, today, shortId, CONTEXTS_DIR } from './shared.mjs';
+const { readFileSync, existsSync, renameSync } = require('fs');
+const { resolve } = require('path');
+const { readProjects, writeProjects, saveContext, today, shortId, CONTEXTS_DIR } = require('./shared.js');
 
 const isDryRun = process.argv.includes('--dry-run');
 

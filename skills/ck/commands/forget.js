@@ -1,9 +1,9 @@
 #!/usr/bin/env node
 /**
  * ck — Context Keeper v2
- * forget.mjs — remove a project's context and registry entry
+ * forget.js — remove a project's context and registry entry
  *
- * Usage: node forget.mjs [name|number]
+ * Usage: node forget.js [name|number]
  * stdout: confirmation or error
  * exit 0: success  exit 1: not found
  *
@@ -11,9 +11,9 @@
  * This script is the "do it" step — no confirmation prompt here.
  */
 
-import { rmSync } from 'fs';
-import { resolve } from 'path';
-import { resolveContext, readProjects, writeProjects, CONTEXTS_DIR } from './shared.mjs';
+const { rmSync } = require('fs');
+const { resolve } = require('path');
+const { resolveContext, readProjects, writeProjects, CONTEXTS_DIR } = require('./shared.js');
 
 const arg = process.argv[2];
 const cwd = process.env.PWD || process.cwd();

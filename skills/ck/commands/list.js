@@ -1,14 +1,14 @@
 #!/usr/bin/env node
 /**
  * ck — Context Keeper v2
- * list.mjs — portfolio view of all registered projects
+ * list.js — portfolio view of all registered projects
  *
- * Usage: node list.mjs
+ * Usage: node list.js
  * stdout: ASCII table of all projects + prompt to resume
  * exit 0: success  exit 1: no projects
  */
 
-import { readProjects, loadContext, today, renderListTable } from './shared.mjs';
+const { readProjects, loadContext, today, renderListTable } = require('./shared.js');
 
 const cwd = process.env.PWD || process.cwd();
 const projects = readProjects();

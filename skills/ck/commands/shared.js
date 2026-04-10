@@ -1,27 +1,27 @@
 /**
  * ck — Context Keeper v2
- * shared.mjs — common utilities for all command scripts
+ * shared.js — common utilities for all command scripts
  *
  * No external dependencies. Node.js stdlib only.
  */
 
-import { readFileSync, writeFileSync, existsSync, mkdirSync } from 'fs';
-import { resolve } from 'path';
-import { homedir } from 'os';
-import { spawnSync } from 'child_process';
-import { randomBytes } from 'crypto';
+const { readFileSync, writeFileSync, existsSync, mkdirSync } = require('fs');
+const { resolve } = require('path');
+const { homedir } = require('os');
+const { spawnSync } = require('child_process');
+const { randomBytes } = require('crypto');
 
 // ─── Paths ────────────────────────────────────────────────────────────────────
 
-export const CK_HOME          = resolve(homedir(), '.claude', 'ck');
-export const CONTEXTS_DIR     = resolve(CK_HOME, 'contexts');
-export const PROJECTS_FILE    = resolve(CK_HOME, 'projects.json');
-export const CURRENT_SESSION  = resolve(CK_HOME, 'current-session.json');
-export const SKILL_FILE       = resolve(homedir(), '.claude', 'skills', 'ck', 'SKILL.md');
+const CK_HOME          = resolve(homedir(), '.claude', 'ck');
+const CONTEXTS_DIR     = resolve(CK_HOME, 'contexts');
+const PROJECTS_FILE    = resolve(CK_HOME, 'projects.json');
+const CURRENT_SESSION  = resolve(CK_HOME, 'current-session.json');
+const SKILL_FILE       = resolve(homedir(), '.claude', 'skills', 'ck', 'SKILL.md');
 
 // ─── JSON I/O ─────────────────────────────────────────────────────────────────
 
-export function readJson(filePath) {
+function readJson(filePath) {
   try {
     if (!existsSync(filePath)) return null;
     return JSON.parse(readFileSync(filePath, 'utf8'));
@@ -30,35 +30,35 @@ export function readJson(filePath) {
   }
 }
 
-export function writeJson(filePath, data) {
+function writeJson(filePath, data) {
   const dir = resolve(filePath, '..');
   mkdirSync(dir, { recursive: true });
   writeFileSync(filePath, JSON.stringify(data, null, 2) + '\n', 'utf8');
 }
 
-export function readProjects() {
+function readProjects() {
   return readJson(PROJECTS_FILE) || {};
 }
 
-export function writeProjects(projects) {
+function writeProjects(projects) {
   writeJson(PROJECTS_FILE, projects);
 }
 
 // ─── Context I/O ──────────────────────────────────────────────────────────────
 
-export function contextPath(contextDir) {
+function contextPath(contextDir) {
   return resolve(CONTEXTS_DIR, contextDir, 'context.json');
 }
 
-export function contextMdPath(contextDir) {
+function contextMdPath(contextDir) {
   return resolve(CONTEXTS_DIR, contextDir, 'CONTEXT.md');
 }
 
-export function loadContext(contextDir) {
+function loadContext(contextDir) {
   return readJson(contextPath(contextDir));
 }
 
-export function saveContext(contextDir, data) {
+function saveContext(contextDir, data) {
   const dir = resolve(CONTEXTS_DIR, contextDir);
   mkdirSync(dir, { recursive: true });
   writeJson(contextPath(contextDir), data);
@@ -71,7 +71,7 @@ export function saveContext(contextDir, data) {
  * @param {string} cwd
  * @returns {{ name, contextDir, projectPath, context } | null}
  */
-export function resolveContext(arg, cwd) {
+function resolveContext(arg, cwd) {
   const projects = readProjects();
   const entries = Object.entries(projects); // [path, {name, contextDir, lastUpdated}]
 
@@ -114,11 +114,11 @@ export function resolveContext(arg, cwd) {
 
 // ─── Date helpers ─────────────────────────────────────────────────────────────
 
-export function today() {
+function today() {
   return new Date().toISOString().slice(0, 10);
 }
 
-export function daysAgoLabel(dateStr) {
+function daysAgoLabel(dateStr) {
   if (!dateStr) return 'unknown';
   const diff = Math.floor((Date.now() - new Date(dateStr)) / 86_400_000);
   if (diff === 0) return 'Today';
@@ -126,7 +126,7 @@ export function daysAgoLabel(dateStr) {
   return `${diff} days ago`;
 }
 
-export function stalenessIcon(dateStr) {
+function stalenessIcon(dateStr) {
   if (!dateStr) return '○';
   const diff = Math.floor((Date.now() - new Date(dateStr)) / 86_400_000);
   if (diff < 1) return '●';
@@ -136,7 +136,7 @@ export function stalenessIcon(dateStr) {
 
 // ─── ID generation ────────────────────────────────────────────────────────────
 
-export function shortId() {
+function shortId() {
   return randomBytes(4).toString('hex');
 }
 
@@ -156,12 +156,12 @@ function runGit(args, cwd) {
   }
 }
 
-export function gitLogSince(projectPath, sinceDate) {
+function gitLogSince(projectPath, sinceDate) {
   if (!sinceDate) return null;
   return runGit(['log', '--oneline', `--since=${sinceDate}`], projectPath);
 }
 
-export function gitSummary(projectPath, sinceDate) {
+function gitSummary(projectPath, sinceDate) {
   const log = gitLogSince(projectPath, sinceDate);
   if (!log) return null;
   const commits = log.split('\n').filter(Boolean).length;
@@ -182,12 +182,12 @@ export function gitSummary(projectPath, sinceDate) {
 
 // ─── Native memory path encoding ──────────────────────────────────────────────
 
-export function encodeProjectPath(absolutePath) {
+function encodeProjectPath(absolutePath) {
   // "/Users/sree/dev/app" -> "-Users-sree-dev-app"
   return absolutePath.replace(/\//g, '-');
 }
 
-export function nativeMemoryDir(absolutePath) {
+function nativeMemoryDir(absolutePath) {
   const encoded = encodeProjectPath(absolutePath);
   return resolve(homedir(), '.claude', 'projects', encoded, 'memory');
 }
@@ -195,7 +195,7 @@ export function nativeMemoryDir(absolutePath) {
 // ─── Rendering ────────────────────────────────────────────────────────────────
 
 /** Render the human-readable CONTEXT.md from context.json */
-export function renderContextMd(ctx) {
+function renderContextMd(ctx) {
   const latest = ctx.sessions?.[ctx.sessions.length - 1] || null;
   const lines = [
     `<!-- Generated by ck v2 — edit context.json instead -->`,
@@ -270,7 +270,7 @@ export function renderContextMd(ctx) {
 }
 
 /** Render the bordered briefing box used by /ck:resume */
-export function renderBriefingBox(ctx, _meta = {}) {
+function renderBriefingBox(ctx, _meta = {}) {
   const latest = ctx.sessions?.[ctx.sessions.length - 1] || {};
   const W = 57;
   const pad = (str, w) => {
@@ -317,7 +317,7 @@ export function renderBriefingBox(ctx, _meta = {}) {
 }
 
 /** Render compact info block used by /ck:info */
-export function renderInfoBlock(ctx) {
+function renderInfoBlock(ctx) {
   const latest = ctx.sessions?.[ctx.sessions.length - 1] || {};
   const sep = '─'.repeat(44);
   const lines = [
@@ -344,7 +344,7 @@ export function renderInfoBlock(ctx) {
 }
 
 /** Render ASCII list table used by /ck:list */
-export function renderListTable(entries, cwd, _todayStr) {
+function renderListTable(entries, cwd, _todayStr) {
   // entries: [{name, contextDir, path, context, lastUpdated}]
   // Sorted alphabetically by contextDir before calling
   const rows = entries.map((e, i) => {
@@ -385,3 +385,32 @@ export function renderListTable(entries, cwd, _todayStr) {
 
   return [hr, headerRow, hr, ...dataRows, hr].join('\n');
 }
+
+module.exports = {
+  CK_HOME,
+  CONTEXTS_DIR,
+  PROJECTS_FILE,
+  CURRENT_SESSION,
+  SKILL_FILE,
+  readJson,
+  writeJson,
+  readProjects,
+  writeProjects,
+  contextPath,
+  contextMdPath,
+  loadContext,
+  saveContext,
+  resolveContext,
+  today,
+  daysAgoLabel,
+  stalenessIcon,
+  shortId,
+  gitLogSince,
+  gitSummary,
+  encodeProjectPath,
+  nativeMemoryDir,
+  renderContextMd,
+  renderBriefingBox,
+  renderInfoBlock,
+  renderListTable,
+};

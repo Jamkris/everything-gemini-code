@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /**
  * ck — Context Keeper v2
- * session-start.mjs — inject compact project context on session start.
+ * session-start.js — inject compact project context on session start.
  *
  * Injects ~100 tokens (not ~2,500 like v1).
  * SKILL.md is injected separately (still small at ~50 lines).
@@ -14,10 +14,10 @@
  * - Mini portfolio for unregistered directories
  */
 
-import { readFileSync, writeFileSync, existsSync } from 'fs';
-import { resolve } from 'path';
-import { homedir } from 'os';
-import { spawnSync } from 'child_process';
+const { readFileSync, writeFileSync, existsSync } = require('fs');
+const { resolve } = require('path');
+const { homedir } = require('os');
+const { spawnSync } = require('child_process');
 
 const CK_HOME         = resolve(homedir(), '.claude', 'ck');
 const PROJECTS_FILE   = resolve(CK_HOME, 'projects.json');

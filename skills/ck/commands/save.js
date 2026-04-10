@@ -1,28 +1,28 @@
 #!/usr/bin/env node
 /**
  * ck — Context Keeper v2
- * save.mjs — write session data to context.json, regenerate CONTEXT.md,
+ * save.js — write session data to context.json, regenerate CONTEXT.md,
  *             and write a native memory entry.
  *
  * Usage (regular save):
- *   echo '<json>' | node save.mjs
+ *   echo '<json>' | node save.js
  *   JSON schema: { summary, leftOff, nextSteps[], decisions[{what,why}], blockers[], goal? }
  *
  * Usage (init — first registration):
- *   echo '<json>' | node save.mjs --init
+ *   echo '<json>' | node save.js --init
  *   JSON schema: { name, path, description, stack[], goal, constraints[], repo? }
  *
  * stdout: confirmation message
  * exit 0: success  exit 1: error
  */
 
-import { readFileSync, mkdirSync, writeFileSync } from 'fs';
-import { resolve } from 'path';
-import {
+const { readFileSync, mkdirSync, writeFileSync } = require('fs');
+const { resolve } = require('path');
+const {
   readProjects, writeProjects, loadContext, saveContext,
   today, shortId, gitSummary, nativeMemoryDir,
   CURRENT_SESSION,
-} from './shared.mjs';
+} = require('./shared.js');
 
 const isInit = process.argv.includes('--init');
 const cwd    = process.env.PWD || process.cwd();

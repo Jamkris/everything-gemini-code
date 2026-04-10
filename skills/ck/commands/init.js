@@ -1,16 +1,16 @@
 #!/usr/bin/env node
 /**
  * ck — Context Keeper v2
- * init.mjs — auto-detect project info and output JSON for Claude to confirm
+ * init.js — auto-detect project info and output JSON for Claude to confirm
  *
- * Usage: node init.mjs
+ * Usage: node init.js
  * stdout: JSON with auto-detected project info
  * exit 0: success  exit 1: error
  */
 
-import { readFileSync, existsSync } from 'fs';
-import { resolve, basename } from 'path';
-import { readProjects } from './shared.mjs';
+const { readFileSync, existsSync } = require('fs');
+const { resolve, basename } = require('path');
+const { readProjects } = require('./shared.js');
 
 const cwd = process.env.PWD || process.cwd();
 const projects = readProjects();

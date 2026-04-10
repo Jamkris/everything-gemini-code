@@ -1,15 +1,15 @@
 #!/usr/bin/env node
 /**
  * ck — Context Keeper v2
- * resume.mjs — full project briefing
+ * resume.js — full project briefing
  *
- * Usage: node resume.mjs [name|number]
+ * Usage: node resume.js [name|number]
  * stdout: bordered briefing box
  * exit 0: success  exit 1: not found
  */
 
-import { existsSync } from 'fs';
-import { resolveContext, renderBriefingBox } from './shared.mjs';
+const { existsSync } = require('fs');
+const { resolveContext, renderBriefingBox } = require('./shared.js');
 
 const arg = process.argv[2];
 const cwd = process.env.PWD || process.cwd();

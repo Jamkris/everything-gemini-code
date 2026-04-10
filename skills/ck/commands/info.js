@@ -1,14 +1,14 @@
 #!/usr/bin/env node
 /**
  * ck — Context Keeper v2
- * info.mjs — quick read-only context snapshot
+ * info.js — quick read-only context snapshot
  *
- * Usage: node info.mjs [name|number]
+ * Usage: node info.js [name|number]
  * stdout: compact info block
  * exit 0: success  exit 1: not found
  */
 
-import { resolveContext, renderInfoBlock } from './shared.mjs';
+const { resolveContext, renderInfoBlock } = require('./shared.js');
 
 const arg = process.argv[2];
 const cwd = process.env.PWD || process.cwd();
