@@ -189,7 +189,7 @@ rm -rf ~/.gemini/skills/* ~/.gemini/commands/*
 
 ## 🤝 Contributing
 
-**Contributions are welcome!** See the [Contributing Guide](docs/en/contributing/README.md).
+**Contributions are welcome!** See the [Contributing Guide](CONTRIBUTING.md).
 
 If you have useful agents, skills, or configurations, please submit a Pull Request.
 

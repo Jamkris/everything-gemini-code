@@ -1,6 +1,6 @@
 # 기여 가이드
 
-**언어:** [English](../../en/contributing/README.md) | **한국어**
+**언어:** [English](../../../CONTRIBUTING.md) | **한국어**
 
 Everything Gemini Code에 기여해 주셔서 감사합니다!
 
