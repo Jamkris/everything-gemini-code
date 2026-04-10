@@ -1,8 +1,7 @@
 ---
 name: silent-failure-hunter
 description: Review code for silent failures, swallowed errors, bad fallbacks, and missing error propagation.
-model: sonnet
-tools: [Read, Grep, Glob, Bash]
+tools: [read_file, search_files, list_directory, run_shell_command]
 ---
 
 # Silent Failure Hunter Agent

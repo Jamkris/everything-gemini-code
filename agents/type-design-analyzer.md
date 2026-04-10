@@ -1,8 +1,7 @@
 ---
 name: type-design-analyzer
 description: Analyze type design for encapsulation, invariant expression, usefulness, and enforcement.
-model: sonnet
-tools: [Read, Grep, Glob, Bash]
+tools: [read_file, search_files, list_directory, run_shell_command]
 ---
 
 # Type Design Analyzer Agent

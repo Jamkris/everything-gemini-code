@@ -1,8 +1,7 @@
 ---
 name: code-simplifier
 description: Simplifies and refines code for clarity, consistency, and maintainability while preserving behavior. Focus on recently modified code unless instructed otherwise.
-model: sonnet
-tools: [Read, Write, Edit, Bash, Grep, Glob]
+tools: [read_file, write_file, replace_in_file, run_shell_command, search_files, list_directory]
 ---
 
 # Code Simplifier Agent
