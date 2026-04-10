@@ -100,4 +100,10 @@ while iteration <= max_iterations:
 
 Write the full report to `gan-harness/build-report.md`.
 
+## Related Commands
+
+- `/gan-design` — Design-focused generation loop
+- `/code-review` — Standard code review
+- `/tdd` — Test-driven development workflow
+
 '''

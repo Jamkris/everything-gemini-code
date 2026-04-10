@@ -36,4 +36,9 @@ Same as `/project:gan-build` Phase 2, but:
 ### Key Difference from gan-build
 The Generator is told: "Your PRIMARY goal is visual excellence. A stunning half-finished app beats a functional ugly one. Push for creative leaps — unusual layouts, custom animations, distinctive color work."
 
+## Related Commands
+
+- `/gan-build` — Build-focused generation loop
+- `/e2e` — End-to-end testing
+
 '''

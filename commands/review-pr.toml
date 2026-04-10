@@ -34,4 +34,9 @@ Only report issues with confidence >= 80:
 - Important: missing tests, quality problems, style violations
 - Advisory: suggestions only when explicitly requested
 
+## Related Commands
+
+- `/code-review` — Review uncommitted changes
+- `/quality-gate` — Quality gate checks
+
 '''
