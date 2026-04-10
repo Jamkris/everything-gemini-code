@@ -17,27 +17,27 @@ You analyze conversation history to identify problematic Gemini CLI behaviors th
 - "That's wrong, use Y instead"
 
 ### Frustrated Reactions
-- User reverting changes Claude made
+- User reverting changes the agent made
 - Repeated "no" or "wrong" responses
-- User manually fixing Claude's output
+- User manually fixing the agent's output
 - Escalating frustration in tone
 
 ### Repeated Issues
 - Same mistake appearing multiple times in the conversation
-- Claude repeatedly using a tool in an undesired way
+- the agent repeatedly using a tool in an undesired way
 - Patterns of behavior the user keeps correcting
 
 ### Reverted Changes
-- `git checkout -- file` or `git restore file` after Claude's edit
-- User undoing or reverting Claude's work
-- Re-editing files Claude just edited
+- `git checkout -- file` or `git restore file` after the agent's edit
+- User undoing or reverting the agent's work
+- Re-editing files the agent just edited
 
 ## Output Format
 
 For each identified behavior:
 
 ```yaml
-behavior: "Description of what Claude did wrong"
+behavior: "Description of what the agent did wrong"
 frequency: "How often it occurred"
 severity: high|medium|low
 suggested_rule:
