@@ -112,6 +112,50 @@ Skills are collections of workflow definitions and domain knowledge, defined as 
 | [autonomous-loops](autonomous-loops/) | Autonomous loop patterns |
 | [cost-aware-llm-pipeline](cost-aware-llm-pipeline/) | LLM cost optimization, model routing |
 | [agent-eval](agent-eval/) | Agent evaluation |
+| [agent-introspection-debugging](agent-introspection-debugging/) | Agent self-debugging workflow |
+| [autonomous-agent-harness](autonomous-agent-harness/) | Persistent autonomous agent system |
+| [gan-style-harness](gan-style-harness/) | GAN-style adversarial quality loops |
+| [agent-sort](agent-sort/) | Agent configuration management |
+| [token-budget-advisor](token-budget-advisor/) | Response depth/token budget control |
+
+## DevOps & Operations
+
+| Skill | Description |
+|-------|-------------|
+| [github-ops](github-ops/) | GitHub automation and management |
+| [jira-integration](jira-integration/) | Jira ticket integration |
+| [dashboard-builder](dashboard-builder/) | Dashboard generation |
+| [email-ops](email-ops/) | Email automation |
+| [hookify-rules](hookify-rules/) | Behavior-prevention hook rules |
+
+## Domain-Specific
+
+| Skill | Description |
+|-------|-------------|
+| [healthcare-cdss-patterns](healthcare-cdss-patterns/) | Clinical decision support |
+| [healthcare-emr-patterns](healthcare-emr-patterns/) | EMR system patterns |
+| [healthcare-eval-harness](healthcare-eval-harness/) | Healthcare evaluation |
+| [healthcare-phi-compliance](healthcare-phi-compliance/) | PHI compliance |
+| [hipaa-compliance](hipaa-compliance/) | HIPAA compliance |
+| [defi-amm-security](defi-amm-security/) | DeFi AMM security |
+| [customs-trade-compliance](customs-trade-compliance/) | Trade compliance |
+
+## Architecture
+
+| Skill | Description |
+|-------|-------------|
+| [hexagonal-architecture](hexagonal-architecture/) | Hexagonal/ports-adapters architecture |
+| [nestjs-patterns](nestjs-patterns/) | NestJS patterns |
+| [dotnet-patterns](dotnet-patterns/) | .NET/C# patterns |
+| [csharp-testing](csharp-testing/) | C# testing patterns |
+| [dart-flutter-patterns](dart-flutter-patterns/) | Dart/Flutter patterns |
+
+## Media & Video
+
+| Skill | Description |
+|-------|-------------|
+| [remotion-video-creation](remotion-video-creation/) | Remotion video creation |
+| [manim-video](manim-video/) | Mathematical animation videos |
 
 ## Business & Content
 
@@ -122,3 +166,8 @@ Skills are collections of workflow definitions and domain knowledge, defined as 
 | [market-research](market-research/) | Market, competitor, investor research |
 | [investor-materials](investor-materials/) | Pitch decks, one-pagers, financial models |
 | [deep-research](deep-research/) | Deep research workflow |
+| [brand-voice](brand-voice/) | Brand voice guidelines |
+| [seo](seo/) | SEO optimization |
+| [lead-intelligence](lead-intelligence/) | Lead research and outreach |
+| [product-capability](product-capability/) | Product capability analysis |
+| [openclaw-persona-forge](openclaw-persona-forge/) | AI persona creation |
