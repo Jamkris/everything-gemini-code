@@ -113,8 +113,8 @@ Trigger Gemini CLI agents remotely for event-driven workflows.
 
 ```bash
 # Trigger from CI/CD
-curl -X POST "https://api.anthropic.com/dispatch" \
-  -H "Authorization: Bearer $ANTHROPIC_API_KEY" \
+curl -X POST "https://generativelanguage.googleapis.com/v1/dispatch" \
+  -H "Authorization: Bearer $GEMINI_API_KEY" \
   -d '{"prompt": "Build failed on main. Diagnose and fix.", "project": "/repo"}'
 
 # Trigger from webhook
