@@ -7,7 +7,7 @@
  * stdout: confirmation or error
  * exit 0: success  exit 1: not found
  *
- * Note: SKILL.md instructs Claude to ask "Are you sure?" before calling this script.
+ * Note: SKILL.md instructs Gemini to ask "Are you sure?" before calling this script.
  * This script is the "do it" step — no confirmation prompt here.
  */
 

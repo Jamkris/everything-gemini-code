@@ -1,6 +1,6 @@
 ---
 name: agent-eval
-description: Head-to-head comparison of coding agents (Claude Code, Aider, Codex, etc.) on custom tasks with pass rate, cost, time, and consistency metrics
+description: Head-to-head comparison of coding agents (Gemini CLI, Aider, Codex, etc.) on custom tasks with pass rate, cost, time, and consistency metrics
 origin: ECC
 tools: Read, Write, Edit, Bash, Grep, Glob
 ---
@@ -11,7 +11,7 @@ A lightweight CLI tool for comparing coding agents head-to-head on reproducible 
 
 ## When to Use
 
-- Comparing coding agents (Claude Code, Aider, Codex, etc.) on your own codebase
+- Comparing coding agents (Gemini CLI, Aider, Codex, etc.) on your own codebase
 - Measuring agent performance before adopting a new tool or model
 - Running regression checks when an agent updates its model or tooling
 - Producing data-backed agent selection decisions for a team

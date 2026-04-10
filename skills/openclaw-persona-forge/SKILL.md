@@ -286,7 +286,7 @@ python3 ${SKILL_DIR}/gacha.py [次数]
 ## 兼容性
 
 本 Skill 遵循 Markdown 指令注入标准：
-- **Claude Code / Claude.ai**：原生支持
+- **Gemini CLI / Gemini**：原生支持
 - **OpenClaw Agent**：通过 SOUL.md 注入
 - **其他 Agent**：支持 SKILL.md 格式的框架均可使用
 

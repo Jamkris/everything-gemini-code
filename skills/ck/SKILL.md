@@ -1,6 +1,6 @@
 ---
 name: ck
-description: Persistent per-project memory for Claude Code. Auto-loads project context on session start, tracks sessions with git activity, and writes to native memory. Commands run deterministic Node.js scripts — behavior is consistent across model versions.
+description: Persistent per-project memory for Gemini CLI. Auto-loads project context on session start, tracks sessions with git activity, and writes to native memory. Commands run deterministic Node.js scripts — behavior is consistent across model versions.
 origin: community
 version: 2.0.0
 author: sreedhargs89
@@ -31,7 +31,7 @@ Scripts live at: `~/.gemini/skills/ck/commands/` (expand `~` with `$HOME`).
 
 ### `/ck:init` — Register a Project
 ```bash
-node "$HOME/.claude/skills/ck/commands/init.js"
+node "$HOME/.gemini/skills/ck/commands/init.js"
 ```
 The script outputs JSON with auto-detected info. Present it as a confirmation draft:
 ```
@@ -45,7 +45,7 @@ Repo:        <repo or "none">
 ```
 Wait for user approval. Apply any edits. Then pipe confirmed JSON to save.js --init:
 ```bash
-echo '<confirmed-json>' | node "$HOME/.claude/skills/ck/commands/save.js" --init
+echo '<confirmed-json>' | node "$HOME/.gemini/skills/ck/commands/save.js" --init
 ```
 Confirmed JSON schema: `{"name":"...","path":"...","description":"...","stack":["..."],"goal":"...","constraints":["..."],"repo":"..." }`
 
@@ -63,7 +63,7 @@ Confirmed JSON schema: `{"name":"...","path":"...","description":"...","stack":[
 Show a draft summary to the user: `"Session: '<summary>' — save this? (yes / edit)"`
 Wait for confirmation. Then pipe to save.js:
 ```bash
-echo '<json>' | node "$HOME/.claude/skills/ck/commands/save.js"
+echo '<json>' | node "$HOME/.gemini/skills/ck/commands/save.js"
 ```
 JSON schema (exact): `{"summary":"...","leftOff":"...","nextSteps":["..."],"decisions":[{"what":"...","why":"..."}],"blockers":["..."]}`
 Display the script's stdout confirmation verbatim.
@@ -72,7 +72,7 @@ Display the script's stdout confirmation verbatim.
 
 ### `/ck:resume [name|number]` — Full Briefing
 ```bash
-node "$HOME/.claude/skills/ck/commands/resume.js" [arg]
+node "$HOME/.gemini/skills/ck/commands/resume.js" [arg]
 ```
 Display output verbatim. Then ask: "Continue from here? Or has anything changed?"
 If user reports changes → run `/ck:save` immediately.
@@ -81,7 +81,7 @@ If user reports changes → run `/ck:save` immediately.
 
 ### `/ck:info [name|number]` — Quick Snapshot
 ```bash
-node "$HOME/.claude/skills/ck/commands/info.js" [arg]
+node "$HOME/.gemini/skills/ck/commands/info.js" [arg]
 ```
 Display output verbatim. No follow-up question.
 
@@ -89,7 +89,7 @@ Display output verbatim. No follow-up question.
 
 ### `/ck:list` — Portfolio View
 ```bash
-node "$HOME/.claude/skills/ck/commands/list.js"
+node "$HOME/.gemini/skills/ck/commands/list.js"
 ```
 Display output verbatim. If user replies with a number or name → run `/ck:resume`.
 
@@ -100,7 +100,7 @@ First resolve the project name (run `/ck:list` if needed).
 Ask: `"This will permanently delete context for '<name>'. Are you sure? (yes/no)"`
 If yes:
 ```bash
-node "$HOME/.claude/skills/ck/commands/forget.js" [name]
+node "$HOME/.gemini/skills/ck/commands/forget.js" [name]
 ```
 Display confirmation verbatim.
 
@@ -108,11 +108,11 @@ Display confirmation verbatim.
 
 ### `/ck:migrate` — Convert v1 Data to v2
 ```bash
-node "$HOME/.claude/skills/ck/commands/migrate.js"
+node "$HOME/.gemini/skills/ck/commands/migrate.js"
 ```
 For a dry run first:
 ```bash
-node "$HOME/.claude/skills/ck/commands/migrate.js" --dry-run
+node "$HOME/.gemini/skills/ck/commands/migrate.js" --dry-run
 ```
 Display output verbatim. Migrates all v1 CONTEXT.md + meta.json files to v2 context.json.
 Originals are backed up as `meta.json.v1-backup` — nothing is deleted.
@@ -135,7 +135,7 @@ The hook at `~/.gemini/skills/ck/hooks/session-start.js` must be registered in
 ```
 
 The hook injects ~100 tokens per session (compact 5-line summary). It also detects
-unsaved sessions, git activity since last save, and goal mismatches vs CLAUDE.md.
+unsaved sessions, git activity since last save, and goal mismatches vs GEMINI.md.
 
 ---
 

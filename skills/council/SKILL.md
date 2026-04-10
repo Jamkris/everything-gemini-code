@@ -7,7 +7,7 @@ origin: ECC
 # Council
 
 Convene four advisors for ambiguous decisions:
-- the in-context Claude voice
+- the in-context Gemini voice
 - a Skeptic subagent
 - a Pragmatist subagent
 - a Critic subagent

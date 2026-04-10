@@ -13,11 +13,11 @@ const { randomBytes } = require('crypto');
 
 // ─── Paths ────────────────────────────────────────────────────────────────────
 
-const CK_HOME          = resolve(homedir(), '.claude', 'ck');
+const CK_HOME          = resolve(homedir(), '.gemini', 'ck');
 const CONTEXTS_DIR     = resolve(CK_HOME, 'contexts');
 const PROJECTS_FILE    = resolve(CK_HOME, 'projects.json');
 const CURRENT_SESSION  = resolve(CK_HOME, 'current-session.json');
-const SKILL_FILE       = resolve(homedir(), '.claude', 'skills', 'ck', 'SKILL.md');
+const SKILL_FILE       = resolve(homedir(), '.gemini', 'skills', 'ck', 'SKILL.md');
 
 // ─── JSON I/O ─────────────────────────────────────────────────────────────────
 
@@ -189,7 +189,7 @@ function encodeProjectPath(absolutePath) {
 
 function nativeMemoryDir(absolutePath) {
   const encoded = encodeProjectPath(absolutePath);
-  return resolve(homedir(), '.claude', 'projects', encoded, 'memory');
+  return resolve(homedir(), '.gemini', 'projects', encoded, 'memory');
 }
 
 // ─── Rendering ────────────────────────────────────────────────────────────────

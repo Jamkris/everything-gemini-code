@@ -1,5 +1,5 @@
 <!-- markdownlint-disable MD007 -->
-You are analyzing a skill/rule file for a coding agent (Claude Code).
+You are analyzing a skill/rule file for a coding agent (Gemini CLI).
 Your task: extract the **observable behavioral sequence** that an agent should follow when this skill is active.
 
 Each step should be described in natural language. Do NOT use regex patterns.

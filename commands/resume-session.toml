@@ -14,7 +14,7 @@ This command is the counterpart to `/save-session`.
 - Starting a new session to continue work from a previous day
 - After starting a fresh session due to context limits
 - When handing off a session file from another source (just provide the file path)
-- Any time you have a session file and want Claude to fully absorb it before proceeding
+- Any time you have a session file and want Gemini to fully absorb it before proceeding
 
 ## Usage
 
@@ -116,7 +116,7 @@ Report: "Session file found but appears empty or unreadable. You may need to cre
 ## Example Output
 
 ```
-SESSION LOADED: /Users/you/.claude/sessions/2024-01-15-abc123de-session.tmp
+SESSION LOADED: /Users/you/.gemini/sessions/2024-01-15-abc123de-session.tmp
 ════════════════════════════════════════════════
 
 PROJECT: my-app — JWT Authentication

@@ -18,7 +18,7 @@ origin: community
 
 # Token Budget Advisor (TBA)
 
-Intercept the response flow to offer the user a choice about response depth **before** Claude answers.
+Intercept the response flow to offer the user a choice about response depth **before** Gemini answers.
 
 ## When to Use
 
@@ -129,5 +129,5 @@ This skill uses heuristic estimation — no real tokenizer. Accuracy ~85-90%, va
 
 ## Source
 
-Standalone skill from [TBA — Token Budget Advisor for Claude Code](https://github.com/Xabilimon1/Token-Budget-Advisor-Claude-Code-).
+Standalone skill from [TBA — Token Budget Advisor for Gemini CLI](https://github.com/Xabilimon1/Token-Budget-Advisor-Claude-Code-).
 Original project also ships a Python estimator script, but this repository keeps the skill self-contained and heuristic-only.

@@ -15,7 +15,7 @@ If no PR is specified, review the current branch's PR. If no focus is specified,
 1. Identify the PR:
    - use `gh pr view` to get PR details, changed files, and diff
 2. Find project guidance:
-   - look for `CLAUDE.md`, lint config, TypeScript config, repo conventions
+   - look for `GEMINI.md`, lint config, TypeScript config, repo conventions
 3. Run specialized review agents:
    - `code-reviewer`
    - `comment-analyzer`

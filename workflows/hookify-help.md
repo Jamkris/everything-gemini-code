@@ -6,7 +6,7 @@ Display comprehensive hookify documentation.
 
 ## Hook System Overview
 
-Hookify creates rule files that integrate with Claude Code's hook system to prevent unwanted behaviors.
+Hookify creates rule files that integrate with Gemini CLI's hook system to prevent unwanted behaviors.
 
 ### Event Types
 
@@ -18,7 +18,7 @@ Hookify creates rule files that integrate with Claude Code's hook system to prev
 
 ### Rule File Format
 
-Files are stored as `.claude/hookify.{name}.local.md`:
+Files are stored as `.gemini/hookify.{name}.local.md`:
 
 ```yaml
 ---

@@ -138,4 +138,4 @@ HANDOFF
 
 - Product intent is now concrete enough to implement without rediscovering hidden constraints mid-PR.
 - Engineering review has a durable artifact instead of relying on memory or Slack context.
-- The resulting plan is reusable across Claude Code, Codex, Cursor, OpenCode, and ECC 2.0 planning surfaces.
+- The resulting plan is reusable across Gemini CLI, Codex, Cursor, OpenCode, and ECC 2.0 planning surfaces.

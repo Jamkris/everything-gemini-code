@@ -2,7 +2,7 @@ description = 'Execute - Multi-Model Collaborative Execution'
 prompt = '''
 # Execute - Multi-Model Collaborative Execution
 
-Multi-model collaborative execution - Get prototype from plan → Claude refactors and implements → Multi-model audit and delivery.
+Multi-model collaborative execution - Get prototype from plan → Gemini CLI refactors and implements → Multi-model audit and delivery.
 
 $ARGUMENTS
 
@@ -11,7 +11,7 @@ $ARGUMENTS
 ## Core Protocols
 
 - **Language Protocol**: Use **English** when interacting with tools/models, communicate with user in their language
-- **Code Sovereignty**: External models have **zero filesystem write access**, all modifications by Claude
+- **Code Sovereignty**: External models have **zero filesystem write access**, all modifications by Gemini CLI
 - **Dirty Prototype Refactoring**: Treat Codex/Gemini Unified Diff as "dirty prototype", must refactor to production-grade code
 - **Stop-Loss Mechanism**: Do not proceed to next phase until current phase output is validated
 - **Prerequisite**: Only execute after user explicitly replies "Y" to `/ccg:plan` output (if missing, must confirm first)
@@ -113,7 +113,7 @@ TaskOutput({ task_id: "<task_id>", block: true, timeout: 600000 })
 `[Mode: Prepare]`
 
 1. **Identify Input Type**:
-   - Plan file path (e.g., `.claude/plan/xxx.md`)
+   - Plan file path (e.g., `.gemini/plan/xxx.md`)
    - Direct task description
 
 2. **Read Plan Content**:
@@ -154,7 +154,7 @@ mcp__ace-tool__search_context({
 - Build semantic query covering: entry files, dependency modules, related type definitions
 - If results insufficient, add 1-2 recursive retrievals
 
-**If ace-tool MCP is NOT available**, use Claude Code built-in tools as fallback:
+**If ace-tool MCP is NOT available**, use Gemini CLI built-in tools as fallback:
 1. **Glob**: Find target files from plan's "Key Files" table (e.g., `Glob("src/components/**/*.tsx")`)
 2. **Grep**: Search for key symbols, function names, type definitions across the codebase
 3. **Read**: Read the discovered files to gather complete context
@@ -208,7 +208,7 @@ mcp__ace-tool__search_context({
 
 `[Mode: Implement]`
 
-**Claude as Code Sovereign executes the following steps**:
+**Gemini CLI as Code Sovereign executes the following steps**:
 
 1. **Read Diff**: Parse Unified Diff Patch returned by Codex/Gemini
 
@@ -290,7 +290,7 @@ After audit passes, report to user:
 
 ## Key Rules
 
-1. **Code Sovereignty** – All file modifications by Claude, external models have zero write access
+1. **Code Sovereignty** – All file modifications by Gemini CLI, external models have zero write access
 2. **Dirty Prototype Refactoring** – Codex/Gemini output treated as draft, must refactor
 3. **Trust Rules** – Backend follows Codex, Frontend follows Gemini
 4. **Minimal Changes** – Only modify necessary code, no side effects
@@ -302,7 +302,7 @@ After audit passes, report to user:
 
 ```bash
 # Execute plan file
-/ccg:execute .claude/plan/feature-name.md
+/ccg:execute .gemini/plan/feature-name.md
 
 # Execute task directly (for plans already discussed in context)
 /ccg:execute implement user authentication based on previous plan

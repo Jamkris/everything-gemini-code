@@ -121,14 +121,14 @@ If only 1 agent was selected, skip synthesis and present the output directly.
 - **Dynamic discovery only.** Never hardcode agent lists. New files in the directory auto-appear in the menu.
 - **Max 5 agents per team.** More than 5 produces diminishing returns and excessive token usage. Enforce at selection time.
 - **Parallel dispatch.** All agents run simultaneously — use the Agent tool's parallel invocation pattern.
-- **Parallel Agent calls, not TeamCreate.** This skill uses parallel Agent tool calls for independent work. TeamCreate (a Claude Code tool for multi-agent dialogue) is only needed when agents must debate or respond to each other.
+- **Parallel Agent calls, not TeamCreate.** This skill uses parallel Agent tool calls for independent work. TeamCreate (a Gemini CLI tool for multi-agent dialogue) is only needed when agents must debate or respond to each other.
 
 ## Examples
 
 ```
 User: team builder
 
-Claude:
+Gemini:
 Available agent domains:
 1. Engineering (2) — Software Architect, Security Engineer
 2. Marketing (1) — SEO Specialist
@@ -139,7 +139,7 @@ Pick domains or name specific agents:
 
 User: security + seo
 
-Claude:
+Gemini:
 Selected: Security Engineer + SEO Specialist
 What should they work on?
 
@@ -147,7 +147,7 @@ User: Review my Next.js e-commerce site before launch
 
 [Both agents spawn in parallel, each applying their specialty to the codebase]
 
-Claude:
+Gemini:
 ## Security Engineer Findings
 - [findings...]
 

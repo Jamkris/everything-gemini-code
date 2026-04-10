@@ -131,20 +131,20 @@ This checklist is enforced by a `PostToolUse` hook that blocks completion until 
 - **Hooks over prompts for reliability**: LLMs forget instructions ~20% of the time. `PostToolUse` hooks enforce checklists at the tool level — the LLM physically cannot skip them.
 - **Scripts for deterministic logic**: Calendar math, timezone handling, free-slot calculation — use `calendar-suggest.js`, not the LLM.
 - **Knowledge files are memory**: `relationships.md`, `preferences.md`, `todo.md` persist across stateless sessions via git.
-- **Rules are system-injected**: `.claude/rules/*.md` files load automatically every session. Unlike prompt instructions, the LLM cannot choose to ignore them.
+- **Rules are system-injected**: `.gemini/rules/*.md` files load automatically every session. Unlike prompt instructions, the LLM cannot choose to ignore them.
 
 ## Example Invocations
 
 ```bash
-claude /mail                    # Email-only triage
-claude /slack                   # Slack-only triage
-claude /today                   # All channels + calendar + todo
-claude /schedule-reply "Reply to Sarah about the board meeting"
+gemini /mail                    # Email-only triage
+gemini /slack                   # Slack-only triage
+gemini /today                   # All channels + calendar + todo
+gemini /schedule-reply "Reply to Sarah about the board meeting"
 ```
 
 ## Prerequisites
 
-- [Gemini CLI](https://docs.anthropic.com/en/docs/claude-code)
+- [Gemini CLI](https://ai.google.dev/gemini-api/docs/cli)
 - Gmail CLI (e.g., gog by @pterm)
 - Node.js 18+ (for calendar-suggest.js)
 - Optional: Slack MCP server, Matrix bridge (LINE), Chrome + Playwright (Messenger)

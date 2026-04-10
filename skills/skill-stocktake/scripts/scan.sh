@@ -3,7 +3,7 @@
 # Usage: scan.sh [CWD_SKILLS_DIR]
 # Output: JSON to stdout
 #
-# When CWD_SKILLS_DIR is omitted, defaults to $PWD/.claude/skills so the
+# When CWD_SKILLS_DIR is omitted, defaults to $PWD/.gemini/skills so the
 # script always picks up project-level skills without relying on the caller.
 #
 # Environment:
@@ -13,16 +13,16 @@
 
 set -euo pipefail
 
-GLOBAL_DIR="${SKILL_STOCKTAKE_GLOBAL_DIR:-$HOME/.claude/skills}"
-CWD_SKILLS_DIR="${SKILL_STOCKTAKE_PROJECT_DIR:-${1:-$PWD/.claude/skills}}"
+GLOBAL_DIR="${SKILL_STOCKTAKE_GLOBAL_DIR:-$HOME/.gemini/skills}"
+CWD_SKILLS_DIR="${SKILL_STOCKTAKE_PROJECT_DIR:-${1:-$PWD/.gemini/skills}}"
 # Path to JSONL file containing tool-use observations (optional; used for usage frequency counts).
 # Override via SKILL_STOCKTAKE_OBSERVATIONS env var if your setup uses a different path.
-OBSERVATIONS="${SKILL_STOCKTAKE_OBSERVATIONS:-$HOME/.claude/observations.jsonl}"
+OBSERVATIONS="${SKILL_STOCKTAKE_OBSERVATIONS:-$HOME/.gemini/observations.jsonl}"
 
-# Validate CWD_SKILLS_DIR looks like a .claude/skills path (defense-in-depth).
+# Validate CWD_SKILLS_DIR looks like a .gemini/skills path (defense-in-depth).
 # Only warn when the path exists — a nonexistent path poses no traversal risk.
-if [[ -n "$CWD_SKILLS_DIR" && -d "$CWD_SKILLS_DIR" && "$CWD_SKILLS_DIR" != */.claude/skills* ]]; then
-  echo "Warning: CWD_SKILLS_DIR does not look like a .claude/skills path: $CWD_SKILLS_DIR" >&2
+if [[ -n "$CWD_SKILLS_DIR" && -d "$CWD_SKILLS_DIR" && "$CWD_SKILLS_DIR" != */.gemini/skills* ]]; then
+  echo "Warning: CWD_SKILLS_DIR does not look like a .gemini/skills path: $CWD_SKILLS_DIR" >&2
 fi
 
 # Extract a frontmatter field (handles both quoted and unquoted single-line values).

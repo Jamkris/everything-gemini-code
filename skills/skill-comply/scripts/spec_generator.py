@@ -21,7 +21,7 @@ def generate_spec(
 ) -> ComplianceSpec:
     """Generate a compliance spec from a skill/rule file.
 
-    Calls claude -p with the spec_generator prompt, parses YAML output.
+    Calls gemini -p with the spec_generator prompt, parses YAML output.
     Retries on YAML parse errors with error feedback.
     """
     skill_content = skill_path.read_text()
@@ -41,14 +41,14 @@ def generate_spec(
             )
 
         result = subprocess.run(
-            ["claude", "-p", prompt, "--model", model, "--output-format", "text"],
+            ["gemini", "-p", prompt, "--model", model, "--output-format", "text"],
             capture_output=True,
             text=True,
             timeout=120,
         )
 
         if result.returncode != 0:
-            raise RuntimeError(f"claude -p failed: {result.stderr}")
+            raise RuntimeError(f"gemini -p failed: {result.stderr}")
 
         raw_yaml = extract_yaml(result.stdout)
 

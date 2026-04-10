@@ -1,6 +1,6 @@
 ---
 name: dmux-workflows
-description: Multi-agent orchestration using dmux (tmux pane manager for AI agents). Patterns for parallel agent workflows across Claude Code, Codex, OpenCode, and other harnesses. Use when running multiple agent sessions in parallel or coordinating multi-agent development workflows.
+description: Multi-agent orchestration using dmux (tmux pane manager for AI agents). Patterns for parallel agent workflows across Gemini CLI, Codex, OpenCode, and other harnesses. Use when running multiple agent sessions in parallel or coordinating multi-agent development workflows.
 origin: ECC
 ---
 
@@ -11,7 +11,7 @@ Orchestrate parallel AI agent sessions using dmux, a tmux pane manager for agent
 ## When to Use
 
 - Running multiple agent sessions in parallel
-- Coordinating work across Claude Code, Codex, and other harnesses
+- Coordinating work across Gemini CLI, Codex, and other harnesses
 - Complex tasks that benefit from divide-and-conquer parallelism
 - User says "run in parallel", "split this work", "use dmux", or "multi-agent"
 
@@ -20,7 +20,7 @@ Orchestrate parallel AI agent sessions using dmux, a tmux pane manager for agent
 dmux is a tmux-based orchestration tool that manages AI agent panes:
 - Press `n` to create a new pane with a prompt
 - Press `m` to merge pane output back to the main session
-- Supports: Claude Code, Codex, OpenCode, Cline, Gemini, Qwen
+- Supports: Gemini CLI, Codex, OpenCode, Cline, Gemini, Qwen
 
 **Install:** Install dmux from its repository after reviewing the package. See [github.com/standardagents/dmux](https://github.com/standardagents/dmux)
 
@@ -84,9 +84,9 @@ Pane 2 (Fixer): "Fix failing tests based on the error output from pane 1"
 Use different AI tools for different tasks:
 
 ```
-Pane 1 (Claude Code): "Review the security of the auth module"
+Pane 1 (Gemini CLI): "Review the security of the auth module"
 Pane 2 (Codex): "Refactor the utility functions for performance"
-Pane 3 (Claude Code): "Write E2E tests for the checkout flow"
+Pane 3 (Gemini CLI): "Write E2E tests for the checkout flow"
 ```
 
 ### Pattern 5: Code Review Pipeline
@@ -119,8 +119,8 @@ git worktree add -b feat/auth ../feature-auth HEAD
 git worktree add -b feat/billing ../feature-billing HEAD
 
 # Run agents in separate worktrees
-# Pane 1: cd ../feature-auth && claude
-# Pane 2: cd ../feature-billing && claude
+# Pane 1: cd ../feature-auth && gemini
+# Pane 2: cd ../feature-billing && gemini
 
 # Merge branches when done
 git merge feat/auth
@@ -133,7 +133,7 @@ git merge feat/billing
 |------|-------------|-------------|
 | **dmux** | tmux pane management for agents | Parallel agent sessions |
 | **Superset** | Terminal IDE for 10+ parallel agents | Large-scale orchestration |
-| **Claude Code Task tool** | In-process subagent spawning | Programmatic parallelism within a session |
+| **Gemini CLI Task tool** | In-process subagent spawning | Programmatic parallelism within a session |
 | **Codex multi-agent** | Built-in agent roles | Codex-specific parallel work |
 
 ## ECC Helper
@@ -174,7 +174,7 @@ Use `seedPaths` when workers need access to dirty or untracked local files that 
   "seedPaths": [
     "scripts/orchestrate-worktrees.js",
     "scripts/lib/tmux-worktree-orchestrator.js",
-    ".claude/plan/workflow-e2e-test.json"
+    ".gemini/plan/workflow-e2e-test.json"
   ],
   "launcherCommand": "bash {repo_root}/scripts/orchestrate-codex-worker.sh {task_file} {handoff_file} {status_file}",
   "workers": [

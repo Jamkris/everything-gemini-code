@@ -6,7 +6,7 @@ Find and display all hookify rules in a formatted table.
 
 ## Steps
 
-1. Find all `.claude/hookify.*.local.md` files
+1. Find all `.gemini/hookify.*.local.md` files
 2. Read each file's frontmatter:
    - `name`
    - `enabled`

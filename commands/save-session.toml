@@ -10,7 +10,7 @@ Capture everything that happened in this session — what was built, what worked
 
 ## When to Use
 
-- End of a work session before closing Claude Code
+- End of a work session before closing Gemini CLI
 - Before hitting context limits (run this first, then start a fresh session)
 - After solving a complex problem you want to remember
 - Any time you need to hand off context to a future session
@@ -28,7 +28,7 @@ Before writing the file, collect:
 
 ### Step 2: Create the sessions folder if it doesn't exist
 
-Create the canonical sessions folder in the user's Claude home directory:
+Create the canonical sessions folder in the user's Gemini home directory:
 
 ```bash
 mkdir -p ~/.gemini/sessions
@@ -272,7 +272,7 @@ Then test with Postman — the response should include a `Set-Cookie` header.
 - Each session gets its own file — never append to a previous session's file
 - The "What Did NOT Work" section is the most critical — future sessions will blindly retry failed approaches without it
 - If the user asks to save mid-session (not just at the end), save what's known so far and mark in-progress items clearly
-- The file is meant to be read by Claude at the start of the next session via `/resume-session`
+- The file is meant to be read by Gemini at the start of the next session via `/resume-session`
 - Use the canonical global session store: `~/.gemini/sessions/`
 - Prefer the short-id filename form (`YYYY-MM-DD-<short-id>-session.tmp`) for any new session file
 

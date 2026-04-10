@@ -19,7 +19,7 @@ Neural search for web content, code, companies, and people via the Exa MCP serve
 
 ## MCP Requirement
 
-Exa MCP server must be configured. Add to `~/.claude.json`:
+Exa MCP server must be configured. Add to `~/.gemini.json`:
 
 ```json
 "exa-web-search": {

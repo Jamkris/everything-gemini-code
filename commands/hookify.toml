@@ -1,6 +1,6 @@
 description = "Create hooks to prevent unwanted behaviors from conversation analysis or explicit instructions"
 prompt = '''
-Create hook rules to prevent unwanted Claude Code behaviors by analyzing conversation patterns or explicit user instructions.
+Create hook rules to prevent unwanted Gemini CLI behaviors by analyzing conversation patterns or explicit user instructions.
 
 ## Usage
 
@@ -30,7 +30,7 @@ Show the user:
 
 ### Step 3: Generate Rule Files
 
-For each approved rule, create a file at `.claude/hookify.{name}.local.md`:
+For each approved rule, create a file at `.gemini/hookify.{name}.local.md`:
 
 ```yaml
 ---

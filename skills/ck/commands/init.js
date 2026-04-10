@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /**
  * ck — Context Keeper v2
- * init.js — auto-detect project info and output JSON for Claude to confirm
+ * init.js — auto-detect project info and output JSON for Gemini to confirm
  *
  * Usage: node init.js
  * stdout: JSON with auto-detected project info
@@ -97,13 +97,13 @@ if (gitConfig) {
   if (repoMatch) output.repo = repoMatch[1].trim();
 }
 
-// ── CLAUDE.md ─────────────────────────────────────────────────────────────────
-const claudeMd = readFile('CLAUDE.md');
-if (claudeMd) {
-  const goal = extractSection(claudeMd, 'Current Goal');
+// ── GEMINI.md ─────────────────────────────────────────────────────────────────
+const geminiMd = readFile('GEMINI.md');
+if (geminiMd) {
+  const goal = extractSection(geminiMd, 'Current Goal');
   if (goal && !output.goal) output.goal = goal.split('\n')[0].trim();
 
-  const doNot = extractSection(claudeMd, 'Do Not Do');
+  const doNot = extractSection(geminiMd, 'Do Not Do');
   if (doNot) {
     const bullets = doNot.split('\n')
       .filter(l => /^[-*]\s+/.test(l))
@@ -111,13 +111,13 @@ if (claudeMd) {
     output.constraints = bullets;
   }
 
-  const stack = extractSection(claudeMd, 'Tech Stack');
+  const stack = extractSection(geminiMd, 'Tech Stack');
   if (stack && output.stack.length === 0) {
     output.stack = stack.split(/[,\n]/).map(s => s.replace(/^[-*]\s+/, '').trim()).filter(Boolean);
   }
 
   // Description from first section or "What This Is"
-  const whatItIs = extractSection(claudeMd, 'What This Is') || extractSection(claudeMd, 'About');
+  const whatItIs = extractSection(geminiMd, 'What This Is') || extractSection(geminiMd, 'About');
   if (whatItIs && !output.description) output.description = whatItIs.split('\n')[0].trim();
 }
 

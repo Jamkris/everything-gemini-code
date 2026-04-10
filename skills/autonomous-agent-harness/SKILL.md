@@ -1,12 +1,12 @@
 ---
 name: autonomous-agent-harness
-description: Transform Claude Code into a fully autonomous agent system with persistent memory, scheduled operations, computer use, and task queuing. Replaces standalone agent frameworks (Hermes, AutoGPT) by leveraging Claude Code's native crons, dispatch, MCP tools, and memory. Use when the user wants continuous autonomous operation, scheduled tasks, or a self-directing agent loop.
+description: Transform Gemini CLI into a fully autonomous agent system with persistent memory, scheduled operations, computer use, and task queuing. Replaces standalone agent frameworks (Hermes, AutoGPT) by leveraging Gemini CLI's native crons, dispatch, MCP tools, and memory. Use when the user wants continuous autonomous operation, scheduled tasks, or a self-directing agent loop.
 origin: ECC
 ---
 
 # Autonomous Agent Harness
 
-Turn Claude Code into a persistent, self-directing agent system using only native features and MCP servers.
+Turn Gemini CLI into a persistent, self-directing agent system using only native features and MCP servers.
 
 ## When to Use
 
@@ -21,7 +21,7 @@ Turn Claude Code into a persistent, self-directing agent system using only nativ
 
 ```
 ┌──────────────────────────────────────────────────────────────┐
-│                    Claude Code Runtime                        │
+│                    Gemini CLI Runtime                         │
 │                                                              │
 │  ┌──────────┐  ┌──────────┐  ┌──────────┐  ┌─────────────┐ │
 │  │  Crons   │  │ Dispatch │  │ Memory   │  │ Computer    │ │
@@ -49,7 +49,7 @@ Turn Claude Code into a persistent, self-directing agent system using only nativ
 
 ### 1. Persistent Memory
 
-Use Claude Code's built-in memory system enhanced with MCP memory server for structured data.
+Use Gemini CLI's built-in memory system enhanced with MCP memory server for structured data.
 
 **Built-in memory** (`~/.gemini/projects/*/memory/`):
 - User preferences, feedback, project context
@@ -78,7 +78,7 @@ Use mcp__memory__add_observations for new facts about known entities
 
 ### 2. Scheduled Operations (Crons)
 
-Use Claude Code's scheduled tasks to create recurring agent operations.
+Use Gemini CLI's scheduled tasks to create recurring agent operations.
 
 **Setting up a cron:**
 
@@ -87,12 +87,12 @@ Use Claude Code's scheduled tasks to create recurring agent operations.
 mcp__scheduled-tasks__create_scheduled_task({
   name: "daily-pr-review",
   schedule: "0 9 * * 1-5",  # 9 AM weekdays
-  prompt: "Review all open PRs in affaan-m/everything-claude-code. For each: check CI status, review changes, flag issues. Post summary to memory.",
+  prompt: "Review all open PRs in affaan-m/everything-gemini-code. For each: check CI status, review changes, flag issues. Post summary to memory.",
   project_dir: "/path/to/repo"
 })
 
-# Via claude -p (programmatic mode)
-echo "Review open PRs and summarize" | claude -p --project /path/to/repo
+# Via gemini -p (programmatic mode)
+echo "Review open PRs and summarize" | gemini -p --project /path/to/repo
 ```
 
 **Useful cron patterns:**
@@ -107,7 +107,7 @@ echo "Review open PRs and summarize" | claude -p --project /path/to/repo
 
 ### 3. Dispatch / Remote Agents
 
-Trigger Claude Code agents remotely for event-driven workflows.
+Trigger Gemini CLI agents remotely for event-driven workflows.
 
 **Dispatch patterns:**
 
@@ -118,15 +118,15 @@ curl -X POST "https://api.anthropic.com/dispatch" \
   -d '{"prompt": "Build failed on main. Diagnose and fix.", "project": "/repo"}'
 
 # Trigger from webhook
-# GitHub webhook → dispatch → Claude agent → fix → PR
+# GitHub webhook → dispatch → Gemini agent → fix → PR
 
 # Trigger from another agent
-claude -p "Analyze the output of the security scan and create issues for findings"
+gemini -p "Analyze the output of the security scan and create issues for findings"
 ```
 
 ### 4. Computer Use
 
-Leverage Claude's computer-use MCP for physical world interaction.
+Leverage Gemini's computer-use MCP for physical world interaction.
 
 **Capabilities:**
 - Browser automation (navigate, click, fill forms, screenshot)
@@ -169,8 +169,8 @@ description: Persistent task queue for autonomous operation
 
 | Hermes Component | ECC Equivalent | How |
 |------------------|---------------|-----|
-| Gateway/Router | Claude Code dispatch + crons | Scheduled tasks trigger agent sessions |
-| Memory System | Claude memory + MCP memory server | Built-in persistence + knowledge graph |
+| Gateway/Router | Gemini CLI dispatch + crons | Scheduled tasks trigger agent sessions |
+| Memory System | Gemini memory + MCP memory server | Built-in persistence + knowledge graph |
 | Tool Registry | MCP servers | Dynamically loaded tool providers |
 | Orchestration | ECC skills + agents | Skill definitions direct agent behavior |
 | Computer Use | computer-use MCP | Native browser and desktop control |
@@ -181,7 +181,7 @@ description: Persistent task queue for autonomous operation
 
 ### Step 1: Configure MCP Servers
 
-Ensure these are in `~/.claude.json`:
+Ensure these are in `~/.gemini.json`:
 
 ```json
 {
@@ -206,17 +206,17 @@ Ensure these are in `~/.claude.json`:
 
 ```bash
 # Daily morning briefing
-claude -p "Create a scheduled task: every weekday at 9am, review my GitHub notifications, open PRs, and calendar. Write a morning briefing to memory."
+gemini -p "Create a scheduled task: every weekday at 9am, review my GitHub notifications, open PRs, and calendar. Write a morning briefing to memory."
 
 # Continuous learning
-claude -p "Create a scheduled task: every Sunday at 8pm, extract patterns from this week's sessions and update the learned skills."
+gemini -p "Create a scheduled task: every Sunday at 8pm, extract patterns from this week's sessions and update the learned skills."
 ```
 
 ### Step 3: Initialize Memory Graph
 
 ```bash
 # Bootstrap your identity and context
-claude -p "Create memory entities for: me (user profile), my projects, my key contacts. Add observations about current priorities."
+gemini -p "Create memory entities for: me (user profile), my projects, my key contacts. Add observations about current priorities."
 ```
 
 ### Step 4: Enable Computer Use (Optional)

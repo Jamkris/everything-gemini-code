@@ -19,10 +19,10 @@ const { resolve } = require('path');
 const { homedir } = require('os');
 const { spawnSync } = require('child_process');
 
-const CK_HOME         = resolve(homedir(), '.claude', 'ck');
+const CK_HOME         = resolve(homedir(), '.gemini', 'ck');
 const PROJECTS_FILE   = resolve(CK_HOME, 'projects.json');
 const CURRENT_SESSION = resolve(CK_HOME, 'current-session.json');
-const SKILL_FILE      = resolve(homedir(), '.claude', 'skills', 'ck', 'SKILL.md');
+const SKILL_FILE      = resolve(homedir(), '.gemini', 'skills', 'ck', 'SKILL.md');
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
 
@@ -59,8 +59,8 @@ function gitLogSince(projectPath, sinceDate) {
   } catch { return null; }
 }
 
-function extractClaudeMdGoal(projectPath) {
-  const p = resolve(projectPath, 'CLAUDE.md');
+function extractGeminiMdGoal(projectPath) {
+  const p = resolve(projectPath, 'GEMINI.md');
   if (!existsSync(p)) return null;
   try {
     const md = readFileSync(p, 'utf8');
@@ -139,10 +139,10 @@ function main() {
       if (gitLine) summaryLines.push(`Git: ${gitLine}`);
 
       // ── Goal mismatch detection ───────────────────────────────────────────
-      const claudeMdGoal = extractClaudeMdGoal(cwd);
-      if (claudeMdGoal && context.goal &&
-          claudeMdGoal.toLowerCase().trim() !== context.goal.toLowerCase().trim()) {
-        summaryLines.push(`WARNING Goal mismatch — ck: "${context.goal.slice(0, 40)}" · CLAUDE.md: "${claudeMdGoal.slice(0, 40)}"`);
+      const geminiMdGoal = extractGeminiMdGoal(cwd);
+      if (geminiMdGoal && context.goal &&
+          geminiMdGoal.toLowerCase().trim() !== context.goal.toLowerCase().trim()) {
+        summaryLines.push(`WARNING Goal mismatch — ck: "${context.goal.slice(0, 40)}" · GEMINI.md: "${geminiMdGoal.slice(0, 40)}"`);
         summaryLines.push(`   Run /ck:save with updated goal to sync`);
       }
 
@@ -153,7 +153,7 @@ function main() {
         summaryLines.join('\n'),
       ].join('\n'));
 
-      // Instruct Claude to display compact briefing at session start
+      // Instruct Gemini to display compact briefing at session start
       parts.push([
         `---`,
         `## ck: SESSION START`,

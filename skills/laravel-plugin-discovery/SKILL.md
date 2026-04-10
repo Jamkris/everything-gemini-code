@@ -18,7 +18,7 @@ Find, evaluate, and choose healthy Laravel packages using the LaraPlugins.io MCP
 
 ## MCP Requirement
 
-LaraPlugins MCP server must be configured. Add to your `~/.claude.json` mcpServers:
+LaraPlugins MCP server must be configured. Add to your `~/.gemini.json` mcpServers:
 
 ```json
 "laraplugins": {
