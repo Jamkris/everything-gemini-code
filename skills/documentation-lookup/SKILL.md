@@ -23,7 +23,7 @@ Activate when the user:
 - Needs API or reference information ("What are the Supabase auth methods?")
 - Mentions specific frameworks or libraries (React, Vue, Svelte, Express, Tailwind, Prisma, Supabase, etc.)
 
-Use this skill whenever the request depends on accurate, up-to-date behavior of a library, framework, or API. Applies across harnesses that have the Context7 MCP configured (e.g. Claude Code, Cursor, Codex).
+Use this skill whenever the request depends on accurate, up-to-date behavior of a library, framework, or API. Applies across harnesses that have the Context7 MCP configured (e.g. Gemini CLI, Cursor, Codex).
 
 ## How it works
 

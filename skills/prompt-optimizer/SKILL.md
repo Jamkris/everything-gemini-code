@@ -27,7 +27,7 @@ and output a complete optimized prompt the user can paste and run.
 
 - User says "optimize this prompt", "improve my prompt", "rewrite this prompt"
 - User says "help me write a better prompt for..."
-- User says "what's the best way to ask Claude Code to..."
+- User says "what's the best way to ask Gemini CLI to..."
 - User says "优化prompt", "改进prompt", "怎么写prompt", "帮我优化这个指令"
 - User pastes a draft prompt and asks for feedback or enhancement
 - User says "I don't know how to prompt for this"
@@ -62,7 +62,7 @@ Run this 6-phase pipeline sequentially. Present results using the Output Format 
 
 Before analyzing the prompt, detect the current project context:
 
-1. Check if a `CLAUDE.md` exists in the working directory — read it for project conventions
+1. Check if a `GEMINI.md` exists in the working directory — read it for project conventions
 2. Detect tech stack from project files:
    - `package.json` → Node.js / TypeScript / React / Next.js
    - `go.mod` → Go
@@ -267,7 +267,7 @@ A compact version for experienced ECC users. Vary by intent type:
 ### Trigger Examples
 
 - "Optimize this prompt for ECC"
-- "Rewrite this prompt so Claude Code uses the right commands"
+- "Rewrite this prompt so Gemini CLI uses the right commands"
 - "帮我优化这个指令"
 - "How should I prompt ECC for this task?"
 

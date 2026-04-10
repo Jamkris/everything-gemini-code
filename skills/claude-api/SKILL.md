@@ -1,77 +1,72 @@
 ---
-name: claude-api
-description: Anthropic Claude API patterns for Python and TypeScript. Covers Messages API, streaming, tool use, vision, extended thinking, batches, prompt caching, and Claude Agent SDK. Use when building applications with the Claude API or Anthropic SDKs.
+name: gemini-api
+description: Google Gemini API patterns for Python and TypeScript. Covers content generation, streaming, tool use (function calling), vision, system instructions, context caching, batch requests, and agent workflows. Use when building applications with the Gemini API or Google Generative AI SDKs.
 origin: ECC
 ---
 
-# Claude API
+# Gemini API
 
-Build applications with the Anthropic Claude API and SDKs.
+Build applications with the Google Gemini API and SDKs.
 
 ## When to Use
 
-- Building applications that call the Claude API
-- Code imports `anthropic` (Python) or `@anthropic-ai/sdk` (TypeScript)
-- User asks about Claude API patterns, tool use, streaming, or vision
-- Implementing agent workflows with Claude Agent SDK
+- Building applications that call the Gemini API
+- Code imports `google.generativeai` (Python) or `@google/generative-ai` (TypeScript)
+- User asks about Gemini API patterns, function calling, streaming, or vision
+- Implementing agent workflows with the Gemini API
 - Optimizing API costs, token usage, or latency
 
 ## Model Selection
 
 | Model | ID | Best For |
 |-------|-----|----------|
-| Opus 4.1 | `claude-opus-4-1` | Complex reasoning, architecture, research |
-| Sonnet 4 | `claude-sonnet-4-0` | Balanced coding, most development tasks |
-| Haiku 3.5 | `claude-3-5-haiku-latest` | Fast responses, high-volume, cost-sensitive |
+| Pro 2.5 | `gemini-2.5-pro` | Complex reasoning, architecture, research |
+| Flash 2.5 | `gemini-2.5-flash` | Balanced coding, most development tasks |
+| Flash Lite 2.5 | `gemini-2.5-flash-lite` | Fast responses, high-volume, cost-sensitive |
 
-Default to Sonnet 4 unless the task requires deep reasoning (Opus) or speed/cost optimization (Haiku). For production, prefer pinned snapshot IDs over aliases.
+Default to Flash 2.5 unless the task requires deep reasoning (Pro) or speed/cost optimization (Flash Lite). For production, prefer pinned snapshot IDs over aliases.
 
 ## Python SDK
 
 ### Installation
 
 ```bash
-pip install anthropic
+pip install google-generativeai
 ```
 
 ### Basic Message
 
 ```python
-import anthropic
+import os
+import google.generativeai as genai
 
-client = anthropic.Anthropic()  # reads ANTHROPIC_API_KEY from env
+genai.configure(api_key=os.environ["GEMINI_API_KEY"])
 
-message = client.messages.create(
-    model="claude-sonnet-4-0",
-    max_tokens=1024,
-    messages=[
-        {"role": "user", "content": "Explain async/await in Python"}
-    ]
-)
-print(message.content[0].text)
+model = genai.GenerativeModel("gemini-2.5-flash")
+response = model.generate_content("Explain async/await in Python")
+print(response.text)
 ```
 
 ### Streaming
 
 ```python
-with client.messages.stream(
-    model="claude-sonnet-4-0",
-    max_tokens=1024,
-    messages=[{"role": "user", "content": "Write a haiku about coding"}]
-) as stream:
-    for text in stream.text_stream:
-        print(text, end="", flush=True)
+model = genai.GenerativeModel("gemini-2.5-flash")
+response = model.generate_content(
+    "Write a haiku about coding",
+    stream=True,
+)
+for chunk in response:
+    print(chunk.text, end="", flush=True)
 ```
 
-### System Prompt
+### System Instruction
 
 ```python
-message = client.messages.create(
-    model="claude-sonnet-4-0",
-    max_tokens=1024,
-    system="You are a senior Python developer. Be concise.",
-    messages=[{"role": "user", "content": "Review this function"}]
+model = genai.GenerativeModel(
+    "gemini-2.5-flash",
+    system_instruction="You are a senior Python developer. Be concise.",
 )
+response = model.generate_content("Review this function")
 ```
 
 ## TypeScript SDK
@@ -79,86 +74,94 @@ message = client.messages.create(
 ### Installation
 
 ```bash
-npm install @anthropic-ai/sdk
+npm install @google/generative-ai
 ```
 
 ### Basic Message
 
 ```typescript
-import Anthropic from "@anthropic-ai/sdk";
+import { GoogleGenerativeAI } from "@google/generative-ai";
 
-const client = new Anthropic(); // reads ANTHROPIC_API_KEY from env
+const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY!);
+const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
 
-const message = await client.messages.create({
-  model: "claude-sonnet-4-0",
-  max_tokens: 1024,
-  messages: [
-    { role: "user", content: "Explain async/await in TypeScript" }
-  ],
-});
-console.log(message.content[0].text);
+const result = await model.generateContent("Explain async/await in TypeScript");
+console.log(result.response.text());
 ```
 
 ### Streaming
 
 ```typescript
-const stream = client.messages.stream({
-  model: "claude-sonnet-4-0",
-  max_tokens: 1024,
-  messages: [{ role: "user", content: "Write a haiku" }],
-});
+const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
 
-for await (const event of stream) {
-  if (event.type === "content_block_delta" && event.delta.type === "text_delta") {
-    process.stdout.write(event.delta.text);
-  }
+const result = await model.generateContentStream("Write a haiku");
+
+for await (const chunk of result.stream) {
+  const text = chunk.text();
+  process.stdout.write(text);
 }
 ```
 
-## Tool Use
+## Function Calling (Tool Use)
 
-Define tools and let Claude call them:
+Define tools and let Gemini call them:
 
 ```python
-tools = [
-    {
-        "name": "get_weather",
-        "description": "Get current weather for a location",
-        "input_schema": {
-            "type": "object",
-            "properties": {
-                "location": {"type": "string", "description": "City name"},
-                "unit": {"type": "string", "enum": ["celsius", "fahrenheit"]}
-            },
-            "required": ["location"]
-        }
-    }
-]
+def get_weather(location: str, unit: str = "celsius") -> dict:
+    """Get current weather for a location."""
+    # Your implementation here
+    return {"temp": 18, "unit": unit, "location": location}
 
-message = client.messages.create(
-    model="claude-sonnet-4-0",
-    max_tokens=1024,
-    tools=tools,
-    messages=[{"role": "user", "content": "What's the weather in SF?"}]
+model = genai.GenerativeModel(
+    "gemini-2.5-flash",
+    tools=[get_weather],
 )
 
-# Handle tool use response
-for block in message.content:
-    if block.type == "tool_use":
-        # Execute the tool with block.input
-        result = get_weather(**block.input)
+chat = model.start_chat(enable_automatic_function_calling=True)
+response = chat.send_message("What's the weather in SF?")
+print(response.text)
+```
+
+For manual function calling (more control):
+
+```python
+import google.generativeai as genai
+from google.generativeai.types import FunctionDeclaration, Tool
+
+weather_func = FunctionDeclaration(
+    name="get_weather",
+    description="Get current weather for a location",
+    parameters={
+        "type": "object",
+        "properties": {
+            "location": {"type": "string", "description": "City name"},
+            "unit": {"type": "string", "enum": ["celsius", "fahrenheit"]},
+        },
+        "required": ["location"],
+    },
+)
+
+tool = Tool(function_declarations=[weather_func])
+model = genai.GenerativeModel("gemini-2.5-flash", tools=[tool])
+
+chat = model.start_chat()
+response = chat.send_message("What's the weather in SF?")
+
+# Check for function call in response
+for part in response.parts:
+    if fn := part.function_call:
+        # Execute the function with fn.args
+        result = get_weather(**dict(fn.args))
         # Send result back
-        follow_up = client.messages.create(
-            model="claude-sonnet-4-0",
-            max_tokens=1024,
-            tools=tools,
-            messages=[
-                {"role": "user", "content": "What's the weather in SF?"},
-                {"role": "assistant", "content": message.content},
-                {"role": "user", "content": [
-                    {"type": "tool_result", "tool_use_id": block.id, "content": str(result)}
-                ]}
-            ]
+        response = chat.send_message(
+            genai.protos.Content(
+                parts=[genai.protos.Part(
+                    function_response=genai.protos.FunctionResponse(
+                        name=fn.name,
+                        response={"result": result},
+                    )
+                )]
+            )
         )
 ```
 
@@ -167,142 +170,152 @@ for block in message.content:
 Send images for analysis:
 
 ```python
-import base64
+import PIL.Image
 
+image = PIL.Image.open("diagram.png")
+
+model = genai.GenerativeModel("gemini-2.5-flash")
+response = model.generate_content(
+    ["Describe this diagram", image]
+)
+print(response.text)
+```
+
+Or from raw bytes:
+
+```python
 with open("diagram.png", "rb") as f:
-    image_data = base64.standard_b64encode(f.read()).decode("utf-8")
+    image_data = f.read()
 
-message = client.messages.create(
-    model="claude-sonnet-4-0",
-    max_tokens=1024,
-    messages=[{
-        "role": "user",
-        "content": [
-            {"type": "image", "source": {"type": "base64", "media_type": "image/png", "data": image_data}},
-            {"type": "text", "text": "Describe this diagram"}
-        ]
-    }]
-)
+response = model.generate_content([
+    "Describe this diagram",
+    {"mime_type": "image/png", "data": image_data},
+])
 ```
 
-## Extended Thinking
+## Thinking (Extended Reasoning)
 
-For complex reasoning tasks:
+For complex reasoning tasks, enable thinking in the generation config:
 
 ```python
-message = client.messages.create(
-    model="claude-sonnet-4-0",
-    max_tokens=16000,
-    thinking={
-        "type": "enabled",
-        "budget_tokens": 10000
-    },
-    messages=[{"role": "user", "content": "Solve this math problem step by step..."}]
+model = genai.GenerativeModel("gemini-2.5-flash")
+response = model.generate_content(
+    "Solve this math problem step by step...",
+    generation_config=genai.GenerationConfig(
+        thinking_config=genai.types.ThinkingConfig(
+            thinking_budget=10000,
+        ),
+    ),
 )
 
-for block in message.content:
-    if block.type == "thinking":
-        print(f"Thinking: {block.thinking}")
-    elif block.type == "text":
-        print(f"Answer: {block.text}")
+for part in response.candidates[0].content.parts:
+    if part.thought:
+        print(f"Thinking: {part.text}")
+    else:
+        print(f"Answer: {part.text}")
 ```
 
-## Prompt Caching
+## Context Caching
 
-Cache large system prompts or context to reduce costs:
+Cache large contexts to reduce costs on repeated requests:
 
 ```python
-message = client.messages.create(
-    model="claude-sonnet-4-0",
-    max_tokens=1024,
-    system=[
-        {"type": "text", "text": large_system_prompt, "cache_control": {"type": "ephemeral"}}
-    ],
-    messages=[{"role": "user", "content": "Question about the cached context"}]
+from google.generativeai import caching
+import datetime
+
+cache = caching.CachedContent.create(
+    model="gemini-2.5-flash",
+    display_name="my-cached-context",
+    system_instruction="You are an expert analyst.",
+    contents=[large_context_text],
+    ttl=datetime.timedelta(minutes=30),
 )
-# Check cache usage
-print(f"Cache read: {message.usage.cache_read_input_tokens}")
-print(f"Cache creation: {message.usage.cache_creation_input_tokens}")
+
+# Use the cached content with a model
+model = genai.GenerativeModel.from_cached_content(cache)
+response = model.generate_content("Question about the cached context")
 ```
 
-## Batches API
+## Batch Requests
 
-Process large volumes asynchronously at 50% cost reduction:
+Process multiple requests efficiently:
 
 ```python
-import time
+model = genai.GenerativeModel("gemini-2.5-flash")
 
-batch = client.messages.batches.create(
-    requests=[
-        {
-            "custom_id": f"request-{i}",
-            "params": {
-                "model": "claude-sonnet-4-0",
-                "max_tokens": 1024,
-                "messages": [{"role": "user", "content": prompt}]
-            }
-        }
-        for i, prompt in enumerate(prompts)
+# Use asyncio for concurrent requests
+import asyncio
+
+async def process_batch(prompts: list[str]) -> list[str]:
+    """Process multiple prompts concurrently."""
+    async_model = genai.GenerativeModel("gemini-2.5-flash")
+    tasks = [
+        async_model.generate_content_async(prompt)
+        for prompt in prompts
     ]
-)
+    responses = await asyncio.gather(*tasks)
+    return [r.text for r in responses]
 
-# Poll for completion
-while True:
-    status = client.messages.batches.retrieve(batch.id)
-    if status.processing_status == "ended":
-        break
-    time.sleep(30)
-
-# Get results
-for result in client.messages.batches.results(batch.id):
-    print(result.result.message.content[0].text)
+# Run the batch
+results = asyncio.run(process_batch(prompts))
 ```
 
-## Claude Agent SDK
+## Agent Loop
 
-Build multi-step agents:
+Build multi-step agents with function calling:
 
 ```python
-# Note: Agent SDK API surface may change — check official docs
-import anthropic
+import google.generativeai as genai
 
-# Define tools as functions
-tools = [{
-    "name": "search_codebase",
-    "description": "Search the codebase for relevant code",
-    "input_schema": {
-        "type": "object",
-        "properties": {"query": {"type": "string"}},
-        "required": ["query"]
-    }
-}]
+# Define tools as function declarations
+tools = [
+    genai.protos.Tool(function_declarations=[
+        genai.protos.FunctionDeclaration(
+            name="search_codebase",
+            description="Search the codebase for relevant code",
+            parameters={
+                "type": "object",
+                "properties": {"query": {"type": "string"}},
+                "required": ["query"],
+            },
+        )
+    ])
+]
 
-# Run an agentic loop with tool use
-client = anthropic.Anthropic()
-messages = [{"role": "user", "content": "Review the auth module for security issues"}]
+model = genai.GenerativeModel("gemini-2.5-flash", tools=tools)
+chat = model.start_chat()
 
-while True:
-    response = client.messages.create(
-        model="claude-sonnet-4-0",
-        max_tokens=4096,
-        tools=tools,
-        messages=messages,
-    )
-    if response.stop_reason == "end_turn":
-        break
-    # Handle tool calls and continue the loop
-    messages.append({"role": "assistant", "content": response.content})
-    # ... execute tools and append tool_result messages
+response = chat.send_message("Review the auth module for security issues")
+
+# Agentic loop: keep processing function calls until the model stops
+while response.candidates[0].finish_reason.name == "STOP" and any(
+    part.function_call for part in response.parts
+):
+    for part in response.parts:
+        if fn := part.function_call:
+            result = execute_tool(fn.name, dict(fn.args))
+            response = chat.send_message(
+                genai.protos.Content(
+                    parts=[genai.protos.Part(
+                        function_response=genai.protos.FunctionResponse(
+                            name=fn.name,
+                            response={"result": result},
+                        )
+                    )]
+                )
+            )
+
+print(response.text)
 ```
 
 ## Cost Optimization
 
 | Strategy | Savings | When to Use |
 |----------|---------|-------------|
-| Prompt caching | Up to 90% on cached tokens | Repeated system prompts or context |
-| Batches API | 50% | Non-time-sensitive bulk processing |
-| Haiku instead of Sonnet | ~75% | Simple tasks, classification, extraction |
-| Shorter max_tokens | Variable | When you know output will be short |
+| Context caching | Up to 75% on cached tokens | Repeated system prompts or context |
+| Batch with async | Variable | Non-time-sensitive bulk processing |
+| Flash Lite instead of Flash | ~75% | Simple tasks, classification, extraction |
+| Shorter max_output_tokens | Variable | When you know output will be short |
 | Streaming | None (same cost) | Better UX, same price |
 
 ## Error Handling
@@ -310,28 +323,32 @@ while True:
 ```python
 import time
 
-from anthropic import APIError, RateLimitError, APIConnectionError
+from google.api_core.exceptions import (
+    ResourceExhausted,
+    ServiceUnavailable,
+    GoogleAPIError,
+)
 
 try:
-    message = client.messages.create(...)
-except RateLimitError:
-    # Back off and retry
+    response = model.generate_content(...)
+except ResourceExhausted:
+    # Rate limited, back off and retry
     time.sleep(60)
-except APIConnectionError:
-    # Network issue, retry with backoff
+except ServiceUnavailable:
+    # Service issue, retry with backoff
     pass
-except APIError as e:
-    print(f"API error {e.status_code}: {e.message}")
+except GoogleAPIError as e:
+    print(f"API error: {e.message}")
 ```
 
 ## Environment Setup
 
 ```bash
 # Required
-export ANTHROPIC_API_KEY="your-api-key-here"
+export GEMINI_API_KEY="your-api-key-here"
 
 # Optional: set default model
-export ANTHROPIC_MODEL="claude-sonnet-4-0"
+export GEMINI_MODEL="gemini-2.5-flash"
 ```
 
 Never hardcode API keys. Always use environment variables.

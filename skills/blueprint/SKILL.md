@@ -68,11 +68,11 @@ Produces a plan with parallel steps where possible (e.g., "implement Anthropic p
 - **Branch/PR/CI workflow** — Built into every step. Degrades gracefully to direct mode when git/gh is absent.
 - **Parallel step detection** — Dependency graph identifies steps with no shared files or output dependencies.
 - **Plan mutation protocol** — Steps can be split, inserted, skipped, reordered, or abandoned with formal protocols and audit trail.
-- **Zero runtime risk** — Pure Markdown skill. The entire repository contains only `.md` files — no hooks, no shell scripts, no executable code, no `package.json`, no build step. Nothing runs on install or invocation beyond Claude Code's native Markdown skill loader.
+- **Zero runtime risk** — Pure Markdown skill. The entire repository contains only `.md` files — no hooks, no shell scripts, no executable code, no `package.json`, no build step. Nothing runs on install or invocation beyond Gemini CLI's native Markdown skill loader.
 
 ## Installation
 
-This skill ships with Everything Claude Code. No separate installation is needed when ECC is installed.
+This skill ships with Everything Gemini CLI. No separate installation is needed when ECC is installed.
 
 ### Full ECC install
 
@@ -97,7 +97,7 @@ If you are vendoring only this skill outside the full ECC install, copy the revi
 
 ## Requirements
 
-- Claude Code (for `/blueprint` slash command)
+- Gemini CLI (for `/blueprint` slash command)
 - Git + GitHub CLI (optional — enables full branch/PR/CI workflow; Blueprint detects absence and auto-switches to direct mode)
 
 ## Source

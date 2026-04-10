@@ -1,4 +1,4 @@
-"""Run scenarios via claude -p and parse tool calls from stream-json output."""
+"""Run scenarios via gemini -p and parse tool calls from stream-json output."""
 
 from __future__ import annotations
 
@@ -39,7 +39,7 @@ def run_scenario(
 
     result = subprocess.run(
         [
-            "claude", "-p", scenario.prompt,
+            "gemini", "-p", scenario.prompt,
             "--model", model,
             "--max-turns", str(max_turns),
             "--add-dir", str(sandbox_dir),
@@ -55,7 +55,7 @@ def run_scenario(
 
     if result.returncode != 0:
         raise RuntimeError(
-            f"claude -p failed (rc={result.returncode}): {result.stderr[:500]}"
+            f"gemini -p failed (rc={result.returncode}): {result.stderr[:500]}"
         )
 
     observations = _parse_stream_json(result.stdout)
@@ -90,7 +90,7 @@ def _setup_sandbox(sandbox_dir: Path, scenario: Scenario) -> None:
 
 
 def _parse_stream_json(stdout: str) -> list[ObservationEvent]:
-    """Parse claude -p stream-json output into ObservationEvents.
+    """Parse gemini -p stream-json output into ObservationEvents.
 
     Stream-json format:
     - type=assistant with content[].type=tool_use → tool call (name, input)

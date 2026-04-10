@@ -1,6 +1,6 @@
 ---
 name: autonomous-loops
-description: "Patterns and architectures for autonomous Claude Code loops — from simple sequential pipelines to RFC-driven multi-agent DAG systems."
+description: "Patterns and architectures for autonomous Gemini CLI loops — from simple sequential pipelines to RFC-driven multi-agent DAG systems."
 origin: ECC
 ---
 
@@ -11,7 +11,7 @@ origin: ECC
 > should be authored there, while this skill remains available to avoid
 > breaking existing workflows.
 
-Patterns, architectures, and reference implementations for running Claude Code autonomously in loops. Covers everything from simple `claude -p` pipelines to full RFC-driven multi-agent DAG orchestration.
+Patterns, architectures, and reference implementations for running Gemini CLI autonomously in loops. Covers everything from simple `gemini -p` pipelines to full RFC-driven multi-agent DAG orchestration.
 
 ## When to Use
 
@@ -28,24 +28,24 @@ From simplest to most sophisticated:
 
 | Pattern | Complexity | Best For |
 |---------|-----------|----------|
-| [Sequential Pipeline](#1-sequential-pipeline-claude--p) | Low | Daily dev steps, scripted workflows |
+| [Sequential Pipeline](#1-sequential-pipeline-gemini--p) | Low | Daily dev steps, scripted workflows |
 | [NanoClaw REPL](#2-nanoclaw-repl) | Low | Interactive persistent sessions |
 | [Infinite Agentic Loop](#3-infinite-agentic-loop) | Medium | Parallel content generation, spec-driven work |
-| [Continuous Claude PR Loop](#4-continuous-claude-pr-loop) | Medium | Multi-day iterative projects with CI gates |
+| [Continuous Gemini PR Loop](#4-continuous-gemini-pr-loop) | Medium | Multi-day iterative projects with CI gates |
 | [De-Sloppify Pattern](#5-the-de-sloppify-pattern) | Add-on | Quality cleanup after any Implementer step |
 | [Ralphinho / RFC-Driven DAG](#6-ralphinho--rfc-driven-dag-orchestration) | High | Large features, multi-unit parallel work with merge queue |
 
 ---
 
-## 1. Sequential Pipeline (`claude -p`)
+## 1. Sequential Pipeline (`gemini -p`)
 
-**The simplest loop.** Break daily development into a sequence of non-interactive `claude -p` calls. Each call is a focused step with a clear prompt.
+**The simplest loop.** Break daily development into a sequence of non-interactive `gemini -p` calls. Each call is a focused step with a clear prompt.
 
 ### Core Insight
 
 > If you can't figure out a loop like this, it means you can't even drive the LLM to fix your code in interactive mode.
 
-The `claude -p` flag runs Claude Code non-interactively with a prompt, exits when done. Chain calls to build a pipeline:
+The `gemini -p` flag runs Gemini CLI non-interactively with a prompt, exits when done. Chain calls to build a pipeline:
 
 ```bash
 #!/bin/bash
@@ -54,21 +54,21 @@ The `claude -p` flag runs Claude Code non-interactively with a prompt, exits whe
 set -e
 
 # Step 1: Implement the feature
-claude -p "Read the spec in docs/auth-spec.md. Implement OAuth2 login in src/auth/. Write tests first (TDD). Do NOT create any new documentation files."
+gemini -p "Read the spec in docs/auth-spec.md. Implement OAuth2 login in src/auth/. Write tests first (TDD). Do NOT create any new documentation files."
 
 # Step 2: De-sloppify (cleanup pass)
-claude -p "Review all files changed by the previous commit. Remove any unnecessary type tests, overly defensive checks, or testing of language features (e.g., testing that TypeScript generics work). Keep real business logic tests. Run the test suite after cleanup."
+gemini -p "Review all files changed by the previous commit. Remove any unnecessary type tests, overly defensive checks, or testing of language features (e.g., testing that TypeScript generics work). Keep real business logic tests. Run the test suite after cleanup."
 
 # Step 3: Verify
-claude -p "Run the full build, lint, type check, and test suite. Fix any failures. Do not add new features."
+gemini -p "Run the full build, lint, type check, and test suite. Fix any failures. Do not add new features."
 
 # Step 4: Commit
-claude -p "Create a conventional commit for all staged changes. Use 'feat: add OAuth2 login flow' as the message."
+gemini -p "Create a conventional commit for all staged changes. Use 'feat: add OAuth2 login flow' as the message."
 ```
 
 ### Key Design Principles
 
-1. **Each step is isolated** — A fresh context window per `claude -p` call means no context bleed between steps.
+1. **Each step is isolated** — A fresh context window per `gemini -p` call means no context bleed between steps.
 2. **Order matters** — Steps execute sequentially. Each builds on the filesystem state left by the previous.
 3. **Negative instructions are dangerous** — Don't say "don't test type systems." Instead, add a separate cleanup step (see [De-Sloppify Pattern](#5-the-de-sloppify-pattern)).
 4. **Exit codes propagate** — `set -e` stops the pipeline on failure.
@@ -78,37 +78,37 @@ claude -p "Create a conventional commit for all staged changes. Use 'feat: add O
 **With model routing:**
 ```bash
 # Research with Opus (deep reasoning)
-claude -p --model opus "Analyze the codebase architecture and write a plan for adding caching..."
+gemini -p --model opus "Analyze the codebase architecture and write a plan for adding caching..."
 
 # Implement with Sonnet (fast, capable)
-claude -p "Implement the caching layer according to the plan in docs/caching-plan.md..."
+gemini -p "Implement the caching layer according to the plan in docs/caching-plan.md..."
 
 # Review with Opus (thorough)
-claude -p --model opus "Review all changes for security issues, race conditions, and edge cases..."
+gemini -p --model opus "Review all changes for security issues, race conditions, and edge cases..."
 ```
 
 **With environment context:**
 ```bash
 # Pass context via files, not prompt length
-echo "Focus areas: auth module, API rate limiting" > .claude-context.md
-claude -p "Read .claude-context.md for priorities. Work through them in order."
-rm .claude-context.md
+echo "Focus areas: auth module, API rate limiting" > .gemini-context.md
+gemini -p "Read .gemini-context.md for priorities. Work through them in order."
+rm .gemini-context.md
 ```
 
 **With `--allowedTools` restrictions:**
 ```bash
 # Read-only analysis pass
-claude -p --allowedTools "Read,Grep,Glob" "Audit this codebase for security vulnerabilities..."
+gemini -p --allowedTools "Read,Grep,Glob" "Audit this codebase for security vulnerabilities..."
 
 # Write-only implementation pass
-claude -p --allowedTools "Read,Write,Edit,Bash" "Implement the fixes from security-audit.md..."
+gemini -p --allowedTools "Read,Write,Edit,Bash" "Implement the fixes from security-audit.md..."
 ```
 
 ---
 
 ## 2. NanoClaw REPL
 
-**ECC's built-in persistent loop.** A session-aware REPL that calls `claude -p` synchronously with full conversation history.
+**ECC's built-in persistent loop.** A session-aware REPL that calls `gemini -p` synchronously with full conversation history.
 
 ```bash
 # Start the default session
@@ -121,7 +121,7 @@ CLAW_SESSION=my-project CLAW_SKILLS=tdd-workflow,security-review node scripts/cl
 ### How It Works
 
 1. Loads conversation history from `~/.gemini/claw/{session}.md`
-2. Each user message is sent to `claude -p` with full history as context
+2. Each user message is sent to `gemini -p` with full history as context
 3. Responses are appended to the session file (Markdown-as-database)
 4. Sessions persist across restarts
 
@@ -167,9 +167,9 @@ PROMPT 1 (Orchestrator)              PROMPT 2 (Sub-Agents)
    - A snapshot of existing iterations (for uniqueness)
 4. **Wave Management** — For infinite mode, deploys waves of 3-5 agents until context is exhausted
 
-### Implementation via Claude Code Commands
+### Implementation via Gemini CLI Commands
 
-Create `.claude/commands/infinite.md`:
+Create `.gemini/commands/infinite.md`:
 
 ```markdown
 Parse the following arguments from $ARGUMENTS:
@@ -208,23 +208,23 @@ Don't rely on agents to self-differentiate. The orchestrator **assigns** each ag
 
 ---
 
-## 4. Continuous Claude PR Loop
+## 4. Continuous Gemini PR Loop
 
-**A production-grade shell script** that runs Claude Code in a continuous loop, creating PRs, waiting for CI, and merging automatically. Created by AnandChowdhary (credit: @AnandChowdhary).
+**A production-grade shell script** that runs Gemini CLI in a continuous loop, creating PRs, waiting for CI, and merging automatically. Created by AnandChowdhary (credit: @AnandChowdhary).
 
 ### Core Loop
 
 ```
 ┌─────────────────────────────────────────────────────┐
-│  CONTINUOUS CLAUDE ITERATION                        │
+│  CONTINUOUS GEMINI ITERATION                        │
 │                                                     │
-│  1. Create branch (continuous-claude/iteration-N)   │
-│  2. Run claude -p with enhanced prompt              │
-│  3. (Optional) Reviewer pass — separate claude -p   │
-│  4. Commit changes (claude generates message)       │
+│  1. Create branch (continuous-gemini/iteration-N)   │
+│  2. Run gemini -p with enhanced prompt              │
+│  3. (Optional) Reviewer pass — separate gemini -p   │
+│  4. Commit changes (gemini generates message)       │
 │  5. Push + create PR (gh pr create)                 │
 │  6. Wait for CI checks (poll gh pr checks)          │
-│  7. CI failure? → Auto-fix pass (claude -p)         │
+│  7. CI failure? → Auto-fix pass (gemini -p)         │
 │  8. Merge PR (squash/merge/rebase)                  │
 │  9. Return to main → repeat                         │
 │                                                     │
@@ -235,29 +235,29 @@ Don't rely on agents to self-differentiate. The orchestrator **assigns** each ag
 
 ### Installation
 
-> **Warning:** Install continuous-claude from its repository after reviewing the code. Do not pipe external scripts directly to bash.
+> **Warning:** Install continuous-gemini from its repository after reviewing the code. Do not pipe external scripts directly to bash.
 
 ### Usage
 
 ```bash
 # Basic: 10 iterations
-continuous-claude --prompt "Add unit tests for all untested functions" --max-runs 10
+continuous-gemini --prompt "Add unit tests for all untested functions" --max-runs 10
 
 # Cost-limited
-continuous-claude --prompt "Fix all linter errors" --max-cost 5.00
+continuous-gemini --prompt "Fix all linter errors" --max-cost 5.00
 
 # Time-boxed
-continuous-claude --prompt "Improve test coverage" --max-duration 8h
+continuous-gemini --prompt "Improve test coverage" --max-duration 8h
 
 # With code review pass
-continuous-claude \
+continuous-gemini \
   --prompt "Add authentication feature" \
   --max-runs 10 \
   --review-prompt "Run npm test && npm run lint, fix any failures"
 
 # Parallel via worktrees
-continuous-claude --prompt "Add tests" --max-runs 5 --worktree tests-worker &
-continuous-claude --prompt "Refactor code" --max-runs 5 --worktree refactor-worker &
+continuous-gemini --prompt "Add tests" --max-runs 5 --worktree tests-worker &
+continuous-gemini --prompt "Refactor code" --max-runs 5 --worktree refactor-worker &
 wait
 ```
 
@@ -276,24 +276,24 @@ The critical innovation: a `SHARED_TASK_NOTES.md` file persists across iteration
 - The mock setup in tests/helpers.ts can be reused
 ```
 
-Claude reads this file at iteration start and updates it at iteration end. This bridges the context gap between independent `claude -p` invocations.
+Gemini reads this file at iteration start and updates it at iteration end. This bridges the context gap between independent `gemini -p` invocations.
 
 ### CI Failure Recovery
 
-When PR checks fail, Continuous Claude automatically:
+When PR checks fail, Continuous Gemini automatically:
 1. Fetches the failed run ID via `gh run list`
-2. Spawns a new `claude -p` with CI fix context
-3. Claude inspects logs via `gh run view`, fixes code, commits, pushes
+2. Spawns a new `gemini -p` with CI fix context
+3. Gemini inspects logs via `gh run view`, fixes code, commits, pushes
 4. Re-waits for checks (up to `--ci-retry-max` attempts)
 
 ### Completion Signal
 
-Claude can signal "I'm done" by outputting a magic phrase:
+Gemini can signal "I'm done" by outputting a magic phrase:
 
 ```bash
-continuous-claude \
+continuous-gemini \
   --prompt "Fix all bugs in the issue tracker" \
-  --completion-signal "CONTINUOUS_CLAUDE_PROJECT_COMPLETE" \
+  --completion-signal "CONTINUOUS_GEMINI_PROJECT_COMPLETE" \
   --completion-threshold 3  # Stops after 3 consecutive signals
 ```
 
@@ -339,10 +339,10 @@ Instead of constraining the Implementer, let it be thorough. Then add a focused 
 
 ```bash
 # Step 1: Implement (let it be thorough)
-claude -p "Implement the feature with full TDD. Be thorough with tests."
+gemini -p "Implement the feature with full TDD. Be thorough with tests."
 
 # Step 2: De-sloppify (separate context, focused cleanup)
-claude -p "Review all changes in the working tree. Remove:
+gemini -p "Review all changes in the working tree. Remove:
 - Tests that verify language/framework behavior rather than business logic
 - Redundant type checks that the type system already enforces
 - Over-defensive error handling for impossible states
@@ -357,16 +357,16 @@ Keep all business logic tests. Run the test suite after cleanup to ensure nothin
 ```bash
 for feature in "${features[@]}"; do
   # Implement
-  claude -p "Implement $feature with TDD."
+  gemini -p "Implement $feature with TDD."
 
   # De-sloppify
-  claude -p "Cleanup pass: review changes, remove test/code slop, run tests."
+  gemini -p "Cleanup pass: review changes, remove test/code slop, run tests."
 
   # Verify
-  claude -p "Run build + lint + tests. Fix any failures."
+  gemini -p "Run build + lint + tests. Fix any failures."
 
   # Commit
-  claude -p "Commit with message: feat: add $feature"
+  gemini -p "Commit with message: feat: add $feature"
 done
 ```
 
@@ -538,7 +538,7 @@ Pipeline stages for the same unit **share** a worktree, preserving state (contex
 | Need parallel implementation | Yes | No |
 | Merge conflicts likely | Yes | No (sequential is fine) |
 | Single-file change | No | Yes (sequential pipeline) |
-| Multi-day project | Yes | Maybe (continuous-claude) |
+| Multi-day project | Yes | Maybe (continuous-gemini) |
 | Spec/RFC already written | Yes | Maybe |
 | Quick iteration on one thing | No | Yes (NanoClaw or pipeline) |
 
@@ -554,7 +554,7 @@ Is the task a single focused change?
 └─ No → Is there a written spec/RFC?
          ├─ Yes → Do you need parallel implementation?
          │        ├─ Yes → Ralphinho (DAG orchestration)
-         │        └─ No → Continuous Claude (iterative PR loop)
+         │        └─ No → Continuous Gemini (iterative PR loop)
          └─ No → Do you need many variations of the same thing?
                   ├─ Yes → Infinite Agentic Loop (spec-driven generation)
                   └─ No → Sequential Pipeline with de-sloppify
@@ -566,17 +566,17 @@ These patterns compose well:
 
 1. **Sequential Pipeline + De-Sloppify** — The most common combination. Every implement step gets a cleanup pass.
 
-2. **Continuous Claude + De-Sloppify** — Add `--review-prompt` with a de-sloppify directive to each iteration.
+2. **Continuous Gemini + De-Sloppify** — Add `--review-prompt` with a de-sloppify directive to each iteration.
 
 3. **Any loop + Verification** — Use ECC's `/verify` command or `verification-loop` skill as a gate before commits.
 
 4. **Ralphinho's tiered approach in simpler loops** — Even in a sequential pipeline, you can route simple tasks to Haiku and complex tasks to Opus:
    ```bash
    # Simple formatting fix
-   claude -p --model haiku "Fix the import ordering in src/utils.ts"
+   gemini -p --model haiku "Fix the import ordering in src/utils.ts"
 
    # Complex architectural change
-   claude -p --model opus "Refactor the auth module to use the strategy pattern"
+   gemini -p --model opus "Refactor the auth module to use the strategy pattern"
    ```
 
 ---
@@ -587,7 +587,7 @@ These patterns compose well:
 
 1. **Infinite loops without exit conditions** — Always have a max-runs, max-cost, max-duration, or completion signal.
 
-2. **No context bridge between iterations** — Each `claude -p` call starts fresh. Use `SHARED_TASK_NOTES.md` or filesystem state to bridge context.
+2. **No context bridge between iterations** — Each `gemini -p` call starts fresh. Use `SHARED_TASK_NOTES.md` or filesystem state to bridge context.
 
 3. **Retrying the same failure** — If an iteration fails, don't just retry. Capture the error context and feed it to the next attempt.
 
@@ -605,6 +605,6 @@ These patterns compose well:
 |---------|--------|------|
 | Ralphinho | enitrat | credit: @enitrat |
 | Infinite Agentic Loop | disler | credit: @disler |
-| Continuous Claude | AnandChowdhary | credit: @AnandChowdhary |
+| Continuous Gemini | AnandChowdhary | credit: @AnandChowdhary |
 | NanoClaw | ECC | `/claw` command in this repo |
 | Verification Loop | ECC | `skills/verification-loop/` in this repo |

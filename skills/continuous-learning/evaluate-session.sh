@@ -40,7 +40,7 @@ fi
 mkdir -p "$LEARNED_SKILLS_PATH"
 
 # Get transcript path from environment (set by Gemini CLI)
-transcript_path="${CLAUDE_TRANSCRIPT_PATH:-}"
+transcript_path="${GEMINI_TRANSCRIPT_PATH:-}"
 
 if [ -z "$transcript_path" ] || [ ! -f "$transcript_path" ]; then
   exit 0

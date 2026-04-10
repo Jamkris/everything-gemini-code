@@ -1,5 +1,7 @@
 **언어:** [English](../../README.md) | **한국어** | [简体中文](../zh-CN/README.md)
 
+> **출처:** 이 프로젝트는 [@affaan-m](https://github.com/affaan-m)의 [Everything Claude Code](https://github.com/affaan-m/everything-claude-code)를 Gemini CLI 생태계로 마이그레이션하여 만들었습니다. 원본 프로젝트에 감사드립니다.
+
 # Everything Gemini Code
 
 [![Stars](https://img.shields.io/github/stars/Jamkris/everything-gemini-code?style=flat)](https://github.com/Jamkris/everything-gemini-code/stargazers)

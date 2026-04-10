@@ -1,18 +1,18 @@
 ---
-name: claude-devfleet
-description: Orchestrate multi-agent coding tasks via Claude DevFleet — plan projects, dispatch parallel agents in isolated worktrees, monitor progress, and read structured reports.
+name: gemini-devfleet
+description: Orchestrate multi-agent coding tasks via Gemini DevFleet — plan projects, dispatch parallel agents in isolated worktrees, monitor progress, and read structured reports.
 origin: community
 ---
 
-# Claude DevFleet Multi-Agent Orchestration
+# Gemini DevFleet Multi-Agent Orchestration
 
 ## When to Use
 
-Use this skill when you need to dispatch multiple Claude Code agents to work on coding tasks in parallel. Each agent runs in an isolated git worktree with full tooling.
+Use this skill when you need to dispatch multiple Gemini CLI agents to work on coding tasks in parallel. Each agent runs in an isolated git worktree with full tooling.
 
-Requires a running Claude DevFleet instance connected via MCP:
+Requires a running Gemini DevFleet instance connected via MCP:
 ```bash
-claude mcp add devfleet --transport http http://localhost:18801/mcp
+gemini mcp add devfleet --transport http http://localhost:18801/mcp
 ```
 
 ## How It Works

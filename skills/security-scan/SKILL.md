@@ -1,26 +1,26 @@
 ---
 name: security-scan
-description: Scan your Claude Code configuration (.claude/ directory) for security vulnerabilities, misconfigurations, and injection risks using AgentShield. Checks CLAUDE.md, settings.json, MCP servers, hooks, and agent definitions.
+description: Scan your Gemini CLI configuration (.gemini/ directory) for security vulnerabilities, misconfigurations, and injection risks using AgentShield. Checks GEMINI.md, settings.json, MCP servers, hooks, and agent definitions.
 origin: ECC
 ---
 
 # Security Scan Skill
 
-Audit your Claude Code configuration for security issues using [AgentShield](https://github.com/affaan-m/agentshield).
+Audit your Gemini CLI configuration for security issues using [AgentShield](https://github.com/affaan-m/agentshield).
 
 ## When to Use
 
-- Setting up a new Claude Code project
-- After modifying `.claude/settings.json`, `CLAUDE.md`, or MCP configs
+- Setting up a new Gemini CLI project
+- After modifying `.gemini/settings.json`, `GEMINI.md`, or MCP configs
 - Before committing configuration changes
-- When onboarding to a new repository with existing Claude Code configs
+- When onboarding to a new repository with existing Gemini CLI configs
 - Periodic security hygiene checks
 
 ## What It Scans
 
 | File | Checks |
 |------|--------|
-| `CLAUDE.md` | Hardcoded secrets, auto-run instructions, prompt injection patterns |
+| `GEMINI.md` | Hardcoded secrets, auto-run instructions, prompt injection patterns |
 | `settings.json` | Overly permissive allow lists, missing deny lists, dangerous bypass flags |
 | `mcp.json` | Risky MCP servers, hardcoded env secrets, npx supply chain risks |
 | `hooks/` | Command injection via interpolation, data exfiltration, silent error suppression |
@@ -45,14 +45,14 @@ npx ecc-agentshield scan .
 
 ### Basic Scan
 
-Run against the current project's `.claude/` directory:
+Run against the current project's `.gemini/` directory:
 
 ```bash
 # Scan current project
 npx ecc-agentshield scan
 
 # Scan a specific path
-npx ecc-agentshield scan --path /path/to/.claude
+npx ecc-agentshield scan --path /path/to/.gemini
 
 # Scan with minimum severity filter
 npx ecc-agentshield scan --min-severity medium
@@ -104,7 +104,7 @@ This runs:
 
 ### Initialize Secure Config
 
-Scaffold a new secure `.claude/` configuration from scratch:
+Scaffold a new secure `.gemini/` configuration from scratch:
 
 ```bash
 npx ecc-agentshield init
@@ -112,7 +112,7 @@ npx ecc-agentshield init
 
 Creates:
 - `settings.json` with scoped permissions and deny list
-- `CLAUDE.md` with security best practices
+- `GEMINI.md` with security best practices
 - `mcp.json` placeholder
 
 ### GitHub Action
@@ -146,7 +146,7 @@ Add to your CI pipeline:
 - Shell-running MCP servers
 
 ### High Findings (fix before production)
-- Auto-run instructions in CLAUDE.md (prompt injection vector)
+- Auto-run instructions in GEMINI.md (prompt injection vector)
 - Missing deny lists in permissions
 - Agents with unnecessary Bash access
 

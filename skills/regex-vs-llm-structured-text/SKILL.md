@@ -135,7 +135,7 @@ def validate_with_llm(
 ) -> ParsedItem:
     """Use LLM to fix low-confidence extractions."""
     response = client.messages.create(
-        model="claude-haiku-4-5-20251001",  # Cheapest model for validation
+        model="gemini-2.5-flash-lite",  # Cheapest model for validation
         max_tokens=500,
         messages=[{
             "role": "user",
@@ -198,7 +198,7 @@ From a production quiz parsing pipeline (410 items):
 
 - **Start with regex** — even imperfect regex gives you a baseline to improve
 - **Use confidence scoring** to programmatically identify what needs LLM help
-- **Use the cheapest LLM** for validation (Haiku-class models are sufficient)
+- **Use the cheapest LLM** for validation (Flash Lite-class models are sufficient)
 - **Never mutate** parsed items — return new instances from cleaning/validation steps
 - **TDD works well** for parsers — write tests for known patterns first, then edge cases
 - **Log metrics** (regex success rate, LLM call count) to track pipeline health

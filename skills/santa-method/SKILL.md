@@ -115,7 +115,7 @@ Be rigorous. Your job is to find problems, not to approve.
 ```
 
 ```python
-# Spawn reviewers in parallel (Claude Code subagents)
+# Spawn reviewers in parallel (Gemini CLI subagents)
 review_b = Agent(prompt=REVIEWER_PROMPT.format(...), description="Santa Reviewer B")
 review_c = Agent(prompt=REVIEWER_PROMPT.format(...), description="Santa Reviewer C")
 
@@ -204,12 +204,12 @@ Critical: each review round uses **fresh agents**. Reviewers must not carry memo
 
 ## Implementation Patterns
 
-### Pattern A: Claude Code Subagents (Recommended)
+### Pattern A: Gemini CLI Subagents (Recommended)
 
 Subagents provide true context isolation. Each reviewer is a separate process with no shared state.
 
 ```bash
-# In a Claude Code session, use the Agent tool to spawn reviewers
+# In a Gemini CLI session, use the Agent tool to spawn reviewers
 # Both agents run in parallel for speed
 ```
 

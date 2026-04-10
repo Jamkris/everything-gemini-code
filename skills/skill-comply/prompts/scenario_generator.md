@@ -14,7 +14,7 @@ scenarios:
     level_name: supportive
     description: <what this scenario tests>
     prompt: |
-      <the task prompt to pass to claude -p. Must be a concrete coding task.>
+      <the task prompt to pass to gemini -p. Must be a concrete coding task.>
     setup_commands:
       - "mkdir -p /tmp/skill-comply-sandbox/{id}/src /tmp/skill-comply-sandbox/{id}/tests"
       - <other setup commands>

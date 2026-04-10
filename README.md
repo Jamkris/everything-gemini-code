@@ -1,5 +1,7 @@
 **Language:** **English** | [한국어](docs/ko-KR/README.md) | [简体中文](docs/zh-CN/README.md)
 
+> **Attribution:** This project was built by migrating [Everything Claude Code](https://github.com/affaan-m/everything-claude-code) by [@affaan-m](https://github.com/affaan-m) to the Gemini CLI ecosystem. Huge thanks for the original work.
+
 # Everything Gemini Code
 
 [![Stars](https://img.shields.io/github/stars/Jamkris/everything-gemini-code?style=flat)](https://github.com/Jamkris/everything-gemini-code/stargazers)
@@ -189,7 +191,7 @@ rm -rf ~/.gemini/skills/* ~/.gemini/commands/*
 
 ## 🤝 Contributing
 
-**Contributions are welcome!** See the [Contributing Guide](docs/en/contributing/README.md).
+**Contributions are welcome!** See the [Contributing Guide](CONTRIBUTING.md).
 
 If you have useful agents, skills, or configurations, please submit a Pull Request.
 

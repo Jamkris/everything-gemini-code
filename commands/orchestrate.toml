@@ -164,7 +164,7 @@ When workers need to see dirty or untracked local files from the main checkout, 
   "seedPaths": [
     "scripts/orchestrate-worktrees.js",
     "scripts/lib/tmux-worktree-orchestrator.js",
-    ".claude/plan/workflow-e2e-test.json"
+    ".gemini/plan/workflow-e2e-test.json"
   ],
   "workers": [
     { "name": "docs", "task": "Update orchestration docs." }
@@ -175,7 +175,7 @@ When workers need to see dirty or untracked local files from the main checkout, 
 To export a control-plane snapshot for a live tmux/worktree session, run:
 
 ```bash
-node scripts/orchestration-status.js .claude/plan/workflow-visual-proof.json
+node scripts/orchestration-status.js .gemini/plan/workflow-visual-proof.json
 ```
 
 The snapshot includes session activity, tmux pane metadata, worker states, objectives, seeded overlays, and recent handoff summaries in JSON form.

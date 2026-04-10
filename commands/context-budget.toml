@@ -6,7 +6,7 @@ description: Analyze context window usage across agents, skills, MCP servers, an
 
 # Context Budget Optimizer
 
-Analyze your Claude Code setup's context window consumption and produce actionable recommendations to reduce token overhead.
+Analyze your Gemini CLI setup's context window consumption and produce actionable recommendations to reduce token overhead.
 
 ## Usage
 
@@ -24,7 +24,7 @@ $ARGUMENTS
 Run the **context-budget** skill (`skills/context-budget/SKILL.md`) with the following inputs:
 
 1. Pass `--verbose` flag if present in `$ARGUMENTS`
-2. Assume a 200K context window (Claude Sonnet default) unless the user specifies otherwise
+2. Assume a 1M context window (Gemini default) unless the user specifies otherwise
 3. Follow the skill's four phases: Inventory → Classify → Detect Issues → Report
 4. Output the formatted Context Budget Report to the user
 

@@ -112,6 +112,50 @@
 | [autonomous-loops](autonomous-loops/) | 자율 루프 패턴 |
 | [cost-aware-llm-pipeline](cost-aware-llm-pipeline/) | LLM 비용 최적화, 모델 라우팅 |
 | [agent-eval](agent-eval/) | 에이전트 평가 |
+| [agent-introspection-debugging](agent-introspection-debugging/) | 에이전트 자가 디버깅 워크플로우 |
+| [autonomous-agent-harness](autonomous-agent-harness/) | 영구 자율 에이전트 시스템 |
+| [gan-style-harness](gan-style-harness/) | GAN 스타일 적대적 품질 루프 |
+| [agent-sort](agent-sort/) | 에이전트 설정 관리 |
+| [token-budget-advisor](token-budget-advisor/) | 응답 깊이/토큰 버짓 제어 |
+
+## DevOps 및 운영
+
+| 스킬 | 설명 |
+|------|------|
+| [github-ops](github-ops/) | GitHub 자동화 및 관리 |
+| [jira-integration](jira-integration/) | Jira 티켓 통합 |
+| [dashboard-builder](dashboard-builder/) | 대시보드 생성 |
+| [email-ops](email-ops/) | 이메일 자동화 |
+| [hookify-rules](hookify-rules/) | 동작 방지 훅 규칙 |
+
+## 도메인 특화
+
+| 스킬 | 설명 |
+|------|------|
+| [healthcare-cdss-patterns](healthcare-cdss-patterns/) | 임상 의사결정 지원 |
+| [healthcare-emr-patterns](healthcare-emr-patterns/) | EMR 시스템 패턴 |
+| [healthcare-eval-harness](healthcare-eval-harness/) | 헬스케어 평가 |
+| [healthcare-phi-compliance](healthcare-phi-compliance/) | PHI 규정 준수 |
+| [hipaa-compliance](hipaa-compliance/) | HIPAA 규정 준수 |
+| [defi-amm-security](defi-amm-security/) | DeFi AMM 보안 |
+| [customs-trade-compliance](customs-trade-compliance/) | 무역 규정 준수 |
+
+## 아키텍처
+
+| 스킬 | 설명 |
+|------|------|
+| [hexagonal-architecture](hexagonal-architecture/) | 헥사고날/포트-어댑터 아키텍처 |
+| [nestjs-patterns](nestjs-patterns/) | NestJS 패턴 |
+| [dotnet-patterns](dotnet-patterns/) | .NET/C# 패턴 |
+| [csharp-testing](csharp-testing/) | C# 테스팅 패턴 |
+| [dart-flutter-patterns](dart-flutter-patterns/) | Dart/Flutter 패턴 |
+
+## 미디어 및 영상
+
+| 스킬 | 설명 |
+|------|------|
+| [remotion-video-creation](remotion-video-creation/) | Remotion 비디오 제작 |
+| [manim-video](manim-video/) | 수학 애니메이션 비디오 |
 
 ## 비즈니스 및 콘텐츠
 
@@ -122,3 +166,8 @@
 | [market-research](market-research/) | 시장, 경쟁사, 투자자 리서치 |
 | [investor-materials](investor-materials/) | 피치덱, 원페이저, 재무 모델 |
 | [deep-research](deep-research/) | 심층 리서치 워크플로우 |
+| [brand-voice](brand-voice/) | 브랜드 보이스 가이드라인 |
+| [seo](seo/) | SEO 최적화 |
+| [lead-intelligence](lead-intelligence/) | 리드 리서치 및 아웃리치 |
+| [product-capability](product-capability/) | 제품 역량 분석 |
+| [openclaw-persona-forge](openclaw-persona-forge/) | AI 페르소나 생성 |

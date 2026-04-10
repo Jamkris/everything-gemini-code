@@ -3,7 +3,7 @@
 # Usage: quick-diff.sh RESULTS_JSON [CWD_SKILLS_DIR]
 # Output: JSON array of changed/new files to stdout (empty [] if no changes)
 #
-# When CWD_SKILLS_DIR is omitted, defaults to $PWD/.claude/skills so the
+# When CWD_SKILLS_DIR is omitted, defaults to $PWD/.gemini/skills so the
 # script always picks up project-level skills without relying on the caller.
 #
 # Environment:
@@ -14,18 +14,18 @@
 set -euo pipefail
 
 RESULTS_JSON="${1:-}"
-CWD_SKILLS_DIR="${SKILL_STOCKTAKE_PROJECT_DIR:-${2:-$PWD/.claude/skills}}"
-GLOBAL_DIR="${SKILL_STOCKTAKE_GLOBAL_DIR:-$HOME/.claude/skills}"
+CWD_SKILLS_DIR="${SKILL_STOCKTAKE_PROJECT_DIR:-${2:-$PWD/.gemini/skills}}"
+GLOBAL_DIR="${SKILL_STOCKTAKE_GLOBAL_DIR:-$HOME/.gemini/skills}"
 
 if [[ -z "$RESULTS_JSON" || ! -f "$RESULTS_JSON" ]]; then
   echo "Error: RESULTS_JSON not found: ${RESULTS_JSON:-<empty>}" >&2
   exit 1
 fi
 
-# Validate CWD_SKILLS_DIR looks like a .claude/skills path (defense-in-depth).
+# Validate CWD_SKILLS_DIR looks like a .gemini/skills path (defense-in-depth).
 # Only warn when the path exists — a nonexistent path poses no traversal risk.
-if [[ -n "$CWD_SKILLS_DIR" && -d "$CWD_SKILLS_DIR" && "$CWD_SKILLS_DIR" != */.claude/skills* ]]; then
-  echo "Warning: CWD_SKILLS_DIR does not look like a .claude/skills path: $CWD_SKILLS_DIR" >&2
+if [[ -n "$CWD_SKILLS_DIR" && -d "$CWD_SKILLS_DIR" && "$CWD_SKILLS_DIR" != */.gemini/skills* ]]; then
+  echo "Warning: CWD_SKILLS_DIR does not look like a .gemini/skills path: $CWD_SKILLS_DIR" >&2
 fi
 
 evaluated_at=$(jq -r '.evaluated_at' "$RESULTS_JSON")

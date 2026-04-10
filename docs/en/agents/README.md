@@ -41,6 +41,38 @@ Specialized subagents for Gemini CLI. Invoke with `@agent-name` syntax.
 | [cpp-reviewer](cpp-reviewer.md) | C++ memory safety, modern idioms |
 | [database-reviewer](database-reviewer.md) | SQL queries, indexes, RLS |
 | [flutter-reviewer](flutter-reviewer.md) | Flutter/Dart code review |
+| [csharp-reviewer](csharp-reviewer.md) | C# .NET conventions, async, nullable |
+| [dart-build-resolver](dart-build-resolver.md) | Dart/Flutter build errors |
+
+## Analysis Agents
+
+| Agent | Description |
+|-------|-------------|
+| [code-architect](code-architect.md) | Feature architecture and implementation blueprints |
+| [code-explorer](code-explorer.md) | Codebase analysis and pattern discovery |
+| [code-simplifier](code-simplifier.md) | Code clarity and refactoring |
+| [comment-analyzer](comment-analyzer.md) | PR comment and conversation analysis |
+| [conversation-analyzer](conversation-analyzer.md) | Session behavior analysis for hooks |
+| [performance-optimizer](performance-optimizer.md) | Performance profiling and optimization |
+| [silent-failure-hunter](silent-failure-hunter.md) | Hidden error and silent failure detection |
+| [type-design-analyzer](type-design-analyzer.md) | Type system design review |
+| [pr-test-analyzer](pr-test-analyzer.md) | PR test coverage analysis |
+
+## GAN Harness Agents
+
+| Agent | Description |
+|-------|-------------|
+| [gan-evaluator](gan-evaluator.md) | GAN harness evaluator agent |
+| [gan-generator](gan-generator.md) | GAN harness generator agent |
+| [gan-planner](gan-planner.md) | GAN harness planning agent |
+
+## Open Source Agents
+
+| Agent | Description |
+|-------|-------------|
+| [opensource-forker](opensource-forker.md) | Fork and sanitize repos for open source |
+| [opensource-packager](opensource-packager.md) | Generate open-source packaging |
+| [opensource-sanitizer](opensource-sanitizer.md) | Strip secrets and sensitive data |
 
 ## Workflow Agents
 
@@ -58,6 +90,8 @@ Specialized subagents for Gemini CLI. Invoke with `@agent-name` syntax.
 | [chief-of-staff](chief-of-staff.md) | Multi-channel communication management |
 | [loop-operator](loop-operator.md) | Autonomous loop execution |
 | [harness-optimizer](harness-optimizer.md) | Agent harness configuration tuning |
+| [healthcare-reviewer](healthcare-reviewer.md) | Healthcare/HIPAA compliance review |
+| [seo-specialist](seo-specialist.md) | SEO analysis and optimization |
 
 ---
 

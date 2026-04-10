@@ -30,7 +30,7 @@ def generate_scenarios(
 ) -> list[Scenario]:
     """Generate 3 scenarios with decreasing prompt strictness.
 
-    Calls claude -p with the scenario_generator prompt, parses YAML output.
+    Calls gemini -p with the scenario_generator prompt, parses YAML output.
     """
     skill_content = skill_path.read_text()
     prompt_template = (PROMPTS_DIR / "scenario_generator.md").read_text()
@@ -41,17 +41,17 @@ def generate_scenarios(
     )
 
     result = subprocess.run(
-        ["claude", "-p", prompt, "--model", model, "--output-format", "text"],
+        ["gemini", "-p", prompt, "--model", model, "--output-format", "text"],
         capture_output=True,
         text=True,
         timeout=120,
     )
 
     if result.returncode != 0:
-        raise RuntimeError(f"claude -p failed: {result.stderr}")
+        raise RuntimeError(f"gemini -p failed: {result.stderr}")
 
     if not result.stdout.strip():
-        raise RuntimeError("claude -p returned empty output")
+        raise RuntimeError("gemini -p returned empty output")
 
     raw_yaml = extract_yaml(result.stdout)
     parsed = yaml.safe_load(raw_yaml)

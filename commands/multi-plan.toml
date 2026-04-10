@@ -12,9 +12,9 @@ $ARGUMENTS
 
 - **Language Protocol**: Use **English** when interacting with tools/models, communicate with user in their language
 - **Mandatory Parallel**: Codex/Gemini calls MUST use `run_in_background: true` (including single model calls, to avoid blocking main thread)
-- **Code Sovereignty**: External models have **zero filesystem write access**, all modifications by Claude
+- **Code Sovereignty**: External models have **zero filesystem write access**, all modifications by Gemini CLI
 - **Stop-Loss Mechanism**: Do not proceed to next phase until current phase output is validated
-- **Planning Only**: This command allows reading context and writing to `.claude/plan/*` plan files, but **NEVER modify production code**
+- **Planning Only**: This command allows reading context and writing to `.gemini/plan/*` plan files, but **NEVER modify production code**
 
 ---
 
@@ -101,7 +101,7 @@ mcp__ace-tool__search_context({
 - Build semantic query using natural language (Where/What/How)
 - **NEVER answer based on assumptions**
 
-**If ace-tool MCP is NOT available**, use Claude Code built-in tools as fallback:
+**If ace-tool MCP is NOT available**, use Gemini CLI built-in tools as fallback:
 1. **Glob**: Find relevant files by pattern (e.g., `Glob("**/*.ts")`, `Glob("src/**/*.py")`)
 2. **Grep**: Search for key symbols, function names, class definitions (e.g., `Grep("className|functionName")`)
 3. **Read**: Read the discovered files to gather complete context
@@ -151,7 +151,7 @@ Integrate perspectives and iterate for optimization:
 
 #### 2.3 (Optional but Recommended) Dual-Model Plan Draft
 
-To reduce risk of omissions in Claude's synthesized plan, can parallel have both models output "plan drafts" (still **NOT allowed** to modify files):
+To reduce risk of omissions in Gemini CLI's synthesized plan, can parallel have both models output "plan drafts" (still **NOT allowed** to modify files):
 
 1. **Codex Plan Draft** (Backend authority):
    - ROLE_FILE: `~/.gemini/.ccg/prompts/codex/architect.md`
@@ -163,7 +163,7 @@ To reduce risk of omissions in Claude's synthesized plan, can parallel have both
 
 Wait for both models' complete results with `TaskOutput`, record key differences in their suggestions.
 
-#### 2.4 Generate Implementation Plan (Claude Final Version)
+#### 2.4 Generate Implementation Plan (Gemini CLI Final Version)
 
 Synthesize both analyses, generate **Step-by-step Implementation Plan**:
 
@@ -202,18 +202,18 @@ Synthesize both analyses, generate **Step-by-step Implementation Plan**:
 **`/ccg:plan` responsibilities end here, MUST execute the following actions**:
 
 1. Present complete implementation plan to user (including pseudo-code)
-2. Save plan to `.claude/plan/<feature-name>.md` (extract feature name from requirement, e.g., `user-auth`, `payment-module`)
+2. Save plan to `.gemini/plan/<feature-name>.md` (extract feature name from requirement, e.g., `user-auth`, `payment-module`)
 3. Output prompt in **bold text** (MUST use actual saved file path):
 
    ---
-   **Plan generated and saved to `.claude/plan/actual-feature-name.md`**
+   **Plan generated and saved to `.gemini/plan/actual-feature-name.md`**
 
    **Please review the plan above. You can:**
    - **Modify plan**: Tell me what needs adjustment, I'll update the plan
    - **Execute plan**: Copy the following command to a new session
 
    ```
-   /ccg:execute .claude/plan/actual-feature-name.md
+   /ccg:execute .gemini/plan/actual-feature-name.md
    ```
    ---
 
@@ -233,8 +233,8 @@ Synthesize both analyses, generate **Step-by-step Implementation Plan**:
 
 After planning completes, save plan to:
 
-- **First planning**: `.claude/plan/<feature-name>.md`
-- **Iteration versions**: `.claude/plan/<feature-name>-v2.md`, `.claude/plan/<feature-name>-v3.md`...
+- **First planning**: `.gemini/plan/<feature-name>.md`
+- **Iteration versions**: `.gemini/plan/<feature-name>-v2.md`, `.gemini/plan/<feature-name>-v3.md`...
 
 Plan file write should complete before presenting plan to user.
 
@@ -245,7 +245,7 @@ Plan file write should complete before presenting plan to user.
 If user requests plan modifications:
 
 1. Adjust plan content based on user feedback
-2. Update `.claude/plan/<feature-name>.md` file
+2. Update `.gemini/plan/<feature-name>.md` file
 3. Re-present modified plan
 4. Prompt user to review or execute again
 
@@ -256,7 +256,7 @@ If user requests plan modifications:
 After user approves, **manually** execute:
 
 ```bash
-/ccg:execute .claude/plan/<feature-name>.md
+/ccg:execute .gemini/plan/<feature-name>.md
 ```
 
 ---

@@ -1,11 +1,11 @@
 ---
-description: "Use when auditing Claude skills and commands for quality. Supports Quick Scan (changed skills only) and Full Stocktake modes with sequential subagent batch evaluation."
+description: "Use when auditing Gemini skills and commands for quality. Supports Quick Scan (changed skills only) and Full Stocktake modes with sequential subagent batch evaluation."
 origin: ECC
 ---
 
 # skill-stocktake
 
-Slash command (`/skill-stocktake`) that audits all Claude skills and commands using a quality checklist + AI holistic judgment. Supports two modes: Quick Scan for recently changed skills, and Full Stocktake for a complete review.
+Slash command (`/skill-stocktake`) that audits all Gemini skills and commands using a quality checklist + AI holistic judgment. Supports two modes: Quick Scan for recently changed skills, and Full Stocktake for a complete review.
 
 ## Scope
 
@@ -14,7 +14,7 @@ The command targets the following paths **relative to the directory where it is 
 | Path | Description |
 |------|-------------|
 | `~/.gemini/skills/` | Global skills (all projects) |
-| `{cwd}/.claude/skills/` | Project-level skills (if the directory exists) |
+| `{cwd}/.gemini/skills/` | Project-level skills (if the directory exists) |
 
 **At the start of Phase 1, the command explicitly lists which paths were found and scanned.**
 
@@ -27,7 +27,7 @@ cd ~/path/to/my-project
 /skill-stocktake
 ```
 
-If the project has no `.claude/skills/` directory, only global skills and commands are evaluated.
+If the project has no `.gemini/skills/` directory, only global skills and commands are evaluated.
 
 ## Modes
 
@@ -45,7 +45,7 @@ Re-evaluate only skills that have changed since the last run (5–10 min).
 1. Read `~/.gemini/skills/skill-stocktake/results.json`
 2. Run: `bash ~/.gemini/skills/skill-stocktake/scripts/quick-diff.sh \
          ~/.gemini/skills/skill-stocktake/results.json`
-   (Project dir is auto-detected from `$PWD/.claude/skills`; pass it explicitly only if needed)
+   (Project dir is auto-detected from `$PWD/.gemini/skills`; pass it explicitly only if needed)
 3. If output is `[]`: report "No changes since last run." and stop
 4. Re-evaluate only those changed files using the same Phase 2 criteria
 5. Carry forward unchanged skills from previous results
@@ -60,13 +60,13 @@ Re-evaluate only skills that have changed since the last run (5–10 min).
 Run: `bash ~/.gemini/skills/skill-stocktake/scripts/scan.sh`
 
 The script enumerates skill files, extracts frontmatter, and collects UTC mtimes.
-Project dir is auto-detected from `$PWD/.claude/skills`; pass it explicitly only if needed.
+Project dir is auto-detected from `$PWD/.gemini/skills`; pass it explicitly only if needed.
 Present the scan summary and inventory table from the script output:
 
 ```
 Scanning:
   ✓ ~/.gemini/skills/         (17 files)
-  ✗ {cwd}/.claude/skills/    (not found — global skills only)
+  ✗ {cwd}/.gemini/skills/    (not found — global skills only)
 ```
 
 | Skill | 7d use | 30d use | Description |
@@ -106,7 +106,7 @@ Each skill is evaluated against this checklist:
 
 ```
 - [ ] Content overlap with other skills checked
-- [ ] Overlap with MEMORY.md / CLAUDE.md checked
+- [ ] Overlap with MEMORY.md / GEMINI.md checked
 - [ ] Freshness of technical references verified (use WebSearch if tool names / CLI flags / APIs are present)
 - [ ] Usage frequency considered
 ```
@@ -124,7 +124,7 @@ Verdict criteria:
 Evaluation is **holistic AI judgment** — not a numeric rubric. Guiding dimensions:
 - **Actionability**: code examples, commands, or steps that let you act immediately
 - **Scope fit**: name, trigger, and content are aligned; not too broad or narrow
-- **Uniqueness**: value not replaceable by MEMORY.md / CLAUDE.md / another skill
+- **Uniqueness**: value not replaceable by MEMORY.md / GEMINI.md / another skill
 - **Currency**: technical references work in the current environment
 
 **Reason quality requirements** — the `reason` field must be self-contained and decision-enabling:

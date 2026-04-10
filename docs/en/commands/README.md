@@ -6,6 +6,7 @@ List of available commands provided by `everything-gemini-code`.
 
 | Command            | Description                                                                                                                                      |
 | ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `/agent-sort`      | Sort and organize agent configurations.                                                                                                          |
 | `/build-fix`       | Analyze build errors and attempt to fix them automatically using the `build-error-resolver` agent.                                               |
 | `/checkpoint`      | Stage all changes and commit them with an AI-generated message.                                                                                  |
 | `/code-review`     | Comprehensive code review of the current changes or specific files using the `code-reviewer` agent.                                              |
@@ -14,12 +15,23 @@ List of available commands provided by `everything-gemini-code`.
 | `/ecc-docs`        | Look up current documentation for a library or topic via Context7. (alias: `/everything-gemini-code:docs`)                                       |
 | `/eval`            | Manage eval-driven development workflow.                                                                                                         |
 | `/evolve`          | Cluster related instincts into skills, commands, or agents.                                                                                      |
+| `/feature-dev`     | Guided feature development with codebase understanding.                                                                                          |
+| `/flutter-build`   | Fix Dart analyzer errors and Flutter build failures.                                                                                             |
+| `/flutter-review`  | Review Flutter/Dart code for idiomatic patterns.                                                                                                 |
+| `/flutter-test`    | Run Flutter/Dart tests and fix failures.                                                                                                         |
+| `/gan-build`       | GAN-style three-agent build loop.                                                                                                                |
+| `/gan-design`      | GAN-style design harness for frontend quality.                                                                                                   |
 | `/go-build`        | Fix Go build errors, go vet warnings, and linter issues incrementally.                                                                           |
 | `/go-review`       | Comprehensive Go code review for idiomatic patterns, concurrency safety, error handling, and security.                                           |
 | `/go-test`         | Enforce TDD workflow for Go. Write table-driven tests first, then implement.                                                                     |
+| `/hookify`         | Create hooks to prevent unwanted behaviors.                                                                                                      |
+| `/hookify-configure` | Enable or disable hookify rules.                                                                                                               |
+| `/hookify-help`    | Hookify system documentation.                                                                                                                    |
+| `/hookify-list`    | List configured hookify rules.                                                                                                                   |
 | `/instinct-export` | Export learned instincts to a file for sharing.                                                                                                  |
 | `/instinct-import` | Import instincts from a file or another source.                                                                                                  |
 | `/instinct-status` | Show all currently learned instincts with confidence levels.                                                                                     |
+| `/jira`            | Jira ticket integration.                                                                                                                         |
 | `/learn`           | Extract reusable patterns from the current session.                                                                                              |
 | `/multi-backend`   | Backend-focused multi-agent workflow.                                                                                                            |
 | `/multi-execute`   | Execute a multi-phase plan using multiple specialized agents.                                                                                    |
@@ -28,8 +40,15 @@ List of available commands provided by `everything-gemini-code`.
 | `/multi-workflow`  | Multi-model collaborative development workflow.                                                                                                  |
 | `/orchestrate`     | High-level orchestration for complex, multi-step tasks.                                                                                          |
 | `/pm2`             | Auto-analyze project and generate PM2 service commands.                                                                                          |
+| `/prp-commit`      | Natural language commit targeting.                                                                                                               |
+| `/prp-implement`   | Execute implementation plans with validation.                                                                                                    |
+| `/prp-plan`        | Create implementation plans with codebase analysis.                                                                                              |
+| `/prp-pr`          | Create GitHub PRs from current branch.                                                                                                           |
+| `/prp-prd`         | Interactive PRD generator.                                                                                                                       |
 | `/python-review`   | Comprehensive Python code review for PEP 8, type hints, and security.                                                                           |
 | `/refactor-clean`  | Identify and remove dead code, unused imports, and legacy artifacts.                                                                             |
+| `/review-pr`       | Comprehensive multi-perspective PR review.                                                                                                       |
+| `/santa-loop`      | Adversarial dual-review convergence loop.                                                                                                        |
 | `/sessions`        | Manage and list active Gemini sessions.                                                                                                          |
 | `/setup-pm`        | Configure your preferred package manager (npm/pnpm/yarn/bun).                                                                                   |
 | `/skill-create`    | Analyze local git history to extract coding patterns and generate `SKILL.md` files.                                                              |
@@ -194,3 +213,51 @@ Monitor and manage context window usage.
 ### /model-route
 
 Route tasks to the optimal model based on complexity.
+
+---
+
+## Feature Development
+
+### /feature-dev
+
+Guided feature development workflow with codebase exploration, architecture design, and quality review.
+
+### /review-pr
+
+Multi-perspective PR review using specialized agents (code-reviewer, comment-analyzer, pr-test-analyzer, etc.).
+
+---
+
+## GAN Harness
+
+### /gan-build
+
+Three-agent adversarial build loop: planner, generator, evaluator iterate until quality threshold is met.
+
+### /gan-design
+
+Design-focused GAN loop emphasizing visual excellence and creative breakthroughs.
+
+---
+
+## Hookify
+
+### /hookify, /hookify-configure, /hookify-list, /hookify-help
+
+Create, configure, list, and document behavior-prevention hooks.
+
+---
+
+## PRP (Plan-Review-Push)
+
+### /prp-prd, /prp-plan, /prp-implement, /prp-commit, /prp-pr
+
+Full development pipeline: PRD → plan → implement → commit → PR.
+
+---
+
+## Flutter
+
+### /flutter-build, /flutter-review, /flutter-test
+
+Flutter/Dart build error resolution, code review, and testing.
