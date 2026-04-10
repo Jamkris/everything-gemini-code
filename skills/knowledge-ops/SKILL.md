@@ -31,7 +31,7 @@ Prefer the live workspace model:
 - **Rule:** if something affects an active engineering plan, roadmap, rollout, or release, prefer putting it here first
 
 ### Layer 2: Claude Code Memory (Quick Access)
-- **Path:** `~/.claude/projects/*/memory/`
+- **Path:** `~/.gemini/projects/*/memory/`
 - **Format:** Markdown files with frontmatter
 - **Types:** user preferences, feedback, project context, reference
 - **Use for:** quick-access context that persists across conversations
@@ -121,7 +121,7 @@ Pull knowledge from multiple sources into one place:
 Use TodoWrite for in-session task tracking
 
 # Medium-term: project memory files
-Write to ~/.claude/projects/*/memory/ for cross-session recall
+Write to ~/.gemini/projects/*/memory/ for cross-session recall
 
 # Long-term: GitHub / Linear / KB
 Put active execution truth in GitHub + Linear

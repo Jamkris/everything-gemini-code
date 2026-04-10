@@ -51,7 +51,7 @@ Turn Claude Code into a persistent, self-directing agent system using only nativ
 
 Use Claude Code's built-in memory system enhanced with MCP memory server for structured data.
 
-**Built-in memory** (`~/.claude/projects/*/memory/`):
+**Built-in memory** (`~/.gemini/projects/*/memory/`):
 - User preferences, feedback, project context
 - Stored as markdown files with frontmatter
 - Automatically loaded at session start
@@ -68,7 +68,7 @@ Use Claude Code's built-in memory system enhanced with MCP memory server for str
 Use TodoWrite for in-session task tracking
 
 # Medium-term: project memory files
-Write to ~/.claude/projects/*/memory/ for cross-session recall
+Write to ~/.gemini/projects/*/memory/ for cross-session recall
 
 # Long-term: MCP knowledge graph
 Use mcp__memory__create_entities for permanent structured data
@@ -147,7 +147,7 @@ Manage a persistent queue of tasks that survive session boundaries.
 
 ```
 # Task persistence via memory
-Write task queue to ~/.claude/projects/*/memory/task-queue.md
+Write task queue to ~/.gemini/projects/*/memory/task-queue.md
 
 # Task format
 ---

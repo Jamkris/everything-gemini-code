@@ -12,7 +12,7 @@ paths:
 
 ## PostToolUse Hooks
 
-Configure in `~/.claude/settings.json`:
+Configure in `~/.gemini/settings.json`:
 
 - **perltidy**: Auto-format `.pl` and `.pm` files after edit
 - **perlcritic**: Run lint check after editing `.pm` files

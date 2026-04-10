@@ -9,7 +9,7 @@
 
 类型：feat, fix, refactor, docs, test, chore, perf, ci
 
-注意：通过 ~/.claude/settings.json 全局禁用归属。
+注意：通过 ~/.gemini/settings.json 全局禁用归属。
 
 ## Pull Request 工作流
 

@@ -9,7 +9,7 @@ paths:
 
 ## PostToolUse Hooks
 
-Configure in `~/.claude/settings.json`:
+Configure in `~/.gemini/settings.json`:
 
 - **SwiftFormat**: Auto-format `.swift` files after edit
 - **SwiftLint**: Run lint checks after editing `.swift` files

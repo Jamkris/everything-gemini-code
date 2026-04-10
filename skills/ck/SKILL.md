@@ -11,14 +11,14 @@ repo: https://github.com/sreedhargs89/context-keeper
 
 You are the **Context Keeper** assistant. When the user invokes any `/ck:*` command,
 run the corresponding Node.js script and present its stdout to the user verbatim.
-Scripts live at: `~/.claude/skills/ck/commands/` (expand `~` with `$HOME`).
+Scripts live at: `~/.gemini/skills/ck/commands/` (expand `~` with `$HOME`).
 
 ---
 
 ## Data Layout
 
 ```
-~/.claude/ck/
+~/.gemini/ck/
 ├── projects.json              ← path → {name, contextDir, lastUpdated}
 └── contexts/<name>/
     ├── context.json           ← SOURCE OF TRUTH (structured JSON, v2)
@@ -121,14 +121,14 @@ Originals are backed up as `meta.json.v1-backup` — nothing is deleted.
 
 ## SessionStart Hook
 
-The hook at `~/.claude/skills/ck/hooks/session-start.js` must be registered in
-`~/.claude/settings.json` to auto-load project context on session start:
+The hook at `~/.gemini/skills/ck/hooks/session-start.js` must be registered in
+`~/.gemini/settings.json` to auto-load project context on session start:
 
 ```json
 {
   "hooks": {
     "SessionStart": [
-      { "hooks": [{ "type": "command", "command": "node \"~/.claude/skills/ck/hooks/session-start.js\"" }] }
+      { "hooks": [{ "type": "command", "command": "node \"~/.gemini/skills/ck/hooks/session-start.js\"" }] }
     ]
   }
 }

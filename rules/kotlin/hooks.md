@@ -10,7 +10,7 @@ paths:
 
 ## PostToolUse Hooks
 
-Configure in `~/.claude/settings.json`:
+Configure in `~/.gemini/settings.json`:
 
 - **ktfmt/ktlint**: Auto-format `.kt` and `.kts` files after edit
 - **detekt**: Run static analysis after editing Kotlin files

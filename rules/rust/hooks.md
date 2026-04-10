@@ -9,7 +9,7 @@ paths:
 
 ## PostToolUse Hooks
 
-Configure in `~/.claude/settings.json`:
+Configure in `~/.gemini/settings.json`:
 
 - **cargo fmt**: Auto-format `.rs` files after edit
 - **cargo clippy**: Run lint checks after editing Rust files

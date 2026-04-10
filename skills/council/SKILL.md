@@ -153,7 +153,7 @@ Keep it scannable on a phone screen.
 
 ## Persistence Rule
 
-Do **not** write ad-hoc notes to `~/.claude/notes` or other shadow paths from this skill.
+Do **not** write ad-hoc notes to `~/.gemini/notes` or other shadow paths from this skill.
 
 If the council materially changes the recommendation:
 - use `knowledge-ops` to store the lesson in the right durable location

@@ -10,7 +10,7 @@ paths:
 
 ## PostToolUse Hooks
 
-Configure in `~/.claude/settings.json`:
+Configure in `~/.gemini/settings.json`:
 
 - **gofmt/goimports**: Auto-format `.go` files after edit
 - **go vet**: Run static analysis after editing `.go` files
