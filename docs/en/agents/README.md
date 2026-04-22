@@ -103,8 +103,8 @@ Agents in Everything Gemini Code use Gemini CLI tool names:
 |------|-------------|
 | `read_file` | Read file contents |
 | `write_file` | Write to files |
-| `replace_in_file` | Edit file content |
+| `replace` | Edit file content |
 | `run_shell_command` | Execute shell commands |
-| `search_files` | Search/grep in files |
+| `search_file_content` | Search/grep in files |
 | `list_directory` | List directory contents |
 | `google_web_search` | Web search |

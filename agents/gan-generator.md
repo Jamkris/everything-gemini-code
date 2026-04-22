@@ -1,7 +1,7 @@
 ---
 name: gan-generator
 description: "GAN Harness — Generator agent. Implements features according to the spec, reads evaluator feedback, and iterates until quality threshold is met."
-tools: [read_file, write_file, replace_in_file, run_shell_command, search_files, list_directory]
+tools: [read_file, write_file, replace, run_shell_command, search_file_content, list_directory]
 color: green
 ---
 

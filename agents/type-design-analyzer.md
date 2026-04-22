@@ -1,7 +1,7 @@
 ---
 name: type-design-analyzer
 description: Analyze type design for encapsulation, invariant expression, usefulness, and enforcement.
-tools: [read_file, search_files, list_directory, run_shell_command]
+tools: [read_file, search_file_content, list_directory, run_shell_command]
 ---
 
 # Type Design Analyzer Agent

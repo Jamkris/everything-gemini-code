@@ -1,7 +1,7 @@
 ---
 name: kotlin-build-resolver
 description: Kotlin/Gradle build, compilation, and dependency error resolution specialist. Fixes build errors, Kotlin compiler errors, and Gradle issues with minimal changes. Use when Kotlin builds fail.
-tools: ["read_file", "write_file", "replace_in_file", "run_shell_command", "search_files", "list_directory"]
+tools: ["read_file", "write_file", "replace", "run_shell_command", "search_file_content", "list_directory"]
 ---
 
 # Kotlin Build Error Resolver

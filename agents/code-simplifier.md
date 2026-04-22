@@ -1,7 +1,7 @@
 ---
 name: code-simplifier
 description: Simplifies and refines code for clarity, consistency, and maintainability while preserving behavior. Focus on recently modified code unless instructed otherwise.
-tools: [read_file, write_file, replace_in_file, run_shell_command, search_files, list_directory]
+tools: [read_file, write_file, replace, run_shell_command, search_file_content, list_directory]
 ---
 
 # Code Simplifier Agent

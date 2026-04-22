@@ -80,7 +80,7 @@ Note: If you adapt skill references from Claude Code, be aware that tool names d
 |-------------|------------|
 | `Read` | `read_file` |
 | `Write` | `write_file` |
-| `Edit` | `replace_in_file` |
+| `Edit` | `replace` |
 | `Bash` | `run_shell_command` |
-| `Grep` | `search_files` |
+| `Grep` | `search_file_content` |
 | `Glob` | `list_directory` |
