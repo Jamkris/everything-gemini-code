@@ -61,6 +61,7 @@ Gemini CLI와 Claude Code는 도구 이름이 다릅니다:
 | `Bash` | `run_shell_command` |
 | `Grep` | `search_file_content` |
 | `Glob` | `list_directory` |
+| `WebSearch` | `google_web_search` |
 
 ---
 
