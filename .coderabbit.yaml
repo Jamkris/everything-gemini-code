@@ -54,8 +54,9 @@ reviews:
         is consistent and shell snippets are safely quoted.
     - path: "skills/**/*.md"
       instructions: |
-        Skill definitions. Check that frontmatter includes `name` and `description`,
-        and that "When to Use" / "Ideal For" sections are present and specific.
+        Skill definitions. Frontmatter must include `name` and `description`.
+        The document body (not the frontmatter) should contain a "When to Use"
+        or "Ideal For" section with specific, actionable trigger conditions.
     - path: "hooks/**"
       instructions: |
         Hook scripts and hooks.json. Hooks run automatically on tool events —
@@ -63,9 +64,9 @@ reviews:
         and that exit codes are intentional.
     - path: "scripts/**"
       instructions: |
-        Shell scripts must use `set -e`, quote all variables, and avoid
-        interpolating shell variables into `node -e` strings (use `process.env`
-        instead). JS scripts target Node.js 20+.
+        Shell scripts must use `set -euo pipefail`, quote all variables, and
+        avoid interpolating shell variables into `node -e` strings (use
+        `process.env` instead). JS scripts target Node.js 20+.
     - path: "rules/**/*.md"
       instructions: |
         Coding rules shipped to end users' ~/.gemini/rules/. Cross-references
