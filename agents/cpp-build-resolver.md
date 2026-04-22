@@ -1,7 +1,7 @@
 ---
 name: cpp-build-resolver
 description: C++ build, CMake, and compilation error resolution specialist. Fixes build errors, linker issues, and template errors with minimal changes. Use when C++ builds fail.
-tools: ["read_file", "write_file", "replace_in_file", "run_shell_command", "search_files", "list_directory"]
+tools: ["read_file", "write_file", "replace", "run_shell_command", "search_file_content", "list_directory"]
 ---
 
 # C++ Build Error Resolver

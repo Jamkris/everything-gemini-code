@@ -1,7 +1,7 @@
 ---
 name: code-explorer
 description: Deeply analyzes existing codebase features by tracing execution paths, mapping architecture layers, and documenting dependencies to inform new development.
-tools: [read_file, search_files, list_directory, run_shell_command]
+tools: [read_file, search_file_content, list_directory, run_shell_command]
 ---
 
 # Code Explorer Agent

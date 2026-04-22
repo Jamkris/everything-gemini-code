@@ -1,7 +1,7 @@
 ---
 name: harness-optimizer
 description: Analyze and improve the local agent harness configuration for reliability, cost, and throughput.
-tools: ["read_file", "search_files", "list_directory", "run_shell_command", "replace_in_file"]
+tools: ["read_file", "search_file_content", "list_directory", "run_shell_command", "replace"]
 color: teal
 ---
 

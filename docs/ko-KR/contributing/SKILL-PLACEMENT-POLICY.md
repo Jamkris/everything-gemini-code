@@ -82,7 +82,7 @@ Claude Code에서 스킬 참조를 변환할 때 도구 이름이 다릅니다:
 |-------------|------------|
 | `Read` | `read_file` |
 | `Write` | `write_file` |
-| `Edit` | `replace_in_file` |
+| `Edit` | `replace` |
 | `Bash` | `run_shell_command` |
-| `Grep` | `search_files` |
+| `Grep` | `search_file_content` |
 | `Glob` | `list_directory` |

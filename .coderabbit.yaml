@@ -1,0 +1,115 @@
+language: "en-US"
+
+tone_instructions: |
+  Be concise and direct. Focus on bugs and security issues over style.
+
+early_access: true
+enable_free_tier: true
+
+reviews:
+  profile: "assertive"
+
+  auto_review:
+    enabled: true
+    auto_incremental_review: true
+    drafts: false
+    ignore_title_keywords:
+      - "bump version"
+      - "release"
+      - "chore: bump"
+
+  high_level_summary: true
+  poem: false
+  collapse_walkthrough: false
+  sequence_diagrams: false
+
+  request_changes_workflow: true
+  suggested_labels: true
+  suggested_reviewers: false
+  auto_apply_labels: false
+
+  path_filters:
+    - "!node_modules/**"
+    - "!package-lock.json"
+    - "!*.lock"
+    - "!.DS_Store"
+
+  path_instructions:
+    - path: "agents/**/*.md"
+      instructions: |
+        Gemini CLI agent definitions. The YAML frontmatter `tools:` array must
+        contain either:
+          (a) a valid Gemini CLI built-in tool: read_file, read_many_files,
+              write_file, replace, glob, search_file_content, list_directory,
+              run_shell_command, save_memory, web_fetch, google_web_search; or
+          (b) an MCP tool in the form `mcp__<server>__<tool_name>`.
+        Reject Claude-style names like `search_files`, `replace_in_file`, `Read`,
+        `Edit`. Also flag when the agent body references MCP tools (e.g. Slack,
+        Context7) that are not declared in the frontmatter `tools:` array — the
+        agent will be unable to call them at runtime. Each agent must have `name`
+        and `description` in frontmatter.
+    - path: "commands/**/*.toml"
+      instructions: |
+        Gemini CLI command definitions in TOML format. Verify command metadata
+        is consistent and shell snippets are safely quoted.
+    - path: "skills/**/*.md"
+      instructions: |
+        Skill definitions. Frontmatter must include `name` and `description`.
+        The document body (not the frontmatter) should contain a "When to Use"
+        or "Ideal For" section with specific, actionable trigger conditions.
+    - path: "hooks/**"
+      instructions: |
+        Hook scripts and hooks.json. Hooks run automatically on tool events —
+        any failure impacts all sessions. Verify error handling, quiet logging,
+        and that exit codes are intentional.
+    - path: "scripts/**"
+      instructions: |
+        Shell scripts must use `set -euo pipefail`, quote all variables, and
+        avoid interpolating shell variables into `node -e` strings (use
+        `process.env` instead). JS scripts target Node.js 20+.
+    - path: "rules/**/*.md"
+      instructions: |
+        Coding rules shipped to end users' ~/.gemini/rules/. Cross-references
+        between `common/` and language-specific files must use relative paths
+        (`../common/xxx.md`) and those targets must exist.
+    - path: "docs/**/*.md"
+      instructions: |
+        User-facing documentation. Tool-name mapping tables (Claude Code ↔ Gemini
+        CLI) must list only valid Gemini CLI tool names — incorrect mappings here
+        propagate into agent/skill definitions.
+    - path: "**/*.js"
+      instructions: |
+        Node.js 20+ project. Use `node:` prefix for built-in modules. Avoid
+        mutation — prefer spread/immutable patterns. Handle errors explicitly;
+        never swallow silently.
+
+  labeling_instructions:
+    - label: "security"
+      instructions: "Changes to hooks, scripts executing shell commands, or handling of user config/credential paths"
+    - label: "breaking"
+      instructions: "Changes to command names, agent tool names, hook event contracts, or public file layout under ~/.gemini/"
+    - label: "agents"
+      instructions: "Changes under agents/"
+    - label: "skills"
+      instructions: "Changes under skills/"
+    - label: "commands"
+      instructions: "Changes under commands/"
+    - label: "docs"
+      instructions: "Changes under docs/ or top-level markdown files only"
+
+  tools:
+    shellcheck:
+      enabled: true
+    gitleaks:
+      enabled: true
+    markdownlint:
+      enabled: true
+    eslint:
+      enabled: true
+
+chat:
+  auto_reply: true
+
+knowledge_base:
+  learnings:
+    scope: "local"

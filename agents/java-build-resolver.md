@@ -1,7 +1,7 @@
 ---
 name: java-build-resolver
 description: Java/Maven/Gradle build, compilation, and dependency error resolution specialist. Fixes build errors, Java compiler errors, and Maven/Gradle issues with minimal changes. Use when Java or Spring Boot builds fail.
-tools: ["read_file", "write_file", "replace_in_file", "run_shell_command", "search_files", "list_directory"]
+tools: ["read_file", "write_file", "replace", "run_shell_command", "search_file_content", "list_directory"]
 ---
 
 # Java Build Error Resolver

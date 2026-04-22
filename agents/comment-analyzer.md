@@ -1,7 +1,7 @@
 ---
 name: comment-analyzer
 description: Analyze code comments for accuracy, completeness, maintainability, and comment rot risk.
-tools: [read_file, search_files, list_directory, run_shell_command]
+tools: [read_file, search_file_content, list_directory, run_shell_command]
 ---
 
 # Comment Analyzer Agent

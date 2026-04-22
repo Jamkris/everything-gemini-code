@@ -1,7 +1,7 @@
 ---
 name: performance-optimizer
 description: Performance analysis and optimization specialist. Use PROACTIVELY for identifying bottlenecks, optimizing slow code, reducing bundle sizes, and improving runtime performance. Profiling, memory leaks, render optimization, and algorithmic improvements.
-tools: [read_file, write_file, replace_in_file, run_shell_command, search_files, list_directory]
+tools: [read_file, write_file, replace, run_shell_command, search_file_content, list_directory]
 ---
 
 # Performance Optimizer

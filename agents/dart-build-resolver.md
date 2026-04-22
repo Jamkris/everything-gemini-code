@@ -1,7 +1,7 @@
 ---
 name: dart-build-resolver
 description: Dart/Flutter build, analysis, and dependency error resolution specialist. Fixes `dart analyze` errors, Flutter compilation failures, pub dependency conflicts, and build_runner issues with minimal, surgical changes. Use when Dart/Flutter builds fail.
-tools: [read_file, write_file, replace_in_file, run_shell_command, search_files, list_directory]
+tools: [read_file, write_file, replace, run_shell_command, search_file_content, list_directory]
 ---
 
 # Dart/Flutter Build Error Resolver

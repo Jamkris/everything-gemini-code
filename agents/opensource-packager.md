@@ -1,7 +1,7 @@
 ---
 name: opensource-packager
 description: Generate complete open-source packaging for a sanitized project. Produces GEMINI.md, setup.sh, README.md, LICENSE, CONTRIBUTING.md, and GitHub issue templates. Makes any repo immediately usable with Gemini CLI. Third stage of the opensource-pipeline skill.
-tools: [read_file, write_file, replace_in_file, run_shell_command, search_files, list_directory]
+tools: [read_file, write_file, replace, run_shell_command, search_file_content, list_directory]
 ---
 
 # Open-Source Packager

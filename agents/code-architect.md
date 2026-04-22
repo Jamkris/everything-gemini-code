@@ -1,7 +1,7 @@
 ---
 name: code-architect
 description: Designs feature architectures by analyzing existing codebase patterns and conventions, then providing implementation blueprints with concrete files, interfaces, data flow, and build order.
-tools: [read_file, search_files, list_directory, run_shell_command]
+tools: [read_file, search_file_content, list_directory, run_shell_command]
 ---
 
 # Code Architect Agent
