@@ -138,6 +138,12 @@ Use custom commands to automate workflows (see [Full Command List](docs/en/comma
 /egc-code-review
 ```
 
+> **Antigravity users:** workflows are installed under bare names
+> (e.g. `/tdd`, `/code-review`, `/build-fix`) — the `egc-` prefix is only
+> applied to `/egc-plan`, which would otherwise conflict with Antigravity's
+> built-in `/plan`. In Gemini CLI every command uses the `egc-` prefix to
+> avoid collisions with its built-in command set.
+
 ### Agents
 
 Delegate complex tasks to specialized agents:

@@ -78,6 +78,11 @@ gemini extensions uninstall https://github.com/Jamkris/everything-gemini-code
 /egc-code-review
 ```
 
+> **Antigravity 用户注意：** 工作流使用裸名称安装
+> （例如 `/tdd`、`/code-review`、`/build-fix`）。只有与 Antigravity 内置
+> `/plan` 冲突的 `/egc-plan` 会加上 `egc-` 前缀。在 Gemini CLI 中，所有命令
+> 都使用 `egc-` 前缀以避免与内置命令集冲突。
+
 ### 智能体 (Agents)
 
 将复杂任务委托给专用智能体：

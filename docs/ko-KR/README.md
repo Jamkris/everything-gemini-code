@@ -70,6 +70,11 @@ Antigravity 사용자는 스크립트를 사용하세요:
 @security-reviewer "이 파일의 인젝션 취약점 감사"
 ```
 
+> **Antigravity 사용자 참고:** 워크플로우는 bare name 으로 설치됩니다
+> (예: `/tdd`, `/code-review`, `/build-fix`). Antigravity 내장 `/plan` 과
+> 충돌하는 `/egc-plan` 에만 `egc-` 프리픽스가 붙습니다. Gemini CLI 에서는
+> 내장 커맨드 충돌 방지를 위해 모든 커맨드가 `egc-` 프리픽스를 사용합니다.
+
 ✨ **완료!** 이제 28개 에이전트, 125개 스킬, 60개 커맨드를 사용할 수 있습니다.
 
 ---
