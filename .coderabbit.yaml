@@ -37,10 +37,11 @@ reviews:
   path_instructions:
     - path: "agents/**/*.md"
       instructions: |
-        Gemini CLI agent definitions. The YAML frontmatter `tools:` array may
-        ONLY contain valid Gemini CLI built-in tools: read_file, read_many_files,
-        write_file, replace, glob, search_file_content, list_directory,
-        run_shell_command, save_memory, web_fetch, google_web_search.
+        Gemini CLI agent definitions. YAML frontmatter MUST include `name`,
+        `description`, and `tools`. The `tools:` array may ONLY contain valid
+        Gemini CLI built-in tools: read_file, read_many_files, write_file,
+        replace, glob, search_file_content, list_directory, run_shell_command,
+        save_memory, web_fetch, google_web_search.
 
         Reject:
           - Claude-style names: `search_files`, `replace_in_file`, `Read`, `Edit`.
@@ -49,9 +50,11 @@ reviews:
             load time. MCP tools are auto-discovered from the configured MCP
             server at runtime and must NOT be declared in agent frontmatter.
             Agent body text describing MCP tool usage is fine and expected.
+          - Frontmatter keys outside the Gemini CLI schema (e.g. `color`,
+            `model`).
 
-        Reject frontmatter keys outside the Gemini CLI schema (e.g. `color`,
-        `model`). Each agent must have `name` and `description` in frontmatter.
+        The authoritative tool allowlist is also documented in
+        `.gemini/styleguide.md` — keep the two in sync.
     - path: "commands/**/*.toml"
       instructions: |
         Gemini CLI command definitions in TOML format. Verify command metadata

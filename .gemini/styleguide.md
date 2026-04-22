@@ -42,9 +42,17 @@ The codebase consists of:
 
 ## Markdown Agents
 
-- Must have YAML frontmatter with `tools` field.
-- Tool names must use Gemini format: `read_file`, `run_shell_command`, `write_file`.
-- No `model` field (Gemini CLI does not support it).
+- Must have YAML frontmatter with `name`, `description`, and `tools` fields.
+- `tools` entries must be valid Gemini CLI built-ins only: `read_file`,
+  `read_many_files`, `write_file`, `replace`, `glob`, `search_file_content`,
+  `list_directory`, `run_shell_command`, `save_memory`, `web_fetch`,
+  `google_web_search`.
+- Do NOT include MCP tools (e.g. `mcp__slack__...`, `mcp__context7__...`) in
+  the `tools` array — Gemini CLI rejects them at load time. MCP tools are
+  auto-discovered from the configured MCP server at runtime.
+- Do NOT include Claude-style names (`search_files`, `replace_in_file`,
+  `Read`, `Edit`) — those are not valid in Gemini CLI.
+- No `model` or `color` field (Gemini CLI schema does not support them).
 
 ## Documentation
 
