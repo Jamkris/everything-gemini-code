@@ -6,7 +6,7 @@
 
 | 커맨드 | 사용 에이전트 | 설명 |
 |--------|-------------|------|
-| `/ecc-plan` | planner | 기능 구현 계획 수립 |
+| `/egc-plan` | planner | 기능 구현 계획 수립 |
 | `/tdd` | tdd-guide | 테스트 주도 개발 |
 | `/code-review` | code-reviewer | 코드 품질 리뷰 |
 | `/build-fix` | build-error-resolver | 빌드 오류 수정 |

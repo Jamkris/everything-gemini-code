@@ -11,8 +11,8 @@
 | `/checkpoint`      | 모든 변경 사항을 스테이징하고 AI 생성 메시지로 커밋합니다.                                                                               |
 | `/code-review`     | `code-reviewer` 에이전트를 사용하여 현재 변경 사항에 대한 종합 코드 리뷰를 수행합니다.                                                    |
 | `/e2e`             | Playwright로 E2E 테스트를 생성하고 실행합니다.                                                                                           |
-| `/ecc-plan`        | 요구 사항을 재검토하고 단계별 구현 계획을 수립합니다. (별칭: `/everything-gemini-code:plan`)                                               |
-| `/ecc-docs`        | Context7을 통해 라이브러리 또는 주제의 최신 문서를 조회합니다. (별칭: `/everything-gemini-code:docs`)                                      |
+| `/egc-plan`        | 요구 사항을 재검토하고 단계별 구현 계획을 수립합니다. (별칭: `/everything-gemini-code:plan`)                                               |
+| `/egc-docs`        | Context7을 통해 라이브러리 또는 주제의 최신 문서를 조회합니다. (별칭: `/everything-gemini-code:docs`)                                      |
 | `/eval`            | Eval 기반 개발 워크플로우를 관리합니다.                                                                                                  |
 | `/evolve`          | 관련 인스팅트를 스킬, 커맨드 또는 에이전트로 클러스터링합니다.                                                                            |
 | `/feature-dev`     | 코드베이스 이해 기반 가이드 기능 개발.                                                                                                   |
@@ -62,7 +62,7 @@
 
 ## 핵심 커맨드
 
-### /ecc-plan
+### /egc-plan
 
 요구 사항을 재검토하고, 위험을 평가하며, 단계별 구현 계획을 수립합니다. 코드 작성 전 사용자 확인을 기다립니다.
 
@@ -194,7 +194,7 @@ Gradle/Android 빌드 오류 및 의존성 문제 수정.
 
 세션 관리 — 나열, 저장, 불러오기, 별칭 설정.
 
-### /ecc-docs
+### /egc-docs
 
 Context7을 통해 라이브러리 또는 주제의 최신 문서를 조회합니다.
 

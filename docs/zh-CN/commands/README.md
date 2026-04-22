@@ -10,8 +10,8 @@
 | `/checkpoint`      | 暂存所有更改并使用 AI 生成的消息提交。                                                                          |
 | `/code-review`     | 使用 `code-reviewer` 代理对当前更改进行全面代码审查。                                                           |
 | `/e2e`             | 使用 Playwright 生成并运行端到端测试。                                                                          |
-| `/ecc-plan`        | 重述需求、评估风险并制定分步实施计划。(别名: `/everything-gemini-code:plan`)                                      |
-| `/ecc-docs`        | 通过 Context7 查找库或主题的最新文档。(别名: `/everything-gemini-code:docs`)                                     |
+| `/egc-plan`        | 重述需求、评估风险并制定分步实施计划。(别名: `/everything-gemini-code:plan`)                                      |
+| `/egc-docs`        | 通过 Context7 查找库或主题的最新文档。(别名: `/everything-gemini-code:docs`)                                     |
 | `/eval`            | 管理 eval 驱动的开发工作流。                                                                                    |
 | `/evolve`          | 将相关直觉聚类为技能、命令或代理。                                                                               |
 | `/go-build`        | 逐步修复 Go 构建错误、go vet 警告和 linter 问题。                                                               |

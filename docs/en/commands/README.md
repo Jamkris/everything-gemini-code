@@ -11,8 +11,8 @@ List of available commands provided by `everything-gemini-code`.
 | `/checkpoint`      | Stage all changes and commit them with an AI-generated message.                                                                                  |
 | `/code-review`     | Comprehensive code review of the current changes or specific files using the `code-reviewer` agent.                                              |
 | `/e2e`             | Generate and run end-to-end tests with Playwright.                                                                                               |
-| `/ecc-plan`        | Restate requirements, assess risks, and create step-by-step implementation plan. (alias: `/everything-gemini-code:plan`)                         |
-| `/ecc-docs`        | Look up current documentation for a library or topic via Context7. (alias: `/everything-gemini-code:docs`)                                       |
+| `/egc-plan`        | Restate requirements, assess risks, and create step-by-step implementation plan. (alias: `/everything-gemini-code:plan`)                         |
+| `/egc-docs`        | Look up current documentation for a library or topic via Context7. (alias: `/everything-gemini-code:docs`)                                       |
 | `/eval`            | Manage eval-driven development workflow.                                                                                                         |
 | `/evolve`          | Cluster related instincts into skills, commands, or agents.                                                                                      |
 | `/feature-dev`     | Guided feature development with codebase understanding.                                                                                          |
@@ -62,7 +62,7 @@ List of available commands provided by `everything-gemini-code`.
 
 ## Core Commands
 
-### /ecc-plan
+### /egc-plan
 
 Restate requirements, assess risks, and create step-by-step implementation plan. WAIT for user CONFIRM before touching any code.
 
@@ -202,7 +202,7 @@ Verification suite, workflow checkpoints, and eval-driven development.
 
 Session management - list, save, load, and alias sessions.
 
-### /ecc-docs
+### /egc-docs
 
 Look up current documentation for a library or topic via Context7.
 

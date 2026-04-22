@@ -1,10 +1,10 @@
-description = '/docs'
+description = '/egc-docs'
 prompt = '''
 ---
 description: Look up current documentation for a library or topic via Context7.
 ---
 
-# /docs
+# /egc-docs
 
 ## Purpose
 
@@ -13,10 +13,10 @@ Look up up-to-date documentation for a library, framework, or API and return a s
 ## Usage
 
 ```
-/docs [library name] [question]
+/egc-docs [library name] [question]
 ```
 
-Use quotes for multi-word arguments so they are parsed as a single token. Example: `/docs "Next.js" "How do I configure middleware?"`
+Use quotes for multi-word arguments so they are parsed as a single token. Example: `/egc-docs "Next.js" "How do I configure middleware?"`
 
 If library or question is omitted, prompt the user for:
 1. The library or product name (e.g. Next.js, Prisma, Supabase).

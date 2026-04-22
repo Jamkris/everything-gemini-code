@@ -129,7 +129,7 @@ Use custom commands to automate workflows (see [Full Command List](docs/en/comma
 
 ```bash
 # Plan a feature implementation
-/ecc-plan "Add user authentication with JWT"
+/egc-plan "Add user authentication with JWT"
 
 # Start Test-Driven Development workflow
 /tdd "Create a user service"

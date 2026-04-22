@@ -13,7 +13,7 @@ This command invokes the **planner** agent to create a comprehensive implementat
 
 ## When to Use
 
-Use `/ecc-plan` when:
+Use `/egc-plan` when:
 - Starting a new feature
 - Making significant architectural changes
 - Working on complex refactoring
@@ -34,7 +34,7 @@ The planner agent will:
 ## Example Usage
 
 ```
-User: /ecc-plan I need to add real-time notifications when markets resolve
+User: /egc-plan I need to add real-time notifications when markets resolve
 
 Agent (planner):
 # Implementation Plan: Real-Time Market Resolution Notifications
