@@ -87,10 +87,10 @@ DEBUG=false
 
 ## Available Commands
 
-- `/tdd` - Test-driven development workflow
-- `/plan` - Create implementation plan
-- `/code-review` - Review code quality
-- `/build-fix` - Fix build errors
+- `/egc-tdd` - Test-driven development workflow
+- `/egc-plan` - Create implementation plan
+- `/egc-code-review` - Review code quality
+- `/egc-build-fix` - Fix build errors
 
 ## Git Workflow
 

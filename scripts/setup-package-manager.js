@@ -3,7 +3,7 @@
  * Package Manager Setup Script
  *
  * Interactive script to configure preferred package manager.
- * Can be run directly or via the /setup-pm command.
+ * Can be run directly or via the /egc-setup-pm command.
  *
  * Usage:
  *   node scripts/setup-package-manager.js [pm-name]

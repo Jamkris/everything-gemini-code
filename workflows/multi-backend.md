@@ -125,7 +125,7 @@ Output solutions (at least 2), wait for user selection.
 - Context: Analysis results from Phase 2
 - OUTPUT: File structure, function/class design, dependency relationships
 
-Gemini synthesizes plan, save to `.gemini/plan/task-name.md` after user approval.
+Gemini synthesizes plan, save to `.gemini/egc-plan/task-name.md` after user approval.
 
 ### Phase 4: Implementation
 

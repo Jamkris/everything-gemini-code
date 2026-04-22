@@ -485,8 +485,8 @@ Before ANY production deployment:
 ## Resources
 
 - [OWASP Top 10](https://owasp.org/www-project-top-ten/)
-- [Next.js Security](https://nextjs.org/docs/security)
-- [Supabase Security](https://supabase.com/docs/guides/auth)
+- [Next.js Security](https://nextjs.org/egc-docs/security)
+- [Supabase Security](https://supabase.com/egc-docs/guides/auth)
 - [Web Security Academy](https://portswigger.net/web-security)
 
 ---

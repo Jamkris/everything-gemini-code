@@ -72,7 +72,7 @@ Identifies generic AI-generated design patterns:
 
 **Audit existing UI:**
 ```
-/design-system audit --url http://localhost:3000 --pages / /pricing /docs
+/design-system audit --url http://localhost:3000 --pages / /pricing /egc-docs
 ```
 
 **Check for AI slop:**

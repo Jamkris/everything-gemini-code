@@ -1,6 +1,6 @@
 ---
 name: conversation-analyzer
-description: Use this agent when analyzing conversation transcripts to find behaviors worth preventing with hooks. Triggered by /hookify without arguments.
+description: Use this agent when analyzing conversation transcripts to find behaviors worth preventing with hooks. Triggered by /egc-hookify without arguments.
 tools: [read_file, search_file_content]
 ---
 

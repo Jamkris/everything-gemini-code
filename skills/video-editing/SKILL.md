@@ -164,7 +164,7 @@ export const VlogComposition: React.FC = () => {
 npx remotion render src/index.ts VlogComposition output.mp4
 ```
 
-See the [Remotion docs](https://www.remotion.dev/docs) for detailed patterns and API reference.
+See the [Remotion docs](https://www.remotion.dev/egc-docs) for detailed patterns and API reference.
 
 ## Layer 5: Generated Assets (ElevenLabs / fal.ai)
 

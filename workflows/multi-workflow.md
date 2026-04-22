@@ -152,7 +152,7 @@ Wait for results with `TaskOutput`.
 
 **Follow the `IMPORTANT` instructions in `Multi-Model Call Specification` above**
 
-**Gemini Synthesis**: Adopt Codex backend plan + Gemini frontend plan, save to `.gemini/plan/task-name.md` after user approval.
+**Gemini Synthesis**: Adopt Codex backend plan + Gemini frontend plan, save to `.gemini/egc-plan/task-name.md` after user approval.
 
 ### Phase 4: Implementation
 

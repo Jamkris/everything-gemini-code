@@ -8,11 +8,11 @@ Manage eval-driven development workflow.
 
 ## Usage
 
-`/eval [define|check|report|list] [feature-name]`
+`/egc-eval [define|check|report|list] [feature-name]`
 
 ## Define Evals
 
-`/eval define feature-name`
+`/egc-eval define feature-name`
 
 Create a new eval definition:
 
@@ -39,7 +39,7 @@ Created: $(date)
 
 ## Check Evals
 
-`/eval check feature-name`
+`/egc-eval check feature-name`
 
 Run evals for a feature:
 
@@ -64,7 +64,7 @@ Status: IN PROGRESS / READY
 
 ## Report Evals
 
-`/eval report feature-name`
+`/egc-eval report feature-name`
 
 Generate comprehensive eval report:
 
@@ -102,7 +102,7 @@ RECOMMENDATION
 
 ## List Evals
 
-`/eval list`
+`/egc-eval list`
 
 Show all eval definitions:
 

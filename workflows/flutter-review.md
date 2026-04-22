@@ -16,15 +16,15 @@ This command invokes the **flutter-reviewer** agent to review Flutter/Dart code 
 
 ## Prerequisites
 
-Before running `/flutter-review`, ensure:
-1. **Build passes** — run `/flutter-build` first; a review on broken code is incomplete
-2. **Tests pass** — run `/flutter-test` to confirm no regressions
+Before running `/egc-flutter-review`, ensure:
+1. **Build passes** — run `/egc-flutter-build` first; a review on broken code is incomplete
+2. **Tests pass** — run `/egc-flutter-test` to confirm no regressions
 3. **No merge conflicts** — resolve all conflicts so the diff reflects only intentional changes
 4. **`flutter analyze` is clean** — fix analyzer warnings before review
 
 ## When to Use
 
-Use `/flutter-review` when:
+Use `/egc-flutter-review` when:
 - Before submitting a PR with Flutter/Dart changes (after build and tests pass)
 - After implementing a new feature to catch issues early
 - When reviewing someone else's Flutter code
@@ -50,7 +50,7 @@ Use `/flutter-review` when:
 ## Example Session
 
 ````text
-User: /flutter-review
+User: /egc-flutter-review
 
 Agent:
 # Flutter Code Review
@@ -105,9 +105,9 @@ Verdict: BLOCK — HIGH issues must be fixed before merge.
 
 ## Related Commands
 
-- `/flutter-build` — Fix build errors first
-- `/flutter-test` — Run tests before reviewing
-- `/code-review` — General code review (language-agnostic)
+- `/egc-flutter-build` — Fix build errors first
+- `/egc-flutter-test` — Run tests before reviewing
+- `/egc-code-review` — General code review (language-agnostic)
 
 ## Related
 

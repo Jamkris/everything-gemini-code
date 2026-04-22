@@ -16,7 +16,7 @@ $ARGUMENTS
 - **Mandatory Parallel**: Codex/Gemini calls MUST use `run_in_background: true` (including single model calls, to avoid blocking main thread)
 - **Code Sovereignty**: External models have **zero filesystem write access**, all modifications by Gemini
 - **Stop-Loss Mechanism**: Do not proceed to next phase until current phase output is validated
-- **Planning Only**: This command allows reading context and writing to `.gemini/plan/*` plan files, but **NEVER modify production code**
+- **Planning Only**: This command allows reading context and writing to `.gemini/egc-plan/*` plan files, but **NEVER modify production code**
 
 ---
 
@@ -199,19 +199,19 @@ Synthesize both analyses, generate **Step-by-step Implementation Plan**:
 **`/ccg:plan` responsibilities end here, MUST execute the following actions**:
 
 1. Present complete implementation plan to user (including pseudo-code)
-2. Save plan to `.gemini/plan/<feature-name>.md` (extract feature name from requirement, e.g., `user-auth`, `payment-module`)
+2. Save plan to `.gemini/egc-plan/<feature-name>.md` (extract feature name from requirement, e.g., `user-auth`, `payment-module`)
 3. Output prompt in **bold text** (MUST use actual saved file path):
 
    ---
 
-   **Plan generated and saved to `.gemini/plan/actual-feature-name.md`**
+   **Plan generated and saved to `.gemini/egc-plan/actual-feature-name.md`**
 
    **Please review the plan above. You can:**
    - **Modify plan**: Tell me what needs adjustment, I'll update the plan
    - **Execute plan**: Copy the following command to a new session
 
    ```
-   /ccg:execute .gemini/plan/actual-feature-name.md
+   /ccg:execute .gemini/egc-plan/actual-feature-name.md
    ```
 
    ---
@@ -233,8 +233,8 @@ Synthesize both analyses, generate **Step-by-step Implementation Plan**:
 
 After planning completes, save plan to:
 
-- **First planning**: `.gemini/plan/<feature-name>.md`
-- **Iteration versions**: `.gemini/plan/<feature-name>-v2.md`, `.gemini/plan/<feature-name>-v3.md`...
+- **First planning**: `.gemini/egc-plan/<feature-name>.md`
+- **Iteration versions**: `.gemini/egc-plan/<feature-name>-v2.md`, `.gemini/egc-plan/<feature-name>-v3.md`...
 
 Plan file write should complete before presenting plan to user.
 
@@ -245,7 +245,7 @@ Plan file write should complete before presenting plan to user.
 If user requests plan modifications:
 
 1. Adjust plan content based on user feedback
-2. Update `.gemini/plan/<feature-name>.md` file
+2. Update `.gemini/egc-plan/<feature-name>.md` file
 3. Re-present modified plan
 4. Prompt user to review or execute again
 
@@ -256,7 +256,7 @@ If user requests plan modifications:
 After user approves, **manually** execute:
 
 ```bash
-/ccg:execute .gemini/plan/<feature-name>.md
+/ccg:execute .gemini/egc-plan/<feature-name>.md
 ```
 
 ---

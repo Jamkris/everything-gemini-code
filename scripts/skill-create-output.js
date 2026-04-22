@@ -2,7 +2,7 @@
 /**
  * Skill Creator - Pretty Output Formatter
  *
- * Creates beautiful terminal output for the /skill-create command
+ * Creates beautiful terminal output for the /egc-skill-create command
  * similar to @mvanhorn's /last30days skill
  */
 
@@ -158,9 +158,9 @@ ${chalk.bold('Files Tracked:')}    ${chalk.green(data.files)}
   nextSteps() {
     console.log(box('📋 Next Steps', `
 ${chalk.yellow('1.')} Review the generated SKILL.md
-${chalk.yellow('2.')} Import instincts: ${chalk.cyan('/instinct-import <path>')}
-${chalk.yellow('3.')} View learned patterns: ${chalk.cyan('/instinct-status')}
-${chalk.yellow('4.')} Evolve into skills: ${chalk.cyan('/evolve')}
+${chalk.yellow('2.')} Import instincts: ${chalk.cyan('/egc-instinct-import <path>')}
+${chalk.yellow('3.')} View learned patterns: ${chalk.cyan('/egc-instinct-status')}
+${chalk.yellow('4.')} Evolve into skills: ${chalk.cyan('/egc-evolve')}
 `));
     console.log('\n');
   }

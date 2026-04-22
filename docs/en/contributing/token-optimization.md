@@ -43,8 +43,8 @@ Each active MCP server consumes context tokens. Best practices:
 ### Session Management
 
 - Start fresh sessions for unrelated tasks
-- Use `/checkpoint` to save state before context-intensive operations
-- Use `/sessions` to review and resume past sessions
+- Use `/egc-checkpoint` to save state before context-intensive operations
+- Use `/egc-sessions` to review and resume past sessions
 
 ## Skill Loading Optimization
 
@@ -74,15 +74,15 @@ export ECC_DISABLED_HOOKS="hook-id-1,hook-id-2"
 | Situation | Action |
 |-----------|--------|
 | Large codebase review | Use targeted agents (`@go-reviewer` not full review) |
-| Repeated build fixes | Use language-specific resolver (`/go-build` vs generic) |
-| Documentation updates | Use `/update-docs` instead of manual prompting |
+| Repeated build fixes | Use language-specific resolver (`/egc-go-build` vs generic) |
+| Documentation updates | Use `/egc-update-docs` instead of manual prompting |
 | Architecture decisions | Use `@architect` with clear scope boundaries |
 
 ## Continuous Learning for Token Efficiency
 
-The `/learn` command extracts patterns from your sessions into reusable skills, reducing the need to re-explain context in future sessions:
+The `/egc-learn` command extracts patterns from your sessions into reusable skills, reducing the need to re-explain context in future sessions:
 
 ```bash
-/learn          # Extract patterns from current session
-/evolve         # Cluster instincts into efficient skills
+/egc-learn          # Extract patterns from current session
+/egc-evolve         # Cluster instincts into efficient skills
 ```

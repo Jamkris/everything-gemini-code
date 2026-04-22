@@ -1,6 +1,6 @@
 ---
 description: Execute an implementation plan with rigorous validation loops
-argument-hint: <path/to/plan.md>
+argument-hint: <path/to/egc-plan.md>
 ---
 
 > Adapted from PRPs-agentic-eng by Wirasm. Part of the PRP workflow series.
@@ -61,7 +61,7 @@ Extract these sections from the plan:
 If the file doesn't exist or isn't a valid plan:
 ```
 Error: Plan file not found or invalid.
-Run /prp-plan <feature-description> to create a plan first.
+Run /egc-prp-plan <feature-description> to create a plan first.
 ```
 
 **CHECKPOINT**: Plan loaded. All sections identified. Tasks extracted.
@@ -267,8 +267,8 @@ Write report to `.gemini/PRPs/reports/{plan-name}-report.md`:
 | `path/to/test` | N tests | [area covered] |
 
 ## Next Steps
-- [ ] Code review via `/code-review`
-- [ ] Create PR via `/prp-pr`
+- [ ] Code review via `/egc-code-review`
+- [ ] Create PR via `/egc-prp-pr`
 ```
 
 ### Update PRD (if applicable)
@@ -326,7 +326,7 @@ Report to user:
 | Phase 2 | [next] |
 | ... | ... |
 
-> Next step: Run `/prp-pr` to create a pull request, or `/code-review` to review changes first.
+> Next step: Run `/egc-prp-pr` to create a pull request, or `/egc-code-review` to review changes first.
 ```
 
 ---
@@ -379,7 +379,7 @@ Report to user:
 
 ## Next Steps
 
-- Run `/code-review` to review changes before committing
-- Run `/prp-commit` to commit with a descriptive message
-- Run `/prp-pr` to create a pull request
-- Run `/prp-plan <next-phase>` if the PRD has more phases
+- Run `/egc-code-review` to review changes before committing
+- Run `/egc-prp-commit` to commit with a descriptive message
+- Run `/egc-prp-pr` to create a pull request
+- Run `/egc-prp-plan <next-phase>` if the PRD has more phases

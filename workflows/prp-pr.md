@@ -29,7 +29,7 @@ git log origin/<base>..HEAD --oneline
 | Check | Condition | Action if Failed |
 |---|---|---|
 | Not on base branch | Current branch ≠ base | Stop: "Switch to a feature branch first." |
-| Clean working directory | No uncommitted changes | Warn: "You have uncommitted changes. Commit or stash first. Use `/prp-commit` to commit." |
+| Clean working directory | No uncommitted changes | Warn: "You have uncommitted changes. Commit or stash first. Use `/egc-prp-commit` to commit." |
 | Has commits ahead | `git log origin/<base>..HEAD` not empty | Stop: "No commits ahead of `<base>`. Nothing to PR." |
 | No existing PR | `gh pr list --head <branch> --json number` is empty | Stop: "PR already exists: #<number>. Use `gh pr view <number> --web` to open it." |
 
@@ -169,7 +169,7 @@ Artifacts referenced:
 
 Next steps:
   - gh pr view <number> --web   → open in browser
-  - /code-review <number>       → review the PR
+  - /egc-code-review <number>       → review the PR
   - gh pr merge <number>        → merge when ready
 ```
 

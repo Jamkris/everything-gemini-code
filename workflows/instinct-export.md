@@ -1,7 +1,7 @@
 ---
 name: instinct-export
 description: Export instincts for sharing with teammates or other projects
-command: /instinct-export
+command: /egc-instinct-export
 ---
 
 # Instinct Export Command
@@ -14,10 +14,10 @@ Exports instincts to a shareable format. Perfect for:
 ## Usage
 
 ```
-/instinct-export                           # Export all personal instincts
-/instinct-export --domain testing          # Export only testing instincts
-/instinct-export --min-confidence 0.7      # Only export high-confidence instincts
-/instinct-export --output team-instincts.yaml
+/egc-instinct-export                           # Export all personal instincts
+/egc-instinct-export --domain testing          # Export only testing instincts
+/egc-instinct-export --min-confidence 0.7      # Only export high-confidence instincts
+/egc-instinct-export --output team-instincts.yaml
 ```
 
 ## What to Do

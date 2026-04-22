@@ -144,7 +144,7 @@ gemini /schedule-reply "Reply to Sarah about the board meeting"
 
 ## Prerequisites
 
-- [Gemini CLI](https://ai.google.dev/gemini-api/docs/cli)
+- [Gemini CLI](https://ai.google.dev/gemini-api/egc-docs/cli)
 - Gmail CLI (e.g., gog by @pterm)
 - Node.js 18+ (for calendar-suggest.js)
 - Optional: Slack MCP server, Matrix bridge (LINE), Chrome + Playwright (Messenger)

@@ -57,13 +57,13 @@ Antigravity 사용자는 스크립트를 사용하세요:
 
 ```bash
 # 기능 구현 계획
-/plan "사용자 인증 추가"
+/egc-plan "사용자 인증 추가"
 
 # TDD 워크플로우 시작
-/tdd "사용자 서비스 생성"
+/egc-tdd "사용자 서비스 생성"
 
 # 코드 리뷰 실행
-/code-review
+/egc-code-review
 
 # 에이전트 직접 호출
 @architect "마이크로서비스 아키텍처 설계"
@@ -141,14 +141,14 @@ everything-gemini-code/
 │   └── 그 외 100개+ 스킬...
 │
 ├── commands/              # Gemini CLI 커맨드 (.toml, 60개)
-│   ├── plan.toml            # /plan - 구현 계획
-│   ├── tdd.toml             # /tdd - 테스트 주도 개발
-│   ├── code-review.toml     # /code-review - 코드 리뷰
-│   ├── build-fix.toml       # /build-fix - 빌드 에러 수정
-│   ├── e2e.toml             # /e2e - E2E 테스트 생성
-│   ├── refactor-clean.toml  # /refactor-clean - 코드 정리
+│   ├── plan.toml            # /egc-plan - 구현 계획
+│   ├── tdd.toml             # /egc-tdd - 테스트 주도 개발
+│   ├── code-review.toml     # /egc-code-review - 코드 리뷰
+│   ├── build-fix.toml       # /egc-build-fix - 빌드 에러 수정
+│   ├── e2e.toml             # /egc-e2e - E2E 테스트 생성
+│   ├── refactor-clean.toml  # /egc-refactor-clean - 코드 정리
 │   ├── security-scan.toml   # /security-scan - 보안 스캔 (AgentShield)
-│   ├── update-docs.toml     # /update-docs - 문서 업데이트
+│   ├── update-docs.toml     # /egc-update-docs - 문서 업데이트
 │   └── 그 외 50개+ 커맨드...
 │
 ├── workflows/             # Antigravity 워크플로우 (.md)
@@ -258,17 +258,17 @@ Incrementally fix build errors:
 
 | 하고 싶은 것 | 사용할 커맨드 | 사용되는 에이전트 |
 |-------------|-------------|--------------------|
-| 새 기능 계획하기 | `/plan "인증 추가"` | planner |
+| 새 기능 계획하기 | `/egc-plan "인증 추가"` | planner |
 | 시스템 아키텍처 설계 | `@architect "설계해줘"` | architect |
-| 테스트를 먼저 작성하며 코딩 | `/tdd` | tdd-guide |
-| 방금 작성한 코드 리뷰 | `/code-review` | code-reviewer |
-| 빌드 실패 수정 | `/build-fix` | build-error-resolver |
-| E2E 테스트 실행 | `/e2e` | e2e-runner |
+| 테스트를 먼저 작성하며 코딩 | `/egc-tdd` | tdd-guide |
+| 방금 작성한 코드 리뷰 | `/egc-code-review` | code-reviewer |
+| 빌드 실패 수정 | `/egc-build-fix` | build-error-resolver |
+| E2E 테스트 실행 | `/egc-e2e` | e2e-runner |
 | 보안 취약점 찾기 | `@security-reviewer "감사해줘"` | security-reviewer |
-| 사용하지 않는 코드 제거 | `/refactor-clean` | refactor-cleaner |
-| 문서 업데이트 | `/update-docs` | doc-updater |
-| Go 코드 리뷰 | `/go-review` | go-reviewer |
-| Python 코드 리뷰 | `/python-review` | python-reviewer |
+| 사용하지 않는 코드 제거 | `/egc-refactor-clean` | refactor-cleaner |
+| 문서 업데이트 | `/egc-update-docs` | doc-updater |
+| Go 코드 리뷰 | `/egc-go-review` | go-reviewer |
+| Python 코드 리뷰 | `/egc-python-review` | python-reviewer |
 | TypeScript 코드 리뷰 | `@typescript-reviewer` | typescript-reviewer |
 | 데이터베이스 쿼리 감사 | `@database-reviewer` | database-reviewer |
 
@@ -276,24 +276,24 @@ Incrementally fix build errors:
 
 **새로운 기능 시작:**
 ```
-/plan "OAuth를 사용한 사용자 인증 추가"
+/egc-plan "OAuth를 사용한 사용자 인증 추가"
                                 → planner가 구현 청사진 작성
-/tdd                            → tdd-guide가 테스트 먼저 작성 강제
-/code-review                    → code-reviewer가 코드 검토
+/egc-tdd                            → tdd-guide가 테스트 먼저 작성 강제
+/egc-code-review                    → code-reviewer가 코드 검토
 ```
 
 **버그 수정:**
 ```
-/tdd                            → tdd-guide: 버그를 재현하는 실패 테스트 작성
+/egc-tdd                            → tdd-guide: 버그를 재현하는 실패 테스트 작성
                                 → 수정 구현, 테스트 통과 확인
-/code-review                    → code-reviewer: 회귀 검사
+/egc-code-review                    → code-reviewer: 회귀 검사
 ```
 
 **프로덕션 준비:**
 ```
 @security-reviewer "보안 감사"   → OWASP Top 10 감사
-/e2e                            → e2e-runner: 핵심 사용자 흐름 테스트
-/test-coverage                  → 80% 이상 커버리지 확인
+/egc-e2e                            → e2e-runner: 핵심 사용자 흐름 테스트
+/egc-test-coverage                  → 80% 이상 커버리지 확인
 ```
 
 ---

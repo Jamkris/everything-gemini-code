@@ -8,7 +8,7 @@ Sequential agent workflow for complex tasks.
 
 ## Usage
 
-`/orchestrate [workflow-type] [task-description]`
+`/egc-orchestrate [workflow-type] [task-description]`
 
 ## Workflow Types
 
@@ -79,7 +79,7 @@ Between agents, create handoff document:
 ## Example: Feature Workflow
 
 ```
-/orchestrate feature "Add user authentication"
+/egc-orchestrate feature "Add user authentication"
 ```
 
 Executes:
@@ -173,7 +173,7 @@ $ARGUMENTS:
 ## Custom Workflow Example
 
 ```
-/orchestrate custom "architect,tdd-guide,code-reviewer" "Redesign caching layer"
+/egc-orchestrate custom "architect,tdd-guide,code-reviewer" "Redesign caching layer"
 ```
 
 ## Tips

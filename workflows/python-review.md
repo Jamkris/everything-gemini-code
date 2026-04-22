@@ -17,7 +17,7 @@ This command invokes the **python-reviewer** agent for comprehensive Python-spec
 
 ## When to Use
 
-Use `/python-review` when:
+Use `/egc-python-review` when:
 - After writing or modifying Python code
 - Before committing Python changes
 - Reviewing pull requests with Python code
@@ -77,7 +77,7 @@ pytest --cov=app --cov-report=term-missing
 ## Example Usage
 
 ```text
-User: /python-review
+User: /egc-python-review
 
 Agent:
 # Python Code Review Report
@@ -172,9 +172,9 @@ Run: `black app/routes/user.py app/services/auth.py`
 ## Integration with Other Commands
 
 - Use `/python-test` first to ensure tests pass
-- Use `/code-review` for non-Python specific concerns
-- Use `/python-review` before committing
-- Use `/build-fix` if static analysis tools fail
+- Use `/egc-code-review` for non-Python specific concerns
+- Use `/egc-python-review` before committing
+- Use `/egc-build-fix` if static analysis tools fail
 
 ## Framework-Specific Reviews
 

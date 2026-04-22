@@ -35,7 +35,7 @@ Intercept the response flow to offer the user a choice about response depth **be
 
 Use the repository's canonical context-budget heuristics to estimate the prompt's token count mentally.
 
-Use the same calibration guidance as [context-budget](../context-budget/SKILL.md):
+Use the same calibration guidance as [context-budget](../egc-context-budget/SKILL.md):
 
 - prose: `words × 1.3`
 - code-heavy or mixed/code blocks: `chars / 4`

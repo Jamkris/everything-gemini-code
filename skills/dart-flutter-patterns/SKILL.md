@@ -554,7 +554,7 @@ testWidgets('CartBadge shows item count', (tester) async {
 ## References
 
 - [Effective Dart: Design](https://dart.dev/effective-dart/design)
-- [Flutter Performance Best Practices](https://docs.flutter.dev/perf/best-practices)
+- [Flutter Performance Best Practices](https://egc-docs.flutter.dev/perf/best-practices)
 - [Riverpod Documentation](https://riverpod.dev/)
 - [BLoC Library](https://bloclibrary.dev/)
 - [GoRouter](https://pub.dev/packages/go_router)

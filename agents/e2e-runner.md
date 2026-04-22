@@ -295,7 +295,7 @@ export class MarketsPage {
 ### Example Test with Best Practices
 
 ```typescript
-// tests/e2e/markets/search.spec.ts
+// tests/egc-e2e/markets/search.spec.ts
 import { test, expect } from '@playwright/test'
 import { MarketsPage } from '../../pages/MarketsPage'
 
@@ -525,7 +525,7 @@ test('user can place trade with sufficient balance', async ({ page }) => {
 import { defineConfig, devices } from '@playwright/test'
 
 export default defineConfig({
-  testDir: './tests/e2e',
+  testDir: './tests/egc-e2e',
   fullyParallel: true,
   forbidOnly: !!process.env.CI,
   retries: process.env.CI ? 2 : 0,
@@ -682,7 +682,7 @@ use: {
 ### GitHub Actions Workflow
 
 ```yaml
-# .github/workflows/e2e.yml
+# .github/workflows/egc-e2e.yml
 name: E2E Tests
 
 on: [push, pull_request]
@@ -762,7 +762,7 @@ jobs:
 ## Failed Tests
 
 ### 1. search with special characters
-**File:** `tests/e2e/markets/search.spec.ts:45`
+**File:** `tests/egc-e2e/markets/search.spec.ts:45`
 **Error:** Expected element to be visible, but was not found
 **Screenshot:** artifacts/search-special-chars-failed.png
 **Trace:** artifacts/trace-123.zip
@@ -777,7 +777,7 @@ jobs:
 ---
 
 ### 2. user can place sell order
-**File:** `tests/e2e/trading/sell.spec.ts:28`
+**File:** `tests/egc-e2e/trading/sell.spec.ts:28`
 **Error:** Timeout waiting for API response /api/trade
 **Video:** artifacts/videos/sell-order-failed.webm
 

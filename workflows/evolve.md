@@ -28,10 +28,10 @@ Analyzes instincts and clusters related ones into higher-level structures:
 ## Usage
 
 ```
-/evolve                    # Analyze all instincts and suggest evolutions
-/evolve --domain testing   # Only evolve instincts in testing domain
-/evolve --dry-run          # Show what would be created without creating
-/evolve --threshold 5      # Require 5+ related instincts to cluster
+/egc-evolve                    # Analyze all instincts and suggest evolutions
+/egc-evolve --domain testing   # Only evolve instincts in testing domain
+/egc-evolve --dry-run          # Show what would be created without creating
+/egc-evolve --threshold 5      # Require 5+ related instincts to cluster
 ```
 
 ## Evolution Rules
@@ -125,7 +125,7 @@ Files:
   - ~/.gemini/homunculus/evolved/agents/debugger.md
 
 ---
-Run `/evolve --execute` to create these files.
+Run `/egc-evolve --execute` to create these files.
 ```
 
 ## Flags

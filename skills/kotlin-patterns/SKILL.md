@@ -531,7 +531,7 @@ val first20 = fibonacci.take(20).toList()
 ### build.gradle.kts Configuration
 
 ```kotlin
-// Check for latest versions: https://kotlinlang.org/docs/releases.html
+// Check for latest versions: https://kotlinlang.org/egc-docs/releases.html
 plugins {
     kotlin("jvm") version "2.3.10"
     kotlin("plugin.serialization") version "2.3.10"

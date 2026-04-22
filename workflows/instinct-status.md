@@ -25,9 +25,9 @@ python3 ~/.gemini/skills/continuous-learning-v2/scripts/instinct-cli.py status
 ## Usage
 
 ```
-/instinct-status
-/instinct-status --domain code-style
-/instinct-status --low-confidence
+/egc-instinct-status
+/egc-instinct-status --domain code-style
+/egc-instinct-status --low-confidence
 ```
 
 ## What to Do

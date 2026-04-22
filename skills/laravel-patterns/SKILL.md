@@ -114,7 +114,7 @@ Use scoped bindings to prevent cross-tenant access.
 
 ```php
 Route::scopeBindings()->group(function () {
-    Route::get('/accounts/{account}/projects/{project}', [ProjectController::class, 'show']);
+    Route::get('/accounts/{account}/egc-projects/{project}', [ProjectController::class, 'show']);
 });
 ```
 

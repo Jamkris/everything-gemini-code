@@ -78,7 +78,7 @@ Session Activity
 │   • use-zod-validation.md (0.6)         │
 └─────────────────────────────────────────┘
       │
-      │ /evolve clusters
+      │ /egc-evolve clusters
       ▼
 ┌─────────────────────────────────────────┐
 │              evolved/                   │
@@ -152,20 +152,20 @@ touch ~/.gemini/homunculus/observations.jsonl
 ### 3. Use the Instinct Commands
 
 ```bash
-/instinct-status     # Show learned instincts with confidence scores
-/evolve              # Cluster related instincts into skills/commands
-/instinct-export     # Export instincts for sharing
-/instinct-import     # Import instincts from others
+/egc-instinct-status     # Show learned instincts with confidence scores
+/egc-evolve              # Cluster related instincts into skills/commands
+/egc-instinct-export     # Export instincts for sharing
+/egc-instinct-import     # Import instincts from others
 ```
 
 ## Commands
 
 | Command | Description |
 |---------|-------------|
-| `/instinct-status` | Show all learned instincts with confidence |
-| `/evolve` | Cluster related instincts into skills/commands |
-| `/instinct-export` | Export instincts for sharing |
-| `/instinct-import <file>` | Import instincts from others |
+| `/egc-instinct-status` | Show all learned instincts with confidence |
+| `/egc-evolve` | Cluster related instincts into skills/commands |
+| `/egc-instinct-export` | Export instincts for sharing |
+| `/egc-instinct-import <file>` | Import instincts from others |
 
 ## Configuration
 

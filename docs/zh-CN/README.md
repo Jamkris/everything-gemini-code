@@ -69,13 +69,13 @@ gemini extensions uninstall https://github.com/Jamkris/everything-gemini-code
 
 ```bash
 # 规划功能实现
-/plan "添加 JWT 用户认证"
+/egc-plan "添加 JWT 用户认证"
 
 # 开始 TDD 工作流
-/tdd "创建用户服务"
+/egc-tdd "创建用户服务"
 
 # 运行代码审查
-/code-review
+/egc-code-review
 ```
 
 ### 智能体 (Agents)
@@ -109,7 +109,7 @@ everything-gemini-code/
 ├── gemini-extension.json  # 扩展清单
 ├── agents/                # 专用子智能体 (@planner, @architect 等)
 ├── skills/                # 工作流定义 (TDD, Patterns 等)
-├── commands/              # 斜杠命令 (/plan, /tdd 等)
+├── commands/              # 斜杠命令 (/egc-plan, /egc-tdd 等)
 ├── templates/             # GEMINI.md 规则模板 (Global, TS, Python, Go)
 ├── hooks/                 # 自动化触发器 (hooks.json)
 └── mcp-configs/           # MCP 服务器配置

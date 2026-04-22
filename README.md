@@ -132,10 +132,10 @@ Use custom commands to automate workflows (see [Full Command List](docs/en/comma
 /egc-plan "Add user authentication with JWT"
 
 # Start Test-Driven Development workflow
-/tdd "Create a user service"
+/egc-tdd "Create a user service"
 
 # Run a code review
-/code-review
+/egc-code-review
 ```
 
 ### Agents

@@ -188,10 +188,10 @@ function getChecks() {
       category: 'Context Efficiency',
       points: 2,
       scopes: ['repo', 'commands'],
-      path: 'commands/model-route.toml',
+      path: 'commands/egc-model-route.toml',
       description: 'Model routing command exists',
-      pass: fileExists('commands/model-route.toml'),
-      fix: 'Add model-route command guidance in commands/model-route.toml.',
+      pass: fileExists('commands/egc-model-route.toml'),
+      fix: 'Add model-route command guidance in commands/egc-model-route.toml.',
     },
     {
       id: 'context-token-doc',
@@ -278,10 +278,10 @@ function getChecks() {
       category: 'Eval Coverage',
       points: 4,
       scopes: ['repo', 'commands'],
-      path: 'commands/eval.toml',
+      path: 'commands/egc-eval.toml',
       description: 'Eval and verification commands exist',
-      pass: fileExists('commands/eval.toml') && fileExists('commands/verify.toml') && fileExists('commands/checkpoint.toml'),
-      fix: 'Add eval/checkpoint/verify commands to standardize verification loops.',
+      pass: fileExists('commands/egc-eval.toml') && fileExists('commands/egc-verify.toml') && fileExists('commands/egc-checkpoint.toml'),
+      fix: 'Add eval/egc-checkpoint/egc-verify commands to standardize verification loops.',
     },
     {
       id: 'eval-tests-presence',
@@ -442,7 +442,7 @@ function printText(report) {
 
 function showHelp(exitCode = 0) {
   console.log(`
-Usage: node scripts/harness-audit.js [scope] [--scope <repo|hooks|skills|commands|agents>] [--format <text|json>]
+Usage: node scripts/egc-harness-audit.js [scope] [--scope <repo|hooks|skills|commands|agents>] [--format <text|json>]
 
 Deterministic Gemini harness audit based on explicit file/rule checks.
 `);

@@ -3,7 +3,7 @@
 Code-level details for RTStream operations. For workflow guide, see [rtstream.md](rtstream.md).
 For usage guidance and workflow selection, start with [../SKILL.md](../SKILL.md).
 
-Based on [docs.videodb.io](https://docs.videodb.io/pages/ingest/live-streams/realtime-apis.md).
+Based on [docs.videodb.io](https://egc-docs.videodb.io/pages/ingest/live-streams/realtime-apis.md).
 
 ---
 

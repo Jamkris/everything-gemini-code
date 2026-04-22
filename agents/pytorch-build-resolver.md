@@ -116,4 +116,4 @@ Final: `Status: SUCCESS/FAILED | Errors Fixed: N | Files Modified: list`
 
 ---
 
-For PyTorch best practices, consult the [official PyTorch documentation](https://pytorch.org/docs/stable/) and [PyTorch forums](https://discuss.pytorch.org/).
+For PyTorch best practices, consult the [official PyTorch documentation](https://pytorch.org/egc-docs/stable/) and [PyTorch forums](https://discuss.pytorch.org/).

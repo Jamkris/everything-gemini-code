@@ -13,7 +13,7 @@ Run two independent reviewers (Gemini Ultra + an external model) against the cur
 ## Usage
 
 ```
-/santa-loop [file-or-glob | description]
+/egc-santa-loop [file-or-glob | description]
 ```
 
 ## Workflow

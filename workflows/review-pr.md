@@ -6,7 +6,7 @@ Run a comprehensive multi-perspective review of a pull request.
 
 ## Usage
 
-`/review-pr [PR-number-or-URL] [--focus=comments|tests|errors|types|code|simplify]`
+`/egc-review-pr [PR-number-or-URL] [--focus=comments|tests|errors|types|code|simplify]`
 
 If no PR is specified, review the current branch's PR. If no focus is specified, run the full review stack.
 

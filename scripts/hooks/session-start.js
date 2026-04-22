@@ -51,7 +51,7 @@ runHook('SessionStart', async () => {
         }
       }
     } else {
-      // Manual install: create shims so short aliases like /tdd work
+      // Manual install: create shims so short aliases like /egc-tdd work
       const globalCmdDir = path.join(geminiDir, 'commands');
       const extDir = path.resolve(__dirname, '..', '..');
       const extCmdDir = path.join(extDir, 'commands');

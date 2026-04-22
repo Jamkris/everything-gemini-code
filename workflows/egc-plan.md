@@ -15,7 +15,7 @@ This command invokes the **planner** agent to create a comprehensive implementat
 
 ## When to Use
 
-Use `/plan` when:
+Use `/egc-plan` when:
 - Starting a new feature
 - Making significant architectural changes
 - Working on complex refactoring
@@ -36,7 +36,7 @@ The planner agent will:
 ## Example Usage
 
 ```
-User: /plan I need to add real-time notifications when markets resolve
+User: /egc-plan I need to add real-time notifications when markets resolve
 
 Agent (planner):
 # Implementation Plan: Real-Time Market Resolution Notifications
@@ -103,9 +103,9 @@ If you want changes, respond with:
 ## Integration with Other Commands
 
 After planning:
-- Use `/tdd` to implement with test-driven development
+- Use `/egc-tdd` to implement with test-driven development
 - Use `/build-and-fix` if build errors occur
-- Use `/code-review` to review completed implementation
+- Use `/egc-code-review` to review completed implementation
 
 ## Related Agents
 
