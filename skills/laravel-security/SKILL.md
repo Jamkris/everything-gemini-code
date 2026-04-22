@@ -84,7 +84,7 @@ Use policy middleware for route-level enforcement:
 ```php
 use Illuminate\Support\Facades\Route;
 
-Route::put('/projects/{project}', [ProjectController::class, 'update'])
+Route::put('/egc-projects/{project}', [ProjectController::class, 'update'])
     ->middleware(['auth:sanctum', 'can:update,project']);
 ```
 

@@ -1,0 +1,45 @@
+description = 'Promote'
+prompt = '''
+---
+name: promote
+description: Promote project-scoped instincts to global scope
+command: true
+---
+
+# Promote Command
+
+Promote instincts from project scope to global scope in continuous-learning-v2.
+
+## Implementation
+
+Run the instinct CLI using the plugin root path:
+
+```bash
+python3 "${GEMINI_EXTENSION_ROOT}/skills/continuous-learning-v2/scripts/instinct-cli.py" promote [instinct-id] [--force] [--dry-run]
+```
+
+Or if `GEMINI_EXTENSION_ROOT` is not set (manual installation):
+
+```bash
+python3 ~/.gemini/skills/continuous-learning-v2/scripts/instinct-cli.py promote [instinct-id] [--force] [--dry-run]
+```
+
+## Usage
+
+```bash
+/egc-promote                      # Auto-detect promotion candidates
+/egc-promote --dry-run            # Preview auto-promotion candidates
+/egc-promote --force              # Promote all qualified candidates without prompt
+/egc-promote grep-before-edit     # Promote one specific instinct from current project
+```
+
+## What to Do
+
+1. Detect current project
+2. If `instinct-id` is provided, promote only that instinct (if present in current project)
+3. Otherwise, find cross-project candidates that:
+   - Appear in at least 2 projects
+   - Meet confidence threshold
+4. Write promoted instincts to `~/.gemini/homunculus/instincts/personal/` with `scope: global`
+
+'''

@@ -117,7 +117,7 @@ TaskOutput({ task_id: "<task_id>", block: true, timeout: 600000 })
 `[Mode: Prepare]`
 
 1. **Identify Input Type**:
-   - Plan file path (e.g., `.gemini/plan/xxx.md`)
+   - Plan file path (e.g., `.gemini/egc-plan/xxx.md`)
    - Direct task description
 
 2. **Read Plan Content**:
@@ -222,7 +222,7 @@ mcp__ace-tool__search_context({
    - Refactor "dirty prototype" to **highly readable, maintainable, enterprise-grade code**
    - Remove redundant code
    - Ensure compliance with project's existing code standards
-   - **Do not generate comments/docs unless necessary**, code should be self-explanatory
+   - **Do not generate comments/egc-docs unless necessary**, code should be self-explanatory
 
 4. **Minimal Scope**:
    - Changes limited to requirement scope only
@@ -303,7 +303,7 @@ After audit passes, report to user:
 
 ```bash
 # Execute plan file
-/ccg:execute .gemini/plan/feature-name.md
+/ccg:execute .gemini/egc-plan/feature-name.md
 
 # Execute task directly (for plans already discussed in context)
 /ccg:execute implement user authentication based on previous plan

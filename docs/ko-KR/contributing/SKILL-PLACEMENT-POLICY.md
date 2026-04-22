@@ -27,7 +27,7 @@
 
 위치: `~/.gemini/skills/learned/<skill-name>/`
 
-지속적 학습(evaluate-session 훅, `/learn` 커맨드)에 의해 생성됨.
+지속적 학습(evaluate-session 훅, `/egc-learn` 커맨드)에 의해 생성됨.
 
 - 저장소에 없음. 배포 안 됨
 - `SKILL.md` 옆에 `.provenance.json` 파일 필수
@@ -46,7 +46,7 @@
 
 위치: `~/.gemini/skills/evolved/`
 
-`/evolve` 커맨드에 의해 클러스터링된 인스팅트에서 생성됨.
+`/egc-evolve` 커맨드에 의해 클러스터링된 인스팅트에서 생성됨.
 
 - 저장소에 없음. 배포 안 됨
 - 출처는 소스 인스팅트에서 상속됨. 별도 `.provenance.json` 불필요

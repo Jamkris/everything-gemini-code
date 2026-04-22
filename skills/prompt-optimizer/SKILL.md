@@ -32,7 +32,7 @@ and output a complete optimized prompt the user can paste and run.
 - User pastes a draft prompt and asks for feedback or enhancement
 - User says "I don't know how to prompt for this"
 - User says "how should I use ECC for..."
-- User explicitly invokes `/prompt-optimize`
+- User explicitly invokes `/egc-prompt-optimize`
 
 ### Do Not Use When
 
@@ -105,8 +105,8 @@ from the prompt description alone and mark the estimate as uncertain.
 |-------|-----------|---------------|
 | TRIVIAL | Single file, < 50 lines | Direct execution |
 | LOW | Single component or module | Single command or skill |
-| MEDIUM | Multiple components, same domain | Command chain + /verify |
-| HIGH | Cross-domain, 5+ files | /plan first, then phased execution |
+| MEDIUM | Multiple components, same domain | Command chain + /egc-verify |
+| HIGH | Cross-domain, 5+ files | /egc-plan first, then phased execution |
 | EPIC | Multi-session, multi-PR, architectural shift | Use blueprint skill for multi-session plan |
 
 ### Phase 3: ECC Component Matching
@@ -117,15 +117,15 @@ Map intent + scope + tech stack (from Phase 0) to specific ECC components.
 
 | Intent | Commands | Skills | Agents |
 |--------|----------|--------|--------|
-| New Feature | /plan, /tdd, /code-review, /verify | tdd-workflow, verification-loop | planner, tdd-guide, code-reviewer |
-| Bug Fix | /tdd, /build-fix, /verify | tdd-workflow | tdd-guide, build-error-resolver |
-| Refactor | /refactor-clean, /code-review, /verify | verification-loop | refactor-cleaner, code-reviewer |
-| Research | /plan | search-first, iterative-retrieval | — |
-| Testing | /tdd, /e2e, /test-coverage | tdd-workflow, e2e-testing | tdd-guide, e2e-runner |
-| Review | /code-review | security-review | code-reviewer, security-reviewer |
-| Documentation | /update-docs, /update-codemaps | — | doc-updater |
-| Infrastructure | /plan, /verify | docker-patterns, deployment-patterns, database-migrations | architect |
-| Design (MEDIUM-HIGH) | /plan | — | planner, architect |
+| New Feature | /egc-plan, /egc-tdd, /egc-code-review, /egc-verify | tdd-workflow, verification-loop | planner, tdd-guide, code-reviewer |
+| Bug Fix | /egc-tdd, /egc-build-fix, /egc-verify | tdd-workflow | tdd-guide, build-error-resolver |
+| Refactor | /egc-refactor-clean, /egc-code-review, /egc-verify | verification-loop | refactor-cleaner, code-reviewer |
+| Research | /egc-plan | search-first, iterative-retrieval | — |
+| Testing | /egc-tdd, /egc-e2e, /egc-test-coverage | tdd-workflow, e2e-testing | tdd-guide, e2e-runner |
+| Review | /egc-code-review | security-review | code-reviewer, security-reviewer |
+| Documentation | /egc-update-docs, /egc-update-codemaps | — | doc-updater |
+| Infrastructure | /egc-plan, /egc-verify | docker-patterns, deployment-patterns, database-migrations | architect |
+| Design (MEDIUM-HIGH) | /egc-plan | — | planner, architect |
 | Design (EPIC) | — | blueprint (invoke as skill) | planner, architect |
 
 #### By Tech Stack
@@ -172,7 +172,7 @@ Determine where this prompt sits in the development lifecycle:
 Research → Plan → Implement (TDD) → Review → Verify → Commit
 ```
 
-For MEDIUM+ tasks, always start with /plan. For EPIC tasks, use blueprint skill.
+For MEDIUM+ tasks, always start with /egc-plan. For EPIC tasks, use blueprint skill.
 
 **Model recommendation** (include in output):
 
@@ -186,10 +186,10 @@ For MEDIUM+ tasks, always start with /plan. For EPIC tasks, use blueprint skill.
 **Multi-prompt splitting** (for HIGH/EPIC scope):
 
 For tasks that exceed a single session, split into sequential prompts:
-- Prompt 1: Research + Plan (use search-first skill, then /plan)
-- Prompt 2-N: Implement one phase per prompt (each ends with /verify)
-- Final Prompt: Integration test + /code-review across all phases
-- Use /save-session and /resume-session to preserve context between sessions
+- Prompt 1: Research + Plan (use search-first skill, then /egc-plan)
+- Prompt 2-N: Implement one phase per prompt (each ends with /egc-verify)
+- Final Prompt: Integration test + /egc-code-review across all phases
+- Use /egc-save-session and /egc-resume-session to preserve context between sessions
 
 ---
 
@@ -215,7 +215,7 @@ If Phase 0 auto-detected the answer, state it instead of asking.
 
 | Type | Component | Purpose |
 |------|-----------|---------|
-| Command | /plan | Plan architecture before coding |
+| Command | /egc-plan | Plan architecture before coding |
 | Skill | tdd-workflow | TDD methodology guidance |
 | Agent | code-reviewer | Post-implementation review |
 | Model | Sonnet 4.6 | Recommended for this scope |
@@ -240,14 +240,14 @@ A compact version for experienced ECC users. Vary by intent type:
 
 | Intent | Quick Pattern |
 |--------|--------------|
-| New Feature | `/plan [feature]. /tdd to implement. /code-review. /verify.` |
-| Bug Fix | `/tdd — write failing test for [bug]. Fix to green. /verify.` |
-| Refactor | `/refactor-clean [scope]. /code-review. /verify.` |
-| Research | `Use search-first skill for [topic]. /plan based on findings.` |
-| Testing | `/tdd [module]. /e2e for critical flows. /test-coverage.` |
-| Review | `/code-review. Then use security-reviewer agent.` |
-| Docs | `/update-docs. /update-codemaps.` |
-| EPIC | `Use blueprint skill for "[objective]". Execute phases with /verify gates.` |
+| New Feature | `/egc-plan [feature]. /egc-tdd to implement. /egc-code-review. /egc-verify.` |
+| Bug Fix | `/egc-tdd — write failing test for [bug]. Fix to green. /egc-verify.` |
+| Refactor | `/egc-refactor-clean [scope]. /egc-code-review. /egc-verify.` |
+| Research | `Use search-first skill for [topic]. /egc-plan based on findings.` |
+| Testing | `/egc-tdd [module]. /egc-e2e for critical flows. /egc-test-coverage.` |
+| Review | `/egc-code-review. Then use security-reviewer agent.` |
+| Docs | `/egc-update-docs. /egc-update-codemaps.` |
+| EPIC | `Use blueprint skill for "[objective]". Execute phases with /egc-verify gates.` |
 
 ### Section 5: Enhancement Rationale
 
@@ -291,11 +291,11 @@ A compact version for experienced ECC users. Vary by intent type:
 - 包含：邮箱/密码登录表单、表单验证、错误提示、加载状态、响应式布局
 
 工作流：
-1. /plan 先规划组件结构和认证流程，参考现有页面的模式
-2. /tdd 测试先行：编写登录表单的单元测试和认证流程的集成测试
+1. /egc-plan 先规划组件结构和认证流程，参考现有页面的模式
+2. /egc-tdd 测试先行：编写登录表单的单元测试和认证流程的集成测试
 3. 实现登录页面和认证逻辑
-4. /code-review 审查实现
-5. /verify 验证所有测试通过且页面正常渲染
+4. /egc-code-review 审查实现
+5. /egc-verify 验证所有测试通过且页面正常渲染
 
 安全要求：
 - 密码不明文传输
@@ -339,11 +339,11 @@ Requirements:
 - Follow existing API patterns in the codebase
 
 Workflow:
-1. /plan the endpoint structure, middleware chain, and validation logic
-2. /tdd — write table-driven tests for success, validation failure, auth failure, not-found
+1. /egc-plan the endpoint structure, middleware chain, and validation logic
+2. /egc-tdd — write table-driven tests for success, validation failure, auth failure, not-found
 3. Implement following existing handler patterns
-4. /go-review
-5. /verify — run full test suite, confirm no regressions
+4. /egc-go-review
+5. /egc-verify — run full test suite, confirm no regressions
 
 Do not:
 - Modify existing endpoints
@@ -376,8 +376,8 @@ The blueprint should produce phases like:
 - Phase 4: Verify with integration tests, then extract next service
 - Phase N: Decommission monolith
 
-Each phase = 1 PR, with /verify gates between phases.
-Use /save-session between phases. Use /resume-session to continue.
+Each phase = 1 PR, with /egc-verify gates between phases.
+Use /egc-save-session between phases. Use /egc-resume-session to continue.
 Use git worktrees for parallel service extraction when dependencies allow.
 
 Recommended: Opus 4.6 for blueprint planning, Sonnet 4.6 for phase execution.

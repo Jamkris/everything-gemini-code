@@ -16,9 +16,9 @@ This command runs the Flutter test suite and reports results. When failures occu
 
 ## When to Use
 
-Use `/flutter-test` when:
+Use `/egc-flutter-test` when:
 - After implementing a feature to verify nothing broke
-- After running `/flutter-build` to ensure tests pass
+- After running `/egc-flutter-build` to ensure tests pass
 - To check test coverage on new code
 - When a specific test file is failing
 - Before submitting a PR
@@ -48,7 +48,7 @@ flutter test --update-goldens 2>&1
 ## Example Session
 
 ````text
-User: /flutter-test
+User: /egc-flutter-test
 
 Agent:
 # Flutter Test Run
@@ -132,9 +132,9 @@ Test Status: PASS ✓
 
 ## Related Commands
 
-- `/flutter-build` — Fix build errors before running tests
-- `/flutter-review` — Review code after tests pass
-- `/tdd` — Test-driven development workflow
+- `/egc-flutter-build` — Fix build errors before running tests
+- `/egc-flutter-review` — Review code after tests pass
+- `/egc-tdd` — Test-driven development workflow
 
 ## Related
 

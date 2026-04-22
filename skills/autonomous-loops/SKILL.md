@@ -112,15 +112,15 @@ gemini -p --allowedTools "Read,Write,Edit,Bash" "Implement the fixes from securi
 
 ```bash
 # Start the default session
-node scripts/claw.js
+node scripts/egc-claw.js
 
 # Named session with skill context
-CLAW_SESSION=my-project CLAW_SKILLS=tdd-workflow,security-review node scripts/claw.js
+CLAW_SESSION=my-project CLAW_SKILLS=tdd-workflow,security-review node scripts/egc-claw.js
 ```
 
 ### How It Works
 
-1. Loads conversation history from `~/.gemini/claw/{session}.md`
+1. Loads conversation history from `~/.gemini/egc-claw/{session}.md`
 2. Each user message is sent to `gemini -p` with full history as context
 3. Responses are appended to the session file (Markdown-as-database)
 4. Sessions persist across restarts
@@ -135,7 +135,7 @@ CLAW_SESSION=my-project CLAW_SKILLS=tdd-workflow,security-review node scripts/cl
 | Context accumulation | Grows per turn | Fresh each step |
 | CI/CD integration | Poor | Excellent |
 
-See the `/claw` command documentation for full details.
+See the `/egc-claw` command documentation for full details.
 
 ---
 
@@ -568,7 +568,7 @@ These patterns compose well:
 
 2. **Continuous Gemini + De-Sloppify** — Add `--review-prompt` with a de-sloppify directive to each iteration.
 
-3. **Any loop + Verification** — Use ECC's `/verify` command or `verification-loop` skill as a gate before commits.
+3. **Any loop + Verification** — Use ECC's `/egc-verify` command or `verification-loop` skill as a gate before commits.
 
 4. **Ralphinho's tiered approach in simpler loops** — Even in a sequential pipeline, you can route simple tasks to Haiku and complex tasks to Opus:
    ```bash
@@ -606,5 +606,5 @@ These patterns compose well:
 | Ralphinho | enitrat | credit: @enitrat |
 | Infinite Agentic Loop | disler | credit: @disler |
 | Continuous Gemini | AnandChowdhary | credit: @AnandChowdhary |
-| NanoClaw | ECC | `/claw` command in this repo |
+| NanoClaw | ECC | `/egc-claw` command in this repo |
 | Verification Loop | ECC | `skills/verification-loop/` in this repo |

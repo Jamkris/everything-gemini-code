@@ -7,7 +7,7 @@ description: This skill should be used when the user asks to create a hookify ru
 
 ## Overview
 
-Hookify rules are markdown files with YAML frontmatter that define patterns to watch for and messages to show when those patterns match. Rules are stored in `.gemini/hookify.{rule-name}.local.md` files.
+Hookify rules are markdown files with YAML frontmatter that define patterns to watch for and messages to show when those patterns match. Rules are stored in `.gemini/egc-hookify.{rule-name}.local.md` files.
 
 ## Rule File Format
 
@@ -104,15 +104,15 @@ python3 -c "import re; print(re.search(r'your_pattern', 'test text'))"
 ## File Organization
 
 - **Location**: `.gemini/` directory in project root
-- **Naming**: `.gemini/hookify.{descriptive-name}.local.md`
+- **Naming**: `.gemini/egc-hookify.{descriptive-name}.local.md`
 - **Gitignore**: Add `.gemini/*.local.md` to `.gitignore`
 
 ## Commands
 
-- `/hookify [description]` - Create new rules (auto-analyzes conversation if no args)
-- `/hookify-list` - View all rules in table format
-- `/hookify-configure` - Toggle rules on/off interactively
-- `/hookify-help` - Full documentation
+- `/egc-hookify [description]` - Create new rules (auto-analyzes conversation if no args)
+- `/egc-hookify-list` - View all rules in table format
+- `/egc-hookify-configure` - Toggle rules on/off interactively
+- `/egc-hookify-help` - Full documentation
 
 ## Quick Reference
 

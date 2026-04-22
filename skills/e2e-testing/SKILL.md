@@ -103,7 +103,7 @@ test.describe('Item Search', () => {
 import { defineConfig, devices } from '@playwright/test'
 
 export default defineConfig({
-  testDir: './tests/e2e',
+  testDir: './tests/egc-e2e',
   fullyParallel: true,
   forbidOnly: !!process.env.CI,
   retries: process.env.CI ? 2 : 0,
@@ -225,7 +225,7 @@ use: {
 ## CI/CD Integration
 
 ```yaml
-# .github/workflows/e2e.yml
+# .github/workflows/egc-e2e.yml
 name: E2E Tests
 on: [push, pull_request]
 
@@ -265,7 +265,7 @@ jobs:
 ## Failed Tests
 
 ### test-name
-**File:** `tests/e2e/feature.spec.ts:45`
+**File:** `tests/egc-e2e/feature.spec.ts:45`
 **Error:** Expected element to be visible
 **Screenshot:** artifacts/failed.png
 **Recommended Fix:** [description]

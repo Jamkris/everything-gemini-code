@@ -25,13 +25,13 @@ The rules distillation process follows three phases:
 #### 1a. Collect skill inventory
 
 ```bash
-bash ~/.gemini/skills/rules-distill/scripts/scan-skills.sh
+bash ~/.gemini/skills/egc-rules-distill/scripts/scan-skills.sh
 ```
 
 #### 1b. Collect rules index
 
 ```bash
-bash ~/.gemini/skills/rules-distill/scripts/scan-rules.sh
+bash ~/.gemini/skills/egc-rules-distill/scripts/scan-rules.sh
 ```
 
 #### 1c. Present to user
@@ -207,7 +207,7 @@ Store results in the skill directory (`results.json`):
 ### End-to-end run
 
 ```
-$ /rules-distill
+$ /egc-rules-distill
 
 Rules Distillation — Phase 1: Inventory
 ────────────────────────────────────────

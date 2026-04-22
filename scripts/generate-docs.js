@@ -2,7 +2,7 @@ const fs = require('fs');
 const path = require('path');
 
 const COMMANDS_DIR = path.join(__dirname, '../../gemini/commands');
-const DOCS_DIR = path.join(__dirname, '../docs/commands');
+const DOCS_DIR = path.join(__dirname, '../egc-docs/commands');
 
 if (!fs.existsSync(DOCS_DIR)) {
     fs.mkdirSync(DOCS_DIR, { recursive: true });

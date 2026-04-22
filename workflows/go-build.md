@@ -16,7 +16,7 @@ This command invokes the **go-build-resolver** agent to incrementally fix Go bui
 
 ## When to Use
 
-Use `/go-build` when:
+Use `/egc-go-build` when:
 - `go build ./...` fails with errors
 - `go vet ./...` reports issues
 - `golangci-lint run` shows warnings
@@ -44,7 +44,7 @@ go mod tidy -v
 ## Example Session
 
 ```text
-User: /go-build
+User: /egc-go-build
 
 Agent:
 # Go Build Resolution
@@ -173,9 +173,9 @@ The agent will stop and report if:
 
 ## Related Commands
 
-- `/go-test` - Run tests after build succeeds
-- `/go-review` - Review code quality
-- `/verify` - Full verification loop
+- `/egc-go-test` - Run tests after build succeeds
+- `/egc-go-review` - Review code quality
+- `/egc-verify` - Full verification loop
 
 ## Related
 

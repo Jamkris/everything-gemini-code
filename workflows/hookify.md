@@ -6,7 +6,7 @@ Create hook rules to prevent unwanted Gemini CLI behaviors by analyzing conversa
 
 ## Usage
 
-`/hookify [description of behavior to prevent]`
+`/egc-hookify [description of behavior to prevent]`
 
 If no arguments are provided, analyze the current conversation to find behaviors worth preventing.
 
@@ -32,7 +32,7 @@ Show the user:
 
 ### Step 3: Generate Rule Files
 
-For each approved rule, create a file at `.gemini/hookify.{name}.local.md`:
+For each approved rule, create a file at `.gemini/egc-hookify.{name}.local.md`:
 
 ```yaml
 ---
@@ -47,4 +47,4 @@ Message shown when rule triggers.
 
 ### Step 4: Confirm
 
-Report created rules and how to manage them with `/hookify-list` and `/hookify-configure`.
+Report created rules and how to manage them with `/egc-hookify-list` and `/egc-hookify-configure`.

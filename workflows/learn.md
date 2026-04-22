@@ -2,13 +2,13 @@
 description: Extract reusable patterns from the session and save as skills.
 ---
 
-# /learn - Extract Reusable Patterns
+# /egc-learn - Extract Reusable Patterns
 
 Analyze the current session and extract any patterns worth saving as skills.
 
 ## Trigger
 
-Run `/learn` at any point during a session when you've solved a non-trivial problem.
+Run `/egc-learn` at any point during a session when you've solved a non-trivial problem.
 
 ## What to Extract
 

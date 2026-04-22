@@ -107,7 +107,7 @@ Use [scripts/ws_listener.py](../scripts/ws_listener.py) to connect and dump even
 }
 ```
 
-> For latest details, see [VideoDB Realtime Context docs](https://docs.videodb.io/pages/ingest/capture-sdks/realtime-context.md).
+> For latest details, see [VideoDB Realtime Context docs](https://egc-docs.videodb.io/pages/ingest/capture-sdks/realtime-context.md).
 
 ---
 

@@ -157,19 +157,19 @@ Status: READY FOR REVIEW
 
 ### Pre-Implementation
 ```
-/eval define feature-name
+/egc-eval define feature-name
 ```
 Creates eval definition file at `.gemini/evals/feature-name.md`
 
 ### During Implementation
 ```
-/eval check feature-name
+/egc-eval check feature-name
 ```
 Runs current evals and reports status
 
 ### Post-Implementation
 ```
-/eval report feature-name
+/egc-eval report feature-name
 ```
 Generates full eval report
 
@@ -216,7 +216,7 @@ Regression Evals:
 [Write code]
 
 ### Phase 3: Evaluate
-Run: /eval check add-authentication
+Run: /egc-eval check add-authentication
 
 ### Phase 4: Report
 EVAL REPORT: add-authentication

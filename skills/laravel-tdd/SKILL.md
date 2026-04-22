@@ -65,7 +65,7 @@ final class ProjectControllerTest extends TestCase
     {
         $user = User::factory()->create();
 
-        $response = $this->actingAs($user)->postJson('/api/projects', [
+        $response = $this->actingAs($user)->postJson('/api/egc-projects', [
             'name' => 'New Project',
         ]);
 
@@ -92,7 +92,7 @@ final class ProjectIndexTest extends TestCase
         $user = User::factory()->create();
         Project::factory()->count(3)->for($user)->create();
 
-        $response = $this->actingAs($user)->getJson('/api/projects');
+        $response = $this->actingAs($user)->getJson('/api/egc-projects');
 
         $response->assertOk();
         $response->assertJsonStructure(['success', 'data', 'error', 'meta']);
@@ -114,7 +114,7 @@ uses(RefreshDatabase::class);
 test('owner can create project', function () {
     $user = User::factory()->create();
 
-    $response = actingAs($user)->postJson('/api/projects', [
+    $response = actingAs($user)->postJson('/api/egc-projects', [
         'name' => 'New Project',
     ]);
 
@@ -138,7 +138,7 @@ test('projects index returns paginated results', function () {
     $user = User::factory()->create();
     Project::factory()->count(3)->for($user)->create();
 
-    $response = actingAs($user)->getJson('/api/projects');
+    $response = actingAs($user)->getJson('/api/egc-projects');
 
     $response->assertOk();
     $response->assertJsonStructure(['success', 'data', 'error', 'meta']);
@@ -216,7 +216,7 @@ use Laravel\Sanctum\Sanctum;
 
 Sanctum::actingAs($user);
 
-$response = $this->getJson('/api/projects');
+$response = $this->getJson('/api/egc-projects');
 $response->assertOk();
 ```
 

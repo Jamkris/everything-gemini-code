@@ -16,7 +16,7 @@ This command invokes the **e2e-runner** agent to generate, maintain, and execute
 
 ## When to Use
 
-Use `/e2e` when:
+Use `/egc-e2e` when:
 - Testing critical user journeys (login, trading, payments)
 - Verifying multi-step flows work end-to-end
 - Testing UI interactions and navigation
@@ -37,7 +37,7 @@ The e2e-runner agent will:
 ## Example Usage
 
 ```
-User: /e2e Test the market search and view flow
+User: /egc-e2e Test the market search and view flow
 
 Agent (e2e-runner):
 # E2E Test Generation: Market Search and View Flow
@@ -57,7 +57,7 @@ Agent (e2e-runner):
 ## Generated Test Code
 
 ```typescript
-// tests/e2e/markets/search-and-view.spec.ts
+// tests/egc-e2e/markets/search-and-view.spec.ts
 import { test, expect } from '@playwright/test'
 import { MarketsPage } from '../../pages/MarketsPage'
 import { MarketDetailsPage } from '../../pages/MarketDetailsPage'
@@ -160,7 +160,7 @@ test.describe('Market Search and View Flow', () => {
 
 ```bash
 # Run the generated test
-npx playwright test tests/e2e/markets/search-and-view.spec.ts
+npx playwright test tests/egc-e2e/markets/search-and-view.spec.ts
 
 Running 3 tests using 3 workers
 
@@ -235,7 +235,7 @@ open artifacts/search-results.png
 If a test fails intermittently:
 
 ```
-⚠️  FLAKY TEST DETECTED: tests/e2e/markets/trade.spec.ts
+⚠️  FLAKY TEST DETECTED: tests/egc-e2e/markets/trade.spec.ts
 
 Test passed 7/10 runs (70% pass rate)
 
@@ -266,7 +266,7 @@ Configure in `playwright.config.ts` to adjust browsers.
 Add to your CI pipeline:
 
 ```yaml
-# .github/workflows/e2e.yml
+# .github/workflows/egc-e2e.yml
 - name: Install Playwright
   run: npx playwright install --with-deps
 
@@ -330,10 +330,10 @@ For PMX, prioritize these E2E tests:
 
 ## Integration with Other Commands
 
-- Use `/plan` to identify critical journeys to test
-- Use `/tdd` for unit tests (faster, more granular)
-- Use `/e2e` for integration and user journey tests
-- Use `/code-review` to verify test quality
+- Use `/egc-plan` to identify critical journeys to test
+- Use `/egc-tdd` for unit tests (faster, more granular)
+- Use `/egc-e2e` for integration and user journey tests
+- Use `/egc-code-review` to verify test quality
 
 ## Related Agents
 
@@ -347,7 +347,7 @@ This command invokes the `e2e-runner` agent located at:
 npx playwright test
 
 # Run specific test file
-npx playwright test tests/e2e/markets/search.spec.ts
+npx playwright test tests/egc-e2e/markets/search.spec.ts
 
 # Run in headed mode (see browser)
 npx playwright test --headed

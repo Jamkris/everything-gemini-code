@@ -2,7 +2,7 @@
  * Session Manager Library for Gemini CLI
  * Provides core session CRUD operations for listing, loading, and managing sessions
  *
- * Sessions are stored as markdown files in ~/.gemini/sessions/ with format:
+ * Sessions are stored as markdown files in ~/.gemini/egc-sessions/ with format:
  * - YYYY-MM-DD-session.tmp (old format)
  * - YYYY-MM-DD-<short-id>-session.tmp (new format)
  */

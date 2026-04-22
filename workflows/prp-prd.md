@@ -389,7 +389,7 @@ After generating, report:
 
 ### To Start Implementation
 
-Run: `/prp-plan .gemini/PRPs/prds/{name}.prd.md`
+Run: `/egc-prp-plan .gemini/PRPs/prds/{name}.prd.md`
 
 This will automatically select the next pending phase and create an implementation plan.
 ```
@@ -433,9 +433,9 @@ This will automatically select the next pending phase and create an implementati
 ## Integration with ECC
 
 After PRD generation:
-- Use `/prp-plan` to create implementation plans from PRD phases
-- Use `/plan` for simpler planning without PRD structure
-- Use `/save-session` to preserve PRD context across sessions
+- Use `/egc-prp-plan` to create implementation plans from PRD phases
+- Use `/egc-plan` for simpler planning without PRD structure
+- Use `/egc-save-session` to preserve PRD context across sessions
 
 ## Success Criteria
 

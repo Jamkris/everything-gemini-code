@@ -6,7 +6,7 @@ Find and display all hookify rules in a formatted table.
 
 ## Steps
 
-1. Find all `.gemini/hookify.*.local.md` files
+1. Find all `.gemini/egc-hookify.*.local.md` files
 2. Read each file's frontmatter:
    - `name`
    - `enabled`
@@ -18,4 +18,4 @@ Find and display all hookify rules in a formatted table.
 | Rule | Enabled | Event | Pattern | File |
 |------|---------|-------|---------|------|
 
-4. Show the rule count and remind the user that `/hookify-configure` can change state later.
+4. Show the rule count and remind the user that `/egc-hookify-configure` can change state later.

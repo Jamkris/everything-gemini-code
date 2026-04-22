@@ -6,32 +6,32 @@
 
 | 커맨드 | 사용 에이전트 | 설명 |
 |--------|-------------|------|
-| `/ecc-plan` | planner | 기능 구현 계획 수립 |
-| `/tdd` | tdd-guide | 테스트 주도 개발 |
-| `/code-review` | code-reviewer | 코드 품질 리뷰 |
-| `/build-fix` | build-error-resolver | 빌드 오류 수정 |
-| `/e2e` | e2e-runner | E2E 테스트 생성 |
-| `/refactor-clean` | refactor-cleaner | 불필요한 코드 제거 |
-| `/update-docs` | doc-updater | 문서 동기화 |
-| `/verify` | — | 검증 루프 스킬 실행 |
-| `/eval` | — | 기준 대비 평가 |
-| `/go-build` | go-build-resolver | Go 빌드 오류 수정 |
-| `/go-review` | go-reviewer | Go 코드 리뷰 |
-| `/go-test` | — | Go TDD 워크플로우 |
-| `/python-review` | python-reviewer | Python 코드 리뷰 |
-| `/kotlin-build` | kotlin-build-resolver | Kotlin 빌드 오류 |
-| `/kotlin-review` | kotlin-reviewer | Kotlin 코드 리뷰 |
-| `/rust-build` | rust-build-resolver | Rust 빌드 오류 |
-| `/rust-review` | rust-reviewer | Rust 코드 리뷰 |
-| `/cpp-build` | cpp-build-resolver | C++ 빌드 오류 |
-| `/cpp-review` | cpp-reviewer | C++ 코드 리뷰 |
-| `/orchestrate` | — | 멀티 에이전트 조율 |
-| `/multi-plan` | planner | 멀티 에이전트 작업 분해 |
-| `/sessions` | — | 세션 히스토리 관리 |
-| `/skill-create` | — | git 히스토리에서 스킬 생성 |
-| `/learn` | — | 세션에서 패턴 추출 |
-| `/evolve` | — | 인스팅트를 스킬로 클러스터링 |
-| `/checkpoint` | — | 검증 상태 저장 |
+| `/egc-plan` | planner | 기능 구현 계획 수립 |
+| `/egc-tdd` | tdd-guide | 테스트 주도 개발 |
+| `/egc-code-review` | code-reviewer | 코드 품질 리뷰 |
+| `/egc-build-fix` | build-error-resolver | 빌드 오류 수정 |
+| `/egc-e2e` | e2e-runner | E2E 테스트 생성 |
+| `/egc-refactor-clean` | refactor-cleaner | 불필요한 코드 제거 |
+| `/egc-update-docs` | doc-updater | 문서 동기화 |
+| `/egc-verify` | — | 검증 루프 스킬 실행 |
+| `/egc-eval` | — | 기준 대비 평가 |
+| `/egc-go-build` | go-build-resolver | Go 빌드 오류 수정 |
+| `/egc-go-review` | go-reviewer | Go 코드 리뷰 |
+| `/egc-go-test` | — | Go TDD 워크플로우 |
+| `/egc-python-review` | python-reviewer | Python 코드 리뷰 |
+| `/egc-kotlin-build` | kotlin-build-resolver | Kotlin 빌드 오류 |
+| `/egc-kotlin-review` | kotlin-reviewer | Kotlin 코드 리뷰 |
+| `/egc-rust-build` | rust-build-resolver | Rust 빌드 오류 |
+| `/egc-rust-review` | rust-reviewer | Rust 코드 리뷰 |
+| `/egc-cpp-build` | cpp-build-resolver | C++ 빌드 오류 |
+| `/egc-cpp-review` | cpp-reviewer | C++ 코드 리뷰 |
+| `/egc-orchestrate` | — | 멀티 에이전트 조율 |
+| `/egc-multi-plan` | planner | 멀티 에이전트 작업 분해 |
+| `/egc-sessions` | — | 세션 히스토리 관리 |
+| `/egc-skill-create` | — | git 히스토리에서 스킬 생성 |
+| `/egc-learn` | — | 세션에서 패턴 추출 |
+| `/egc-evolve` | — | 인스팅트를 스킬로 클러스터링 |
+| `/egc-checkpoint` | — | 검증 상태 저장 |
 
 ---
 

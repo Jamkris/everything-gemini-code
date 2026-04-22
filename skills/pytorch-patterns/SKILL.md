@@ -336,7 +336,7 @@ model = torch.compile(model, mode="reduce-overhead")
 
 | Idiom | Description |
 |-------|-------------|
-| `model.train()` / `model.eval()` | Always set mode before train/eval |
+| `model.train()` / `model.eval()` | Always set mode before train/egc-eval |
 | `torch.no_grad()` | Disable gradients for inference |
 | `optimizer.zero_grad(set_to_none=True)` | More efficient gradient clearing |
 | `.to(device)` | Device-agnostic tensor/model placement |

@@ -36,10 +36,10 @@ You should see output similar to:
 
 ### Step 3: Verify Command Shims
 
-Check if the short commands (e.g., `/tdd`) are created and point to the extension:
+Check if the short commands (e.g., `/egc-tdd`) are created and point to the extension:
 
 ```bash
-cat ~/.gemini/commands/tdd.toml | grep "@everything-gemini-code"
+cat ~/.gemini/commands/egc-tdd.toml | grep "@everything-gemini-code"
 ```
 
 **Expected Output:**
@@ -52,10 +52,10 @@ If you see this, the shim is correctly configured.
 
 ## 2. Functionality Verification
 
-### Test the `/tdd` Command
+### Test the `/egc-tdd` Command
 
 1. Start a Gemini session: `gemini`
-2. Type `/tdd` and press Enter.
+2. Type `/egc-tdd` and press Enter.
 3. The prompt should load the **TDD Guide** agent from the extension.
 4. Verify the agent name in the chat (it might show as "tdd-guide" or "everything-gemini-code.tdd-guide").
 
@@ -67,12 +67,12 @@ If you see this, the shim is correctly configured.
 
 ## Troubleshooting
 
-If `/tdd` command is missing or not working:
+If `/egc-tdd` command is missing or not working:
 
 1. **Force Shim Regeneration:**
    Delete the existing shim and restart session:
    ```bash
-   rm ~/.gemini/commands/tdd.toml
+   rm ~/.gemini/commands/egc-tdd.toml
    gemini run "echo 'Regenerating...'"
    ```
 2. **Check Logs:**

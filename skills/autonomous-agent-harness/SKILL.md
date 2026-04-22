@@ -51,7 +51,7 @@ Turn Gemini CLI into a persistent, self-directing agent system using only native
 
 Use Gemini CLI's built-in memory system enhanced with MCP memory server for structured data.
 
-**Built-in memory** (`~/.gemini/projects/*/memory/`):
+**Built-in memory** (`~/.gemini/egc-projects/*/memory/`):
 - User preferences, feedback, project context
 - Stored as markdown files with frontmatter
 - Automatically loaded at session start
@@ -68,7 +68,7 @@ Use Gemini CLI's built-in memory system enhanced with MCP memory server for stru
 Use TodoWrite for in-session task tracking
 
 # Medium-term: project memory files
-Write to ~/.gemini/projects/*/memory/ for cross-session recall
+Write to ~/.gemini/egc-projects/*/memory/ for cross-session recall
 
 # Long-term: MCP knowledge graph
 Use mcp__memory__create_entities for permanent structured data
@@ -147,7 +147,7 @@ Manage a persistent queue of tasks that survive session boundaries.
 
 ```
 # Task persistence via memory
-Write task queue to ~/.gemini/projects/*/memory/task-queue.md
+Write task queue to ~/.gemini/egc-projects/*/memory/task-queue.md
 
 # Task format
 ---

@@ -9,10 +9,10 @@ Interact with Jira tickets directly from your workflow — fetch tickets, analyz
 ## Usage
 
 ```
-/jira get <TICKET-KEY>          # Fetch and analyze a ticket
-/jira comment <TICKET-KEY>      # Add a progress comment
-/jira transition <TICKET-KEY>   # Change ticket status
-/jira search <JQL>              # Search issues with JQL
+/egc-jira get <TICKET-KEY>          # Fetch and analyze a ticket
+/egc-jira comment <TICKET-KEY>      # Add a progress comment
+/egc-jira transition <TICKET-KEY>   # Change ticket status
+/egc-jira search <JQL>              # Search issues with JQL
 ```
 
 ## What This Command Does
@@ -24,7 +24,7 @@ Interact with Jira tickets directly from your workflow — fetch tickets, analyz
 
 ## How It Works
 
-### `/jira get <TICKET-KEY>`
+### `/egc-jira get <TICKET-KEY>`
 
 1. Fetch the ticket from Jira (via MCP `jira_get_issue` or REST API)
 2. Extract all fields: summary, description, acceptance criteria, priority, labels, linked issues
@@ -54,23 +54,23 @@ Dependencies:
 - [linked issues, APIs, services]
 
 Recommended Next Steps:
-- /plan to create implementation plan
-- /tdd to implement with tests first
+- /egc-plan to create implementation plan
+- /egc-tdd to implement with tests first
 ```
 
-### `/jira comment <TICKET-KEY>`
+### `/egc-jira comment <TICKET-KEY>`
 
 1. Summarize current session progress (what was built, tested, committed)
 2. Format as a structured comment
 3. Post to the Jira ticket
 
-### `/jira transition <TICKET-KEY>`
+### `/egc-jira transition <TICKET-KEY>`
 
 1. Fetch available transitions for the ticket
 2. Show options to user
 3. Execute the selected transition
 
-### `/jira search <JQL>`
+### `/egc-jira search <JQL>`
 
 1. Execute the JQL query against Jira
 2. Return a summary table of matching issues
@@ -94,11 +94,11 @@ If credentials are missing, stop and direct the user to set them up.
 ## Integration with Other Commands
 
 After analyzing a ticket:
-- Use `/plan` to create an implementation plan from the requirements
-- Use `/tdd` to implement with test-driven development
-- Use `/code-review` after implementation
-- Use `/jira comment` to post progress back to the ticket
-- Use `/jira transition` to move the ticket when work is complete
+- Use `/egc-plan` to create an implementation plan from the requirements
+- Use `/egc-tdd` to implement with test-driven development
+- Use `/egc-code-review` after implementation
+- Use `/egc-jira comment` to post progress back to the ticket
+- Use `/egc-jira transition` to move the ticket when work is complete
 
 ## Related
 

@@ -4,7 +4,7 @@ description: Legacy slash-entry shim for the agent-sort skill. Prefer the skill 
 
 # Agent Sort (Legacy Shim)
 
-Use this only if you still invoke `/agent-sort`. The maintained workflow lives in `skills/agent-sort/SKILL.md`.
+Use this only if you still invoke `/egc-agent-sort`. The maintained workflow lives in `skills/egc-agent-sort/SKILL.md`.
 
 ## Canonical Surface
 

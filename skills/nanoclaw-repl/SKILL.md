@@ -6,7 +6,7 @@ origin: ECC
 
 # NanoClaw REPL
 
-Use this skill when running or extending `scripts/claw.js`.
+Use this skill when running or extending `scripts/egc-claw.js`.
 
 ## Capabilities
 

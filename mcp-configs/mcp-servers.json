@@ -81,7 +81,7 @@
 			"args": [
 				"-y",
 				"@modelcontextprotocol/server-filesystem",
-				"/path/to/your/projects"
+				"/path/to/your/egc-projects"
 			],
 			"description": "Filesystem operations (set your path)"
 		}

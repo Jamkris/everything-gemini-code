@@ -18,7 +18,7 @@ Hookify creates rule files that integrate with Gemini CLI's hook system to preve
 
 ### Rule File Format
 
-Files are stored as `.gemini/hookify.{name}.local.md`:
+Files are stored as `.gemini/egc-hookify.{name}.local.md`:
 
 ```yaml
 ---
@@ -34,9 +34,9 @@ Supports multiple lines.
 
 ### Commands
 
-- `/hookify [description]` creates new rules and auto-analyzes the conversation when no description is given
-- `/hookify-list` lists configured rules
-- `/hookify-configure` toggles rules on or off
+- `/egc-hookify [description]` creates new rules and auto-analyzes the conversation when no description is given
+- `/egc-hookify-list` lists configured rules
+- `/egc-hookify-configure` toggles rules on or off
 
 ### Pattern Tips
 

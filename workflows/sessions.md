@@ -4,11 +4,11 @@ description: Manage Gemini CLI session history, listing, and loading.
 
 # Sessions Command
 
-Manage Gemini CLI session history - list, load, alias, and edit sessions stored in `~/.gemini/sessions/`.
+Manage Gemini CLI session history - list, load, alias, and edit sessions stored in `~/.gemini/egc-sessions/`.
 
 ## Usage
 
-`/sessions [list|load|alias|info|help] [options]`
+`/egc-sessions [list|load|alias|info|help] [options]`
 
 ## Actions
 
@@ -17,11 +17,11 @@ Manage Gemini CLI session history - list, load, alias, and edit sessions stored 
 Display all sessions with metadata, filtering, and pagination.
 
 ```bash
-/sessions                              # List all sessions (default)
-/sessions list                         # Same as above
-/sessions list --limit 10              # Show 10 sessions
-/sessions list --date 2026-02-01       # Filter by date
-/sessions list --search abc            # Search by session ID
+/egc-sessions                              # List all sessions (default)
+/egc-sessions list                         # Same as above
+/egc-sessions list --limit 10              # Show 10 sessions
+/egc-sessions list --date 2026-02-01       # Filter by date
+/egc-sessions list --search abc            # Search by session ID
 ```
 
 **Script:**
@@ -58,10 +58,10 @@ for (const s of result.sessions) {
 Load and display a session's content (by ID or alias).
 
 ```bash
-/sessions load <id|alias>             # Load session
-/sessions load 2026-02-01             # By date (for no-id sessions)
-/sessions load a1b2c3d4               # By short ID
-/sessions load my-alias               # By alias name
+/egc-sessions load <id|alias>             # Load session
+/egc-sessions load 2026-02-01             # By date (for no-id sessions)
+/egc-sessions load a1b2c3d4               # By short ID
+/egc-sessions load my-alias               # By alias name
 ```
 
 **Script:**
@@ -87,7 +87,7 @@ const size = sm.getSessionSize(session.sessionPath);
 const aliases = aa.getAliasesForSession(session.filename);
 
 console.log('Session: ' + session.filename);
-console.log('Path: ~/.gemini/sessions/' + session.filename);
+console.log('Path: ~/.gemini/egc-sessions/' + session.filename);
 console.log('');
 console.log('Statistics:');
 console.log('  Lines: ' + stats.lineCount);
@@ -122,8 +122,8 @@ if (session.metadata.lastUpdated) {
 Create a memorable alias for a session.
 
 ```bash
-/sessions alias <id> <name>           # Create alias
-/sessions alias 2026-02-01 today-work # Create alias named "today-work"
+/egc-sessions alias <id> <name>           # Create alias
+/egc-sessions alias 2026-02-01 today-work # Create alias named "today-work"
 ```
 
 **Script:**
@@ -137,7 +137,7 @@ const sessionId = process.argv[1];
 const aliasName = process.argv[2];
 
 if (!sessionId || !aliasName) {
-  console.log('Usage: /sessions alias <id> <name>');
+  console.log('Usage: /egc-sessions alias <id> <name>');
   process.exit(1);
 }
 
@@ -163,8 +163,8 @@ if (result.success) {
 Delete an existing alias.
 
 ```bash
-/sessions alias --remove <name>        # Remove alias
-/sessions unalias <name>               # Same as above
+/egc-sessions alias --remove <name>        # Remove alias
+/egc-sessions unalias <name>               # Same as above
 ```
 
 **Script:**
@@ -175,7 +175,7 @@ const aa = require('./scripts/lib/session-aliases');
 
 const aliasName = process.argv[1];
 if (!aliasName) {
-  console.log('Usage: /sessions alias --remove <name>');
+  console.log('Usage: /egc-sessions alias --remove <name>');
   process.exit(1);
 }
 
@@ -194,7 +194,7 @@ if (result.success) {
 Show detailed information about a session.
 
 ```bash
-/sessions info <id|alias>              # Show session details
+/egc-sessions info <id|alias>              # Show session details
 ```
 
 **Script:**
@@ -242,7 +242,7 @@ if (aliases.length > 0) {
 Show all session aliases.
 
 ```bash
-/sessions aliases                      # List all aliases
+/egc-sessions aliases                      # List all aliases
 ```
 
 **Script:**
@@ -290,27 +290,27 @@ $ARGUMENTS:
 
 ```bash
 # List all sessions
-/sessions list
+/egc-sessions list
 
 # Create an alias for today's session
-/sessions alias 2026-02-01 today
+/egc-sessions alias 2026-02-01 today
 
 # Load session by alias
-/sessions load today
+/egc-sessions load today
 
 # Show session info
-/sessions info today
+/egc-sessions info today
 
 # Remove alias
-/sessions alias --remove today
+/egc-sessions alias --remove today
 
 # List all aliases
-/sessions aliases
+/egc-sessions aliases
 ```
 
 ## Notes
 
-- Sessions are stored as markdown files in `~/.gemini/sessions/`
+- Sessions are stored as markdown files in `~/.gemini/egc-sessions/`
 - Aliases are stored in `~/.gemini/session-aliases.json`
 - Session IDs can be shortened (first 4-8 characters usually unique enough)
 - Use aliases for frequently referenced sessions
