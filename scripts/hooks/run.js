@@ -34,7 +34,19 @@ if (!fs.existsSync(hookPath)) {
 // unchanged (hooks read JSON payloads on stdin and may write to stdout/stderr).
 // Mirror the previous "fail soft" semantics: a hook error never fails the
 // parent Gemini CLI action. Surface via GEMINI_HOOK_DEBUG=1 when diagnosing.
-const result = spawnSync(process.execPath, [hookPath], { stdio: 'inherit' });
+// Bound execution time so a hung hook can't stall a Gemini session. Override
+// via GEMINI_HOOK_TIMEOUT_MS (e.g. set to a larger value for slow hooks, or
+// to 0 to disable the bound).
+const DEFAULT_HOOK_TIMEOUT_MS = 30_000;
+const parsedTimeout = Number.parseInt(process.env.GEMINI_HOOK_TIMEOUT_MS || '', 10);
+const timeout = Number.isFinite(parsedTimeout) && parsedTimeout >= 0
+  ? parsedTimeout
+  : DEFAULT_HOOK_TIMEOUT_MS;
+
+const spawnOptions = { stdio: 'inherit' };
+if (timeout > 0) spawnOptions.timeout = timeout;
+
+const result = spawnSync(process.execPath, [hookPath], spawnOptions);
 if (result.error && process.env.GEMINI_HOOK_DEBUG) {
   console.error(`[hook:${hookName}] spawn error:`, result.error);
 }

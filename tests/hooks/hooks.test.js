@@ -367,11 +367,16 @@ async function runTests() {
         for (const hook of entry.hooks) {
           if (hook.type !== 'command') continue;
           if (hook.command.startsWith('node -e ')) continue;
-          const bad = [' || ', '2>/dev/null', ' || true'];
-          for (const pattern of bad) {
+          // Regex guards catch variants like `||true`, `cmd|| true`, `2> /dev/null`.
+          const bad = [
+            { pattern: /\|\|/, label: '||' },
+            { pattern: /2>\s*\/dev\/null\b/, label: '2>/dev/null' },
+            { pattern: /(^|\s)true(\s|$)/, label: 'trailing `true`' },
+          ];
+          for (const { pattern, label } of bad) {
             assert.ok(
-              !hook.command.includes(pattern),
-              `Hook command must not use POSIX-only "${pattern}" (breaks on Windows PowerShell): ${hook.command.substring(0, 80)}...`
+              !pattern.test(hook.command),
+              `Hook command must not use POSIX-only "${label}" (breaks on Windows PowerShell): ${hook.command.substring(0, 80)}...`
             );
           }
         }
@@ -391,8 +396,18 @@ async function runTests() {
     const launcher = path.join(__dirname, '..', '..', 'scripts', 'hooks', 'run.js');
     assert.ok(fs.existsSync(launcher), 'scripts/hooks/run.js must exist');
     const src = fs.readFileSync(launcher, 'utf8');
-    assert.ok(src.includes('__dirname'), 'launcher should resolve hooks relative to __dirname');
-    assert.ok(src.includes('process.argv[2]'), 'launcher should read hook name from argv[2]');
+    // Strip block + line comments so header doc can't satisfy the assertions.
+    const code = src
+      .replace(/\/\*[\s\S]*?\*\//g, '')
+      .replace(/^\s*\/\/.*$/gm, '');
+    assert.ok(
+      /path\.join\(\s*__dirname/.test(code),
+      'launcher should resolve hooks via path.join(__dirname, ...)'
+    );
+    assert.ok(
+      /process\.argv\[2\]/.test(code),
+      'launcher should read hook name from process.argv[2]'
+    );
   })) passed++; else failed++;
 
   // plugin.json validation
