@@ -47,7 +47,7 @@
 				"hooks": [
 					{
 						"type": "command",
-						"command": "node \"$HOME/.gemini/extensions/everything-gemini-code/scripts/hooks/suggest-compact.js\" 2>/dev/null || node \"$HOME/.gemini/scripts/hooks/suggest-compact.js\" 2>/dev/null || true"
+						"command": "node \"$HOME/.gemini/extensions/everything-gemini-code/scripts/hooks/run.js\" suggest-compact"
 					}
 				],
 				"description": "Suggest manual compaction at logical intervals"
@@ -59,7 +59,7 @@
 				"hooks": [
 					{
 						"type": "command",
-						"command": "node \"$HOME/.gemini/extensions/everything-gemini-code/scripts/hooks/pre-compact.js\" 2>/dev/null || node \"$HOME/.gemini/scripts/hooks/pre-compact.js\" 2>/dev/null || true"
+						"command": "node \"$HOME/.gemini/extensions/everything-gemini-code/scripts/hooks/run.js\" pre-compact"
 					}
 				],
 				"description": "Run pre-compression logic"
@@ -71,7 +71,7 @@
 				"hooks": [
 					{
 						"type": "command",
-						"command": "node \"$HOME/.gemini/extensions/everything-gemini-code/scripts/hooks/session-start.js\" 2>/dev/null || node \"$HOME/.gemini/scripts/hooks/session-start.js\" 2>/dev/null || true"
+						"command": "node \"$HOME/.gemini/extensions/everything-gemini-code/scripts/hooks/run.js\" session-start"
 					}
 				],
 				"description": "Load previous context and detect package manager on new session"
@@ -137,7 +137,7 @@
 				"hooks": [
 					{
 						"type": "command",
-						"command": "node \"$HOME/.gemini/extensions/everything-gemini-code/scripts/hooks/check-console-log.js\" 2>/dev/null || node \"$HOME/.gemini/scripts/hooks/check-console-log.js\" 2>/dev/null || true"
+						"command": "node \"$HOME/.gemini/extensions/everything-gemini-code/scripts/hooks/run.js\" check-console-log"
 					}
 				],
 				"description": "Check for console.log in modified files after each response"
@@ -149,7 +149,7 @@
 				"hooks": [
 					{
 						"type": "command",
-						"command": "node \"$HOME/.gemini/extensions/everything-gemini-code/scripts/hooks/session-end.js\" 2>/dev/null || node \"$HOME/.gemini/scripts/hooks/session-end.js\" 2>/dev/null || true"
+						"command": "node \"$HOME/.gemini/extensions/everything-gemini-code/scripts/hooks/run.js\" session-end"
 					}
 				],
 				"description": "Persist session state on end"
@@ -159,7 +159,7 @@
 				"hooks": [
 					{
 						"type": "command",
-						"command": "node \"$HOME/.gemini/extensions/everything-gemini-code/scripts/hooks/evaluate-session.js\" 2>/dev/null || node \"$HOME/.gemini/scripts/hooks/evaluate-session.js\" 2>/dev/null || true"
+						"command": "node \"$HOME/.gemini/extensions/everything-gemini-code/scripts/hooks/run.js\" evaluate-session"
 					}
 				],
 				"description": "Evaluate session for extractable patterns"

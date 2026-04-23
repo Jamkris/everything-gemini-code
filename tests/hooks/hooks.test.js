@@ -351,6 +351,50 @@ async function runTests() {
     }
   })) passed++; else failed++;
 
+  if (test('hook script commands avoid POSIX-only shell syntax (Windows PS compat)', () => {
+    // Regression guard for #42. Hook commands that invoke a script file must
+    // not chain with `||`, redirect with `2>/dev/null`, or rely on `true` —
+    // Windows PowerShell 5.x parses `||` as an error and has no /dev/null.
+    // Inline `node -e "..."` payloads are exempt because the JS string is
+    // consumed by Node, not the shell.
+    const hooksPath = path.join(__dirname, '..', '..', 'hooks', 'hooks.json');
+    const hooks = JSON.parse(fs.readFileSync(hooksPath, 'utf8'));
+    const hooksObj = hooks.hooks || hooks;
+
+    const checkHooks = (hookArray) => {
+      if (!hookArray) return;
+      for (const entry of hookArray) {
+        for (const hook of entry.hooks) {
+          if (hook.type !== 'command') continue;
+          if (hook.command.startsWith('node -e ')) continue;
+          const bad = [' || ', '2>/dev/null', ' || true'];
+          for (const pattern of bad) {
+            assert.ok(
+              !hook.command.includes(pattern),
+              `Hook command must not use POSIX-only "${pattern}" (breaks on Windows PowerShell): ${hook.command.substring(0, 80)}...`
+            );
+          }
+        }
+      }
+    };
+
+    if (Array.isArray(hooksObj)) {
+        checkHooks(hooksObj);
+    } else {
+        for (const [, hookArray] of Object.entries(hooksObj)) {
+            checkHooks(hookArray);
+        }
+    }
+  })) passed++; else failed++;
+
+  if (test('run.js launcher resolves hook files from its own directory', () => {
+    const launcher = path.join(__dirname, '..', '..', 'scripts', 'hooks', 'run.js');
+    assert.ok(fs.existsSync(launcher), 'scripts/hooks/run.js must exist');
+    const src = fs.readFileSync(launcher, 'utf8');
+    assert.ok(src.includes('__dirname'), 'launcher should resolve hooks relative to __dirname');
+    assert.ok(src.includes('process.argv[2]'), 'launcher should read hook name from argv[2]');
+  })) passed++; else failed++;
+
   // plugin.json validation
   console.log('\nplugin.json Validation:');
 
