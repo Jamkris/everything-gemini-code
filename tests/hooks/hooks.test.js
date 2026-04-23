@@ -351,6 +351,65 @@ async function runTests() {
     }
   })) passed++; else failed++;
 
+  if (test('hook script commands avoid POSIX-only shell syntax (Windows PS compat)', () => {
+    // Regression guard for #42. Hook commands that invoke a script file must
+    // not chain with `||`, redirect with `2>/dev/null`, or rely on `true` —
+    // Windows PowerShell 5.x parses `||` as an error and has no /dev/null.
+    // Inline `node -e "..."` payloads are exempt because the JS string is
+    // consumed by Node, not the shell.
+    const hooksPath = path.join(__dirname, '..', '..', 'hooks', 'hooks.json');
+    const hooks = JSON.parse(fs.readFileSync(hooksPath, 'utf8'));
+    const hooksObj = hooks.hooks || hooks;
+
+    const checkHooks = (hookArray) => {
+      if (!hookArray) return;
+      for (const entry of hookArray) {
+        for (const hook of entry.hooks) {
+          if (hook.type !== 'command') continue;
+          if (hook.command.startsWith('node -e ')) continue;
+          // Regex guards catch variants like `||true`, `cmd|| true`, `2> /dev/null`.
+          const bad = [
+            { pattern: /\|\|/, label: '||' },
+            { pattern: /2>\s*\/dev\/null\b/, label: '2>/dev/null' },
+            { pattern: /(^|\s)true(\s|$)/, label: 'trailing `true`' },
+          ];
+          for (const { pattern, label } of bad) {
+            assert.ok(
+              !pattern.test(hook.command),
+              `Hook command must not use POSIX-only "${label}" (breaks on Windows PowerShell): ${hook.command.substring(0, 80)}...`
+            );
+          }
+        }
+      }
+    };
+
+    if (Array.isArray(hooksObj)) {
+        checkHooks(hooksObj);
+    } else {
+        for (const [, hookArray] of Object.entries(hooksObj)) {
+            checkHooks(hookArray);
+        }
+    }
+  })) passed++; else failed++;
+
+  if (test('run.js launcher resolves hook files from its own directory', () => {
+    const launcher = path.join(__dirname, '..', '..', 'scripts', 'hooks', 'run.js');
+    assert.ok(fs.existsSync(launcher), 'scripts/hooks/run.js must exist');
+    const src = fs.readFileSync(launcher, 'utf8');
+    // Strip block + line comments so header doc can't satisfy the assertions.
+    const code = src
+      .replace(/\/\*[\s\S]*?\*\//g, '')
+      .replace(/^\s*\/\/.*$/gm, '');
+    assert.ok(
+      /path\.join\(\s*__dirname/.test(code),
+      'launcher should resolve hooks via path.join(__dirname, ...)'
+    );
+    assert.ok(
+      /process\.argv\[2\]/.test(code),
+      'launcher should read hook name from process.argv[2]'
+    );
+  })) passed++; else failed++;
+
   // plugin.json validation
   console.log('\nplugin.json Validation:');
 
