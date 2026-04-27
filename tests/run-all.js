@@ -15,7 +15,9 @@ const testFiles = [
   'lib/package-manager.test.js',
   'lib/session-manager.test.js',
   'lib/session-aliases.test.js',
-  'hooks/hooks.test.js'
+  'lib/gemini-tools.test.js',
+  'hooks/hooks.test.js',
+  'lint/validators.test.js'
 ];
 
 console.log('╔══════════════════════════════════════════════════════════╗');

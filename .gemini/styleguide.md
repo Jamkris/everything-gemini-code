@@ -53,6 +53,10 @@ The codebase consists of:
 - Do NOT include Claude-style names (`search_files`, `replace_in_file`,
   `Read`, `Edit`) — those are not valid in Gemini CLI.
 - No `model` or `color` field (Gemini CLI schema does not support them).
+- The authoritative allowlist lives in `scripts/lib/gemini-tools.js` and is
+  enforced by `scripts/ci/validate-agents.js` (run on every PR). Update the
+  lib first if the Gemini CLI tool surface changes; this file is the
+  human-facing mirror.
 
 ## Documentation
 

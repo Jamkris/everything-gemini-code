@@ -1,0 +1,4 @@
+description = "Well-formed command fixture used by validator integration tests."
+prompt = '''
+Body.
+'''
