@@ -106,7 +106,7 @@ function detectGitCommand(input) {
         const after = input[cmdIdx + cmd.length] || ' ';
         if (!/\s/.test(before)) { searchPos = cmdIdx + 1; continue; }
         if (!/[\s;&#|>)\]}"']/.test(after) && after !== '') { searchPos = cmdIdx + 1; continue; }
-        if (/[;|]/.test(input.slice(git.idx + git.len, cmdIdx))) break;
+        if (/[;|&]/.test(input.slice(git.idx + git.len, cmdIdx))) break;
         if (isInComment(input, cmdIdx)) { searchPos = cmdIdx + 1; continue; }
 
         // Verify this token is the first non-flag word after "git" — i.e. the
@@ -150,13 +150,27 @@ function detectGitCommand(input) {
 }
 
 /**
+ * Replace the contents of single- and double-quoted strings with empty
+ * quotes. Used to neutralize commit messages and other quoted args before
+ * we run the flag-detection regexes — without this, a benign command like
+ *   git commit -m "fix: --no-verify edge case"
+ * would falsely match `--no-verify` inside the message and block the
+ * commit. Backslash-escaped quotes inside the string are honored.
+ */
+function stripQuotedStrings(input) {
+  return input
+    .replace(/'(?:[^'\\]|\\.)*'/g, "''")
+    .replace(/"(?:[^"\\]|\\.)*"/g, '""');
+}
+
+/**
  * Check if the input contains a --no-verify flag for a specific git command.
  * Only inspects the portion of the input starting at `offset` (the position
  * right after the detected subcommand keyword) so that flags belonging to
  * earlier commands in a chain are not falsely matched.
  */
 function hasNoVerifyFlag(input, command, offset) {
-  const region = input.slice(offset);
+  const region = stripQuotedStrings(input.slice(offset));
   if (/--no-verify\b/.test(region)) return true;
 
   // For commit, -n is shorthand for --no-verify
@@ -169,9 +183,11 @@ function hasNoVerifyFlag(input, command, offset) {
 
 /**
  * Check if the input contains a -c core.hooksPath= override.
+ * Quoted strings are stripped first to avoid false positives on commit
+ * messages or argument values that happen to contain the phrase.
  */
 function hasHooksPathOverride(input) {
-  return /-c\s+["']?core\.hooksPath\s*=/.test(input);
+  return /-c\s+["']?core\.hooksPath\s*=/.test(stripQuotedStrings(input));
 }
 
 /**

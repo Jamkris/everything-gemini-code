@@ -114,6 +114,33 @@ if (test('blocks plain text input with --no-verify', () => {
   assert.strictEqual(r.code, 2, `expected exit 2, got ${r.code}`);
 })) passed++; else failed++;
 
+// False-positive prevention: flag-like text inside quoted commit messages
+// must not trigger a block (gemini-code-assist review on PR #47).
+if (test('does not false-positive on --no-verify inside double-quoted message', () => {
+  const r = runHook({ tool_input: { command: 'git commit -m "fix: --no-verify edge case"' } });
+  assert.strictEqual(r.code, 0, `expected exit 0, got ${r.code}: ${r.stderr}`);
+})) passed++; else failed++;
+
+if (test('does not false-positive on --no-verify inside single-quoted message', () => {
+  const r = runHook({ tool_input: { command: "git commit -m 'fix: --no-verify edge case'" } });
+  assert.strictEqual(r.code, 0, `expected exit 0, got ${r.code}: ${r.stderr}`);
+})) passed++; else failed++;
+
+if (test('does not false-positive on -n inside quoted commit message', () => {
+  const r = runHook({ tool_input: { command: 'git commit -m "Fixed -n bug in module"' } });
+  assert.strictEqual(r.code, 0, `expected exit 0, got ${r.code}: ${r.stderr}`);
+})) passed++; else failed++;
+
+if (test('does not false-positive on core.hooksPath= inside quoted message', () => {
+  const r = runHook({ tool_input: { command: 'git commit -m "doc: explain core.hooksPath= setting"' } });
+  assert.strictEqual(r.code, 0, `expected exit 0, got ${r.code}: ${r.stderr}`);
+})) passed++; else failed++;
+
+if (test('still blocks --no-verify when both quoted message and real flag are present', () => {
+  const r = runHook({ tool_input: { command: 'git commit --no-verify -m "fix: -n edge case"' } });
+  assert.strictEqual(r.code, 2, `expected exit 2, got ${r.code}`);
+})) passed++; else failed++;
+
 console.log('─'.repeat(50));
 console.log(`Passed: ${passed}  Failed: ${failed}`);
 
