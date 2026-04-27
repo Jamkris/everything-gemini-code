@@ -19,7 +19,21 @@ const { validateFiles } = require('../lib/validator');
 
 const EGC_PREFIX_EXEMPT = new Set([]);
 
-const DESCRIPTION_RE = /^\s*description\s*=\s*(['"])([^]*?)\1/m;
+// TOML allows four string forms for `description`:
+//   description = "basic"      description = 'literal'
+//   description = """basic"""  description = '''literal'''
+// Try the triple-quoted form first; otherwise the non-greedy single-quote
+// regex matches the empty span between the first two quotes of a `"""`
+// opener and produces a false "Empty description field" error.
+const DESCRIPTION_TRIPLE_RE = /^\s*description\s*=\s*("""|''')([\s\S]*?)\1/m;
+const DESCRIPTION_SINGLE_RE = /^\s*description\s*=\s*(['"])([^]*?)\1/m;
+
+function extractDescriptionValue(content) {
+  const triple = DESCRIPTION_TRIPLE_RE.exec(content);
+  if (triple) return triple[2];
+  const single = DESCRIPTION_SINGLE_RE.exec(content);
+  return single ? single[2] : null;
+}
 
 function validateCommandContent(content, filename) {
   const errors = [];
@@ -36,10 +50,10 @@ function validateCommandContent(content, filename) {
     );
   }
 
-  const match = DESCRIPTION_RE.exec(content);
-  if (!match) {
+  const description = extractDescriptionValue(content);
+  if (description === null) {
     errors.push('Missing required field: description');
-  } else if (match[2].trim().length === 0) {
+  } else if (description.trim().length === 0) {
     errors.push('Empty description field');
   }
 

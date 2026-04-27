@@ -1,0 +1,4 @@
+description = '''Triple-quoted literal description — must not be flagged as empty.'''
+prompt = '''
+Body.
+'''

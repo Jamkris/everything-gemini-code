@@ -146,6 +146,18 @@ function runTests() {
     assert.deepStrictEqual(errors, ['Empty command file']);
   })) passed++; else failed++;
 
+  if (test('triple-quoted basic description is accepted', () => {
+    const content = readFixture(COMMAND_FIXTURES, 'egc-triple-description.toml');
+    const errors = validateCommandContent(content, 'egc-triple-description.toml');
+    assert.deepStrictEqual(errors, []);
+  })) passed++; else failed++;
+
+  if (test('triple-quoted literal description is accepted', () => {
+    const content = readFixture(COMMAND_FIXTURES, 'egc-triple-literal.toml');
+    const errors = validateCommandContent(content, 'egc-triple-literal.toml');
+    assert.deepStrictEqual(errors, []);
+  })) passed++; else failed++;
+
   console.log('\nReal commands/ directory:');
 
   if (test('all real command files pass validation', () => {

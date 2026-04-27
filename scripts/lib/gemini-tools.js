@@ -157,15 +157,19 @@ function validateToolList(tools) {
  */
 function validateAgentFrontmatter(frontmatter) {
   const errors = [];
+  const has = key => Object.prototype.hasOwnProperty.call(frontmatter, key);
+  const isEmpty = value => value === null || value === undefined || value === '';
 
   for (const key of REQUIRED_FRONTMATTER_KEYS) {
-    if (!frontmatter[key]) {
+    if (!has(key)) {
       errors.push(`Missing required field: ${key}`);
+    } else if (isEmpty(frontmatter[key])) {
+      errors.push(`Empty required field: ${key}`);
     }
   }
 
   for (const key of FORBIDDEN_FRONTMATTER_KEYS) {
-    if (Object.prototype.hasOwnProperty.call(frontmatter, key)) {
+    if (has(key)) {
       errors.push(
         `Forbidden frontmatter key: "${key}" — Gemini CLI agent schema only ` +
         `accepts ${REQUIRED_FRONTMATTER_KEYS.join(', ')}.`
@@ -173,7 +177,10 @@ function validateAgentFrontmatter(frontmatter) {
     }
   }
 
-  if (frontmatter.tools) {
+  // Run the tool-list parse only if the field has a non-empty value. The
+  // empty / missing cases are already covered above; running parseToolsField
+  // on `''` would just produce a redundant "Malformed tools field" message.
+  if (has('tools') && !isEmpty(frontmatter.tools)) {
     const tools = parseToolsField(frontmatter.tools);
     if (tools === null) {
       errors.push(

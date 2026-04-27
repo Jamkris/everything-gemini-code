@@ -133,6 +133,28 @@ function runTests() {
     assert.strictEqual(missing.length, 3);
   })) passed++; else failed++;
 
+  if (test('distinguishes empty value from missing key', () => {
+    const errors = validateAgentFrontmatter({
+      name: '',
+      description: '',
+      tools: ''
+    });
+    const empty = errors.filter(e => e.startsWith('Empty required field'));
+    const missing = errors.filter(e => e.startsWith('Missing required field'));
+    assert.strictEqual(empty.length, 3);
+    assert.strictEqual(missing.length, 0);
+  })) passed++; else failed++;
+
+  if (test('does not produce a redundant Malformed tools error when tools is empty', () => {
+    const errors = validateAgentFrontmatter({
+      name: 'x',
+      description: 'x',
+      tools: ''
+    });
+    assert.ok(errors.some(e => e === 'Empty required field: tools'));
+    assert.ok(!errors.some(e => e.includes('Malformed tools field')));
+  })) passed++; else failed++;
+
   if (test('rejects forbidden keys (color, model)', () => {
     const errors = validateAgentFrontmatter({
       name: 'x',
