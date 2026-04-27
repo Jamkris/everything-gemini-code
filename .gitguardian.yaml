@@ -27,9 +27,10 @@ secret:
     - 'tests/lint/fixtures/**'
     - 'tests/ci/**'
 
-  # Reduce noise from broad detectors that misfire on documentation
-  # examples (curl snippets, example tokens like "sk-proj-xxxxx").
-  ignored_detectors:
-    - 'Generic High Entropy Secret'
+    # Documentation examples that show fake secret literals (e.g. the
+    # `sk-proj-xxxxx` placeholder in rules/typescript/security.md). These
+    # are illustrative and never match a real key.
+    - 'rules/**/security.md'
+    - '**/SKILL.md'
 
   show_secrets: false

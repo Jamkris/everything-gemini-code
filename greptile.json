@@ -5,10 +5,22 @@
 	"triggerOnUpdates": true,
 	"triggerOnDrafts": false,
 	"shouldUpdateDescription": false,
-	"summarySection": true,
-	"confidenceScoreSection": true,
-	"sequenceDiagramSection": false,
-	"ignoreKeywords": "bump version\nrelease\nchore: bump\nchore(release)\nchore(deps)",
+	"summarySection": {
+		"included": true,
+		"collapsible": false,
+		"defaultOpen": true
+	},
+	"confidenceScoreSection": {
+		"included": true,
+		"collapsible": false,
+		"defaultOpen": true
+	},
+	"sequenceDiagramSection": {
+		"included": false,
+		"collapsible": false,
+		"defaultOpen": false
+	},
+	"ignoreKeywords": "bump version\nchore: bump\nchore: release\nchore(release)\nchore(deps)",
 	"ignorePatterns": "node_modules/**\npackage-lock.json\n*.lock\n.DS_Store\nassets/**\ndocs/**/*.png\ndocs/**/*.jpg",
 	"disabledLabels": ["release", "skip-review"],
 	"instructions": "This is a Gemini CLI extension (everything-gemini-code) — not a typical application. Codebase consists of: shell/Node scripts (scripts/), TOML commands (commands/), Markdown skills (skills/) and agents (agents/), JSON hooks (hooks/), and multilingual docs (docs/{en,ko-KR,zh-CN}). Be concise and direct. Prioritize bugs and security issues over style. Do NOT flag emoji usage in markdown, long TOML prompt fields, or skills referencing ~/.gemini/ paths.",
@@ -27,15 +39,15 @@
 				"scope": ["skills/**/*.md"]
 			},
 			{
-				"rule": "Hook scripts and hooks.json. Hooks run automatically on Gemini CLI tool events (BeforeTool, AfterTool, SessionStart, SessionEnd, PreCompress, AfterAgent) — any failure impacts every session. Verify error handling, quiet logging, and intentional exit codes (0 = allow, 2 = block in BeforeTool).",
+				"rule": "Hook scripts and hooks.json. Hooks run automatically on Gemini CLI tool events (BeforeTool, AfterTool, SessionStart, SessionEnd, PreCompress, AfterAgent) — any failure impacts every session. Verify error handling, intentional exit codes (0 = allow, 2 = block in BeforeTool), and that the script runs silently on success: NO console.log in hook scripts, only stderr writes for blocking diagnostics.",
 				"scope": ["hooks/**", "scripts/hooks/**"]
 			},
 			{
-				"rule": "Shell scripts must use `set -euo pipefail`, quote all variables, and avoid interpolating shell variables into `node -e` strings (use process.env instead). Support both macOS and Linux — no GNU-only flags.",
+				"rule": "Shell scripts must use `set -e` at the top (per .gemini/styleguide.md), quote all variables, and avoid interpolating shell variables into `node -e` strings (use process.env instead). Support both macOS and Linux — no GNU-only flags.",
 				"scope": ["scripts/**/*.sh", "**/*.sh"]
 			},
 			{
-				"rule": "Node.js 20+ project. Avoid mutation — prefer spread/immutable patterns. Handle errors explicitly; never swallow silently. Functions should be under 50 lines (soft target — vendored upstream ports may exceed). No console.log in hook scripts (hooks must run silently on success).",
+				"rule": "Node.js 20+ project. Avoid mutation — prefer spread/immutable patterns. Handle errors explicitly; never swallow silently. Functions should be under 50 lines (soft target — vendored upstream ports may exceed). console.log is fine in scripts and tests (the no-console rule lives on the hooks rule above).",
 				"scope": ["scripts/**/*.js", "tests/**/*.js"]
 			},
 			{
