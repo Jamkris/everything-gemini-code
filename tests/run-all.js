@@ -17,6 +17,8 @@ const testFiles = [
   'lib/session-aliases.test.js',
   'lib/gemini-tools.test.js',
   'hooks/hooks.test.js',
+  'hooks/block-no-verify.test.js',
+  'ci/validate-workflow-security.test.js',
   'lint/validators.test.js'
 ];
 
