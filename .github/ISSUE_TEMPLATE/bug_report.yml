@@ -1,0 +1,43 @@
+name: 🐞 Bug Report
+description: Something is broken — agent fails, hook misbehaves, install errors, etc.
+title: "bug: "
+labels: ["🐞 Bug", "🔍 Triage"]
+body:
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened?
+      description: Include reproduction steps if possible.
+      placeholder: |
+        1. Run `./install.sh`
+        2. Invoke `/egc-plan ...`
+        3. See error
+    validations:
+      required: true
+
+  - type: dropdown
+    id: environment
+    attributes:
+      label: Environment
+      multiple: true
+      options:
+        - Gemini CLI
+        - Antigravity
+        - npm package
+        - Other
+    validations:
+      required: true
+
+  - type: input
+    id: version
+    attributes:
+      label: OS / Version
+      placeholder: macOS 14.5 / v1.3.6
+    validations:
+      required: true
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs (optional)
+      render: shell

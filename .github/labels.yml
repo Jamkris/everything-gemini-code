@@ -1,0 +1,70 @@
+# --- Type ---------------------------------------------------------------
+- name: 🐞 Bug
+  color: d73a4a
+  description: Something isn't working
+- name: ✨ Feature
+  color: a2eeef
+  description: New feature or improvement request
+- name: 🔨 Refactor
+  color: f29a4e
+  description: Code refactoring with no behavior change
+- name: 📃 Docs
+  color: 1D76DB
+  description: Documentation changes (README, docs/)
+- name: ✅ Test
+  color: ccffc4
+  description: Test additions or fixes (tests/, fixtures)
+- name: ⚙ Setting
+  color: e3dede
+  description: Tooling, CI, dependencies, build setup
+- name: 🌏 Release
+  color: C2E0C6
+  description: Release, packaging, publish
+- name: 🙋‍♂️ Question
+  color: 9ED447
+  description: Further information is requested
+
+# --- Area ---------------------------------------------------------------
+- name: 🤖 Agent
+  color: 7057ff
+  description: Changes under agents/ (subagent definitions)
+- name: 🧠 Skill
+  color: 0e8a16
+  description: Changes under skills/ (SKILL.md)
+- name: ⌨ Command
+  color: D4C5F9
+  description: Changes under commands/ (egc-* slash commands)
+- name: 🪝 Hook
+  color: e99695
+  description: Changes under hooks/ or scripts/hooks/
+- name: 📚 Rules
+  color: C5DEF5
+  description: Changes under rules/ (shipped to user ~/.gemini/rules/)
+- name: 📦 Install
+  color: FEF2C0
+  description: install.sh / install.ps1 / npm packaging
+
+# --- Severity / nature --------------------------------------------------
+- name: 🛡 Security
+  color: b60205
+  description: Security-relevant change or vulnerability
+- name: 💥 Breaking
+  color: d93f0b
+  description: Breaks command names, tool lists, or hook contracts
+
+# --- Triage / flow ------------------------------------------------------
+- name: 🔍 Triage
+  color: ededed
+  description: Awaiting maintainer triage
+- name: 🌱 Good First Issue
+  color: 7057ff
+  description: Approachable for first-time contributors
+- name: 🤝 Help Wanted
+  color: 008672
+  description: Maintainer would like community help on this
+- name: 🌀 Duplicate
+  color: cccccc
+  description: Already tracked elsewhere
+- name: 🚫 Wontfix
+  color: ffffff
+  description: Out of scope or intentionally not addressed

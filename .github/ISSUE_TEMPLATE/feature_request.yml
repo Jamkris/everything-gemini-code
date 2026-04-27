@@ -1,0 +1,33 @@
+name: ✨ Feature Request
+description: Suggest a new feature, command, hook, or integration
+title: "feat: "
+labels: ["✨ Feature", "🔍 Triage"]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem
+      description: What are you trying to do that the current bundle doesn't support?
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed solution
+    validations:
+      required: true
+
+  - type: dropdown
+    id: scope
+    attributes:
+      label: Scope
+      multiple: true
+      options:
+        - Agent
+        - Skill
+        - Slash command
+        - Hook
+        - Install / packaging
+        - Docs
+        - Other
