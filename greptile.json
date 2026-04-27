@@ -1,0 +1,75 @@
+{
+	"$schema": "https://www.greptile.com/schemas/greptile.json",
+	"strictness": 2,
+	"commentTypes": ["logic", "syntax"],
+	"triggerOnUpdates": true,
+	"triggerOnDrafts": false,
+	"shouldUpdateDescription": false,
+	"summarySection": {
+		"included": true,
+		"collapsible": false,
+		"defaultOpen": true
+	},
+	"confidenceScoreSection": {
+		"included": true,
+		"collapsible": false,
+		"defaultOpen": true
+	},
+	"sequenceDiagramSection": {
+		"included": false,
+		"collapsible": false,
+		"defaultOpen": false
+	},
+	"ignoreKeywords": "bump version\nchore: bump\nchore: release\nchore(release)\nchore(deps)",
+	"ignorePatterns": "node_modules/**\npackage-lock.json\n*.lock\n.DS_Store\nassets/**\ndocs/**/*.png\ndocs/**/*.jpg",
+	"disabledLabels": ["release", "skip-review"],
+	"instructions": "This is a Gemini CLI extension (everything-gemini-code) — not a typical application. Codebase consists of: shell/Node scripts (scripts/), TOML commands (commands/), Markdown skills (skills/) and agents (agents/), JSON hooks (hooks/), and multilingual docs (docs/{en,ko-KR,zh-CN}). Be concise and direct. Prioritize bugs and security issues over style. Do NOT flag emoji usage in markdown, long TOML prompt fields, or skills referencing ~/.gemini/ paths.",
+	"customContext": {
+		"rules": [
+			{
+				"rule": "Gemini CLI agent definitions. YAML frontmatter MUST include `name`, `description`, and `tools`. The `tools:` array may ONLY contain valid Gemini CLI built-in tools: read_file, read_many_files, write_file, replace, glob, search_file_content, list_directory, run_shell_command, save_memory, web_fetch, google_web_search. Reject Claude-style names (search_files, replace_in_file, Read, Edit), MCP tool references (mcp__*) — those are auto-discovered at runtime and rejected by the schema if declared. Reject frontmatter keys outside the schema (color, model). Authoritative allowlist lives in scripts/lib/gemini-tools.js.",
+				"scope": ["agents/**/*.md"]
+			},
+			{
+				"rule": "Gemini CLI command definitions in TOML. Filename MUST start with the `egc-` prefix (avoids collision with built-in /plan, /docs). `description` must be non-empty.",
+				"scope": ["commands/**/*.toml"]
+			},
+			{
+				"rule": "Skill definitions. Frontmatter must include `name` and `description`. The body must contain a `## When to Use` section with specific, actionable trigger conditions — not `When to Activate` or `When to Apply`.",
+				"scope": ["skills/**/*.md"]
+			},
+			{
+				"rule": "Hook scripts and hooks.json. Hooks run automatically on Gemini CLI tool events (BeforeTool, AfterTool, SessionStart, SessionEnd, PreCompress, AfterAgent) — any failure impacts every session. Verify error handling, intentional exit codes (0 = allow, 2 = block in BeforeTool), and that the script runs silently on success: NO console.log in hook scripts, only stderr writes for blocking diagnostics.",
+				"scope": ["hooks/**", "scripts/hooks/**"]
+			},
+			{
+				"rule": "Shell scripts must use `set -e` at the top (per .gemini/styleguide.md), quote all variables, and avoid interpolating shell variables into `node -e` strings (use process.env instead). Support both macOS and Linux — no GNU-only flags.",
+				"scope": ["scripts/**/*.sh", "**/*.sh"]
+			},
+			{
+				"rule": "Node.js 20+ project. Avoid mutation — prefer spread/immutable patterns. Handle errors explicitly; never swallow silently. Functions should be under 50 lines (soft target — vendored upstream ports may exceed). console.log is fine in scripts and tests (the no-console rule lives on the hooks rule above).",
+				"scope": ["scripts/**/*.js", "tests/**/*.js"]
+			},
+			{
+				"rule": "Coding rules shipped to end users at ~/.gemini/rules/. Cross-references between common/ and language-specific files must use relative paths (../common/xxx.md) and the targets must exist.",
+				"scope": ["rules/**/*.md"]
+			},
+			{
+				"rule": "User-facing multilingual documentation. Tool-name mapping tables (Claude Code ↔ Gemini CLI) must list ONLY valid Gemini CLI tool names — incorrect mappings here propagate into agent/skill definitions.",
+				"scope": ["docs/**/*.md"]
+			}
+		],
+		"files": [
+			{
+				"path": ".gemini/styleguide.md",
+				"description": "Project conventions for shell scripts, TOML commands, agents, skills, hooks, and CI workflows.",
+				"scope": ["**"]
+			},
+			{
+				"path": "scripts/lib/gemini-tools.js",
+				"description": "Authoritative source of valid Gemini CLI agent tool names and forbidden frontmatter keys.",
+				"scope": ["agents/**", "scripts/ci/validate-agents.js"]
+			}
+		]
+	}
+}
