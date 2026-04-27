@@ -1,0 +1,4 @@
+description = "Fixture — filename lacks the egc- prefix mandated after PR #38."
+prompt = '''
+Body.
+'''
