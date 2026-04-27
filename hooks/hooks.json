@@ -3,6 +3,16 @@
 	"hooks": {
 		"BeforeTool": [
 			{
+				"matcher": "tool == \"run_shell_command\"",
+				"hooks": [
+					{
+						"type": "command",
+						"command": "node \"$HOME/.gemini/extensions/everything-gemini-code/scripts/hooks/block-no-verify.js\""
+					}
+				],
+				"description": "Block git --no-verify and core.hooksPath= overrides on commit/push/merge/cherry-pick/rebase/am — protects pre-commit, commit-msg, and pre-push hooks from being skipped"
+			},
+			{
 				"matcher": "tool == \"run_shell_command\" && tool_input.command matches \"(npm run dev|pnpm( run)? dev|yarn dev|bun run dev)\"",
 				"hooks": [
 					{
