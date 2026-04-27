@@ -1,0 +1,35 @@
+version: 2
+
+# Public OSS repo on the GitGuardian Free tier. Defaults are fine for most
+# of the tree; we only add path-level excludes for noise (lockfiles, vendored
+# binary assets) and intentional dummy values used in security-hook tests.
+
+exit_zero: false
+verbose: false
+
+secret:
+  ignored_paths:
+    # Lockfiles and machine-generated artifacts
+    - 'package-lock.json'
+    - '**/package-lock.json'
+    - 'node_modules/**'
+    - '*.lock'
+    - '.DS_Store'
+
+    # Binary/static assets that scanners shouldn't probe
+    - 'docs/**/*.png'
+    - 'docs/**/*.jpg'
+
+    # Test fixtures: tests/lint/fixtures/agents/* contains intentionally
+    # malformed YAML and tests/ci/* embeds GitHub Actions expression
+    # strings (`${{ github.event.pull_request.head.sha }}`) — neither is
+    # a real secret but pattern-matchers can flag the latter.
+    - 'tests/lint/fixtures/**'
+    - 'tests/ci/**'
+
+  # Reduce noise from broad detectors that misfire on documentation
+  # examples (curl snippets, example tokens like "sk-proj-xxxxx").
+  ignored_detectors:
+    - 'Generic High Entropy Secret'
+
+  show_secrets: false
