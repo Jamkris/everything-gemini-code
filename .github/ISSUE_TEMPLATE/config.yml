@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: 💬 Discussions
+    url: https://github.com/Jamkris/everything-gemini-code/discussions
+    about: Questions, ideas, "is this the right pattern?", show and tell
+  - name: 📖 Documentation
+    url: https://github.com/Jamkris/everything-gemini-code/tree/main/docs
+    about: Multilingual docs (en / ko-KR / zh-CN)

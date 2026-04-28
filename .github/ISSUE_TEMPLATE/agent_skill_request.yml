@@ -1,0 +1,44 @@
+name: 🤖 Agent / Skill Request
+description: Propose a new subagent or skill to bundle
+title: "agent: "
+labels: ["🤖 Agent", "🔍 Triage"]
+body:
+  - type: dropdown
+    id: kind
+    attributes:
+      label: Type
+      options:
+        - Agent (under `agents/`)
+        - Skill (under `skills/<name>/SKILL.md`)
+    validations:
+      required: true
+
+  - type: input
+    id: name
+    attributes:
+      label: Proposed name
+      placeholder: e.g. terraform-reviewer / accessibility-auditor
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Description
+      description: One-paragraph summary for the frontmatter.
+    validations:
+      required: true
+
+  - type: textarea
+    id: when-to-use
+    attributes:
+      label: When to use it
+      description: Specific, actionable trigger conditions.
+    validations:
+      required: true
+
+  - type: textarea
+    id: gap
+    attributes:
+      label: Why isn't this covered by an existing one?
+      description: Link the closest existing agent/skill and explain the gap.
