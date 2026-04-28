@@ -2,11 +2,13 @@
 
 ## Supported Versions
 
+Only the latest minor release line receives security fixes. Older lines are not patched —
+upgrade to the current `1.3.x` release.
+
 | Version | Supported          |
 | ------- | ------------------ |
-| 1.2.x   | :white_check_mark: |
-| 1.1.x   | :white_check_mark: |
-| < 1.1   | :x:                |
+| 1.3.x   | :white_check_mark: |
+| < 1.3   | :x:                |
 
 ## Reporting a Vulnerability
 
@@ -14,7 +16,9 @@ If you discover a security vulnerability in Everything Gemini Code, please repor
 
 **Do not open a public GitHub issue for security vulnerabilities.**
 
-Instead, email **<security@egc.tools>** with:
+Preferred channel: open a [GitHub private security advisory](https://github.com/Jamkris/everything-gemini-code/security/advisories/new).
+
+Alternatively, email **<contact@jamkris.com>** with:
 
 - A description of the vulnerability
 - Steps to reproduce
