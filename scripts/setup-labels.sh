@@ -4,7 +4,7 @@
 # Idempotent: re-running updates color/description on existing labels.
 # Requires `gh` CLI and `python3` (used to parse the YAML).
 
-set -e
+set -euo pipefail
 
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 LABELS_FILE="$ROOT/.github/labels.yml"
@@ -16,6 +16,11 @@ fi
 
 if ! command -v gh >/dev/null 2>&1; then
   echo "gh CLI not installed. See https://cli.github.com/" >&2
+  exit 1
+fi
+
+if ! command -v python3 >/dev/null 2>&1; then
+  echo "python3 not found. Please install Python 3." >&2
   exit 1
 fi
 
