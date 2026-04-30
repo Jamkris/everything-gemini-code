@@ -48,6 +48,7 @@ const JS_LIKE_EXT = Object.freeze(['.js', '.mjs', '.cjs', '.jsx', '.ts', '.tsx']
 
 function walkRepo(rootDir, options = {}) {
   const ignore = new Set(options.ignore || DEFAULT_IGNORE);
+  const errors = options.errors || [];
   const results = [];
   const stack = [rootDir];
 
@@ -56,7 +57,12 @@ function walkRepo(rootDir, options = {}) {
     let entries;
     try {
       entries = fs.readdirSync(current, { withFileTypes: true });
-    } catch (_err) {
+    } catch (err) {
+      errors.push({
+        path: path.relative(rootDir, current) || '.',
+        op: 'readdir',
+        message: err.message,
+      });
       continue;
     }
 
@@ -116,7 +122,11 @@ function summarizeFiles(files, rootDir) {
   return summary;
 }
 
-function stripCommentsAndStrings(source) {
+// Strips line/block comments. Does NOT strip string literals — an import-like
+// pattern inside a string (e.g. `"const a = require('x')"`) will produce a
+// false edge. Acceptable for v1 because grok-engine only consumes the result
+// to build a graph and reports it as a "candidate" for synthesis.
+function stripComments(source) {
   return source
     .replace(/\/\*[\s\S]*?\*\//g, '')
     .replace(/(^|[^:])\/\/[^\n]*/g, '$1');
@@ -128,7 +138,7 @@ const DYNAMIC_IMPORT_RE = /import\(\s*['"]([^'"]+)['"]\s*\)/g;
 const EXPORT_FROM_RE = /(?:^|[\s;])export\s+[^'"]*?from\s+['"]([^'"]+)['"]/g;
 
 function extractImports(content) {
-  const cleaned = stripCommentsAndStrings(content);
+  const cleaned = stripComments(content);
   const imports = new Set();
   const patterns = [REQUIRE_RE, IMPORT_FROM_RE, DYNAMIC_IMPORT_RE, EXPORT_FROM_RE];
 
@@ -165,7 +175,7 @@ function resolveRelativeImport(fromRel, specifier, fileSet) {
   return null;
 }
 
-function buildGraph(files, rootDir) {
+function buildGraph(files, rootDir, errors = []) {
   const jsFiles = files.filter((f) => JS_LIKE_EXT.includes(path.extname(f)));
   const fileSet = new Set(jsFiles);
   const edges = new Map();
@@ -181,7 +191,8 @@ function buildGraph(files, rootDir) {
     let content;
     try {
       content = fs.readFileSync(path.join(rootDir, rel), 'utf8');
-    } catch (_err) {
+    } catch (err) {
+      errors.push({ path: rel, op: 'readFile', message: err.message });
       continue;
     }
 
@@ -266,21 +277,32 @@ const DEFAULT_ENTRY_PATTERNS = Object.freeze([
   /^[^/]+\.config\.(?:js|mjs|cjs)$/,
 ]);
 
-function loadEntryPatterns(rootDir) {
+// `package.json` paths can carry leading `./` or `/`, but walkRepo emits
+// repo-relative paths without that prefix. Normalize so both shapes match.
+function normalizePackagePath(value) {
+  const stripped = value.replace(/^\.\//, '').replace(/^\//, '');
+  return path.posix.normalize(stripped);
+}
+
+function loadEntryPatterns(rootDir, errors = []) {
   const patterns = [...DEFAULT_ENTRY_PATTERNS];
 
   try {
     const pkgRaw = fs.readFileSync(path.join(rootDir, 'package.json'), 'utf8');
     const pkg = JSON.parse(pkgRaw);
-    if (typeof pkg.main === 'string') patterns.push(pkg.main);
+    if (typeof pkg.main === 'string') {
+      patterns.push(normalizePackagePath(pkg.main));
+    }
     if (pkg.bin) {
       const binValues = typeof pkg.bin === 'string' ? [pkg.bin] : Object.values(pkg.bin);
       for (const value of binValues) {
-        if (typeof value === 'string') patterns.push(value);
+        if (typeof value === 'string') patterns.push(normalizePackagePath(value));
       }
     }
-  } catch (_err) {
-    // No package.json or invalid — fall back to defaults only.
+  } catch (err) {
+    if (err && err.code !== 'ENOENT') {
+      errors.push({ path: 'package.json', op: 'parse', message: err.message });
+    }
   }
 
   return patterns;
@@ -317,11 +339,12 @@ function countEdges(graph) {
 }
 
 function buildReport(rootDir, options = {}) {
-  const files = walkRepo(rootDir, { ignore: options.ignore });
+  const errors = [];
+  const files = walkRepo(rootDir, { ignore: options.ignore, errors });
   const summary = summarizeFiles(files, rootDir);
-  const graph = buildGraph(files, rootDir);
+  const graph = buildGraph(files, rootDir, errors);
   const cycles = detectCycles(graph);
-  const entryPatterns = loadEntryPatterns(rootDir);
+  const entryPatterns = loadEntryPatterns(rootDir, errors);
   const deadFiles = detectDeadFiles(graph, entryPatterns);
 
   return {
@@ -334,6 +357,7 @@ function buildReport(rootDir, options = {}) {
     },
     cycles: cycles.map((files) => ({ size: files.length, files })),
     deadFiles,
+    errors,
   };
 }
 
@@ -382,6 +406,16 @@ function formatText(report) {
   }
   lines.push('');
 
+  const errors = report.errors || [];
+  if (errors.length > 0) {
+    lines.push(`## Read errors (${errors.length})`);
+    lines.push('Some files or directories could not be read; results may be incomplete.');
+    for (const err of errors) {
+      lines.push(`- [${err.op}] ${err.path}: ${err.message}`);
+    }
+    lines.push('');
+  }
+
   return lines.join('\n');
 }
 
@@ -396,13 +430,14 @@ module.exports = {
   classifyLanguage,
   countLines,
   summarizeFiles,
-  stripCommentsAndStrings,
+  stripComments,
   extractImports,
   isRelativeImport,
   resolveRelativeImport,
   buildGraph,
   detectCycles,
   loadEntryPatterns,
+  normalizePackagePath,
   isEntryFile,
   detectDeadFiles,
   countEdges,

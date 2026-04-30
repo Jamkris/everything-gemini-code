@@ -17,6 +17,7 @@ const testFiles = [
   'lib/session-aliases.test.js',
   'lib/gemini-tools.test.js',
   'lib/grok-engine.test.js',
+  'lib/grok-cli.test.js',
   'hooks/hooks.test.js',
   'hooks/block-no-verify.test.js',
   'ci/validate-workflow-security.test.js',

@@ -1,9 +1,21 @@
 #!/usr/bin/env node
 
+const fs = require('fs');
 const path = require('path');
 const engine = require('./lib/grok-engine');
 
 const REPO_ROOT = path.join(__dirname, '..');
+
+function valueAfterEquals(arg) {
+  return arg.slice(arg.indexOf('=') + 1);
+}
+
+function requireValue(flag, value) {
+  if (typeof value !== 'string' || value.length === 0 || value.startsWith('-')) {
+    throw new Error(`Missing value for ${flag}`);
+  }
+  return value;
+}
 
 function parseArgs(argv) {
   const args = argv.slice(2);
@@ -22,24 +34,24 @@ function parseArgs(argv) {
     }
 
     if (arg === '--format') {
-      parsed.format = (args[index + 1] || '').toLowerCase();
+      parsed.format = requireValue('--format', args[index + 1]).toLowerCase();
       index += 1;
       continue;
     }
 
     if (arg === '--scope') {
-      parsed.scope = path.resolve(args[index + 1] || REPO_ROOT);
+      parsed.scope = path.resolve(requireValue('--scope', args[index + 1]));
       index += 1;
       continue;
     }
 
     if (arg.startsWith('--format=')) {
-      parsed.format = arg.split('=')[1].toLowerCase();
+      parsed.format = valueAfterEquals(arg).toLowerCase();
       continue;
     }
 
     if (arg.startsWith('--scope=')) {
-      parsed.scope = path.resolve(arg.split('=')[1]);
+      parsed.scope = path.resolve(valueAfterEquals(arg));
       continue;
     }
 
@@ -55,6 +67,18 @@ function parseArgs(argv) {
   }
 
   return parsed;
+}
+
+function ensureDirectory(scopePath) {
+  let stat;
+  try {
+    stat = fs.statSync(scopePath);
+  } catch (err) {
+    throw new Error(`Scope path not found: ${scopePath} (${err.code || err.message})`);
+  }
+  if (!stat.isDirectory()) {
+    throw new Error(`Scope path is not a directory: ${scopePath}`);
+  }
 }
 
 function printHelp() {
@@ -87,13 +111,19 @@ function main() {
     return;
   }
 
-  const report = engine.buildReport(parsed.scope);
-  const output = parsed.format === 'json' ? engine.formatJson(report) : engine.formatText(report);
-  console.log(output);
+  try {
+    ensureDirectory(parsed.scope);
+    const report = engine.buildReport(parsed.scope);
+    const output = parsed.format === 'json' ? engine.formatJson(report) : engine.formatText(report);
+    console.log(output);
+  } catch (err) {
+    console.error(err.message);
+    process.exit(1);
+  }
 }
 
 if (require.main === module) {
   main();
 }
 
-module.exports = { parseArgs };
+module.exports = { parseArgs, ensureDirectory };
