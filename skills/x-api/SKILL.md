@@ -208,7 +208,7 @@ setup, webhooks, giveaway draws, or approval-gated posting, keep this skill as
 the API reference and install TweetClaw as the execution tool:
 
 ```bash
-openclaw plugins install npm:@xquik/tweetclaw@1.6.31
+openclaw plugins install npm:@xquik/tweetclaw@1.6.31 --pin
 ```
 
 Treat TweetClaw results as source evidence or an approved execution path. Do not
